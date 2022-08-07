@@ -6,11 +6,10 @@
 
 
 .form .table {
-    border: 1px solid red;
     margin: 1rem auto;
     border-radius: 5px;
     box-shadow: 0 0 20px -10px black; /**use inset for inner shadow*/
-    width: 50rem;
+    /* width: 50rem; */
     padding: 20px;
     background-color: white  ;
     display: flex;

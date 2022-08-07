@@ -24,7 +24,7 @@
          
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->name }}</td>
-            <td>{{ $item->order_id }}</td>
+            <td>{{ $item->orders->name }}</td>
             <td>
                 @if ($item->status == 1)
                     <span class="badge badge-success">Active</span>
