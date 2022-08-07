@@ -1,6 +1,19 @@
 <script>
+
+
+
+
     $(document).ready(function() {
-        $("#order_id").on('change',function() {
+
+        
+        var count = 1;
+        function init(){
+           count = count+1;
+        }
+
+        // Triggered when changed
+        $('#order_id_1').on('change',function() {
+            alert(count);
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -17,19 +30,21 @@
                 }
             });
         });
-    });
 
+   
 
-//For cloning       
+    
+    //Triggered when button clicked   
     $('#btnAdd').click(function(e) {
+     
+        init();
                 e.preventDefault();
-
                 let template =`  <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                                <select name="order_id[]" id="order_id" class="form-control">
+                                <select name="order_id" id="order_id_${count}" class="form-control">
                                     <option value="" selected>Select order</option>
                                     @foreach ($orders as $order )
                                     <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -42,7 +57,7 @@
                         <div class="col-3 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id[]" id="size_id" class="form-control">
+                                <select name="size_id" id="size_id" class="form-control">
                                     <option value="" selected>Select order</option>
                                 </select>
                             </div>
@@ -50,7 +65,7 @@
 
                         <!--Quantity-->
                         <div class="col-3 form-group row">
-                            {!! Form::label('quantity[]', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+                            {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
                                 {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
                             </div>
@@ -74,5 +89,5 @@
 
                 $('.dynamic-input').append(template);
             });
-
+        });
 </script>

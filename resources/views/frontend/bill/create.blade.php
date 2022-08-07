@@ -16,15 +16,16 @@
 
                 </div>
 
-
                 <div class="dynamic-input">
-
                     <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                                <select name="order_id" id="order_id" class="form-control">
+                                @php
+                                    $i=1;
+                                @endphp
+                                <select name="order_id" id="order_id_{{ $i }}" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order )
                                     <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -37,7 +38,7 @@
                         <div class="col-3 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id[]" id="size_id" class="form-control">
+                                <select name="size_id" id="size_id" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>
@@ -45,7 +46,7 @@
 
                         <!--Quantity-->
                         <div class="col-3 form-group row">
-                            {!! Form::label('quantity[]', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+                            {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
                                 {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
                             </div>
