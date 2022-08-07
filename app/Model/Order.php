@@ -10,4 +10,8 @@ class Order extends Model
 
     protected $table = 'orders';
     protected $fillable = ['name','status','details_required','rank'];
+
+    public function sizes(){
+        return $this->hasMany(Size::class);
+    }
 }

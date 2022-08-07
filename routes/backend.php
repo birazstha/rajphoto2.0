@@ -69,6 +69,9 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX, 'middleware' => ['lan
         //Custom
 
         Route::resource('/order', 'order\OrderController');
+        Route::resource('/sizes', 'size\SizeController');
+        Route::post('/getSizeByOrder', 'order\OrderController@getSizeByOrderId')->name('order.getSize');
+
       
     });
 });

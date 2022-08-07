@@ -1,6 +1,4 @@
 @section('main-content')
-
-
     <div class="form">
         <div class="table">
             <div class="table-responsive">
@@ -8,8 +6,8 @@
                 <!--Name-->
                 <div class="form-group row">
 
-                    {!! Form::label('name', 'Name', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
+                    {!! Form::label('name', 'Name', ['class' => 'col-sm-1 col-form-label']) !!}
+                    <div class="col-sm-11">
                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter customer's name"]) !!}
                         @error('name')
                             <span class="text text-danger">{{ $message }}</span>
@@ -18,49 +16,64 @@
 
                 </div>
 
-                <!--Order-->
-                <div class="form-group row ">
-                    {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::select('order_id', $orders, null, ['class' => 'form-control', 'placeholder' => 'Select a order']) !!}
-                        @error('order_id')
-                            <p class="text text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
 
+                <div class="dynamic-input">
 
-                <!--Size-->
-                <div class="form-group row">
-                    {!! Form::label('size_id', 'Size', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::select('size_id', [], null, ['class' => 'form-control', 'placeholder' => 'Select a size']) !!}
-                        @error('size_id')
+                    <div class="row">
+                        <!--Order-->
+                        <div class="col-3 form-group row ">
+                            {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
+                            <div class="col-sm-8">
+                                <select name="order_id" id="order_id" class="form-control">
+                                    <option value="" selected>Select order</option>
+                                    @foreach ($orders as $order )
+                                    <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Size-->
+                        <div class="col-3 form-group row">
+                            {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-9">
+                                <select name="size_id[]" id="size_id" class="form-control">
+                                    <option value="" selected>Select order</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Quantity-->
+                        <div class="col-3 form-group row">
+                            {!! Form::label('quantity[]', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-9">
+                                {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        @error('quantity')
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
+
+                        <!--Rate-->
+                        <div class="col-3 form-group row">
+                            {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-9">
+                                {!! Form::number('rate', null, ['class' => 'form-control']) !!}
+                                @error('rate')
+                                    <span class="text text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!--Quantity-->
-                <div class="form-group row">
-                    {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-                @error('quantity')
-                    <span class="text text-danger">{{ $message }}</span>
-                @enderror
+                <div class="more-input"></div>
 
-                <!--Rate-->
-                <div class="form-group row">
-                    {!! Form::label('rate', 'Rate', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::number('rate', null, ['class' => 'form-control']) !!}
-                        @error('rate')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                {{-- Action --}}
+                <div>
+                    <button class="btn btn-success btn-sm " id="btnAdd">Add</button>
+                    <button class="btn btn-danger btn-sm">Remove</button>
                 </div>
 
                 <div class="row">
@@ -172,8 +185,10 @@
     </div>
 @endsection
 
-{{-- @section('js')
-    @include($base_route.'include.script')
-@endsection --}}
+
+
+@section('js')
+    @include('frontend.bill.include.script')
+@endsection
 
 @include('frontend.layout.master')

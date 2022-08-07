@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\System\order;
 
 use App\Http\Controllers\System\ResourceController;
+use App\Model\Order;
 use App\Services\System\OrderService;
+use Illuminate\Http\Request;
 
 class orderController extends ResourceController
 {
@@ -30,5 +32,20 @@ class orderController extends ResourceController
     public function viewFolder()
     {
         return 'system.order';
+    }
+
+    public function getSizeByOrderId(Request $request)
+    {
+   
+        $order=Order::find($request->input('order_id'));
+   
+        $html="<option value=''>Select a size</option>";
+        foreach ($order->sizes as $size)
+        {
+
+            $html.="<option value='$size->id'>$size->name</option>";
+        }
+        return $html;
+
     }
 }

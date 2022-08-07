@@ -16,6 +16,7 @@ class OrderService extends Service
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
 
+
         $query = $this->query();
 
         if (isset($data->keyword) && $data->keyword !== null) {
@@ -25,7 +26,7 @@ class OrderService extends Service
             $query->select($selectedColumns);
         }
         if ($pagination) {
-            return $query->orderBy('id', 'ASC')->pluck('name','id');
+            return $query->orderBy('id', 'ASC')->get();
         }
 
         // return $query->orderBy('id', 'ASC')->get();
