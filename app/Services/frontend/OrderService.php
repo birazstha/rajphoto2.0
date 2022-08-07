@@ -25,7 +25,7 @@ class OrderService extends Service
             $query->select($selectedColumns);
         }
         if ($pagination) {
-            return $query->orderBy('id', 'ASC')->pluck('name','id');
+            return $query->orderBy('id', 'ASC')->get();
         }
 
         // return $query->orderBy('id', 'ASC')->get();

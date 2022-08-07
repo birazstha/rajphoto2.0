@@ -33,7 +33,8 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
-    <script type="text/javascript">
+   
+   <script type="text/javascript">
         $(function() {
 
             function autoCalcSetup() {
