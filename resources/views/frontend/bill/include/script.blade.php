@@ -1,18 +1,12 @@
 <script>
-
-
-
-
     $(document).ready(function() {
-
-        
         var count = 1;
         function init(){
            count = count+1;
         }
 
         // Triggered when changed
-        $('#order_id_1').on('change',function() {
+        $(`#order_id_${count}`).on('change',function() {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
