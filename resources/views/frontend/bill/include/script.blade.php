@@ -120,14 +120,14 @@
 
 
     //First order
-    $('.dynamic-input').delegate('input[name=rate]', 'keyup', function() {
+    $('.dynamic-input').delegate('input[id=rate]', 'keyup', function() {
         rate = $(this).val();
         let total = rate * quantity;
         $('#total').val(total);
         calculateGrandTotal();
     });
 
-    $('.dynamic-input').delegate('input[name=quantity]', 'change keyup', function() {
+    $('.dynamic-input').delegate('input[id=quantity]', 'change keyup', function() {
         quantity = $(this).val();
         let total = rate * quantity;
         $('#total').val(total);
@@ -136,7 +136,7 @@
 
 
     //Second order
-    $('.dynamic-input').delegate('input[name=rate2]', 'keyup', function() {
+    $('.dynamic-input').delegate('input[id=rate2]', 'keyup', function() {
       
         rate = $(this).val();
         let total = rate * quantity;
@@ -144,7 +144,7 @@
         calculateGrandTotal();
     });
     
-    $('.dynamic-input').delegate('input[name=quantity2]', 'change keyup', function() {
+    $('.dynamic-input').delegate('input[id=quantity2]', 'change keyup', function() {
         quantity = $(this).val();
         let total = rate * quantity;
         $('#total2').val(total);

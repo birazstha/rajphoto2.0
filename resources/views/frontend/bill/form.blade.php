@@ -2,7 +2,7 @@
     <div class="form">
         <div class="table">
             <div class="table-responsive">
-                f
+                {{Form::open(['route' => 'bill.store'])}}
                 <!--Name-->
                 <div class="form-group row">
 
@@ -24,7 +24,7 @@
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
 
-                                <select name="order_id" id="order_id_1" class="form-control">
+                                <select name="order_id[]" id="order_id_1" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -37,7 +37,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id" id="size_id_1" class="form-control">
+                                <select name="size_id[]" id="size_id_1" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>
@@ -47,7 +47,8 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
+                                <input type="number" name="quantity[]" id="quantity" value="1" class="form-control">
+                            
                             </div>
                         </div>
                         @error('quantity')
@@ -58,7 +59,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('rate', null, ['class' => 'form-control']) !!}
+                                <input type="number" name="rate[]" id="rate" class="form-control">
                                 @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
@@ -69,7 +70,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <input type="text" name="total" id="total" value="" disabled
+                                <input type="text" name="total[]" id="total" value="" readonly 
                                     class="form-control"> @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
@@ -96,7 +97,7 @@
                             <div class="form-group row">
                                 {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="grand_total" value="" id="grand_total" disabled
+                                    <td><input type="text" name="grand_total" value="" id="grand_total" readonly 
                                              class="form-control"></td>
                                 </div>
                             </div>

@@ -24,6 +24,7 @@ class BillController extends Controller
     
     public function create(Request $request)
     {
+
         $data = [
             'orders'=>$this->orderService->getAllData($request),
         ];
@@ -33,7 +34,7 @@ class BillController extends Controller
    
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
