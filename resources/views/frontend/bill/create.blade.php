@@ -16,6 +16,7 @@
 
                 </div>
 
+<<<<<<< HEAD
 
                 <div class="dynamic-input">
 
@@ -46,6 +47,37 @@
                         <!--Quantity-->
                         <div class="col-3 form-group row">
                             {!! Form::label('quantity[]', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+=======
+                <div class="dynamic-input1">
+                    <div class="row">
+                        <!--Order-->
+                        <div class="col-3 form-group row ">
+                            {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
+                            <div class="col-sm-8">
+                              
+                                <select name="order_id" id="order_id_1" class="form-control">
+                                    <option value="" selected>Select Order Type</option>
+                                    @foreach ($orders as $order )
+                                    <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Size-->
+                        <div class="col-3 form-group row">
+                            {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-9">
+                                <select name="size_id" id="size_id" class="form-control">
+                                    <option value="" selected>Select a size</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Quantity-->
+                        <div class="col-3 form-group row">
+                            {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
                             <div class="col-sm-9">
                                 {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
                             </div>
@@ -66,10 +98,22 @@
                         </div>
 
                     </div>
+
+                 
                 </div>
 
+<<<<<<< HEAD
                 <div class="more-input"></div>
 
+=======
+                <div class="more-inputs">
+                    
+                </div>
+
+            
+             
+
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
                 {{-- Action --}}
                 <div>
                     <button class="btn btn-success btn-sm " id="btnAdd">Add</button>

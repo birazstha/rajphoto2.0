@@ -6,7 +6,10 @@
 
 
 .form .table {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
     margin: 1rem auto;
     border-radius: 5px;
     box-shadow: 0 0 20px -10px black; /**use inset for inner shadow*/

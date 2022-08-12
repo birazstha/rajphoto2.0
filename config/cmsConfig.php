@@ -18,7 +18,11 @@ $categoriesBaseUrl = '/categories';
 $profileBaseUrl = '/profile';
 $mailtestBaseUrl = '/mail-test';
 $orderBaseUrl = '/order';
+<<<<<<< HEAD
 $sizeBaseUrl = '/size';
+=======
+$sizeBaseUrl = '/sizes';
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given

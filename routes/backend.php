@@ -7,7 +7,7 @@ use Spatie\TranslationLoader\LanguageLine;
 
 
 
-Route::group(['namespace' => 'System', 'prefix' => PREFIX, 'middleware' => ['language', 'pinewheel-log']], function () {
+Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.form');
     Route::post('/login', 'Auth\LoginController@login')->name('login');
     Route::get('forgot-password', 'Auth\ForgotPasswordController@showRequestForm')->name('forgot.password');
@@ -69,8 +69,13 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX, 'middleware' => ['lan
         //Custom
 
         Route::resource('/order', 'order\OrderController');
+<<<<<<< HEAD
         Route::resource('/size', 'size\SizeController');
         Route::post('/getSizeByOrder', 'order\OrderController@getSizeByOrderId')->name('order.getSize');
+=======
+        Route::resource('/sizes', 'size\SizeController');
+       
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
 
       
     });

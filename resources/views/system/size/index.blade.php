@@ -10,7 +10,11 @@
 @section('table-heading')
     <tr>
         <th scope="col">S.No</th>
+<<<<<<< HEAD
         <th scope="col">Title</th>
+=======
+        <th scope="col">Name</th>
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
         <th scope="col">Order</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
@@ -21,8 +25,14 @@
     @php $pageIndex = pageIndex($items); @endphp
     @foreach ($items as $key => $item)
         <tr>
+<<<<<<< HEAD
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->title }}</td>
+=======
+         
+            <td>{{ SN($pageIndex, $key) }}</td>
+            <td>{{ $item->name }}</td>
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
             <td>{{ $item->orders->name }}</td>
             <td>
                 @if ($item->status == 1)
@@ -31,6 +41,11 @@
                     <span class="badge badge-danger">Danger</span>
                 @endif
             </td>
+<<<<<<< HEAD
+=======
+       
+
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
             <td>
                 @include('system.partials.editButton')
                 @include('system.partials.deleteButton')

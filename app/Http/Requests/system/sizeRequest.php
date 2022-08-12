@@ -24,7 +24,11 @@ class sizeRequest extends FormRequest
     public function rules()
     {
         return [
+<<<<<<< HEAD
             'title' => 'required',
+=======
+            'name' => 'required',
+>>>>>>> 056d438f8dd74b2d5f5eec06b60f96ecd6fba377
         ];
     }
 }
