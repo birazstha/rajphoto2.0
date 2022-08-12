@@ -112,19 +112,19 @@
 
         //Calculation
 
-        let rate = null;
-        let quantity = null;
-
+ 
+        var rate = null;
+       var quantity = 1;
         $('#rate').keyup(function() {
             rate = $(this).val();
+            console.log(rate);
             calculate();
-         
-
         });
 
-        $('#quantity').change(function() {
-           quantity = $(this).val();
+        $('#quantity').on('change keyup',function() {
+            quantity = $(this).val();
             calculate();
+    
         });
 
         function calculate(){
