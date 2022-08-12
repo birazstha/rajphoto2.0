@@ -55,7 +55,7 @@
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
 
-                                <select name="order_id" id="order_id_${count}" class="form-control">
+                                <select name="order_id[]" id="order_id_${count}" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -68,7 +68,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id" id="size_id_${count}" class="form-control">
+                                <select name="size_id[]" id="size_id_${count}" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>
@@ -78,7 +78,8 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('quantity${count}', 1, ['class' => 'form-control']) !!}
+                                <input type="number" name="quantity[]" id="quantity${count}" value="1" class="form-control">
+                            
                             </div>
                         </div>
                         @error('quantity')
@@ -89,7 +90,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('rate${count}', null, ['class' => 'form-control']) !!}
+                                <input type="number" name="rate[]" id="rate${count}" class="form-control">
                                 @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
@@ -100,7 +101,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <input type="text" name="total" id="total${count}" value="" disabled
+                                <input type="text" name="total[]" id="total${count}" value="" readonly 
                                     class="form-control"> @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
@@ -120,7 +121,7 @@
 
 
     //First order
-    $('.dynamic-input').delegate('input[id=rate]', 'keyup', function() {
+    $('.dynamic-input').delegate('input[id=rate]', 'change keyup', function() {
         rate = $(this).val();
         let total = rate * quantity;
         $('#total').val(total);
@@ -136,7 +137,7 @@
 
 
     //Second order
-    $('.dynamic-input').delegate('input[id=rate2]', 'keyup', function() {
+    $('.dynamic-input').delegate('input[id=rate2]', 'change keyup', function() {
       
         rate = $(this).val();
         let total = rate * quantity;
@@ -168,6 +169,25 @@
 
         $('#grand_total').val(grand_total);
     }
+
+    $('#grand_total').change(function(){
+        alert('hello');
+    });
+
+    //Calculate balance amount
+    let balanceAmt = 0;
+    $('#paid_amount').on('keyup change',function(){
+             balanceAmt = grand_total - $('#paid_amount').val();
+            $('#balance_amount').val(balanceAmt);
+    });
+
+     //Calculate cash return
+     $('#cash_received').on('keyup change',function(){
+             cashReturn = $('#cash_received').val() - $("#paid_amount").val();
+            $('#cash_return').val(cashReturn);
+    });
+
+   
 
      
 

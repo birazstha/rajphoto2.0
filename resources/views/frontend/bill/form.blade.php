@@ -87,8 +87,8 @@
                 {{-- Action --}}
                 <div>
                     <div>
-                        <button class="btn btn-success btn-sm " id="btnAdd">Add</button>
-                        <button class="btn btn-danger btn-sm">Remove</button>
+                        <button type="button" class="btn btn-success btn-sm " id="btnAdd" >Add</button>
+                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
                     </div>
 
                     <!--Grand Total-->
@@ -97,7 +97,7 @@
                             <div class="form-group row">
                                 {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="grand_total" value="" id="grand_total" readonly 
+                                    <td><input type="number" name="grand_total" value="" id="grand_total" 
                                              class="form-control"></td>
                                 </div>
                             </div>
@@ -108,7 +108,8 @@
                             <div class="form-group row">
                                 {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    {!! Form::number('paid_amount', null, ['class' => 'form-control']) !!}
+                                      <td><input type="text" name="paid_amount" value="" id="paid_amount" 
+                                        class="form-control"></td>
                                 </div>
                             </div>
                             @error('paid_amount')
@@ -121,7 +122,7 @@
                             <div class="form-group row">
                                 {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="balance_amount" jAutoCalc="{grand_total} - {paid_amount}"
+                                    <td><input type="text" name="balance_amount" id ="balance_amount" readonly
                                             class="form-control"></td>
                                 </div>
                             </div>
@@ -132,7 +133,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            {!! Form::number('cash_received', null, ['class' => 'form-control']) !!}
+                            <td><input type="text" name="cash_received" value="" id="cash_received" class="form-control"></td>
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
@@ -143,8 +144,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash return', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <td><input type="text" name="cash_return" value=""
-                                    jAutoCalc="{cash_received} -{paid_amount}" class="form-control"></td>
+                            <td><input type="text" name="cash_return" value="" id="cash_return" class="form-control"></td>
 
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
