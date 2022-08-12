@@ -1,7 +1,5 @@
 <script>
     $(document).ready(function() {
-     
-
         let count = 1;
         function init(){
             count++;
@@ -26,7 +24,6 @@
         });
 
         $('.dynamic-input').delegate('select[id=order_id_2]', 'change', function () {
-            alert('hello from the other side');
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -47,17 +44,14 @@
  
     //Triggered when button clicked   
     $('#btnAdd').click(function(e) {
-
-        init();
-
-                e.preventDefault();
-                let template =`    <div class="row">
-                        <!--Order-->
-                        <div class="col-3 form-group row ">
-                            {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
-                            <div class="col-sm-8">
-
-                                <select name="order_id" id="order_id_2" class="form-control">
+    init();
+    e.preventDefault();
+    let template =`<div class="row">
+     <!--Order-->
+    <div class="col-3 form-group row ">
+    {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
+    <div class="col-sm-8">
+        <select name="order_id" id="order_id_${count}" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -70,7 +64,7 @@
                         <div class="col-3 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id" id="size_id_2" class="form-control">
+                                <select name="size_id" id="size_id_${count}" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>

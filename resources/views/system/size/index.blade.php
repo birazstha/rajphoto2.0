@@ -7,6 +7,18 @@
     </x-system.search-form>
 @endsection
 
+
+@if (isset($order_id))
+    @section('create')
+        <div class="col-6">
+            <a class="btn btn-primary pull-right btn-sm" id="addNew"
+                href="{{ route('sizes.create') . '/?order_id=' . $order_id }}">
+                <em class="fa fa-plus"></em> Add New
+            </a>
+        </div>
+    @endsection
+@endif
+
 @section('table-heading')
     <tr>
         <th scope="col">S.No</th>
@@ -21,7 +33,7 @@
     @php $pageIndex = pageIndex($items); @endphp
     @foreach ($items as $key => $item)
         <tr>
-         
+
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->orders->name }}</td>
@@ -32,7 +44,7 @@
                     <span class="badge badge-danger">Danger</span>
                 @endif
             </td>
-       
+
 
             <td>
                 @include('system.partials.editButton')

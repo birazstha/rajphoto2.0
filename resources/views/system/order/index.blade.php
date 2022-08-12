@@ -41,6 +41,12 @@
             <td>
                 @include('system.partials.editButton')
                 @include('system.partials.deleteButton')
+                <a href="{{ route('sizes.create').'/?order_id='.$item->id }}">
+                    <button class="btn btn-info btn-sm"><i class="fas fa-plus"></i> Size</button>
+                </a>
+                <a href="{{ route('sizes.index').'/?order_id='.$item->id }}">
+                    <button class="btn btn-info btn-sm"><i class="fas fa-list"></i> Sizes</button>
+                </a>
             </td>
         </tr>
     @endforeach
