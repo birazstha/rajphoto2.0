@@ -6,6 +6,7 @@
             count++;
         }
 
+        //First order
         $('.dynamic-input').delegate('select[id=order_id_1]', 'change', function() {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
@@ -24,6 +25,7 @@
             });
         });
 
+        //Second order
         $('.dynamic-input').delegate('select[id=order_id_2]', 'change', function() {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
@@ -43,7 +45,7 @@
         });
 
 
-        //Triggered when button clicked   
+        //Append new order 
         $('#btnAdd').click(function(e) {
             init();
             e.preventDefault();
@@ -113,24 +115,23 @@
 
 
     //Calculation
-
-
     var rate = null;
     var quantity = 1;
 
 
     //First order
     $('.dynamic-input').delegate('input[name=rate]', 'keyup', function() {
-
         rate = $(this).val();
         let total = rate * quantity;
         $('#total').val(total);
+        calculateGrandTotal();
     });
 
     $('.dynamic-input').delegate('input[name=quantity]', 'change keyup', function() {
         quantity = $(this).val();
         let total = rate * quantity;
         $('#total').val(total);
+        calculateGrandTotal();
     });
 
 
@@ -140,11 +141,35 @@
         rate = $(this).val();
         let total = rate * quantity;
         $('#total2').val(total);
+        calculateGrandTotal();
     });
-
+    
     $('.dynamic-input').delegate('input[name=quantity2]', 'change keyup', function() {
         quantity = $(this).val();
         let total = rate * quantity;
         $('#total2').val(total);
+        calculateGrandTotal();
+        
     });
+
+    //Calculating grand total
+
+    let grand_total = 0;
+    function calculateGrandTotal(){
+        let total = parseInt($('#total').val());
+        let total2 = parseInt($('#total2').val());
+
+        //if total2 is not added
+        if(!total2){
+            grand_total = total + 0;
+        }else{
+            grand_total = total + total2;
+        }
+
+        $('#grand_total').val(grand_total);
+    }
+
+     
+
+
 </script>

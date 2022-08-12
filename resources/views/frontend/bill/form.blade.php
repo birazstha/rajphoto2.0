@@ -2,7 +2,7 @@
     <div class="form">
         <div class="table">
             <div class="table-responsive">
-                {{ Form::open(['id' => 'cart']) }}
+                f
                 <!--Name-->
                 <div class="form-group row">
 
@@ -96,8 +96,8 @@
                             <div class="form-group row">
                                 {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="grand_total" value=""
-                                            jAutoCalc="SUM({item_total})" class="form-control"></td>
+                                    <td><input type="text" name="grand_total" value="" id="grand_total" disabled
+                                             class="form-control"></td>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             <div class="form-group row">
                                 {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="balance_amount" jAutoCalc="{total} - {paid_amount}"
+                                    <td><input type="text" name="balance_amount" jAutoCalc="{grand_total} - {paid_amount}"
                                             class="form-control"></td>
                                 </div>
                             </div>
