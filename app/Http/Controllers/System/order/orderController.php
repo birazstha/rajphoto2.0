@@ -34,18 +34,4 @@ class orderController extends ResourceController
         return 'system.order';
     }
 
-    public function getSizeByOrderId(Request $request)
-    {
-   
-        $order=Order::find($request->input('order_id'));
-   
-        $html="<option value=''>Select a size</option>";
-        foreach ($order->sizes as $size)
-        {
-
-            $html.="<option value='$size->id'>$size->name</option>";
-        }
-        return $html;
-
-    }
 }

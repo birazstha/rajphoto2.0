@@ -16,16 +16,14 @@
 
                 </div>
 
-                <div class="dynamic-input">
+                <div class="dynamic-input1">
                     <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                                @php
-                                    $i=1;
-                                @endphp
-                                <select name="order_id" id="order_id_{{ $i }}" class="form-control">
+                              
+                                <select name="order_id" id="order_id_1" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order )
                                     <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -67,9 +65,16 @@
                         </div>
 
                     </div>
+
+                 
                 </div>
 
-                <div class="more-input"></div>
+                <div class="more-inputs">
+                    
+                </div>
+
+            
+             
 
                 {{-- Action --}}
                 <div>

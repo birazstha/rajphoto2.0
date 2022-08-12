@@ -5,8 +5,8 @@
            count = count+1;
         }
 
-        // Triggered when changed
-        $(`#order_id_${count}`).on('change',function() {
+        $(".dynamic-input1").on('change','select',function() {
+
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -24,21 +24,20 @@
             });
         });
 
-   
-
-    
+ 
     //Triggered when button clicked   
     $('#btnAdd').click(function(e) {
-     
-        init();
+
                 e.preventDefault();
-                let template =`  <div class="row">
+                let template =` <div class="dynamic-input2">
+                    <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                                <select name="order_id" id="order_id_${count}" class="form-control">
-                                    <option value="" selected>Select order</option>
+                              
+                                <select name="order_id" id="order_id_1" class="form-control">
+                                    <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order )
                                     <option value="{{ $order->id }}">{{ $order->name }}</option>
                                     @endforeach
@@ -51,7 +50,7 @@
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
                                 <select name="size_id" id="size_id" class="form-control">
-                                    <option value="" selected>Select order</option>
+                                    <option value="" selected>Select a size</option>
                                 </select>
                             </div>
                         </div>
@@ -78,9 +77,12 @@
                             </div>
                         </div>
 
-                    </div>`;
+                    </div>
 
-                $('.dynamic-input').append(template);
+                 
+                </div>`;
+
+                $('.more-inputs').append(template);
             });
         });
 </script>
