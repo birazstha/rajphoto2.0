@@ -1,11 +1,12 @@
 <script>
     $(document).ready(function() {
         let count = 1;
-        function init(){
+
+        function init() {
             count++;
         }
 
-        $('.dynamic-input').delegate('select[id=order_id_1]', 'change', function () {
+        $('.dynamic-input').delegate('select[id=order_id_1]', 'change', function() {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -23,7 +24,7 @@
             });
         });
 
-        $('.dynamic-input').delegate('select[id=order_id_2]', 'change', function () {
+        $('.dynamic-input').delegate('select[id=order_id_2]', 'change', function() {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -41,12 +42,12 @@
             });
         });
 
- 
-    //Triggered when button clicked   
-    $('#btnAdd').click(function(e) {
-    init();
-    e.preventDefault();
-    let template =`<div class="row">
+
+        //Triggered when button clicked   
+        $('#btnAdd').click(function(e) {
+            init();
+            e.preventDefault();
+            let template = ` <div class="row">
                         <!--Order-->
                         <div class="col-2 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
@@ -75,7 +76,7 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('quantity', 1, ['class' => 'form-control']) !!}
+                                {!! Form::number('quantity${count}', 1, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @error('quantity')
@@ -86,53 +87,64 @@
                         <div class="col-2 form-group row">
                             {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                {!! Form::number('rate', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('rate${count}', null, ['class' => 'form-control']) !!}
                                 @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <!--Total-->
                         <div class="col-2 form-group row">
-                            {!! Form::label('rate', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
+                            {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <input type="text" name="item_total" value="" jAutoCalc="{quantity} * {rate}"
-                                class="form-control">   @error('rate')
+                                <input type="text" name="total" id="total${count}" value="" disabled
+                                    class="form-control"> @error('rate')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
+
                     </div>`;
 
-                $('.more-inputs').append(template);
-            });
+            $('.more-inputs').append(template);
         });
+    });
 
 
-        //Calculation
+    //Calculation
 
- 
-        var rate = null;
-       var quantity = 1;
-        $('#rate').keyup(function() {
-            rate = $(this).val();
-            console.log(rate);
-            calculate();
-        });
 
-        $('#quantity').on('change keyup',function() {
-            quantity = $(this).val();
-            calculate();
-    
-        });
+    var rate = null;
+    var quantity = 1;
 
-        function calculate(){
-           let total = rate*quantity;
-            $('#total').val(total);
-        }
 
-       
-    
+    //First order
+    $('.dynamic-input').delegate('input[name=rate]', 'keyup', function() {
 
+        rate = $(this).val();
+        let total = rate * quantity;
+        $('#total').val(total);
+    });
+
+    $('.dynamic-input').delegate('input[name=quantity]', 'change keyup', function() {
+        quantity = $(this).val();
+        let total = rate * quantity;
+        $('#total').val(total);
+    });
+
+
+    //Second order
+    $('.dynamic-input').delegate('input[name=rate2]', 'keyup', function() {
+      
+        rate = $(this).val();
+        let total = rate * quantity;
+        $('#total2').val(total);
+    });
+
+    $('.dynamic-input').delegate('input[name=quantity2]', 'change keyup', function() {
+        quantity = $(this).val();
+        let total = rate * quantity;
+        $('#total2').val(total);
+    });
 </script>
