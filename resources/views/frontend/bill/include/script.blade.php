@@ -1,12 +1,13 @@
 <script>
     $(document).ready(function() {
-        var count = 1;
+     
+
+        let count = 1;
         function init(){
-           count = count+1;
+            count++;
         }
 
-        $(".dynamic-input1").on('change','select',function() {
-
+        $('.dynamic-input').delegate('select[id=order_id_1]', 'change', function () {
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
@@ -18,8 +19,27 @@
                 method: 'post',
                 dataType: 'text',
                 success: function(response) {
-                    $('#size_id').empty();
-                    $('#size_id').append(response);
+                    $('#size_id_1').empty();
+                    $('#size_id_1').append(response);
+                }
+            });
+        });
+
+        $('.dynamic-input').delegate('select[id=order_id_2]', 'change', function () {
+            alert('hello from the other side');
+            var order = $(this).val();
+            var path = "{{ URL::route('order.getSize') }}";
+            $.ajax({
+                url: path,
+                data: {
+                    'order_id': order,
+                    '_token': "{{ csrf_token() }}"
+                },
+                method: 'post',
+                dataType: 'text',
+                success: function(response) {
+                    $('#size_id_2').empty();
+                    $('#size_id_2').append(response);
                 }
             });
         });
@@ -28,18 +48,19 @@
     //Triggered when button clicked   
     $('#btnAdd').click(function(e) {
 
+        init();
+
                 e.preventDefault();
-                let template =` <div class="dynamic-input2">
-                    <div class="row">
+                let template =`    <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                              
-                                <select name="order_id" id="order_id_1" class="form-control">
+
+                                <select name="order_id" id="order_id_2" class="form-control">
                                     <option value="" selected>Select Order Type</option>
-                                    @foreach ($orders as $order )
-                                    <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                    @foreach ($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -49,7 +70,7 @@
                         <div class="col-3 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id" id="size_id" class="form-control">
+                                <select name="size_id" id="size_id_2" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>
@@ -77,10 +98,7 @@
                             </div>
                         </div>
 
-                    </div>
-
-                 
-                </div>`;
+                    </div> `;
 
                 $('.more-inputs').append(template);
             });

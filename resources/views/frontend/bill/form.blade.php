@@ -16,17 +16,18 @@
 
                 </div>
 
-                <div class="dynamic-input1">
+
+                <div class="dynamic-input">
                     <div class="row">
                         <!--Order-->
                         <div class="col-3 form-group row ">
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-8">
-                              
+
                                 <select name="order_id" id="order_id_1" class="form-control">
                                     <option value="" selected>Select Order Type</option>
-                                    @foreach ($orders as $order )
-                                    <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                    @foreach ($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -36,7 +37,7 @@
                         <div class="col-3 form-group row">
                             {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-9">
-                                <select name="size_id" id="size_id" class="form-control">
+                                <select name="size_id" id="size_id_1" class="form-control">
                                     <option value="" selected>Select a size</option>
                                 </select>
                             </div>
@@ -66,15 +67,13 @@
 
                     </div>
 
-                 
+                    {{-- For cloning --}}
+                    <div class="more-inputs"></div>
                 </div>
 
-                <div class="more-inputs">
-                    
-                </div>
 
-            
-             
+
+
 
                 {{-- Action --}}
                 <div>
