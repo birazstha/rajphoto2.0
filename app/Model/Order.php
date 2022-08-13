@@ -14,5 +14,5 @@ class Order extends Model
     public function sizes(){
         return $this->hasMany(Size::class);
     }
-    
+
 }

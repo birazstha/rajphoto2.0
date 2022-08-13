@@ -43,6 +43,18 @@
                             </div>
                         </div>
 
+                        <!--Rate-->
+                        <div class="col-2 form-group row">
+                            {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-9">
+                                <input type="number" name="rate[]" id="rate" class="form-control">
+                                @error('rate')
+                                    <span class="text text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <!--Quantity-->
                         <div class="col-2 form-group row">
                             {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
@@ -55,16 +67,7 @@
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
 
-                        <!--Rate-->
-                        <div class="col-2 form-group row">
-                            {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-9">
-                                <input type="number" name="rate[]" id="rate" class="form-control">
-                                @error('rate')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
+                        
 
                         <!--Total-->
                         <div class="col-2 form-group row">
