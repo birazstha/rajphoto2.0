@@ -72,7 +72,7 @@ class BillController extends Controller
    
     public function edit($id)
     {
-        //
+       dd('hello');
     }
 
    
@@ -83,10 +83,19 @@ class BillController extends Controller
 
     public function destroy($id)
     {
-        //
+
     }
 
     public function scanQrCode(){
         return view('frontend.bill.qrcode');
+    }
+
+    public function searchBill(Request $request){
+        $items = Bill::where('qr_code',$request->qrcode)->first();
+        $data = [
+            'item' => $items,
+            'orders' => $this->orderService->getAllData($request),
+        ];
+        return view('frontend.bill.form',$data);
     }
 }

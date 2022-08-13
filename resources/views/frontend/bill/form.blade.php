@@ -1,5 +1,7 @@
 @section('main-content')
     <div class="form">
+
+     
         <div class="table">
             <div class="table-responsive">
                 {{Form::open(['route' => 'bill.store'])}}
@@ -7,8 +9,9 @@
                 <div class="form-group row">
 
                     {!! Form::label('name', 'Name', ['class' => 'col-sm-1 col-form-label']) !!}
-                    <div class="col-sm-11">
-                        {!! Form::text('name', null, ['class' => 'form-control','required', 'placeholder' => "Enter customer's name"]) !!}
+                    <div class="col-sm-11">  
+                        <td><input type="text" name="name" value="{{ $item->name??'' }}" id="name" 
+                            class="form-control"></td>
                         @error('name')
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
@@ -100,7 +103,7 @@
                             <div class="form-group row">
                                 {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="number" name="grand_total" value="" id="grand_total" 
+                                    <td><input type="number" name="grand_total" value="{{ $item->grand_total??'' }}" id="grand_total" 
                                              class="form-control"></td>
                                 </div>
                             </div>
@@ -111,7 +114,7 @@
                             <div class="form-group row">
                                 {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                      <td><input type="number" name="paid_amount" value="" id="paid_amount" 
+                                      <td><input type="number" name="paid_amount" value="{{ $item->paid_amount??'' }}" id="paid_amount" 
                                         class="form-control"></td>
                                 </div>
                             </div>
@@ -125,7 +128,7 @@
                             <div class="form-group row">
                                 {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                    <td><input type="text" name="balance_amount" id ="balance_amount" readonly
+                                    <td><input type="text" name="balance_amount" id ="balance_amount" value="{{ $item->balance_amount??'' }}" readonly
                                             class="form-control"></td>
                                 </div>
                             </div>
@@ -136,7 +139,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <td><input type="number" name="cash_received" value="" id="cash_received" class="form-control"></td>
+                            <td><input type="number" name="cash_received" value="{{ $item->cash_received??'' }}" id="cash_received" class="form-control"></td>
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
@@ -147,7 +150,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash return', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <td><input type="text" name="cash_return" value="" id="cash_return" class="form-control" readonly></td>
+                            <td><input type="text" name="cash_return" value="{{ $item->cash_return??'' }}" id="cash_return" class="form-control" readonly></td>
 
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
@@ -162,7 +165,7 @@
                             <div class="form-group row">
                                 <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value=""
+                                    <input type="text" value="{{ $item->ordered_date??'' }}"
                                         name="ordered_date" class="form-control" id="nepali-datepicker">
                                 </div>
                             </div>
@@ -174,7 +177,7 @@
                                 <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="delivery_date"
-                                        value="" class="form-control"
+                                        value="{{ $item->delivery_date??'' }}" class="form-control"
                                         id="nepali-datepicker1">
                                 </div>
                             </div>
