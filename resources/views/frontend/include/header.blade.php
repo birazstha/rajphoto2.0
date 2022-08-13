@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet"
         href="{{ asset('frontend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/dashboard.css') }}">
+    <link href="{{ asset('nepalidatepicker/css/nepali.datepicker.v3.7.min.css') }}" rel="stylesheet" type="text/css" />
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -81,7 +82,7 @@
 <body id="body">
     <nav class="navbar navbar-expand-lg navbar-light bg-primary no_print">
         <div class="container-fluid">
-            <a class="navbar-brand" href=""><img src="{{ asset('backend/logo.png') }}" alt=""></a>
+            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('logo.png') }}" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">

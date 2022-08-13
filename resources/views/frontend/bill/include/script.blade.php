@@ -20,7 +20,11 @@
                 dataType: 'text',
                 success: function(response) {
                     $('#size_id_1').empty();
+                    $('#rate').val('');
+                    $('#quantity').val('');
+                    $('#total').val('');
                     $('#size_id_1').append(response);
+                   
                 }
             });
         });
@@ -39,6 +43,9 @@
                 dataType: 'text',
                 success: function(response) {
                     $('#size_id_2').empty();
+                    $('#rate2').val('');
+                    $('#quantity2').val('');
+                    $('#total2').val('');
                     $('#size_id_2').append(response);
                 }
             });

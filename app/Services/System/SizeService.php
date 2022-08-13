@@ -46,12 +46,26 @@ class SizeService extends Service
         ];
     }
 
+    public function editPageData($request, $id)
+    {
+        return[
+            'item' => $this->itemByIdentifier($id),
+            'orders' => $this->orderService->getAllData($request->merge(['pluck'=>true])),
+            'status'=>$this->status(),
+            'order_id'=>$request->order_id,
+        ];
+    }
+       
+
+
     public function indexPageData($request){
         return[
             'items' => $this->getAllData($request),
             'order_id'=>$request->order_id,
         ];
     }
+
+    
 
    
 }

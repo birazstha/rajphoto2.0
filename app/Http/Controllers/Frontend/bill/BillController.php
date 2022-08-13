@@ -36,7 +36,7 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token', 'order_id', 'size_id', 'rate', 'quantity', 'total']);
-
+        $data['qr_code'] = uniqid();
         $data['row'] =  Bill::create($data);
 
         //Storing multiple orders detail
@@ -57,15 +57,14 @@ class BillController extends Controller
                 BillOrder::create($billOrder);
             }
         }
+
+
     }
 
 
     public function show($id)
     {
        $data['row'] = Bill::where('id',$id)->first();
-
-  
-
        return view('frontend.bill.photoBill',compact('data'));
 
     }
@@ -85,5 +84,9 @@ class BillController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function scanQrCode(){
+        return view('frontend.bill.qrcode');
     }
 }

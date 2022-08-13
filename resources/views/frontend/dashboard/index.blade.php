@@ -17,7 +17,7 @@
         </section>
     </a>
 
-    <a href="">
+    <a href="{{ route('bill.qrcode') }}">
         <section>
             <i class="fas fa-qrcode"></i>
             <p>Scan QR Code</p>

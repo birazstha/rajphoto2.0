@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageSeeder::class);
         $this->call(FrontendUserSeeder::class);
         $this->call(CountriesTableSeeder::class);
+        $this->call(OrderSeeder::class);
+        $this->call(SizeSeeder::class);
     }
 }

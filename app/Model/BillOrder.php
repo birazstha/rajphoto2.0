@@ -15,7 +15,7 @@ class BillOrder extends Model
         return $this->belongsTo(Order::class,'order_id');
     }
 
-    public function size_id(){
+    public function sizes(){
         return $this->belongsTo(Size::class,'size_id');
     }
 }

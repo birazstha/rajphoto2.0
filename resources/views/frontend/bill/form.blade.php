@@ -8,7 +8,7 @@
 
                     {!! Form::label('name', 'Name', ['class' => 'col-sm-1 col-form-label']) !!}
                     <div class="col-sm-11">
-                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter customer's name"]) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control','required', 'placeholder' => "Enter customer's name"]) !!}
                         @error('name')
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
@@ -111,7 +111,7 @@
                             <div class="form-group row">
                                 {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
-                                      <td><input type="text" name="paid_amount" value="" id="paid_amount" 
+                                      <td><input type="number" name="paid_amount" value="" id="paid_amount" 
                                         class="form-control"></td>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <td><input type="text" name="cash_received" value="" id="cash_received" class="form-control"></td>
+                            <td><input type="number" name="cash_received" value="" id="cash_received" class="form-control"></td>
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
@@ -147,7 +147,7 @@
                     <div class="form-group row">
                         {!! Form::label('rate', 'Cash return', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <td><input type="text" name="cash_return" value="" id="cash_return" class="form-control"></td>
+                            <td><input type="text" name="cash_return" value="" id="cash_return" class="form-control" readonly></td>
 
                             @error('rate')
                                 <span class="text text-danger">{{ $message }}</span>
@@ -162,22 +162,20 @@
                             <div class="form-group row">
                                 <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" value="<?php date_default_timezone_set('Asia/Kathmandu'); ?> {{ date('m/d/Y') }}"
-                                        name="ordered_date" class="form-control" id="order_date">
+                                    <input type="text" value=""
+                                        name="ordered_date" class="form-control" id="nepali-datepicker">
                                 </div>
                             </div>
-
 
                         </div>
                         <div class="col-6">
                             <!--Delivery Date-->
                             <div class="form-group row">
-                                <label for="delivery_date" class="col-sm-4 col-form-label">Delivery Date</label>
+                                <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" name="delivery_date"
-                                        value="<?php date_default_timezone_set('Asia/Kathmandu');
-                                        $d = strtotime('tomorrow'); ?>{{ date('m/d/Y', $d) }}" class="form-control"
-                                        id="delivery_date">
+                                    <input type="text" name="delivery_date"
+                                        value="" class="form-control"
+                                        id="nepali-datepicker1">
                                 </div>
                             </div>
                             @error('delivery_date')
@@ -208,6 +206,16 @@
 
     @section('js')
         @include('frontend.bill.include.script')
+          {{-- For nepali date picker --}}
+          <script src="{{ asset('nepalidatepicker/js/nepali.datepicker.v3.7.min.js') }}" type="text/javascript"></script>
+          <script type="text/javascript">
+              window.onload = function() {
+                  var mainInput = document.getElementById("nepali-datepicker");
+                  var mainInput1 = document.getElementById("nepali-datepicker1");
+                  mainInput.nepaliDatePicker();
+                  mainInput1.nepaliDatePicker();
+              };
+          </script>
     @endsection
 
     @include('frontend.layout.master')

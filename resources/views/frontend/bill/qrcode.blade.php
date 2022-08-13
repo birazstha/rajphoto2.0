@@ -1,6 +1,6 @@
 @section('main-content')
 
-    <form class="d-flex" action="{{route('frontend.bill.search')}}">
+    <form class="d-flex" action="">
         @csrf
         <input class="form-control me-2" type="search" name="id" id="id" placeholder="Scan Qr Code" aria-label="Search">
 {{--        <button class="btn btn-danger" type="submit"><i class="fas fa-search search-icon"></i></button>--}}
@@ -15,7 +15,7 @@
 @endsection
 
 @section('js')
-    @include($base_route.'include.script')
+    {{-- @include($base_route.'include.script') --}}
 @endsection
 
 @include('frontend.layout.master')

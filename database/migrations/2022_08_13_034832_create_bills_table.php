@@ -21,9 +21,10 @@ class CreateBillsTable extends Migration
             $table->integer('balance_amount');
             $table->integer('cash_received');
             $table->integer('cash_return');
-            $table->dateTime('ordered_date');
-            $table->dateTime('delivery_date');
+            $table->string('ordered_date');
+            $table->string('delivery_date');
             $table->string('user_id')->nullable();
+            $table->string('qr_code')->unique()->nullable();
             $table->timestamps();
         });
     }
