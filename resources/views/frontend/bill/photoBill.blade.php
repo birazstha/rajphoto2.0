@@ -1,6 +1,8 @@
 @section('main-content')
 
 
+
+
     <style type="text/css">
         /*if you want to remove some content in print display then use .no_print class on it */
         @media print {
@@ -17,11 +19,8 @@
             <table class="table table-bordered">
                 <div class="qrcode">
                     <h1>Raj Photo Studio</h1>
-                {!! QrCode::size(100)->generate($data['row']->qr_code); !!}
-                <!--                    --><?php
-                    //                    $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-                    //                    echo $generator->getBarcode($data['row']->id, $generator::TYPE_CODE_128)
-                    //                    ?>
+                {{-- {!! QrCode::size(100)->generate($data['row']->qr_code); !!} --}}
+             
 
                 </div>
 
@@ -51,18 +50,26 @@
                    </tr>
 
 
+        
+                   @foreach ($data['row']->billOrders as $orderInfo )
+                 
+                        <tr>
+                          
+                        <td rowspan="1">{{ $orderInfo->orders->name }}</td>
+                        <td rowspan="1">{{$orderInfo->quantity}}</td>
+                        <td rowspan="1">रु{{$orderInfo->rate}}</td>
+                        <td rowspan="1">रु{{$orderInfo->total}}</td>
+                     </tr>
+                 
+                   
+                   @endforeach
 
-                   <tr>
-                       <td rowspan="1">{{$data['row']->order->name}}</td>
-                       <td rowspan="1">{{$data['row']->quantity}}</td>
-                       <td rowspan="1">रु{{$data['row']->rate}}</td>
-                       <td rowspan="1">रु{{$data['row']->total}}</td>
-
-                   </tr>
+                   
+                   
 
                    <tr>
                        <td colspan="3"><b>Net Total</b></td>
-                       <td>रु{{$data['row']->total}}</td>
+                       <td>रु{{$data['row']->grand_total}}</td>
                    </tr>
                    <tr>
                        <td colspan="3"><b>Advance</b></td>
@@ -84,7 +91,7 @@
                </table>
             </table>
 
-                <div class="prepare">Bill Prepared By: {{$data['row']->user->name}}</div>
+                <div class="prepare">Bill Prepared By: fsdf</div>
 
 
         </div>
@@ -98,8 +105,8 @@
 @endsection
 
 @section('js')
-    @include($base_route.'include.script')
-    @include($base_route.'include.print')
+    {{-- @include($base_route.'include.script')
+    @include($base_route.'include.print') --}}
 
     <!--No print-->
     <script type="text/javascript" src="{{asset('backend/plugins/jQuery.print.min.js')}}"></script>
