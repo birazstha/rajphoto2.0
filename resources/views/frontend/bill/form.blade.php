@@ -8,8 +8,8 @@
                 <!--Name-->
                 <div class="form-group row">
 
-                    {!! Form::label('name', 'Name', ['class' => 'col-sm-1 col-form-label']) !!}
-                    <div class="col-sm-11">
+                    {!! Form::label('name', 'Name', ['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-sm-10">
                         <td><input type="text" name="name" value="{{ $item->name ?? '' }}" id="name"
                                 class="form-control" {{ isset($item) ? 'readonly' : '' }}></td>
                         @error('name')
@@ -99,10 +99,9 @@
                     <div class="dynamic-input">
                         <div class="row">
                             <!--Order-->
-                            <div class="col-2 form-group row ">
-                                {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
-                                <div class="col-sm-8">
-
+                     
+                                {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
+                                <div class="col-sm-2">
                                     <select name="order_id[]" id="order_id_1" class="form-control">
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
@@ -110,8 +109,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                           
 
+                            
                             <!--Size-->
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
@@ -133,19 +133,16 @@
                                 </div>
                             </div>
 
-
-                            <!--Quantity-->
-                            <div class="col-2 form-group row">
-                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
-                                <div class="col-sm-9">
-                                    <input type="number" name="quantity[]" id="quantity" value="1"
-                                        class="form-control">
-
+                               <!--Quantity-->
+                               <div class="col-2 form-group row">
+                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
+                                <div class="col-sm-8">
+                                    <input type="number" name="quantity[]" id="quantity" value="1" class="form-control">
+                                    @error('quantity')
+                                        <span class="text text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            @error('quantity')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
 
 
 
@@ -163,7 +160,9 @@
                         </div>
 
                         {{-- For cloning --}}
+                 
                         <div class="more-inputs"></div>
+                        
                     </div>
                 @endif
 
@@ -171,7 +170,7 @@
                 <div>
                     <div class="{{ isset($item) ? 'd-none' : '' }}">
                         <button type="button" class="btn btn-success btn-sm " id="btnAdd">Add</button>
-                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                        <button type="button" class="btn btn-danger btn-sm" id=btnRemove>Remove</button>
                     </div>
 
                     <!--Grand Total-->
@@ -214,10 +213,13 @@
                         </div>
                     </div>
 
+                    
+
+
                     <!--Cash Received-->
                     <div class="form-group row">
                         {!! Form::label('cash_received', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
-                        <div class="col-sm-10">
+                        <div class="col-sm-10   ">
                             <td><input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
                                     id="cash_received" class="form-control"></td>
                             @error('rate')

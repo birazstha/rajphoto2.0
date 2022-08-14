@@ -56,70 +56,73 @@
         $('#btnAdd').click(function(e) {
             init();
             e.preventDefault();
-            let template = ` <div class="row">
-                        <!--Order-->
-                        <div class="col-2 form-group row ">
-                            {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
-                            <div class="col-sm-8">
+            var template = `   <div class="appended row">
+                            <!--Order-->
+                     
+                                {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
+                                <div class="col-sm-2">
+                                    <select name="order_id[]" id="order_id_${count}" class="form-control">
+                                        <option value="" selected>Select Order Type</option>
+                                        @foreach ($orders as $order)
+                                            <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                           
 
-                                <select name="order_id[]" id="order_id_${count}" class="form-control">
-                                    <option value="" selected>Select Order Type</option>
-                                    @foreach ($orders as $order)
-                                        <option value="{{ $order->id }}">{{ $order->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <!--Size-->
-                        <div class="col-2 form-group row">
-                            {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-9">
-                                <select name="size_id[]" id="size_id_${count}" class="form-control">
-                                    <option value="" selected>Select a size</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!--Rate-->
-                        <div class="col-2 form-group row">
-                            {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-9">
-                                <input type="number" name="rate[]" id="rate${count}" class="form-control">
-                                @error('rate')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        <!--Quantity-->
-                        <div class="col-2 form-group row">
-                            {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-9">
-                                <input type="number" name="quantity[]" id="quantity${count}" value="1" class="form-control">
                             
+                            <!--Size-->
+                            <div class="col-2 form-group row">
+                                {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
+                                <div class="col-sm-9">
+                                    <select name="size_id[]" id="size_id_${count}" class="form-control">
+                                        <option value="" selected>Select a size</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        @error('quantity')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
 
-
-                        <!--Total-->
-                        <div class="col-2 form-group row">
-                            {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-9">
-                                <input type="text" name="total[]" id="total${count}" value="" readonly 
-                                    class="form-control"> @error('rate')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
+                            <!--Rate-->
+                            <div class="col-2 form-group row">
+                                {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
+                                <div class="col-sm-9">
+                                    <input type="number" name="rate[]" id="rate${count}" class="form-control">
+                                    @error('rate')
+                                        <span class="text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                    </div>`;
+                               <!--Quantity-->
+                               <div class="col-2 form-group row">
+                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
+                                <div class="col-sm-8">
+                                    <input type="number" name="quantity[]" id="quantity${count}" value="1" class="form-control">
+                                    @error('quantity')
+                                        <span class="text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
+                            <!--Total-->
+                            <div class="col-2 form-group row">
+                                {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
+                                <div class="col-sm-9">
+                                    <input type="text" name="total[]" id="total${count}" value="" readonly
+                                        class="form-control"> @error('rate')
+                                        <span class="text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>`;
 
             $('.more-inputs').append(template);
+        });
+
+        $('#btnRemove').click(function(){
+            $('.appended').last().remove();
         });
     });
 

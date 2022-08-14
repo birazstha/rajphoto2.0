@@ -19,6 +19,7 @@ $profileBaseUrl = '/profile';
 $mailtestBaseUrl = '/mail-test';
 $orderBaseUrl = '/order';
 $sizeBaseUrl = '/sizes';
+$billsBaseUrl = '/bills';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -403,15 +404,15 @@ return  [
             ],
         ],
         [
-            'name' => 'Category Management',
-            'icon' => "<i class='fa fa-list'></i>",
+            'name' => 'Bill Management',
+            'icon' => '<i class="fas fa-file-invoice"></i>',
             'hasSubmodules' => false,
-            'route' => $categoriesBaseUrl,
+            'route' => $billsBaseUrl,
             'permissions' => [
                 [
                     'name' => 'View Category',
                     'route' => [
-                        'url' => $categoriesBaseUrl,
+                        'url' => $billsBaseUrl,
                         'method' => $getMethod,
                     ],
                 ],
@@ -419,11 +420,11 @@ return  [
                     'name' => 'Create Category',
                     'route' => [
                         [
-                            'url' => $categoriesBaseUrl.'/create',
+                            'url' => $billsBaseUrl.'/create',
                             'method' => $getMethod,
                         ],
                         [
-                            'url' => $categoriesBaseUrl,
+                            'url' => $billsBaseUrl,
                             'method' => $postMethod,
                         ],
 
@@ -433,11 +434,11 @@ return  [
                     'name' => 'Edit Category',
                     'route' => [
                         [
-                            'url' => $categoriesBaseUrl.'/*/edit',
+                            'url' => $billsBaseUrl.'/*/edit',
                             'method' => $getMethod,
                         ],
                         [
-                            'url' => $categoriesBaseUrl.'/*',
+                            'url' => $billsBaseUrl.'/*',
                             'method' => $putMethod,
                         ],
                     ],
@@ -445,7 +446,7 @@ return  [
                 [
                     'name' => 'Delete Category',
                     'route' => [
-                        'url' => $categoriesBaseUrl.'/*',
+                        'url' => $billsBaseUrl.'/*',
                         'method' => $deleteMethod,
                     ],
                 ],
