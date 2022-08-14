@@ -95,6 +95,7 @@ class BillController extends Controller
         $data = [
             'item' => $items,
             'orders' => $this->orderService->getAllData($request),
+            'sizes' => $this->orderService->getAllData($request),
         ];
         return view('frontend.bill.form',$data);
     }
