@@ -57,8 +57,7 @@ class BillController extends Controller
                 BillOrder::create($billOrder);
             }
         }
-
-
+        return redirect()->route('bill.show',$data['row']->id);
     }
 
 

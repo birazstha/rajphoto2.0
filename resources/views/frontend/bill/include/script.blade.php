@@ -1,12 +1,10 @@
 <script>
     $(document).ready(function() {
         var count = 1;
-
         function init() {
             count++;
         }
-
-        $('.dynamic-input').delegate('select[id=1]', 'change', function() {
+        $('.dynamic-input').delegate('select', 'change', function() {
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -31,9 +29,6 @@
                 }
             });
         });
-
-
-
         //Append new order 
         $('#btnAdd').click(function(e) {
             init();
@@ -67,7 +62,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="${count}" class="form-control">
+                                    <input type="number" name="rate[]" id="rate${count}" data-id="${count}" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -78,7 +73,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="${count}" value="1" class="form-control">
+                                    <input type="number" name="quantity[]" id="quantity${count}" data-id="${count}" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -107,35 +102,39 @@
             $('.appended').last().remove();
         });
  
-
-
     //Calculation
     var rate = null;
     var quantity = 1;
-
-
     $('.dynamic-input').delegate('input', 'change keyup', function() {
+        totalId = '#total' + $(this).attr('data-id');
+        quantityId = '#quantity' + $(this).attr('data-id');
+        quantityValue = $(`${quantityId}`).val();
+        rateId = '#rate' + $(this).attr('data-id');
+        console.log(rateId);
+        rateValue = $(`${rateId}`).val();
 
-        totalId = '#total' + $(this).attr('id');
+    
+
         checkInputType = $(this).attr('name');
+        //Calculating total according to rate
         if (checkInputType === 'rate[]') {
             rate = $(this).val();
-            total = rate * quantity;
+            total = rate * parseInt(quantityValue);
             $(totalId).val(total);
           
-        } else {
-            quantity = $(this).val();
-            total = rate * quantity;
-            $(totalId).val(total);
+        }  //Calculating total according to quality
+        else {
+            quantity = $(this).val(); 
+            total1 = quantity * parseInt(rateValue);
+         
+            $(totalId).val(total1);
         }
 
         //Calculate grand total
         var grand_total = 0;
         for(let i = 1; i<=count; i++){
-
             let total = $(`#total${i}`).val();
             grand_total =  parseInt(total) + parseInt(grand_total);
-            
         }
         $('#grand_total').val(grand_total);
       
@@ -145,7 +144,7 @@
     //Calculate balance amount
     let balanceAmt = 0;
     $('#paid_amount').on('keyup change', function() {
-        balanceAmt = grand_total - $('#paid_amount').val();
+         balanceAmt =  $('#grand_total').val() - $(this).val();   
         $('#balance_amount').val(balanceAmt);
     });
 

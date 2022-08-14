@@ -1,7 +1,5 @@
 @section('main-content')
     <div class="form">
-
-
         <div class="table">
             <div class="table-responsive">
                 {{ Form::open(['route' => 'bill.store']) }}
@@ -16,9 +14,7 @@
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-
                 </div>
-
 
                 {{-- For delivery --}}
                 @if (isset($item->billOrders))
@@ -126,7 +122,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="1" class="form-control">
+                                    <input type="number" name="rate[]" id="rate1" data-id="1" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -137,7 +133,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="1" value="1" class="form-control">
+                                    <input type="number" name="quantity[]" id="quantity1" data-id="1" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -180,7 +176,7 @@
                                 {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="number" name="grand_total" value="{{ $item->grand_total ?? '' }}"
-                                            id="grand_total" class="form-control" {{ isset($item) ? 'readonly' : '' }}>
+                                            id="grand_total" class="form-control" readonly>
                                     </td>
                                 </div>
                             </div>
@@ -189,7 +185,7 @@
                         <!--Paid Amount-->
                         <div class="col-4">
                             <div class="form-group row">
-                                {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-6 col-form-label']) !!}
+                                {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="number" name="paid_amount" value="{{ $item->paid_amount ?? '' }}"
                                             id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }}>
@@ -204,7 +200,7 @@
                         <div class="col-4">
                             <!--Balance Amount-->
                             <div class="form-group row">
-                                {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-6 col-form-label']) !!}
+                                {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="text" name="balance_amount" id="balance_amount"
                                             value="{{ $item->balance_amount ?? '' }}" readonly class="form-control"></td>
