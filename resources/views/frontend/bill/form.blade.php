@@ -102,7 +102,7 @@
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                                 <div class="col-sm-2">
-                                    <select name="order_id[]" id="order_id_1" class="form-control">
+                                    <select name="order_id[]" id="1" class="form-control order">
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
                                             <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -126,7 +126,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="rate" class="form-control">
+                                    <input type="number" name="rate[]" id="1" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -137,7 +137,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="quantity" value="1" class="form-control">
+                                    <input type="number" name="quantity[]" id="1" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -150,7 +150,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="text" name="total[]" id="total" value="" readonly
+                                    <input type="text" name="total[]" id="total1" value="" readonly
                                         class="form-control"> @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror

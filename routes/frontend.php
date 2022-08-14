@@ -9,7 +9,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/qrcode', 'bill\BillController@scanQrCode')->name('bill.qrcode');
     Route::get('/search', 'bill\BillController@searchBill')->name('bill.search');
 
-    Route::post('/haha', 'TestController@getOrderById')->name('order.getSize');
+    Route::post('/getOrderById', 'TestController@getOrderById')->name('order.getSize');
 
 
     
