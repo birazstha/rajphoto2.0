@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\System\size;
+namespace App\Http\Controllers\System\rate;
 
 use App\Http\Controllers\System\ResourceController;
 use App\Model\Order;
 use App\Services\System\OrderService;
-use App\Services\System\SizeService;
+use App\Services\System\RateService;
 
-class sizeController extends ResourceController
+
+class RateController extends ResourceController
 {
     
-    public function __construct(SizeService $categoryService)
+    public function __construct(RateService $categoryService)
     {
         parent::__construct($categoryService);
         $this->orderService = new OrderService(new Order);
@@ -28,12 +29,12 @@ class sizeController extends ResourceController
 
     public function moduleName()
     {
-        return 'sizes';
+        return 'rates';
     }
 
     public function viewFolder()
     {
-        return 'system.size';
+        return 'system.rate';
     }
 
    

@@ -20,6 +20,7 @@ $mailtestBaseUrl = '/mail-test';
 $orderBaseUrl = '/order';
 $sizeBaseUrl = '/sizes';
 $billsBaseUrl = '/bills';
+$ratesBaseUrl = '/rates';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -332,34 +333,34 @@ return  [
                 [
                     'name' => 'Rate',
                     'icon' => '<i class="fas fa-money-bill-wave"></i>',
-                    'route' => $configBaseUrl,
+                    'route' => $ratesBaseUrl,
                     'hasSubmodules' => false,
                     'permissions' => [
                         [
                             'name' => 'View Configs',
                             'route' => [
-                                'url' => $configBaseUrl,
+                                'url' => $ratesBaseUrl,
                                 'method' => $getMethod,
                             ],
                         ],
                         [
                             'name' => 'Create Config',
                             'route' => [
-                                'url' => $configBaseUrl,
+                                'url' => $ratesBaseUrl,
                                 'method' => $postMethod,
                             ],
                         ],
                         [
                             'name' => 'Edit Config',
                             'route' => [
-                                'url' => $configBaseUrl.'/*',
+                                'url' => $ratesBaseUrl.'/*',
                                 'method' => $putMethod,
                             ],
                         ],
                         [
                             'name' => 'Delete Config',
                             'route' => [
-                                'url' => $configBaseUrl.'/*',
+                                'url' => $ratesBaseUrl.'/*',
                                 'method' => $deleteMethod,
                             ],
                         ],

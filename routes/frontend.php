@@ -10,6 +10,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/search', 'bill\BillController@searchBill')->name('bill.search');
 
     Route::post('/getOrderById', 'TestController@getOrderById')->name('order.getSize');
+    Route::post('/getRateBySize', 'TestController@getRateBySize')->name('size.getRate');
 
 
     

@@ -22,22 +22,20 @@
                         <div class="dynamic-input">
                             <div class="row">
                                 <!--Order-->
-                                <div class="col-2 form-group row ">
-                                    {!! Form::label('order_id', 'Order', ['class' => 'col-sm-4 col-form-label']) !!}
-                                    <div class="col-sm-8">
-
-                                        <select name="order_id[]" id="order_id_1" class="form-control" disabled>
+                         
+                                    {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
+                                    <div class="col-sm-2">
+                                        <select name="order_id[]" id="1"  class="form-control order" {{ isset($item)?'disabled':'' }}>
                                             <option value="" selected>Select Order Type</option>
                                             @foreach ($orders as $order)
                                                 <option value="{{ $bill->order_id }}" selected>{{ $bill->orders->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-
-
                                     </div>
-                                </div>
-
+                               
+    
+                                
                                 <!--Size-->
                                 <div class="col-2 form-group row">
                                     {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
@@ -48,47 +46,52 @@
                                         </select>
                                     </div>
                                 </div>
-
+    
                                 <!--Rate-->
                                 <div class="col-2 form-group row">
                                     {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                     <div class="col-sm-9">
-                                        <input type="number" name="rate[]" id="rate" class="form-control"
-                                            value="{{ $bill->rate }}" {{ isset($item) ? 'readonly' : '' }}>
+                                        <input type="number" name="rate[]" id="rate1" data-id="1" value="{{ $bill->rate??'' }}" {{ isset($item)?'readonly':'' }} class="form-control">
                                         @error('rate')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-
-
-                                <!--Quantity-->
-                                <div class="col-2 form-group row">
-                                    {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
-                                    <div class="col-sm-9">
-                                        <input type="number" name="quantity[]" id="quantity" value="{{ $bill->quantity }}"
-                                            class="form-control" {{ isset($item) ? 'readonly' : '' }}>
-
-                                    </div>
-                                </div>
-                                @error('quantity')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
-
-
-
-                                <!--Total-->
-                                <div class="col-2 form-group row">
-                                    {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
-                                    <div class="col-sm-9">
-                                        <input type="text" name="total[]" id="total" value="{{ $bill->total }}"
-                                            readonly class="form-control"> @error('rate')
+    
+                                   <!--Quantity-->
+                                   <div class="col-2 form-group row">
+                                    {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
+                                    <div class="col-sm-8">
+                                        <input type="number" name="quantity[]" id="quantity1" data-id="1"  value="{{ $bill->quantity??'' }}" {{ isset($item)?'readonly':'' }} value="1" class="form-control">
+                                        @error('quantity')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
+    
+    
+    
+                                <!--Total-->
+                                <div class="col-2 form-group row">
+                                    {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
+                                    <div class="col-sm-9">
+                                        <input type="text" name="total[]" id="total1"  value="{{ $bill->total??'' }}" readonly 
+                                            class="form-control"> @error('rate')
+                                            <span class="text text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+    
                             </div>
+    
+                            {{-- For cloning --}}
+                     
+                            <div class="more-inputs"></div>
+                            
                         </div>
+
+                        
+
                     @endforeach
                     {{-- For creating new bill --}}
                 @else
@@ -98,7 +101,7 @@
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                                 <div class="col-sm-2">
-                                    <select name="order_id[]" id="1" class="form-control order">
+                                    <select name="order_id[]" id="1" data-id="order" class="form-control order">
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
                                             <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -112,7 +115,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <select name="size_id[]" id="size_id_1" class="form-control">
+                                    <select name="size_id[]" id="size_id_1" data-id="1" data-class="size" class="form-control">
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>

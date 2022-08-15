@@ -4,7 +4,7 @@
         function init() {
             count++;
         }
-        $('.dynamic-input').delegate('select', 'change', function() {
+        $('.dynamic-input').on('change','select[data-id=order]', function() {
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -29,6 +29,29 @@
                 }
             });
         });
+
+        $('.dynamic-input').on('change','select[data-class=size]', function() {
+            var size = $(this).val();
+            let rateId = '#rate' + $(this).attr('data-id');
+            console.log(rateId);
+    
+            var path = "{{ URL::route('size.getRate') }}";
+            $.ajax({
+                url: path,
+                data: {
+                    'size_id': size,
+                    '_token': "{{ csrf_token() }}"
+                },
+                method: 'post',
+                dataType: 'text',
+                success: function(response) {
+                   $(rateId).val(response);
+                }
+            });
+        });
+
+
+
         //Append new order 
         $('#btnAdd').click(function(e) {
             init();
@@ -38,7 +61,7 @@
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                                 <div class="col-sm-2">
-                                    <select name="order_id[]" id="${count}" class="form-control">
+                                    <select name="order_id[]" id="${count}" data-id="order" class="form-control">
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
                                             <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -52,7 +75,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <select name="size_id[]" id="size_id_${count}" class="form-control">
+                                    <select name="size_id[]" id="size_id_${count}" data-id="${count}" data-class="size" class="form-control">
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>

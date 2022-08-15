@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Order;
+use App\Model\Size;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -19,5 +20,10 @@ class TestController extends Controller
         }
         return $html;
 
+    }
+
+    public function getRateBySize(Request $request){
+        $size = Size::find($request->input('size_id'));
+        return $size->rate;
     }
 }
