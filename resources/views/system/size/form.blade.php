@@ -39,6 +39,15 @@
 </x-system.form.form-group>
 @endif
 
+ {{-- Rate --}}
+ <x-system.form.form-group :input="[
+    'name' => 'rate',
+    'required' => 'true',
+    'label' => 'Rate',
+    'default' => $item->rate ?? old('rate'),
+    'error' => $errors->first('rate'),
+]" />
+
 
     {{-- Status --}}
     <x-system.form.form-group :input="['label' => 'Status']">

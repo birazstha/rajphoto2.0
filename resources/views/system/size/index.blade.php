@@ -24,6 +24,7 @@
         <th scope="col">S.No</th>
         <th scope="col">Name</th>
         <th scope="col">Order</th>
+        <th scope="col">Rate</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
@@ -37,6 +38,7 @@
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->orders->name }}</td>
+            <td>{{ $item->rate ?? '-'}}</td>
             <td>
                 @if ($item->status == 1)
                     <span class="badge badge-success">Active</span>

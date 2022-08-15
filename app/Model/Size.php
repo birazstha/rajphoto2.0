@@ -9,7 +9,7 @@ class Size extends Model
 {
 
     protected $table = 'sizes';
-    protected $fillable = ['order_id','name','status'];
+    protected $fillable = ['order_id','name','status','rate'];
 
     public function orders(){
         return $this->belongsTo(Order::class,'order_id');

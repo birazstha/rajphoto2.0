@@ -24,6 +24,7 @@ class TestController extends Controller
 
     public function getRateBySize(Request $request){
         $size = Size::find($request->input('size_id'));
+        // dd($size);
         return $size->rate;
     }
 }

@@ -33,8 +33,10 @@
         $('.dynamic-input').on('change','select[data-class=size]', function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
-            console.log(rateId);
-    
+            let totalId = '#total' + $(this).attr('data-id');
+            let quantityId = '#quantity' + $(this).attr('data-id');
+            let quantityData = $(`${quantityId}`).val();
+
             var path = "{{ URL::route('size.getRate') }}";
             $.ajax({
                 url: path,
@@ -46,8 +48,15 @@
                 dataType: 'text',
                 success: function(response) {
                    $(rateId).val(response);
-                }
+                   let data = response * parseInt(quantityData);
+                   $(`${totalId}`).val(data);
+                },
+              
             });
+
+           
+
+
         });
 
 
