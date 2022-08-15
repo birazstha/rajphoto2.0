@@ -17,6 +17,7 @@ class SizeService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
+
         
         $query = $this->query();
 

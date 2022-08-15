@@ -38,7 +38,7 @@
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->orders->name }}</td>
-            <td>{{ $item->rate ?? '-'}}</td>
+            <td>Rs.{{ $item->rate ?? '-'}} /-</td>
             <td>
                 @if ($item->status == 1)
                     <span class="badge badge-success">Active</span>
