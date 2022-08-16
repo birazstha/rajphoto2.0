@@ -4,7 +4,7 @@
         function init() {
             count++;
         }
-        $('.dynamic-input').on('change','select[data-id=order]', function() {
+        $('.dynamic-input').on('change', 'select[data-id=order]', function() {
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -30,10 +30,12 @@
             });
         });
 
-        $('.dynamic-input').on('change','select[data-class=size]', function() {
+        $('.dynamic-input').on('change', 'select[data-class=size]', function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
+            let lastTotalId = $(this).attr('data-id') - 1;
+            let lastTotalValue = $(`#${lastTotalId}`).val();
             let quantityId = '#quantity' + $(this).attr('data-id');
             let quantityData = $(`${quantityId}`).val();
 
@@ -47,22 +49,28 @@
                 method: 'post',
                 dataType: 'text',
                 success: function(response) {
-                   $(rateId).val(response);
-                   let data = response * parseInt(quantityData);
-                   $(`${totalId}`).val(data);
+                    $(rateId).val(response);
+
+                    //Calculate total price automatically when size appears
+                    let data = response * parseInt(quantityData);
+                    $(`${totalId}`).val(data);
+
+                    //Calculating grand total when the size's rate appears
+                    var grandTotal = 0;
+                    for (let i = 1; i <= count; i++) {
+                        let finalTotal = $(`#total${i}`).val();
+                        grandTotal = parseInt(finalTotal) + parseInt(grandTotal);
+                    }
+
+                    $('#grand_total').val(grandTotal);
                 },
-              
             });
-
-           
-
-
         });
 
 
 
-        //Append new order 
-        $('#btnAdd').click(function(e) {
+          //Append new order 
+          $('#btnAdd').click(function(e) {
             init();
             e.preventDefault();
             var template = `   <div class="appended row">
@@ -130,61 +138,61 @@
             $('.more-inputs').append(template);
         });
 
+
+
         $('#btnRemove').click(function() {
             $('.appended').last().remove();
         });
- 
-    //Calculation
-    var rate = null;
-    var quantity = 1;
-    $('.dynamic-input').delegate('input', 'change keyup', function() {
-        totalId = '#total' + $(this).attr('data-id');
-        quantityId = '#quantity' + $(this).attr('data-id');
-        quantityValue = $(`${quantityId}`).val();
-        rateId = '#rate' + $(this).attr('data-id');
-        console.log(rateId);
-        rateValue = $(`${rateId}`).val();
 
-    
+        //Calculation
+        var rate = null;
+        var quantity = 1;
+        $('.dynamic-input').delegate('input', 'change keyup', function() {
+            totalId = '#total' + $(this).attr('data-id');
+            quantityId = '#quantity' + $(this).attr('data-id');
+            quantityValue = $(`${quantityId}`).val();
+            rateId = '#rate' + $(this).attr('data-id');
+            rateValue = $(`${rateId}`).val();
 
-        checkInputType = $(this).attr('name');
-        //Calculating total according to rate
-        if (checkInputType === 'rate[]') {
-            rate = $(this).val();
-            total = rate * parseInt(quantityValue);
-            $(totalId).val(total);
-          
-        }  //Calculating total according to quality
-        else {
-            quantity = $(this).val(); 
-            total1 = quantity * parseInt(rateValue);
-         
-            $(totalId).val(total1);
-        }
 
-        //Calculate grand total
-        var grand_total = 0;
-        for(let i = 1; i<=count; i++){
-            let total = $(`#total${i}`).val();
-            grand_total =  parseInt(total) + parseInt(grand_total);
-        }
-        $('#grand_total').val(grand_total);
-      
+            checkInputType = $(this).attr('name');
+            //Calculating total according to rate
+            if (checkInputType === 'rate[]') {
+                rate = $(this).val();
+                total = rate * parseInt(quantityValue);
+                $(totalId).val(total);
+
+            } //Calculating total according to quality
+            else {
+                quantity = $(this).val();
+                total1 = quantity * parseInt(rateValue);
+
+                $(totalId).val(total1);
+            }
+
+            //Calculate grand total
+            var grand_total = 0;
+            for (let i = 1; i <= count; i++) {
+                let total = $(`#total${i}`).val();
+                grand_total = parseInt(total) + parseInt(grand_total);
+            }
+            $('#grand_total').val(grand_total);
+
+        });
+
+
+        //Calculate balance amount
+        let balanceAmt = 0;
+        $('#paid_amount').on('keyup change', function() {
+            balanceAmt = $('#grand_total').val() - $(this).val();
+            $('#balance_amount').val(balanceAmt);
+        });
+
+        //Calculate cash return
+        $('#cash_received').on('keyup change', function() {
+            cashReturn = $('#cash_received').val() - $("#paid_amount").val();
+            $('#cash_return').val(cashReturn);
+        });
+
     });
-
-
-    //Calculate balance amount
-    let balanceAmt = 0;
-    $('#paid_amount').on('keyup change', function() {
-         balanceAmt =  $('#grand_total').val() - $(this).val();   
-        $('#balance_amount').val(balanceAmt);
-    });
-
-    //Calculate cash return
-    $('#cash_received').on('keyup change', function() {
-        cashReturn = $('#cash_received').val() - $("#paid_amount").val();
-        $('#cash_return').val(cashReturn);
-    });
-
-});
 </script>
