@@ -58,7 +58,11 @@
                     //Calculating grand total when the size's rate appears
                     var grandTotal = 0;
                     for (let i = 1; i <= count; i++) {
+                        console.log(count);
+                     
+
                         let finalTotal = $(`#total${i}`).val();
+                        console.log(`final total of #total${i}:`+finalTotal);
                         grandTotal = parseInt(finalTotal) + parseInt(grandTotal);
                     }
 

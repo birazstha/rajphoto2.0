@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="en">
 @include('frontend.include.header')
 
 <div class="container-fluid">
-   @yield('main-content')
+    @yield('main-content')
 </div>
 
 
-    @yield('js')
+@yield('js')
 </body>
 
 

@@ -28,58 +28,14 @@
     <link rel="stylesheet" href="{{ asset('css/frontend/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/dashboard.css') }}">
     <link href="{{ asset('nepalidatepicker/css/nepali.datepicker.v3.7.min.css') }}" rel="stylesheet" type="text/css" />
-
-
+    <title>Raj Photo Studio - {{ $pageTitle??'' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
-    <script type="text/javascript">
-        $(function() {
 
-            function autoCalcSetup() {
-                $('form#cart').jAutoCalc('destroy');
-                $('form#cart tr.line_items').jAutoCalc({
-                    keyEventsFire: true,
-                    decimalPlaces: 2,
-                    emptyAsZero: true
-                });
-                $('form#cart').jAutoCalc({
-                    decimalPlaces: 2
-                });
-            }
-            autoCalcSetup();
-            $('button.row-remove').on("click", function(e) {
-                e.preventDefault();
-
-                var form = $(this).parents('form')
-                $(this).parents('tr').remove();
-                autoCalcSetup();
-
-            });
-
-            $('button.row-add').on("click", function(e) {
-                e.preventDefault();
-
-                var $table = $(this).parents('table');
-                var $top = $table.find('tr.line_items').first();
-                var $new = $top.clone(true);
-
-                $new.jAutoCalc('destroy');
-                $new.insertBefore($top);
-                $new.find('input[type=text]').val('');
-                autoCalcSetup();
-
-            });
-
-        });
-    </script>
-
-
-    <title></title>
 </head>
 
 <body id="body">
+
     <nav class="navbar navbar-expand-lg navbar-light bg-primary no_print">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('logo.png') }}" alt=""></a>
@@ -91,10 +47,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        {{-- <a class="nav-link active" aria-current="page" href="{{route('front')}}">Home</a> --}}
+                        <a class="nav-link active" aria-current="page" href="">Home</a>
                     </li>
                     <li class="nav-item">
-                        {{-- <a class="nav-link" href="{{route('frontend.bill.index')}}">Bills</a> --}}
+                        <a class="nav-link" href="  ">Bills</a>
                     </li>
 
 
