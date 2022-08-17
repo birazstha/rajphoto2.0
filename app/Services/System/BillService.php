@@ -11,7 +11,10 @@ class BillService extends Service
      protected $orderService;
     public function __construct(Bill $bill)
     {
+        
         parent::__construct($bill);
+        $this->orderService = new OrderService(new Order);
+        $this->module = 'Prepare Bill';
     }
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
@@ -38,11 +41,15 @@ class BillService extends Service
     }
 
     public function createPageData($request){
+       
         return[
             'orders' => $this->orderService->getAllData($request->merge(['pluck'=>true])),
             'status'=>$this->status(),
             'order_id'=>$request->order_id,
+            'pageTitle'=>$this->module,
+            
         ];
+        
     }
 
     public function editPageData($request, $id)

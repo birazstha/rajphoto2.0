@@ -25,7 +25,7 @@ class OrderService extends Service
         }
 
         if(isset($data->pluck)){
-            return $query->orderBy('id', 'ASC')->pluck('name','id');
+            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
         }
         if ($pagination) {
             return $query->orderBy('id', 'ASC')->get();

@@ -2,100 +2,39 @@
 
 namespace App\Http\Controllers\Frontend\bill;
 
-use App\Http\Controllers\Controller;
-use App\Model\Bill;
-use App\Model\BillOrder;
-use App\Model\Order;
-use App\Services\frontend\OrderService;
-use Illuminate\Http\Request;
+use App\Http\Controllers\System\ResourceController;
+use App\Services\System\BillService;
 
-class BillController extends Controller
+
+class BillController extends ResourceController
 {
-    protected $orderService;
-    public function __construct()
+    
+    public function __construct(BillService $billService)
     {
-        $this->orderService = new OrderService(new Order);
+        parent::__construct($billService);
     }
 
-    public function index()
-    {
-        //
+    public function storeValidationRequest()
+    {   
+        return 'App\Http\Requests\system\billRequest';
     }
 
-
-    public function create(Request $request)
+    public function updateValidationRequest()
     {
-
-        $data = [
-            'orders' => $this->orderService->getAllData($request),
-        ];
-        return view('frontend.bill.form', $data);
+        return 'App\Http\Requests\system\billRequest';
     }
 
-
-    public function store(Request $request)
+    public function moduleName()
     {
-        $data = $request->except(['_token', 'order_id', 'size_id', 'rate', 'quantity', 'total']);
-        $data['qr_code'] = uniqid();
-        $data['row'] =  Bill::create($data);
-
-        //Storing multiple orders detail
-        if ($data['row']) {
-            $billOrder['bill_id'] = $data['row']->id;
-            $orders = $request->input('order_id');
-            $sizes = $request->input('size_id');
-            $quantities = $request->input('quantity');
-            $rates = $request->input('rate');
-            $totals = $request->input('total');
-
-            for($i = 0; $i < count($orders); $i++){
-                $billOrder['order_id'] = $orders[$i];
-                $billOrder['size_id'] = $sizes[$i];
-                $billOrder['quantity'] = $quantities[$i];
-                $billOrder['rate'] = $rates[$i];
-                $billOrder['total'] = $totals[$i];
-                BillOrder::create($billOrder);
-            }
-        }
-        return redirect()->route('bill.show',$data['row']->id);
+        return 'bills';
     }
 
-
-    public function show($id)
+    public function viewFolder()
     {
-       $data['row'] = Bill::where('id',$id)->first();
-       return view('frontend.bill.photoBill',compact('data'));
-
+        return 'frontend.bill';
     }
 
    
-    public function edit($id)
-    {
-       dd('hello');
-    }
 
    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-
-    }
-
-    public function scanQrCode(){
-        return view('frontend.bill.qrcode');
-    }
-
-    public function searchBill(Request $request){
-        $items = Bill::where('qr_code',$request->qrcode)->first();
-        $data = [
-            'item' => $items,
-            'orders' => $this->orderService->getAllData($request),
-            'sizes' => $this->orderService->getAllData($request),
-        ];
-        return view('frontend.bill.form',$data);
-    }
 }

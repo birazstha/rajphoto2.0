@@ -1,8 +1,9 @@
+@extends('frontend.layout.master')
 @section('main-content')
     <div class="form">
         <div class="table">
             <div class="table-responsive">
-                {{ Form::open(['route' => 'bill.store']) }}
+                {{ Form::open(['']) }}
                 <!--Name-->
                 <div class="form-group row">
 
@@ -22,20 +23,21 @@
                         <div class="dynamic-input">
                             <div class="row">
                                 <!--Order-->
-                         
-                                    {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
-                                    <div class="col-sm-2">
-                                        <select name="order_id[]" id="1"  class="form-control order" {{ isset($item)?'disabled':'' }}>
-                                            <option value="" selected>Select Order Type</option>
-                                            @foreach ($orders as $order)
-                                                <option value="{{ $bill->order_id }}" selected>{{ $bill->orders->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                               
-    
-                                
+
+                                {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
+                                <div class="col-sm-2">
+                                    <select name="order_id[]" id="1" class="form-control order"
+                                        {{ isset($item) ? 'disabled' : '' }}>
+                                        <option value="" selected>Select Order Type</option>
+                                        @foreach ($orders as $order)
+                                            <option value="{{ $bill->order_id }}" selected>{{ $bill->orders->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+
                                 <!--Size-->
                                 <div class="col-2 form-group row">
                                     {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
@@ -46,76 +48,77 @@
                                         </select>
                                     </div>
                                 </div>
-    
+
                                 <!--Rate-->
                                 <div class="col-2 form-group row">
                                     {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                     <div class="col-sm-9">
-                                        <input type="number" name="rate[]" id="rate1" data-id="1" value="{{ $bill->rate??'' }}" {{ isset($item)?'readonly':'' }} class="form-control">
+                                        <input type="number" name="rate[]" id="rate1" data-id="1"
+                                            value="{{ $bill->rate ?? '' }}" {{ isset($item) ? 'readonly' : '' }}
+                                            class="form-control">
                                         @error('rate')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-    
-                                   <!--Quantity-->
-                                   <div class="col-2 form-group row">
+
+                                <!--Quantity-->
+                                <div class="col-2 form-group row">
                                     {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                     <div class="col-sm-8">
-                                        <input type="number" name="quantity[]" id="quantity1" data-id="1"  value="{{ $bill->quantity??'' }}" {{ isset($item)?'readonly':'' }} value="1" class="form-control">
+                                        <input type="number" name="quantity[]" id="quantity1" data-id="1"
+                                            value="{{ $bill->quantity ?? '' }}" {{ isset($item) ? 'readonly' : '' }}
+                                            value="1" class="form-control">
                                         @error('quantity')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-    
-    
-    
+
+
+
                                 <!--Total-->
                                 <div class="col-2 form-group row">
                                     {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                                     <div class="col-sm-9">
-                                        <input type="text" name="total[]" id="total1"  value="{{ $bill->total??'' }}" readonly 
-                                            class="form-control"> @error('rate')
+                                        <input type="text" name="total[]" id="total1"
+                                            value="{{ $bill->total ?? '' }}" readonly class="form-control"> @error('rate')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-    
+
                             </div>
-    
+
                             {{-- For cloning --}}
-                     
+
                             <div class="more-inputs"></div>
-                            
+
                         </div>
-
-                        
-
                     @endforeach
                     {{-- For creating new bill --}}
                 @else
                     <div class="dynamic-input">
                         <div class="row">
                             <!--Order-->
-                     
-                                {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
-                                <div class="col-sm-2">
-                                    <select name="order_id[]" id="1" data-id="order" class="form-control order">
-                                        <option value="" selected>Select Order Type</option>
-                                        @foreach ($orders as $order)
-                                            <option value="{{ $order->id }}">{{ $order->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                           
+                            {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
+                            <div class="col-sm-2">
+                                <select name="order_id[]" id="1" data-id="order" class="form-control order">
+                                    <option value="" selected>Select Order Type</option>
+                                    @foreach ($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                            
+
+
                             <!--Size-->
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <select name="size_id[]" id="size_id_1" data-id="1" data-class="size" class="form-control">
+                                    <select name="size_id[]" id="size_id_1" data-id="1" data-class="size"
+                                        class="form-control">
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>
@@ -132,11 +135,12 @@
                                 </div>
                             </div>
 
-                               <!--Quantity-->
-                               <div class="col-2 form-group row">
+                            <!--Quantity-->
+                            <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="quantity1" data-id="1" value="1" class="form-control">
+                                    <input type="number" name="quantity[]" id="quantity1" data-id="1" value="1"
+                                        class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -159,9 +163,9 @@
                         </div>
 
                         {{-- For cloning --}}
-                 
+
                         <div class="more-inputs"></div>
-                        
+
                     </div>
                 @endif
 
@@ -212,7 +216,7 @@
                         </div>
                     </div>
 
-                    
+
 
 
                     <!--Cash Received-->
@@ -270,7 +274,12 @@
                         <div class="form-group row">
                             {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('user_id', [], null, ['class' => 'form-control', 'placeholder' => 'Select your name']) !!}
+                                <select name="" id="" class="form-control">
+                                    <option value="">Select your name</option>
+                                    <option value="">Raj Shrestha</option>
+                                    <option value="">Biraj Shrestha</option>
+                                    <option value="">Rajeev Shrestha</option>
+                                </select>
                                 @error('user_id')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
@@ -300,5 +309,3 @@
             };
         </script>
     @endsection
-
-    @include('frontend.layout.master')

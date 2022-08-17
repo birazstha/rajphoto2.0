@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Bills</h1>
 
     <div class="dashboard">
-        <a href="{{ route('bill.create') }}">
+        <a href="{{ route('bills.create') }}">
             <section>
                 <i class="far fa-images"></i>
                 <p>Photos</p>
