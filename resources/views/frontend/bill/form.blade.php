@@ -161,11 +161,12 @@
                                     @enderror
                                 </div>
                             </div>
-           
-                              <i class="fas fa-times removeOrder d-none" data-orderId="order-1"></i>
-                           
+                            <div class="remove-order">
+                                <i class="fas fa-times removeOrder d-none" data-orderId="order-1" data-order='1'></i>
+                            </div>
 
                         </div>
+                      
 
                         {{-- For Appending --}}
                         <div class="more-inputs"></div>
@@ -180,8 +181,8 @@
                     </div>
                 @endif
                 <div class="{{ isset($item) ? 'd-none' : '' }}">
-                    <button type="button" class="btn btn-success btn-sm " id="btnAdd" >Add</button>
-                 </div>
+                    <button type="button" class="btn btn-success btn-sm " id="btnAdd">Add</button>
+                </div>
 
                 {{-- Action --}}
 

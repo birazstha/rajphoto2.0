@@ -61,7 +61,6 @@
                     var grandTotal = 0;
                     for (let i = 1; i <= count; i++) {
                         let finalTotal = $(`#total${i}`).val();
-                        // console.log(`final total of #total${i}:` + finalTotal);
                         grandTotal = parseInt(finalTotal) + parseInt(grandTotal);
                     }
 
@@ -76,12 +75,12 @@
         //Append new order 
         $('#btnAdd').click(function() {
             
-            //Check if user has entered full order details or not
-            // let currentTotal = $(`#total${count}`).val();
-            // if(!currentTotal){
-            //     $('.error-msg').removeClass('d-none');
-            //     return false;
-            // }
+            // Check if user has entered full order details or not
+            let currentTotal = $(`#total${count}`).val();
+            if(!currentTotal){
+                $('.error-msg').removeClass('d-none');
+                return false;
+            }
             $('.removeOrder').removeClass('d-none');
             //Increase the count
             init();
@@ -144,8 +143,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <i class="fas fa-times removeOrder" data-orderId="order-${count}"></i>
-                         
+                            <div class="remove-order">
+                                <i class="fas fa-times removeOrder" data-orderId="order-${count}" data-order='${count}'></i>
+                            </div>
 
 
                             
@@ -211,8 +211,19 @@
 
         //For removing specific order
         $(document).on('click','.removeOrder',function(){
-            let orderId = $(this).data('orderid');
-            console.log(orderId);
+                       
+            //set current total
+            let currentTotal = $(`#total${count}`).val();
+      
+            //Deducting the amount of deleted order
+            let totalAmountId = $(this).data('order');
+            let currentTotalAmount = $(`#total${totalAmountId}`).val();
+            let currentGrandTotal = $('#grand_total').val();
+            let newGrandTotal = currentGrandTotal - currentTotalAmount;
+           $('#grand_total').val(newGrandTotal);
+
+
+           let orderId = $(this).data('orderid');
             if (count != 1) {
                 count--;
             }
