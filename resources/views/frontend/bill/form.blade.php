@@ -88,6 +88,7 @@
                                     </div>
                                 </div>
 
+
                             </div>
 
                             {{-- For cloning --}}
@@ -99,11 +100,12 @@
                     {{-- For creating new bill --}}
                 @else
                     <div class="dynamic-input">
-                        <div class="row">
+                        <div class="row" id="order-1">
                             <!--Order-->
+
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                             <div class="col-sm-2">
-                                <select name="order_id[]" id="1" data-id="order" class="form-control order">
+                                <select name="order_id[]" id="1" data-id="order" class="form-control">
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -159,139 +161,148 @@
                                     @enderror
                                 </div>
                             </div>
+           
+                              <i class="fas fa-times removeOrder d-none" data-orderId="order-1"></i>
+                           
 
                         </div>
 
-                        {{-- For cloning --}}
-
+                        {{-- For Appending --}}
                         <div class="more-inputs"></div>
+
+                        <div class="row">
+                            <label for="" class="col-2"></label>
+                            <span class="col-10 text text-danger error-msg d-none" style="top: -10px">Please fill the
+                                previous order details to add a new order. </span>
+
+                        </div>
 
                     </div>
                 @endif
+                <div class="{{ isset($item) ? 'd-none' : '' }}">
+                    <button type="button" class="btn btn-success btn-sm " id="btnAdd" >Add</button>
+                 </div>
 
                 {{-- Action --}}
-                <div>
-                    <div class="{{ isset($item) ? 'd-none' : '' }}">
-                        <button type="button" class="btn btn-success btn-sm " id="btnAdd">Add</button>
-                        <button type="button" class="btn btn-danger btn-sm" id=btnRemove>Remove</button>
-                    </div>
-
-                    <!--Grand Total-->
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group row">
-                                {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
-                                <div class="col-sm-6">
-                                    <td><input type="number" name="grand_total" value="{{ $item->grand_total ?? '' }}"
-                                            id="grand_total" class="form-control" readonly>
-                                    </td>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Paid Amount-->
-                        <div class="col-4">
-                            <div class="form-group row">
-                                {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-3 col-form-label']) !!}
-                                <div class="col-sm-6">
-                                    <td><input type="number" name="paid_amount" value="{{ $item->paid_amount ?? '' }}"
-                                            id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }}>
-                                    </td>
-                                </div>
-                            </div>
-                            @error('paid_amount')
-                                <p class="text text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="col-4">
-                            <!--Balance Amount-->
-                            <div class="form-group row">
-                                {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-4 col-form-label']) !!}
-                                <div class="col-sm-6">
-                                    <td><input type="text" name="balance_amount" id="balance_amount"
-                                            value="{{ $item->balance_amount ?? '' }}" readonly class="form-control"></td>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
 
 
-                    <!--Cash Received-->
-                    <div class="form-group row">
-                        {!! Form::label('cash_received', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
-                        <div class="col-sm-10   ">
-                            <td><input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
-                                    id="cash_received" class="form-control"></td>
-                            @error('rate')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!--Cash Return-->
-                    <div class="form-group row">
-                        {!! Form::label('rate', 'Cash return', ['class' => 'col-sm-2 col-form-label']) !!}
-                        <div class="col-sm-10">
-                            <td><input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}"
-                                    id="cash_return" class="form-control" readonly></td>
-                            @error('rate')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <!--Ordered Data-->
-                            <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
-                                <div class="col-sm-8">
-                                    <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
-                                        class="form-control" id="nepali-datepicker" {{ isset($item) ? 'readonly' : '' }}>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-6">
-                            <!--Delivery Date-->
-                            <div class="form-group row">
-                                <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="delivery_date" value="{{ $item->delivery_date ?? '' }}"
-                                        class="form-control" id="nepali-datepicker1"
-                                        {{ isset($item) ? 'readonly' : '' }}>
-                                </div>
-                            </div>
-                            @error('delivery_date')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <!--Prepared by-->
+                <!--Grand Total-->
+                <div class="row">
+                    <div class="col-4">
                         <div class="form-group row">
-                            {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
-                            <div class="col-sm-10">
-                                <select name="" id="" class="form-control">
-                                    <option value="">Select your name</option>
-                                    <option value="">Raj Shrestha</option>
-                                    <option value="">Biraj Shrestha</option>
-                                    <option value="">Rajeev Shrestha</option>
-                                </select>
-                                @error('user_id')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
+                            {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
+                            <div class="col-sm-6">
+                                <td><input type="number" name="grand_total" value="{{ $item->grand_total ?? '' }}"
+                                        id="grand_total" class="form-control" readonly>
+                                </td>
                             </div>
                         </div>
-                        <button class="btn btn-success">Submit</button>
                     </div>
-                    {!! Form::close() !!}
+
+                    <!--Paid Amount-->
+                    <div class="col-4">
+                        <div class="form-group row">
+                            {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-3 col-form-label']) !!}
+                            <div class="col-sm-6">
+                                <td><input type="number" name="paid_amount" value="{{ $item->paid_amount ?? '' }}"
+                                        id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }}>
+                                </td>
+                            </div>
+                        </div>
+                        @error('paid_amount')
+                            <p class="text text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="col-4">
+                        <!--Balance Amount-->
+                        <div class="form-group row">
+                            {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-4 col-form-label']) !!}
+                            <div class="col-sm-6">
+                                <td><input type="text" name="balance_amount" id="balance_amount"
+                                        value="{{ $item->balance_amount ?? '' }}" readonly class="form-control"></td>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+
+
+
+                <!--Cash Received-->
+                <div class="form-group row">
+                    {!! Form::label('cash_received', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-sm-10   ">
+                        <td><input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
+                                id="cash_received" class="form-control"></td>
+                        @error('rate')
+                            <span class="text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!--Cash Return-->
+                <div class="form-group row">
+                    {!! Form::label('rate', 'Cash return', ['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-sm-10">
+                        <td><input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}"
+                                id="cash_return" class="form-control" readonly></td>
+                        @error('rate')
+                            <span class="text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <!--Ordered Data-->
+                        <div class="form-group row">
+                            <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
+                            <div class="col-sm-8">
+                                <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
+                                    class="form-control" id="nepali-datepicker" {{ isset($item) ? 'readonly' : '' }}>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <!--Delivery Date-->
+                        <div class="form-group row">
+                            <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="delivery_date" value="{{ $item->delivery_date ?? '' }}"
+                                    class="form-control" id="nepali-datepicker1" {{ isset($item) ? 'readonly' : '' }}>
+                            </div>
+                        </div>
+                        @error('delivery_date')
+                            <span class="text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!--Prepared by-->
+                    <div class="form-group row">
+                        {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
+                            <select name="" id="" class="form-control">
+                                <option value="">Select your name</option>
+                                <option value="">Raj Shrestha</option>
+                                <option value="">Biraj Shrestha</option>
+                                <option value="">Rajeev Shrestha</option>
+                            </select>
+                            @error('user_id')
+                                <span class="text text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <button class="btn btn-success">Submit</button>
+                </div>
+                {!! Form::close() !!}
             </div>
+
         </div>
+
     @endsection
 
 

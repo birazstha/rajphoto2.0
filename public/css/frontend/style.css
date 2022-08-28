@@ -39,4 +39,16 @@
     color: black;
 }
 
+.removeOrder{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content:end;
+    margin-top: -40px;
+    /* align-items:flex-end; */
+}
+
+.removeOrder{
+    cursor: pointer;
+    color: red;
+}
 

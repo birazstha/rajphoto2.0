@@ -1,10 +1,11 @@
 <script>
     $(document).ready(function() {
         var count = 1;
+
         function init() {
             count++;
         }
-        $('.dynamic-input').on('change', 'select[data-id=order]', function() {
+        $(document).on('change', 'select[data-id=order]', function() {
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -30,7 +31,7 @@
             });
         });
 
-        $('.dynamic-input').on('change', 'select[data-class=size]', function() {
+        $(document).on('change', 'select[data-class=size]', function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
@@ -54,30 +55,37 @@
                     //Calculate total price automatically when size appears
                     let data = response * parseInt(quantityData);
                     $(`${totalId}`).val(data);
+                    $('.error-msg').addClass('d-none');
 
                     //Calculating grand total when the size's rate appears
                     var grandTotal = 0;
                     for (let i = 1; i <= count; i++) {
-                        console.log(count);
-                     
-
                         let finalTotal = $(`#total${i}`).val();
-                        console.log(`final total of #total${i}:`+finalTotal);
+                        // console.log(`final total of #total${i}:` + finalTotal);
                         grandTotal = parseInt(finalTotal) + parseInt(grandTotal);
                     }
 
-                    $('#grand_total').val(grandTotal);
+                    $('#grand_total').  val(grandTotal);
+
                 },
             });
         });
 
 
 
-          //Append new order 
-          $('#btnAdd').click(function(e) {
+        //Append new order 
+        $('#btnAdd').click(function() {
+            
+            //Check if user has entered full order details or not
+            // let currentTotal = $(`#total${count}`).val();
+            // if(!currentTotal){
+            //     $('.error-msg').removeClass('d-none');
+            //     return false;
+            // }
+            $('.removeOrder').removeClass('d-none');
+            //Increase the count
             init();
-            e.preventDefault();
-            var template = `   <div class="appended row">
+            var template = `<div class="appended row" id=order-${count}>
                             <!--Order-->
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
@@ -136,6 +144,11 @@
                                     @enderror
                                 </div>
                             </div>
+                            <i class="fas fa-times removeOrder" data-orderId="order-${count}"></i>
+                         
+
+
+                            
 
                         </div>`;
 
@@ -144,33 +157,28 @@
 
 
 
-        $('#btnRemove').click(function() {
-            $('.appended').last().remove();
-        });
 
         //Calculation
         var rate = null;
         var quantity = 1;
-        $('.dynamic-input').delegate('input', 'change keyup', function() {
+        $(document).delegate('input', 'change keyup', function() {
             totalId = '#total' + $(this).attr('data-id');
             quantityId = '#quantity' + $(this).attr('data-id');
             quantityValue = $(`${quantityId}`).val();
             rateId = '#rate' + $(this).attr('data-id');
             rateValue = $(`${rateId}`).val();
-
-
             checkInputType = $(this).attr('name');
-            //Calculating total according to rate
+
+            //Poputlating total according to rate appeared
             if (checkInputType === 'rate[]') {
                 rate = $(this).val();
                 total = rate * parseInt(quantityValue);
                 $(totalId).val(total);
 
-            } //Calculating total according to quality
+            } //Poputlating total according to quality
             else {
                 quantity = $(this).val();
                 total1 = quantity * parseInt(rateValue);
-
                 $(totalId).val(total1);
             }
 
@@ -198,5 +206,29 @@
             $('#cash_return').val(cashReturn);
         });
 
+        
+
+
+        //For removing specific order
+        $(document).on('click','.removeOrder',function(){
+            let orderId = $(this).data('orderid');
+            console.log(orderId);
+            if (count != 1) {
+                count--;
+            }
+            $(`#${orderId}`).remove();
+
+            //If only one order is left then remove the remove icon.
+            let countOrder = $('.removeOrder').length
+            if(countOrder===1){
+               $('.removeOrder').addClass('d-none'); 
+            }
+    
+        });
+
+       
     });
+
+    
+
 </script>
