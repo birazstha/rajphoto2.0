@@ -168,15 +168,14 @@
                         </div>
                       
 
-                        {{-- For Appending --}}
-                        <div class="more-inputs"></div>
 
-                        <div class="row">
-                            <label for="" class="col-2"></label>
-                            <span class="col-10 text text-danger error-msg d-none" style="top: -10px">Please fill the
-                                previous order details to add a new order. </span>
+                       
 
-                        </div>
+                    </div>
+                    <div class="row error-msg d-none">
+                        <label for="" class="col-2"></label>
+                        <span class="col-10 text text-danger" style="top: -10px">Please fill the
+                            previous order details to add a new order. </span>
 
                     </div>
                 @endif
@@ -195,7 +194,7 @@
                         <div class="form-group row">
                             {!! Form::label('grand_total', 'Grand Total', ['class' => 'col-sm-6 col-form-label']) !!}
                             <div class="col-sm-6">
-                                <td><input type="number" name="grand_total" value="{{ $item->grand_total ?? '' }}"
+                                <td><input type="number" name="grand_total" value="{{ $item->grand_total ?? '0' }}"
                                         id="grand_total" class="form-control" readonly>
                                 </td>
                             </div>

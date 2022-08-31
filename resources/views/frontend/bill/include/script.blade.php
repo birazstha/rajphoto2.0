@@ -1,7 +1,14 @@
 <script>
     $(document).ready(function() {
         var count = 1;
-
+        var currentTotal;
+        var balanceAmt = 0;
+        var lastTotal;
+       
+       
+        function setLastTotal(data){
+            lastTotal = data;
+        }
         function init() {
             count++;
         }
@@ -50,6 +57,7 @@
                 method: 'post',
                 dataType: 'text',
                 success: function(response) {
+                    //setting the rate of the selected Size
                     $(rateId).val(response);
 
                     //Calculate total price automatically when size appears
@@ -58,33 +66,37 @@
                     $('.error-msg').addClass('d-none');
 
                     //Calculating grand total when the size's rate appears
-                    var grandTotal = 0;
-                    for (let i = 1; i <= count; i++) {
-                        let finalTotal = $(`#total${i}`).val();
-                        grandTotal = parseInt(finalTotal) + parseInt(grandTotal);
-                    }
+                    var grandTotal = parseInt($('#grand_total').val()) + parseInt(response);
+                    console.log(grandTotal);
 
-                    $('#grand_total').  val(grandTotal);
+                    
+                    
+                   
+                   
+
+                    $('#grand_total').val(grandTotal);
 
                 },
             });
         });
 
 
-
+      
         //Append new order 
         $('#btnAdd').click(function() {
-            
+           
             // Check if user has entered full order details or not
-            let currentTotal = $(`#total${count}`).val();
-            if(!currentTotal){
-                $('.error-msg').removeClass('d-none');
-                return false;
-            }
+            currentTotal = $(`#total${count}`).val();
+            setLastTotal(currentTotal);
+            // if(!lastTotal){
+            //     $('.error-msg').removeClass('d-none');
+            //     return false;
+            // }
+            
             $('.removeOrder').removeClass('d-none');
             //Increase the count
             init();
-            var template = `<div class="appended row" id=order-${count}>
+            var template = `<div class="row" id=order-${count}>
                             <!--Order-->
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
@@ -152,8 +164,36 @@
 
                         </div>`;
 
-            $('.more-inputs').append(template);
+            $('.dynamic-input').append(template);
         });
+
+        
+        //For removing specific order
+        $(document).on('click','.removeOrder',function(){
+            //Deducting the amount of deleted order
+            let totalAmountId = $(this).data('order');
+            let currentTotalAmount = $(`#total${totalAmountId}`).val();
+            let currentGrandTotal = $('#grand_total').val();
+            let newGrandTotal = currentGrandTotal - currentTotalAmount;
+           $('#grand_total').val(newGrandTotal);
+
+
+           let orderId = $(this).data('orderid');
+            //set a new currentTotal
+            previousTotal = $(`#order-${totalAmountId}`).prev().find('input[name="total[]"]').val();
+            setLastTotal(previousTotal);
+            //if current total has data than allow user to add new
+            
+            $(`#${orderId}`).remove();
+
+            //If only one order is left then remove the remove icon.
+            let countOrder = $('.removeOrder').length
+            if(countOrder===1){
+               $('.removeOrder').addClass('d-none'); 
+            }
+    
+        });
+
 
 
 
@@ -188,13 +228,14 @@
                 let total = $(`#total${i}`).val();
                 grand_total = parseInt(total) + parseInt(grand_total);
             }
+
             $('#grand_total').val(grand_total);
 
         });
 
 
         //Calculate balance amount
-        let balanceAmt = 0;
+       
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             $('#balance_amount').val(balanceAmt);
@@ -208,34 +249,6 @@
 
         
 
-
-        //For removing specific order
-        $(document).on('click','.removeOrder',function(){
-                       
-            //set current total
-            let currentTotal = $(`#total${count}`).val();
-      
-            //Deducting the amount of deleted order
-            let totalAmountId = $(this).data('order');
-            let currentTotalAmount = $(`#total${totalAmountId}`).val();
-            let currentGrandTotal = $('#grand_total').val();
-            let newGrandTotal = currentGrandTotal - currentTotalAmount;
-           $('#grand_total').val(newGrandTotal);
-
-
-           let orderId = $(this).data('orderid');
-            if (count != 1) {
-                count--;
-            }
-            $(`#${orderId}`).remove();
-
-            //If only one order is left then remove the remove icon.
-            let countOrder = $('.removeOrder').length
-            if(countOrder===1){
-               $('.removeOrder').addClass('d-none'); 
-            }
-    
-        });
 
        
     });
