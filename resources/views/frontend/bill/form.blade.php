@@ -82,7 +82,7 @@
                                     {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                                     <div class="col-sm-9">
                                         <input type="text" name="total[]" id="total1"
-                                            value="{{ $bill->total ?? '' }}" readonly class="form-control"> @error('rate')
+                                            value="{{ $bill->total ?? '0' }}" readonly class="form-control"> @error('rate')
                                             <span class="text text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

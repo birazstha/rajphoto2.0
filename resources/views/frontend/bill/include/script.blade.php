@@ -46,7 +46,7 @@
             let lastTotalValue = $(`#${lastTotalId}`).val();
             let quantityId = '#quantity' + $(this).attr('data-id');
             let quantityData = $(`${quantityId}`).val();
-
+            let oldTotalAmount = $(totalId).val(); 
             var path = "{{ URL::route('size.getRate') }}";
             $.ajax({
                 url: path,
@@ -61,21 +61,27 @@
                     $(rateId).val(response);
 
                     //Calculate total price automatically when size appears
-                    let data = response * parseInt(quantityData);
-                    $(`${totalId}`).val(data);
-                    $('.error-msg').addClass('d-none');
-
+                    let totalAmount = response * parseInt(quantityData);
+                    $(`${totalId}`).val(totalAmount);
+                  
+                 
+                  
                     //Calculating grand total when the size's rate appears
-                    var grandTotal = parseInt($('#grand_total').val()) + parseInt(response);
-                    console.log(grandTotal);
-
-                    
-                    
-                   
-                   
-
-                    $('#grand_total').val(grandTotal);
-
+                    var currentGrandTotal =  parseInt($('#grand_total').val()); 
+                  
+                    if(currentGrandTotal==0){
+                        $('#grand_total').val(totalAmount);
+                    }else{
+                        var currentGrandTotal =  parseInt($('#grand_total').val());
+                        if(!oldTotalAmount){
+                            var gradTotal = currentGrandTotal + parseInt(response);
+                            $('#grand_total').val(gradTotal);
+                        }else{
+                            var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
+                        }
+                     
+                       $('#grand_total').val(gradTotal);
+                    }
                 },
             });
         });
@@ -88,10 +94,10 @@
             // Check if user has entered full order details or not
             currentTotal = $(`#total${count}`).val();
             setLastTotal(currentTotal);
-            // if(!lastTotal){
-            //     $('.error-msg').removeClass('d-none');
-            //     return false;
-            // }
+            if(!lastTotal){
+                $('.error-msg').removeClass('d-none');
+                return false;
+            }
             
             $('.removeOrder').removeClass('d-none');
             //Increase the count
@@ -215,7 +221,7 @@
                 total = rate * parseInt(quantityValue);
                 $(totalId).val(total);
 
-            } //Poputlating total according to quality
+            } //Poputlating total according to quantity
             else {
                 quantity = $(this).val();
                 total1 = quantity * parseInt(rateValue);
