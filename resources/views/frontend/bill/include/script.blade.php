@@ -4,8 +4,7 @@
         var currentTotal;
         var balanceAmt = 0;
         var lastTotal;
-       
-       
+        var currentGrandTotal =  parseInt($('#grand_total').val());
         function setLastTotal(data){
             lastTotal = data;
         }
@@ -25,11 +24,7 @@
                 var grandTotal = currentGrandTotal - currentTotalAmount;
                 $('#grand_total').val(grandTotal);
             }
-           
-        
             var path = "{{ URL::route('order.getSize') }}";
-          
-
             $.ajax({
                 url: path,
                 data: {
@@ -49,8 +44,26 @@
             });
         });
 
+        function calculateGrandTotal(response,oldTotalAmount){
+                    if(currentGrandTotal==0){
+                        $('#grand_total').val(response);
+                       }else{
+                        var currentGrandTotal =  parseInt($('#grand_total').val());
+                        if(!oldTotalAmount){
+                            var gradTotal = currentGrandTotal + parseInt(response);
+                            $('#grand_total').val(gradTotal);
+                        }else{
+                            var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
+                        }
+                       $('#grand_total').val(gradTotal);
+                    }
+        }
+
+        function setOldAmountData(){
+            //
+        }
+
         $(document).on('change', 'select[data-class=size]', function() {
-           
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
@@ -71,28 +84,11 @@
                 success: function(response) {
                     //setting the rate of the selected Size
                     $(rateId).val(response);
-
                     //Calculate total price automatically when size appears
                     let totalAmount = response * parseInt(quantityData);
                     $(`${totalId}`).val(totalAmount);
-                  
-                 
-                  
                     //Calculating grand total when the size's rate appears
-                    var currentGrandTotal =  parseInt($('#grand_total').val()); 
-                  
-                    if(currentGrandTotal==0){
-                        $('#grand_total').val(totalAmount);
-                       }else{
-                        var currentGrandTotal =  parseInt($('#grand_total').val());
-                        if(!oldTotalAmount){
-                            var gradTotal = currentGrandTotal + parseInt(response);
-                            $('#grand_total').val(gradTotal);
-                        }else{
-                            var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
-                        }
-                       $('#grand_total').val(gradTotal);
-                    }
+                    calculateGrandTotal(response,oldTotalAmount);
                 },
             });
         });
@@ -160,8 +156,6 @@
                                 </div>
                             </div>
 
-
-
                             <!--Total-->
                             <div class="col-2 form-group row">
                                 {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
@@ -175,10 +169,6 @@
                             <div class="remove-order">
                                 <i class="fas fa-times removeOrder" data-orderId="order-${count}" data-order='${count}'></i>
                             </div>
-
-
-                            
-
                         </div>`;
 
             $('.dynamic-input').append(template);
@@ -212,9 +202,6 @@
         });
 
 
-
-
-
         //Calculation
         var rate = null;
         var quantity = 1;
@@ -225,29 +212,24 @@
             rateId = '#rate' + $(this).attr('data-id');
             rateValue = $(`${rateId}`).val();
             checkInputType = $(this).attr('name');
+            let oldTotalAmount = $(totalId).val(); 
 
             //Poputlating total according to rate appeared
             if (checkInputType === 'rate[]') {
                 rate = $(this).val();
-                total = rate * parseInt(quantityValue);
+              total = rate * parseInt(quantityValue);
                 $(totalId).val(total);
-
+                calculateGrandTotal(total,oldTotalAmount);
             } //Poputlating total according to quantity
             else {
- 
                 quantity = $(this).val();
                 total1 = quantity * parseInt(rateValue);
-                $(totalId).val(total1);
+                $(totalId).val(total1)
+                calculateGrandTotal(total1,oldTotalAmount);
             }
 
             //Calculate grand total
-            var grand_total = 0;
-            for (let i = 1; i <= count; i++) {
-                let total = $(`#total${i}`).val();
-                grand_total = parseInt(total) + parseInt(grand_total);
-            }
-
-            $('#grand_total').val(grand_total);
+         
 
         });
 
