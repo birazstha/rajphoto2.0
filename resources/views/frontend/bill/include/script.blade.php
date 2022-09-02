@@ -71,7 +71,7 @@
                   
                     if(currentGrandTotal==0){
                         $('#grand_total').val(totalAmount);
-                    }else{
+                       }else{
                         var currentGrandTotal =  parseInt($('#grand_total').val());
                         if(!oldTotalAmount){
                             var gradTotal = currentGrandTotal + parseInt(response);
@@ -92,12 +92,12 @@
         $('#btnAdd').click(function() {
            
             // Check if user has entered full order details or not
-            currentTotal = $(`#total${count}`).val();
-            setLastTotal(currentTotal);
-            if(!lastTotal){
-                $('.error-msg').removeClass('d-none');
-                return false;
-            }
+            // currentTotal = $(`#total${count}`).val();
+            // setLastTotal(currentTotal);
+            // if(!lastTotal){
+            //     $('.error-msg').removeClass('d-none');
+            //     return false;
+            // }
             
             $('.removeOrder').removeClass('d-none');
             //Increase the count
@@ -131,7 +131,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="rate${count}" data-id="${count}" class="form-control">
+                                    <input type="number" name="rate[]" id="rate${count}" data-id="${count}" data-type="rate" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -142,7 +142,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="quantity${count}" data-id="${count}" value="1" class="form-control">
+                                    <input type="number" name="quantity[]" id="quantity${count}" data-id="${count}" data-type="quantity" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -207,7 +207,7 @@
         //Calculation
         var rate = null;
         var quantity = 1;
-        $(document).delegate('input', 'change keyup', function() {
+        $(document).on('change keyup','input[data-type=rate],input[data-type=quantity]', function() {
             totalId = '#total' + $(this).attr('data-id');
             quantityId = '#quantity' + $(this).attr('data-id');
             quantityValue = $(`${quantityId}`).val();
@@ -223,6 +223,7 @@
 
             } //Poputlating total according to quantity
             else {
+ 
                 quantity = $(this).val();
                 total1 = quantity * parseInt(rateValue);
                 $(totalId).val(total1);

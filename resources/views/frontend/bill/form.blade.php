@@ -125,12 +125,13 @@
                                     </select>
                                 </div>
                             </div>
+                            
 
                             <!--Rate-->
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="rate1" data-id="1" class="form-control">
+                                    <input type="number" name="rate[]" id="rate1" data-id="1" data-type="rate" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -141,7 +142,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="quantity1" data-id="1" value="1"
+                                    <input type="number" name="quantity[]" id="quantity1" data-id="1" data-type="quantity" value="1"
                                         class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
