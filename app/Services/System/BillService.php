@@ -2,9 +2,12 @@
 
 namespace App\Services\System;
 
+use App\Exceptions\CustomGenericException;
 use App\Model\Bill;
+use App\Model\BillOrder;
 use App\Model\Order;
 use App\Services\Service;
+use Illuminate\Support\Facades\DB;
 
 class BillService extends Service
 {
@@ -54,10 +57,21 @@ class BillService extends Service
 
     public function store($request)
     {
-        $data = $request->except('_token');
-        $bill = $this->model->create($data); // Bill Create Operation
-        (new OrderService(new Order))->store($request->merge(['bill_id'=>$bill->id]));  
-        return $this->model->create($request->except('_token'));
+        DB::beginTransaction();
+        try{
+            $data = $request->except('_token');
+            $data['qr_code'] = uniqid();
+            $bill = $this->model->create($data); // Bill Create Operation+
+            (new BillOrderService(new BillOrder))->store($request->merge(['bill_id'=>$bill->id]));  
+            DB::commit();
+            return redirect()->route('bills.show',$bill->id);
+
+        }catch(\Exception $e){
+           DB::rollBack();
+           throw new CustomGenericException($e->getMessage());
+           dd($e);
+        }
+      
     }
 
     public function editPageData($request, $id)

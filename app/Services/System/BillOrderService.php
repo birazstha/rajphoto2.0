@@ -2,15 +2,15 @@
 
 namespace App\Services\System;
 
-
+use App\Model\BillOrder;
 use App\Model\Order;
 use App\Services\Service;
 
-class OrderService extends Service
+class BillOrderService extends Service
 {
-    public function __construct(Order $order)
+    public function __construct(BillOrder $billOrder)
     {
-        parent::__construct($order);
+        parent::__construct($billOrder);
     }
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
@@ -35,7 +35,17 @@ class OrderService extends Service
         return $query->orderBy('id', 'ASC')->get();
     }
 
-    
+    public function store($request)
+    {
+       
+        $billArray = [];
+        foreach ($request->bill as $key => $bill) {
+            $innerData = $bill;
+            $innerData['bill_id'] = $request->bill_id;
+            array_push($billArray, $innerData);
+        }
+        return $this->model::insert($billArray);
+    }
 
    
 

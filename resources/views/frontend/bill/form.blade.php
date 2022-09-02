@@ -286,11 +286,11 @@
                     <div class="form-group row">
                         {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="" id="" class="form-control">
+                            <select name="user_id" id="" class="form-control">
                                 <option value="">Select your name</option>
-                                <option value="">Raj Shrestha</option>
-                                <option value="">Biraj Shrestha</option>
-                                <option value="">Rajeev Shrestha</option>
+                                <option value="Raj Shrestha">Raj Shrestha</option>
+                                <option value="Biraj Shrestha">Biraj Shrestha</option>
+                                <option value="Rajeev Shrestha">Rajeev Shrestha</option>
                             </select>
                             @error('user_id')
                                 <span class="text text-danger">{{ $message }}</span>
