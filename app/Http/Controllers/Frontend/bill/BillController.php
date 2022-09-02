@@ -14,15 +14,15 @@ class BillController extends ResourceController
         parent::__construct($billService);
     }
 
-    public function storeValidationRequest()
-    {   
-        return 'App\Http\Requests\system\billRequest';
-    }
+    // public function storeValidationRequest()
+    // {   
+    //     return 'App\Http\Requests\system\billRequest';
+    // }
 
-    public function updateValidationRequest()
-    {
-        return 'App\Http\Requests\system\billRequest';
-    }
+    // public function updateValidationRequest()
+    // {
+    //     return 'App\Http\Requests\system\billRequest';
+    // }
 
     public function moduleName()
     {

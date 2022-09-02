@@ -4,12 +4,31 @@
         var currentTotal;
         var balanceAmt = 0;
         var lastTotal;
-        var currentGrandTotal =  parseInt($('#grand_total').val());
-        function setLastTotal(data){
+        var billCount = 0;
+        var currentGrandTotal = parseInt($('#grand_total').val());
+        var oldTotalAmount;
+
+        function setLastTotal(data) {
             lastTotal = data;
         }
+
         function init() {
             count++;
+        }
+
+        function calculateGrandTotal(response, oldTotalAmount) {
+            if (currentGrandTotal == 0) {
+                $('#grand_total').val(response);
+            } else {
+                var currentGrandTotal = parseInt($('#grand_total').val());
+                if (!oldTotalAmount) {
+                    var gradTotal = currentGrandTotal + parseInt(response);
+                    $('#grand_total').val(gradTotal);
+                } else {
+                    var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
+                }
+                $('#grand_total').val(gradTotal);
+            }
         }
         $(document).on('change', 'select[data-id=order]', function() {
             let sizedId = '#size_id_' + $(this).attr('id');
@@ -17,13 +36,6 @@
             let quantityId = '#quantity' + $(this).attr('id');
             let totalId = '#total' + $(this).attr('id');
             var order = $(this).val();
-            var currentGrandTotal =  parseInt($('#grand_total').val());
-            let currentTotalAmount=  $(totalId).val();
-
-            if(currentGrandTotal){
-                var grandTotal = currentGrandTotal - currentTotalAmount;
-                $('#grand_total').val(grandTotal);
-            }
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
                 url: path,
@@ -44,24 +56,8 @@
             });
         });
 
-        function calculateGrandTotal(response,oldTotalAmount){
-                    if(currentGrandTotal==0){
-                        $('#grand_total').val(response);
-                       }else{
-                        var currentGrandTotal =  parseInt($('#grand_total').val());
-                        if(!oldTotalAmount){
-                            var gradTotal = currentGrandTotal + parseInt(response);
-                            $('#grand_total').val(gradTotal);
-                        }else{
-                            var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
-                        }
-                       $('#grand_total').val(gradTotal);
-                    }
-        }
 
-        function setOldAmountData(){
-            //
-        }
+
 
         $(document).on('change', 'select[data-class=size]', function() {
             var size = $(this).val();
@@ -71,7 +67,7 @@
             let lastTotalValue = $(`#${lastTotalId}`).val();
             let quantityId = '#quantity' + $(this).attr('data-id');
             let quantityData = $(`${quantityId}`).val();
-            let oldTotalAmount = $(totalId).val(); 
+            let oldTotalAmount = $(totalId).val();
             var path = "{{ URL::route('size.getRate') }}";
             $.ajax({
                 url: path,
@@ -88,15 +84,15 @@
                     let totalAmount = response * parseInt(quantityData);
                     $(`${totalId}`).val(totalAmount);
                     //Calculating grand total when the size's rate appears
-                    calculateGrandTotal(response,oldTotalAmount);
+                    calculateGrandTotal(response, oldTotalAmount);
                 },
             });
         });
 
 
-      
-        //Append new order 
-        $('#btnAdd').click(function() {
+           //Append new order 
+           $('#btnAdd').click(function() {
+            billCount++;
            
             // Check if user has entered full order details or not
             // currentTotal = $(`#total${count}`).val();
@@ -114,7 +110,7 @@
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                                 <div class="col-sm-2">
-                                    <select name="order_id[]" id="${count}" data-id="order" class="form-control">
+                                    <select name="bill[${billCount}][order_id]" id="${count}" data-id="order" class="form-control">
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
                                             <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -128,7 +124,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <select name="size_id[]" id="size_id_${count}" data-id="${count}" data-class="size" class="form-control">
+                                    <select name="bill[${billCount}][size_id]" id="size_id_${count}" data-id="${count}" data-class="size" class="form-control">
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>
@@ -138,7 +134,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="rate[]" id="rate${count}" data-id="${count}" data-type="rate" class="form-control">
+                                    <input type="number" name="bill[${billCount}][rate]" id="rate${count}" data-id="${count}" data-type="rate" class="form-control">
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -149,7 +145,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="quantity[]" id="quantity${count}" data-id="${count}" data-type="quantity" value="1" class="form-control">
+                                    <input type="number" name="bill[${billCount}][quantity]" id="quantity${count}" data-id="${count}" data-type="quantity" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -160,7 +156,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('total', 'Total', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="text" name="total[]" id="total${count}" value="" readonly
+                                    <input type="text" name="bill[${billCount}][total]" id="total${count}" value="" readonly
                                         class="form-control"> @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -171,71 +167,72 @@
                             </div>
                         </div>`;
 
-            $('.dynamic-input').append(template);
+              $('.dynamic-input').append(template);
         });
 
-        
+
+
         //For removing specific order
-        $(document).on('click','.removeOrder',function(){
+        $(document).on('click', '.removeOrder', function() {
             //Deducting the amount of deleted order
             let totalAmountId = $(this).data('order');
             let currentTotalAmount = $(`#total${totalAmountId}`).val();
             let currentGrandTotal = $('#grand_total').val();
             let newGrandTotal = currentGrandTotal - currentTotalAmount;
-           $('#grand_total').val(newGrandTotal);
+            $('#grand_total').val(newGrandTotal);
 
 
-           let orderId = $(this).data('orderid');
+            let orderId = $(this).data('orderid');
             //set a new currentTotal
             previousTotal = $(`#order-${totalAmountId}`).prev().find('input[name="total[]"]').val();
             setLastTotal(previousTotal);
             //if current total has data than allow user to add new
-            
+
             $(`#${orderId}`).remove();
 
             //If only one order is left then remove the remove icon.
             let countOrder = $('.removeOrder').length
-            if(countOrder===1){
-               $('.removeOrder').addClass('d-none'); 
+            if (countOrder === 1) {
+                $('.removeOrder').addClass('d-none');
             }
-    
+
         });
 
 
         //Calculation
         var rate = null;
         var quantity = 1;
-        $(document).on('change keyup','input[data-type=rate],input[data-type=quantity]', function() {
+        $(document).on('change keyup', 'input[data-type=rate],input[data-type=quantity]', function() {
             totalId = '#total' + $(this).attr('data-id');
             quantityId = '#quantity' + $(this).attr('data-id');
             quantityValue = $(`${quantityId}`).val();
             rateId = '#rate' + $(this).attr('data-id');
             rateValue = $(`${rateId}`).val();
-            checkInputType = $(this).attr('name');
-            let oldTotalAmount = $(totalId).val(); 
+            checkInputType = $(this).data('type');
+            oldTotalAmount = $(totalId).val();
 
             //Poputlating total according to rate appeared
-            if (checkInputType === 'rate[]') {
+            if (checkInputType === 'rate') {
                 rate = $(this).val();
-              total = rate * parseInt(quantityValue);
+                total = rate * parseInt(quantityValue);
                 $(totalId).val(total);
-                calculateGrandTotal(total,oldTotalAmount);
+                calculateGrandTotal(total, oldTotalAmount);
             } //Poputlating total according to quantity
             else {
                 quantity = $(this).val();
                 total1 = quantity * parseInt(rateValue);
                 $(totalId).val(total1)
-                calculateGrandTotal(total1,oldTotalAmount);
+                calculateGrandTotal(total1, oldTotalAmount);
             }
 
             //Calculate grand total
-         
+
 
         });
 
 
         //Calculate balance amount
-       
+
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             $('#balance_amount').val(balanceAmt);
@@ -247,12 +244,9 @@
             $('#cash_return').val(cashReturn);
         });
 
-        
 
 
-       
+
+
     });
-
-    
-
 </script>

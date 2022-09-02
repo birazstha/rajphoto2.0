@@ -52,6 +52,14 @@ class BillService extends Service
         
     }
 
+    public function store($request)
+    {
+        $data = $request->except('_token');
+        $bill = $this->model->create($data); // Bill Create Operation
+        (new OrderService(new Order))->store($request->merge(['bill_id'=>$bill->id]));  
+        return $this->model->create($request->except('_token'));
+    }
+
     public function editPageData($request, $id)
     {
         return[

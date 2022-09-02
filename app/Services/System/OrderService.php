@@ -35,6 +35,17 @@ class OrderService extends Service
         return $query->orderBy('id', 'ASC')->get();
     }
 
+    public function store($request)
+    {
+        $contentArray = [];
+        foreach ($request->content as $key => $content) {
+            $innerData = $content;
+            $innerData['topic_id'] = $request->topic_id;
+            array_push($contentArray, $innerData);
+        }
+        return $this->model::insert($contentArray);
+    }
+
    
 
    
