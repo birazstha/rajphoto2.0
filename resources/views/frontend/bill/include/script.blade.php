@@ -18,7 +18,18 @@
             let quantityId = '#quantity' + $(this).attr('id');
             let totalId = '#total' + $(this).attr('id');
             var order = $(this).val();
+            var currentGrandTotal =  parseInt($('#grand_total').val());
+            let currentTotalAmount=  $(totalId).val();
+
+            if(currentGrandTotal){
+                var grandTotal = currentGrandTotal - currentTotalAmount;
+                $('#grand_total').val(grandTotal);
+            }
+           
+        
             var path = "{{ URL::route('order.getSize') }}";
+          
+
             $.ajax({
                 url: path,
                 data: {
@@ -39,6 +50,7 @@
         });
 
         $(document).on('change', 'select[data-class=size]', function() {
+           
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
@@ -79,7 +91,6 @@
                         }else{
                             var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
                         }
-                     
                        $('#grand_total').val(gradTotal);
                     }
                 },
