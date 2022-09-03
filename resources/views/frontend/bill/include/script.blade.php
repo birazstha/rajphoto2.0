@@ -31,10 +31,14 @@
             }
         }
         $(document).on('change', 'select[data-id=order]', function() {
+            
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
             let totalId = '#total' + $(this).attr('id');
+            let totalValue = $(totalId).val();
+            var currentGrandTotal = parseInt($('#grand_total').val());
+            $('#grand_total').val(currentGrandTotal - totalValue);
             var order = $(this).val();
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
