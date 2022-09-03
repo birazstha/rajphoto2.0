@@ -2,43 +2,111 @@
 
 namespace App\Http\Controllers\Frontend\bill;
 
-use App\Http\Controllers\System\ResourceController;
+use App\Exceptions\CustomGenericException;
+use App\Http\Controllers\Controller;
 use App\Model\Bill;
+use App\Model\BillOrder;
 use App\Model\Order;
+use App\Services\frontend\OrderService;
+use App\Services\System\BillOrderService;
 use App\Services\System\BillService;
-use App\Services\System\OrderService;
 use Illuminate\Http\Request;
 
-class BillController extends ResourceController
+class BillController extends Controller
 {
-    protected $orderService;
+    protected $orderService,$billOrderService;
     public function __construct(BillService $billService)
     {
-        parent::__construct($billService);
+        $this->billService = $billService;
+        $this->billOrderService = new BillOrderService(new BillOrder);
         $this->orderService = new OrderService(new Order);
     }
 
-    // public function storeValidationRequest()
-    // {   
-    //     return 'App\Http\Requests\system\billRequest';
-    // }
+    public function index()
+    {
+        //
+    }
 
-    // public function updateValidationRequest()
+
+    public function create(Request $request)
+    {
+
+        $data = [
+            'orders' => $this->orderService->getAllData($request),
+        ];
+        return view('frontend.bill.form', $data);
+    }
+
+    public function store(Request $request)
+    {
+ 
+        try{
+            $data = $request;
+            $data['qr_code'] = uniqid();
+            $bill = $this->billService->store($data); // Bill Create Operation+
+            $this->billOrderService->store($request->merge(['bill_id'=>$bill->id]));  
+            if($bill){
+                return redirect()->route('bills.show',$bill->id);
+            }
+        }catch(\Exception $e){
+           throw new CustomGenericException($e->getMessage());
+           dd($e);
+        }
+    }
+
+
+    // public function store(Request $request)
     // {
-    //     return 'App\Http\Requests\system\billRequest';
+    //     $data = $request->except(['_token', 'order_id', 'size_id', 'rate', 'quantity', 'total']);
+    //     $data['qr_code'] = uniqid();
+    //     $data['row'] =  Bill::create($data);
+
+    //     //Storing multiple orders detail
+    //     if ($data['row']) {
+    //         $billOrder['bill_id'] = $data['row']->id;
+    //         $orders = $request->input('order_id');
+    //         $sizes = $request->input('size_id');
+    //         $quantities = $request->input('quantity');
+    //         $rates = $request->input('rate');
+    //         $totals = $request->input('total');
+
+    //         for($i = 0; $i < count($orders); $i++){
+    //             $billOrder['order_id'] = $orders[$i];
+    //             $billOrder['size_id'] = $sizes[$i];
+    //             $billOrder['quantity'] = $quantities[$i];
+    //             $billOrder['rate'] = $rates[$i];
+    //             $billOrder['total'] = $totals[$i];
+    //             BillOrder::create($billOrder);
+    //         }
+    //     }
+    //     return redirect()->route('bill.show',$data['row']->id);
     // }
 
-    public function moduleName()
+
+    public function show($id)
     {
-        return 'bills';
+       $data['row'] = Bill::where('id',$id)->first();
+       return view('frontend.bill.photoBill',compact('data'));
+
     }
 
-    public function viewFolder()
+   
+    public function edit($id)
     {
-        return 'frontend.bill';
+       dd('hello');
     }
 
-    
+   
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function destroy($id)
+    {
+
+    }
+
     public function scanQrCode(){
         return view('frontend.bill.qrcode');
     }
@@ -52,15 +120,4 @@ class BillController extends ResourceController
         ];
         return view('frontend.bill.form',$data);
     }
-
-    public function show($id)
-    {
-       $data['row'] = Bill::where('id',$id)->first();
-       return view('frontend.bill.photoBill',compact('data'));
-
-    }
-
-   
-
-   
 }

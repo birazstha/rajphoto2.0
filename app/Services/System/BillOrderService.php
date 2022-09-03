@@ -37,7 +37,6 @@ class BillOrderService extends Service
 
     public function store($request)
     {
-       
         $billArray = [];
         foreach ($request->bill as $key => $bill) {
             $innerData = $bill;

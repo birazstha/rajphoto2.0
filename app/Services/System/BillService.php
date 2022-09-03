@@ -55,24 +55,26 @@ class BillService extends Service
         
     }
 
-    public function store($request)
-    {
-        DB::beginTransaction();
-        try{
-            $data = $request->except('_token');
-            $data['qr_code'] = uniqid();
-            $bill = $this->model->create($data); // Bill Create Operation+
-            (new BillOrderService(new BillOrder))->store($request->merge(['bill_id'=>$bill->id]));  
-            DB::commit();
-            return redirect()->route('bills.show',$bill->id);
+    // public function store($request)
+    // {
+    //     DB::beginTransaction();
+    //     try{
+    //         $data = $request->except('_token');
+    //         $data['qr_code'] = uniqid();
+    //         $bill = $this->model->create($data); // Bill Create Operation+
+    //         (new BillOrderService(new BillOrder))->store($request->merge(['bill_id'=>$bill->id]));  
+    //         DB::commit();
+    //         if($bill){
+    //             // return redirect()->route('bills.show',$bill->id);
+    //         }
 
-        }catch(\Exception $e){
-           DB::rollBack();
-           throw new CustomGenericException($e->getMessage());
-           dd($e);
-        }
+    //     }catch(\Exception $e){
+    //        DB::rollBack();
+    //        throw new CustomGenericException($e->getMessage());
+    //        dd($e);
+    //     }
       
-    }
+    // }
 
     public function editPageData($request, $id)
     {
