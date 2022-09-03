@@ -15,12 +15,21 @@ class FrontendUserSeeder extends Seeder
      */
     public function run()
     {
-        FrontendUser::truncate();
-        FrontendUser::create([
-            'name' => 'pramesh',
-            'username' => 'pramesh',
-            'email' => 'prmshzk+2@gmail.com',
-            'password' => Hash::make('password'),
+        
+        \DB::table('frontend_users')->insert([
+            0 => [
+                'name' => 'Raj Shrestha',
+                'status' => 1,
+            ],
+            1 => [
+                'name' => 'Biraj Shrestha',
+                'status' => 1,
+            ],
+            2 => [
+                'name' => 'Rajeev Shrestha',
+                'status' => 1,
+            ],
+
         ]);
     }
 }

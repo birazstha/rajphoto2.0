@@ -52,5 +52,10 @@
     color: red;
 }
 
+.fullScreen{
+    font-size: 2rem;
+    cursor: pointer;
+}
+
 
 

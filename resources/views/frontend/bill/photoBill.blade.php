@@ -138,7 +138,7 @@
                         <td>रु{{ $data['row']->cash_return }}</td>
                     </tr>
                 </table>
-                <div class="prepare">Bill Prepared By: {{ $data['row']->user_id }}</div>
+                <div class="prepare">Bill Prepared By: {{ $data['row']->users->name }}</div>
 
 
             </div>

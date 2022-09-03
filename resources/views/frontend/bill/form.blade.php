@@ -1,16 +1,19 @@
 @extends('frontend.layout.master')
 @section('main-content')
+
+
     <div class="form">
+
         <div class="table">
             <div class="table-responsive">
-                {{ Form::open(['route'=>'bills.store']) }}
+                {{ Form::open(['route' => 'bills.store']) }}
                 <!--Name-->
                 <div class="form-group row">
 
                     {!! Form::label('name', 'Name', ['class' => 'col-sm-2 col-form-label']) !!}
                     <div class="col-sm-10">
                         <td><input type="text" name="name" value="{{ $item->name ?? '' }}" id="name"
-                                class="form-control" {{ isset($item) ? 'readonly' : '' }}></td>
+                                class="form-control" {{ isset($item) ? 'readonly' : '' }} required></td>
                         @error('name')
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
@@ -18,6 +21,7 @@
                 </div>
 
                 {{-- For delivery --}}
+
                 @if (isset($item->billOrders))
                     @foreach ($item->billOrders as $key => $bill)
                         <div class="dynamic-input">
@@ -105,7 +109,8 @@
 
                             {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                             <div class="col-sm-2">
-                                <select name="bill[0][order_id]" id="1" data-id="order" class="form-control">
+                                <select name="bill[0][order_id]" id="1" data-id="order" class="form-control"
+                                    required>
                                     <option value="" selected>Select Order Type</option>
                                     @foreach ($orders as $order)
                                         <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -120,18 +125,19 @@
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
                                     <select name="bill[0][size_id]" id="size_id_1" data-id="1" data-class="size"
-                                        class="form-control">
+                                        class="form-control" required>
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>
                             </div>
-                            
+
 
                             <!--Rate-->
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="bill[0][rate]" id="rate1" data-id="1" data-type="rate" class="form-control">
+                                    <input type="number" name="bill[0][rate]" id="rate1" data-id="1"
+                                        data-type="rate" class="form-control" required>
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -142,8 +148,8 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" min="1" name="bill[0][quantity]" id="quantity1" data-id="1" data-type="quantity" value="1"
-                                        class="form-control">
+                                    <input type="number" min="1" name="bill[0][quantity]" id="quantity1"
+                                        data-id="1" data-type="quantity" value="1" class="form-control">
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -165,13 +171,7 @@
                             <div class="remove-order">
                                 <i class="fas fa-times removeOrder d-none" data-orderId="order-1" data-order='1'></i>
                             </div>
-
                         </div>
-                      
-
-
-                       
-
                     </div>
                     <div class="row error-msg d-none">
                         <label for="" class="col-2"></label>
@@ -208,7 +208,8 @@
                             {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-3 col-form-label']) !!}
                             <div class="col-sm-6">
                                 <td><input type="number" name="paid_amount" value="{{ $item->paid_amount ?? '' }}"
-                                        id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }}>
+                                        id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }}
+                                        required>
                                 </td>
                             </div>
                         </div>
@@ -230,14 +231,12 @@
                 </div>
 
 
-
-
                 <!--Cash Received-->
                 <div class="form-group row">
                     {!! Form::label('cash_received', 'Cash Received', ['class' => 'col-sm-2 col-form-label']) !!}
                     <div class="col-sm-10   ">
                         <td><input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
-                                id="cash_received" class="form-control"></td>
+                                id="cash_received" class="form-control" required></td>
                         @error('rate')
                             <span class="text text-danger">{{ $message }}</span>
                         @enderror
@@ -263,7 +262,8 @@
                             <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
                             <div class="col-sm-8">
                                 <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
-                                    class="form-control" id="nepali-datepicker" {{ isset($item) ? 'readonly' : '' }}>
+                                    class="form-control" id="nepali-datepicker" {{ isset($item) ? 'readonly' : '' }}
+                                    required>
                             </div>
                         </div>
 
@@ -273,8 +273,9 @@
                         <div class="form-group row">
                             <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
                             <div class="col-sm-8">
-                                <input type="text" name="delivery_date" value="{{ $item->delivery_date ?? '' }}"
-                                    class="form-control" id="nepali-datepicker1" {{ isset($item) ? 'readonly' : '' }}>
+                                <input type="text" name="delivery_date" required
+                                    value="{{ $item->delivery_date ?? '' }}" class="form-control"
+                                    id="nepali-datepicker1" {{ isset($item) ? 'readonly' : '' }}>
                             </div>
                         </div>
                         @error('delivery_date')
@@ -282,16 +283,26 @@
                         @enderror
                     </div>
 
+
                     <!--Prepared by-->
                     <div class="form-group row">
                         {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="user_id" id="" class="form-control">
-                                <option value="">Select your name</option>
-                                <option value="Raj Shrestha">Raj Shrestha</option>
-                                <option value="Biraj Shrestha">Biraj Shrestha</option>
-                                <option value="Rajeev Shrestha">Rajeev Shrestha</option>
+                            @if(isset($item))
+                            <select name="user_id" class="form-control" required>
+                                @foreach ($users as $user)
+                                    <option {{ $item->user_id == $user->id  ? 'selected':'' }}>{{ $user->name }}</option>
+                                @endforeach
                             </select>
+                            @else
+                            <select name="user_id" class="form-control" required>
+                                <option value="" selected>Select your name</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                            @endif
+
                             @error('user_id')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror

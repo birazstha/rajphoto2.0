@@ -72,6 +72,7 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/sizes', 'size\SizeController');
         Route::resource('/rates', 'rate\RateController');
         Route::resource('/bills', 'bill\BillController');
+        Route::resource('/frontend-users', 'frontendUser\FrontendUserController');
        
 
       

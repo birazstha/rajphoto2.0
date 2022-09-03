@@ -21,6 +21,7 @@ $orderBaseUrl = '/order';
 $sizeBaseUrl = '/sizes';
 $billsBaseUrl = '/bills';
 $ratesBaseUrl = '/rates';
+$frontendUserBaseUrl = '/frontend-users';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -453,6 +454,57 @@ return  [
                 ],
             ],
         ],
+
+        [
+            'name' => 'User Management',
+            'icon' => '<i class="fas fa-users"></i>',
+            'hasSubmodules' => false,
+            'route' => $frontendUserBaseUrl,
+            'permissions' => [
+                [
+                    'name' => 'View Category',
+                    'route' => [
+                        'url' => $frontendUserBaseUrl,
+                        'method' => $getMethod,
+                    ],
+                ],
+                [
+                    'name' => 'Create Category',
+                    'route' => [
+                        [
+                            'url' => $frontendUserBaseUrl.'/create',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $frontendUserBaseUrl,
+                            'method' => $postMethod,
+                        ],
+
+                    ],
+                ],
+                [
+                    'name' => 'Edit Category',
+                    'route' => [
+                        [
+                            'url' => $frontendUserBaseUrl.'/*/edit',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $frontendUserBaseUrl.'/*',
+                            'method' => $putMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Delete Category',
+                    'route' => [
+                        'url' => $frontendUserBaseUrl.'/*',
+                        'method' => $deleteMethod,
+                    ],
+                ],
+            ],
+        ],
+        
         
         // [
         //     'name' => 'Mail Test',

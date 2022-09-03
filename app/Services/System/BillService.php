@@ -2,21 +2,22 @@
 
 namespace App\Services\System;
 
-use App\Exceptions\CustomGenericException;
 use App\Model\Bill;
-use App\Model\BillOrder;
+
+use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Services\Service;
-use Illuminate\Support\Facades\DB;
+
 
 class BillService extends Service
 {
-     protected $orderService;
+     protected $orderService,$frontendUser;
     public function __construct(Bill $bill)
     {
         
         parent::__construct($bill);
         $this->orderService = new OrderService(new Order);
+
         $this->module = 'Prepare Bill';
     }
 
@@ -47,6 +48,7 @@ class BillService extends Service
        
         return[
             'orders' => $this->orderService->getAllData($request->merge(['pluck'=>true])),
+            'users'=>$this->frontendUser->getAllData($request),
             'status'=>$this->status(),
             'order_id'=>$request->order_id,
             'pageTitle'=>$this->module,
@@ -55,26 +57,6 @@ class BillService extends Service
         
     }
 
-    // public function store($request)
-    // {
-    //     DB::beginTransaction();
-    //     try{
-    //         $data = $request->except('_token');
-    //         $data['qr_code'] = uniqid();
-    //         $bill = $this->model->create($data); // Bill Create Operation+
-    //         (new BillOrderService(new BillOrder))->store($request->merge(['bill_id'=>$bill->id]));  
-    //         DB::commit();
-    //         if($bill){
-    //             // return redirect()->route('bills.show',$bill->id);
-    //         }
-
-    //     }catch(\Exception $e){
-    //        DB::rollBack();
-    //        throw new CustomGenericException($e->getMessage());
-    //        dd($e);
-    //     }
-      
-    // }
 
     public function editPageData($request, $id)
     {

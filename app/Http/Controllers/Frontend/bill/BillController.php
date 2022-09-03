@@ -6,25 +6,34 @@ use App\Exceptions\CustomGenericException;
 use App\Http\Controllers\Controller;
 use App\Model\Bill;
 use App\Model\BillOrder;
+use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Services\frontend\OrderService;
 use App\Services\System\BillOrderService;
 use App\Services\System\BillService;
+use App\Services\System\FrontendUserService;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    protected $orderService,$billOrderService;
+    protected $orderService,$billOrderService,$frontendUser;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
+        $this->moduleName = 'Create Bill';
         $this->billOrderService = new BillOrderService(new BillOrder);
+        $this->frontendUser = new FrontendUserService(new FrontendUser);
         $this->orderService = new OrderService(new Order);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
+        $data = [
+            'pageTitle' => $this->moduleName,
+            'bills' =>$this->billService->getAllData($request),
+        ];
+        return view('frontend.bill.index', $data);
     }
 
 
@@ -32,14 +41,15 @@ class BillController extends Controller
     {
 
         $data = [
+            'pageTitle' => $this->moduleName,
             'orders' => $this->orderService->getAllData($request),
+            'users'=>$this->frontendUser->getAllData($request),
         ];
         return view('frontend.bill.form', $data);
     }
 
     public function store(Request $request)
     {
- 
         try{
             $data = $request;
             $data['qr_code'] = uniqid();
@@ -50,37 +60,8 @@ class BillController extends Controller
             }
         }catch(\Exception $e){
            throw new CustomGenericException($e->getMessage());
-           dd($e);
         }
     }
-
-
-    // public function store(Request $request)
-    // {
-    //     $data = $request->except(['_token', 'order_id', 'size_id', 'rate', 'quantity', 'total']);
-    //     $data['qr_code'] = uniqid();
-    //     $data['row'] =  Bill::create($data);
-
-    //     //Storing multiple orders detail
-    //     if ($data['row']) {
-    //         $billOrder['bill_id'] = $data['row']->id;
-    //         $orders = $request->input('order_id');
-    //         $sizes = $request->input('size_id');
-    //         $quantities = $request->input('quantity');
-    //         $rates = $request->input('rate');
-    //         $totals = $request->input('total');
-
-    //         for($i = 0; $i < count($orders); $i++){
-    //             $billOrder['order_id'] = $orders[$i];
-    //             $billOrder['size_id'] = $sizes[$i];
-    //             $billOrder['quantity'] = $quantities[$i];
-    //             $billOrder['rate'] = $rates[$i];
-    //             $billOrder['total'] = $totals[$i];
-    //             BillOrder::create($billOrder);
-    //         }
-    //     }
-    //     return redirect()->route('bill.show',$data['row']->id);
-    // }
 
 
     public function show($id)
@@ -112,11 +93,24 @@ class BillController extends Controller
     }
 
     public function searchBill(Request $request){
+
         $items = Bill::where('qr_code',$request->qrcode)->first();
         $data = [
             'item' => $items,
             'orders' => $this->orderService->getAllData($request),
             'sizes' => $this->orderService->getAllData($request),
+            'users'=>$this->frontendUser->getAllData($request),
+        ];
+        return view('frontend.bill.form',$data);
+    }
+
+    public function searchBillFromIndex(Request $request,$qr_code){
+        $items = Bill::where('qr_code',$qr_code)->first();
+        $data = [
+            'item' => $items,
+            'orders' => $this->orderService->getAllData($request),
+            'sizes' => $this->orderService->getAllData($request),
+            'users'=>$this->frontendUser->getAllData($request),
         ];
         return view('frontend.bill.form',$data);
     }

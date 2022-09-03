@@ -5,6 +5,8 @@
         var balanceAmt = 0;
         var lastTotal;
         var billCount = 0;
+        var grandTotal;
+        var totalAmount;
         var currentGrandTotal = parseInt($('#grand_total').val());
         var oldTotalAmount;
 
@@ -17,21 +19,22 @@
         }
 
         function calculateGrandTotal(response, oldTotalAmount) {
+         
             if (currentGrandTotal == 0) {
                 $('#grand_total').val(response);
             } else {
                 var currentGrandTotal = parseInt($('#grand_total').val());
                 if (!oldTotalAmount) {
-                    var gradTotal = currentGrandTotal + parseInt(response);
-                    $('#grand_total').val(gradTotal);
+                  grandTotal = currentGrandTotal + parseInt(response);
+                    $('#grand_total').val(grandTotal);
                 } else {
-                    var gradTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
+                    grandTotal = currentGrandTotal - parseInt(oldTotalAmount) + parseInt(response);
                 }
-                $('#grand_total').val(gradTotal);
+                $('#grand_total').val(grandTotal);
             }
         }
         $(document).on('change', 'select[data-id=order]', function() {
-            
+
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -60,17 +63,20 @@
             });
         });
 
-
-
-
         $(document).on('change', 'select[data-class=size]', function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
+            let totalAmount = $(totalId).val();
             let lastTotalId = $(this).attr('data-id') - 1;
             let lastTotalValue = $(`#${lastTotalId}`).val();
             let quantityId = '#quantity' + $(this).attr('data-id');
             let quantityData = $(`${quantityId}`).val();
+            $(`${quantityId}`).val('1');
+           
+           
+          
+            
             let oldTotalAmount = $(totalId).val();
             var path = "{{ URL::route('size.getRate') }}";
             $.ajax({
@@ -84,9 +90,16 @@
                 success: function(response) {
                     //setting the rate of the selected Size
                     $(rateId).val(response);
+
                     //Calculate total price automatically when size appears
-                    let totalAmount = response * parseInt(quantityData);
-                    $(`${totalId}`).val(totalAmount);
+
+                    //If total amount is already calculated and now changed,reset the total value
+                    if(totalAmount){
+                     $(`${totalId}`).val(response);
+                    }else{
+                        totalAmount = response * parseInt(quantityData);
+                      $(`${totalId}`).val(totalAmount);
+                    }
                     //Calculating grand total when the size's rate appears
                     calculateGrandTotal(response, oldTotalAmount);
                 },
@@ -208,10 +221,13 @@
         var quantity = 1;
         $(document).on('change keyup', 'input[data-type=rate],input[data-type=quantity]', function() {
             totalId = '#total' + $(this).attr('data-id');
+            sizeId = '#size_id_' + $(this).attr('data-id');
             quantityId = '#quantity' + $(this).attr('data-id');
             quantityValue = $(`${quantityId}`).val();
             rateId = '#rate' + $(this).attr('data-id');
             rateValue = $(`${rateId}`).val();
+            //Getting the size information
+            sizeValue = $(`${sizeId}`).find(":selected").text();
             checkInputType = $(this).data('type');
             oldTotalAmount = $(totalId).val();
 
@@ -224,19 +240,18 @@
             } //Poputlating total according to quantity
             else {
                 quantity = $(this).val();
-                total1 = quantity * parseInt(rateValue);
+                if (sizeValue === 'PP' || sizeValue === 'MRP'  && quantity>1) {
+                    total1 = (parseInt(rateValue) + quantity * 100) - 100
+                } else {
+                    total1 = quantity * parseInt(rateValue);
+                }
                 $(totalId).val(total1)
                 calculateGrandTotal(total1, oldTotalAmount);
             }
-
-            //Calculate grand total
-
-
         });
 
 
         //Calculate balance amount
-
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             $('#balance_amount').val(balanceAmt);
@@ -247,10 +262,16 @@
             cashReturn = $('#cash_received').val() - $("#paid_amount").val();
             $('#cash_return').val(cashReturn);
         });
-
-
-
-
-
     });
+
+
+    var el = document.documentElement;
+    $('.fullScreen').on('click',function(){
+        if(el.requestFullscreen){
+            el.requestFullscreen()
+        }
+    })
+
+
 </script>
+

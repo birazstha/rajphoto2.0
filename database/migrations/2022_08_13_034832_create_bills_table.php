@@ -23,7 +23,7 @@ class CreateBillsTable extends Migration
             $table->integer('cash_return');
             $table->string('ordered_date');
             $table->string('delivery_date');
-            $table->string('user_id')->nullable();
+            $table->foreignId('user_id')->constrained('frontend_users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('qr_code')->unique()->nullable();
             $table->timestamps();
         });
