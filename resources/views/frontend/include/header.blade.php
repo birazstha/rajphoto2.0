@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/dashboard.css') }}">
-    <link href="{{ asset('nepalidatepicker/css/nepali.datepicker.v3.7.min.css') }}" rel="stylesheet" type="text/css" />
-    <title>Raj Photo Studio - {{ $pageTitle??'' }}</title>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" type="text/css"/>
+
+     <title>Raj Photo Studio - {{ $pageTitle??'' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
@@ -62,13 +63,4 @@
                 <i class="fas fa-expand fullScreen ml-3"></i>
             </div>
         </div>
-
-        {{-- <div class="logo"> --}}
-        {{-- <img src="{{asset('backend/logo.png')}}" width="80px" height="80px" alt=""> --}}
-        {{-- </div> --}}
-        {{-- <ul> --}}
-        {{-- <li><a href="{{route('front')}}">Homes</a></li> --}}
-        {{-- <li>Bills</li> --}}
-        {{-- <li>Orders</li> --}}
-        {{-- </ul> --}}
     </nav>

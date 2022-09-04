@@ -29,7 +29,7 @@ class BillController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'pageTitle' => $this->moduleName,
+            'pageTitle' => 'Bills',
             'bills' =>$this->billService->getAllData($request),
         ];
         return view('frontend.bill.index', $data);

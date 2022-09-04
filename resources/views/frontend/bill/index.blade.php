@@ -32,6 +32,7 @@
                         <th>Total</th>
                         <th>Advance</th>
                         <th>Balance Amount</th>
+                        <th>Prepared By</th>
                         <th>Action</th>
 
                     </tr>
@@ -73,13 +74,23 @@
                             <td>
                                {{ $bill->grand_total }}
                             </td>
-                            <td>{{ $bill->paid_amount }}</td>
                             <td>
-                                @if (isset($bill->balance_amount))
+                                @if($bill->paid_amount===0)
+                                <span class="badge badge-danger">Unpaid</span>
+                                    @else
+                                    {{ $bill->paid_amount }}
+                                    @endif
+                            </td>
+                            <td>
+                                @if($bill->balance_amount===0)
+                                <span class="badge badge-success">Paid</span>
+                                    @else
                                     {{ $bill->balance_amount }}
-                                @else
-                                    <p>-----</p>
-                                @endif
+                                    @endif
+                               
+                            </td>
+                            <td>
+                              {{ $bill->users->name }}
                             </td>
                             <td>
                                 <a href="{{ route('bill.searches',$bill->qr_code) }}" class="btn btn-success"><i class="far fa-eye"></i></a>

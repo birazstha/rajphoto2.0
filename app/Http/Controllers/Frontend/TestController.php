@@ -44,6 +44,7 @@ class TestController extends Controller
             <td> '. $bill->grand_total .' </td>
             <td> '. $bill->paid_amount .' </td>
             <td> '. $bill->balance_amount .' </td>
+            <td> '. $bill->users->name .' </td>
             <td>  
             <a href="search/'.$bill->qr_code.'" class="btn btn-success"><i class="far fa-eye"></i></a>
             

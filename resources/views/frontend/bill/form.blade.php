@@ -288,19 +288,20 @@
                     <div class="form-group row">
                         {!! Form::label('user_id', 'Prepare By', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            @if(isset($item))
-                            <select name="user_id" class="form-control" required>
-                                @foreach ($users as $user)
-                                    <option {{ $item->user_id == $user->id  ? 'selected':'' }}>{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            @if (isset($item))
+                                <select name="user_id" class="form-control" required>
+                                    @foreach ($users as $user)
+                                        <option {{ $item->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             @else
-                            <select name="user_id" class="form-control" required>
-                                <option value="" selected>Select your name</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                                <select name="user_id" class="form-control" required>
+                                    <option value="" selected>Select your name</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             @endif
 
                             @error('user_id')
@@ -322,13 +323,29 @@
     @section('js')
         @include('frontend.bill.include.script')
         {{-- For nepali date picker --}}
-        <script src="{{ asset('nepalidatepicker/js/nepali.datepicker.v3.7.min.js') }}" type="text/javascript"></script>
+        <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
+            type="text/javascript"></script>
         <script type="text/javascript">
             window.onload = function() {
                 var mainInput = document.getElementById("nepali-datepicker");
                 var mainInput1 = document.getElementById("nepali-datepicker1");
                 mainInput.nepaliDatePicker();
                 mainInput1.nepaliDatePicker();
+
+                /* Initialize Datepicker with options */
+                mainInput.nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYearCount: 10,
+                    language: "english"
+                });
+
+                mainInput1.nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYearCount: 10,
+                    language: "english"
+                });
             };
         </script>
     @endsection
