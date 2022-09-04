@@ -262,8 +262,8 @@
                             <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
                             <div class="col-sm-8">
                                 <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
-                                    class="form-control" id="nepali-datepicker" {{ isset($item) ? 'readonly' : '' }}
-                                    required>
+                                    class="form-control" id="order-date" {{ isset($item) ? 'readonly' : '' }}
+                                    readonly>
                             </div>
                         </div>
 
@@ -275,7 +275,7 @@
                             <div class="col-sm-8">
                                 <input type="text" name="delivery_date" required
                                     value="{{ $item->delivery_date ?? '' }}" class="form-control"
-                                    id="nepali-datepicker1" {{ isset($item) ? 'readonly' : '' }}>
+                                    id="delivery-date" {{ isset($item) ? 'readonly' : '' }}>
                             </div>
                         </div>
                         @error('delivery_date')
@@ -327,24 +327,15 @@
             type="text/javascript"></script>
         <script type="text/javascript">
             window.onload = function() {
-                var mainInput = document.getElementById("nepali-datepicker");
-                var mainInput1 = document.getElementById("nepali-datepicker1");
-                mainInput.nepaliDatePicker();
-                mainInput1.nepaliDatePicker();
-
-                /* Initialize Datepicker with options */
-                mainInput.nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYearCount: 10,
-                    language: "english"
+                $('#order-date').nepaliDatePicker({
+                    language:"english",
                 });
+                var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+                $('#order-date').val(currentBsDate);
 
-                mainInput1.nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYearCount: 10,
-                    language: "english"
+                //Delivery date
+                $('#delivery-date').nepaliDatePicker({
+                    language:"english",
                 });
             };
         </script>
