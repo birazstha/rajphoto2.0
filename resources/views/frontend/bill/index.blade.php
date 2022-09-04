@@ -1,5 +1,21 @@
+@extends('frontend.layout.master')
 @section('main-content')
 
+
+<div class="mb-4">
+<form class="d-flex">
+    @csrf
+      <div class="input-group input-group-sm">
+        <input type="text" class="form-control customerName" placeholder="Enter a custome's name">
+        <span class="input-group-append">
+          <button type="button" class="btn btn-info btn-flat">Search</button>
+        </span>
+      </div>
+
+</form>
+
+
+</div>
     <div class="table">
         <div class="table-responsive">
 
@@ -8,9 +24,11 @@
                     <tr>
                         <th>S.No</th>
                         <th>Name</th>
-                        <th>Order</th>
+                        <th>Ordered Date</th>
+                        <th>Delivery Date</th>
+                        {{-- <th>Order</th>
                         <th>Size</th>
-                        <th>Quantity</th>
+                        <th>Quantity</th> --}}
                         <th>Total</th>
                         <th>Advance</th>
                         <th>Balance Amount</th>
@@ -19,20 +37,24 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody class="allData">
+                   
 
                     @forelse($bills as $index=>$bill)
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>
                                 @if (isset($bill->name))
-                                    {{ $bill->name }} ({{ $bill->qr_code }})
+                                    {{ $bill->name }}
                                 @else
                                     <p>-----</p>
                                 @endif
                             </td>
 
-                            <td>
+                            <td>{{ $bill->ordered_date }}</td>
+                            <td>{{ $bill->delivery_date }}</td>
+
+                            {{-- <td>
                                 @foreach ($bill->billOrders as $index => $billOrder)
                                     {{ $billOrder->orders->name }},
                                 @endforeach
@@ -47,7 +69,7 @@
                                 @foreach ($bill->billOrders as $index => $billOrder)
                                     {{ $billOrder->quantity }},
                                 @endforeach
-                            </td>
+                            </td> --}}
                             <td>
                                {{ $bill->grand_total }}
                             </td>
@@ -74,9 +96,12 @@
                         </tr>
                     @endforelse
 
-
-
+                    @if(isset($customerDetail))
+                        {{ $customerDetail }}
+                    @endif
                 </tbody>
+
+                <tbody id="content"></tbody>
             </table>
 
         </div>
@@ -85,5 +110,7 @@
 @endsection
 
 
+@section('js')
+@include('frontend.bill.include.filter')
+@endsection
 
-@include('frontend.layout.master')

@@ -28,7 +28,6 @@ class BillController extends Controller
 
     public function index(Request $request)
     {
-        
         $data = [
             'pageTitle' => $this->moduleName,
             'bills' =>$this->billService->getAllData($request),
