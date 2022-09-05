@@ -6,6 +6,7 @@
           $('.allData').addClass('d-none');
 
             var name = $(this).val();
+     
             var path = "{{ URL::route('bill.getCustomerInfo') }}";
             $.ajax({
                 method: 'post',
@@ -27,6 +28,7 @@
                 },
             });
         });
+        
 
 
 

@@ -61,5 +61,8 @@ th,td{
     text-align: center;
 }
 
+#todays-date{
+    cursor: pointer;
+}
 
 

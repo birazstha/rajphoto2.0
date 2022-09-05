@@ -5,17 +5,17 @@
 <div class="mb-4">
 <form class="d-flex">
     @csrf
-      <div class="input-group input-group-sm">
+      <div class="input-group input-group">
         <input type="text" class="form-control customerName" placeholder="Enter a custome's name">
         <span class="input-group-append">
-          <button type="button" class="btn btn-info btn-flat">Search</button>
+            <input type="text" value="" name="todays-date" class="form-control text-center" id="todays-date">
         </span>
       </div>
 
 </form>
-
-
 </div>
+
+
     <div class="table">
         <div class="table-responsive">
 
@@ -87,7 +87,6 @@
                                     @else
                                     {{ $bill->balance_amount }}
                                     @endif
-                               
                             </td>
                             <td>
                               {{ $bill->users->name }}
@@ -122,6 +121,10 @@
 
 
 @section('js')
+<script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
+type="text/javascript">
+</script>
 @include('frontend.bill.include.filter')
+@include('frontend.bill.include.scripts.nepalidate')
 @endsection
 

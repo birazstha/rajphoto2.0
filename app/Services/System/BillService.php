@@ -23,6 +23,7 @@ class BillService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
+      
         
         $query = $this->query();
 
@@ -33,6 +34,10 @@ class BillService extends Service
             $query->select($selectedColumns);
         }
 
+        if(isset($data->today)){
+            return $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->get();
+        }
+
         if(isset($data->order_id)){
             return $query->where('order_id',$data->order_id)->get();   
         }
@@ -40,6 +45,8 @@ class BillService extends Service
         if ($pagination) {
             return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
         }
+
+      
 
         return $query->orderBy('id', 'ASC')->get();
     }

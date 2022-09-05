@@ -263,7 +263,7 @@
                             <div class="col-sm-8">
                                 <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
                                     class="form-control" id="order-date" {{ isset($item) ? 'readonly' : '' }}
-                                    readonly>
+                                    disabled>
                             </div>
                         </div>
 
@@ -319,7 +319,6 @@
     @endsection
 
 
-
     @section('js')
         @include('frontend.bill.include.script')
         {{-- For nepali date picker --}}
@@ -337,6 +336,9 @@
                 $('#delivery-date').nepaliDatePicker({
                     language:"english",
                 });
+                var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions.GetCurrentBsDate(), 1),'YYYY-MM-DD')
+                $('#delivery-date').val(deliveryDate);
+    
             };
         </script>
     @endsection
