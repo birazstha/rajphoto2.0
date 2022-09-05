@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\User;
 use Config;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SizeSeeder extends Seeder
@@ -16,7 +17,7 @@ class SizeSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('sizes')->insert([
+        DB::table('sizes')->insert([
             //Photo sizes
             0 => [
                 'order_id' => 1,

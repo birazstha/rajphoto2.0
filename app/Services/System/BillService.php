@@ -35,11 +35,12 @@ class BillService extends Service
         }
 
         if(isset($data->today)){
-            return $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->get();
+           
+            return $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->paginate(10);
         }
 
         if(isset($data->order_id)){
-            return $query->where('order_id',$data->order_id)->get();   
+            return $query->where('order_id',$data->order_id)->paginate(PAGINATE);   
         }
 
         if ($pagination) {

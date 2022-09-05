@@ -263,7 +263,7 @@
                             <div class="col-sm-8">
                                 <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
                                     class="form-control" id="order-date" {{ isset($item) ? 'readonly' : '' }}
-                                    disabled>
+                                    readonly="readonly">
                             </div>
                         </div>
 
