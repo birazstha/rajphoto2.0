@@ -35,45 +35,17 @@ class TestController extends Controller
     {
 
         if ($request->customer_name) {
-            $customerDetail = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->paginate(20);
-            return $this->filtered($customerDetail);
+            $customerDetail = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(20);
+            return response()->json([
+                $customerDetail
+            ]);
+
         } else {
-            $customerDetail = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->paginate(20);
-            return $this->filtered($customerDetail);
+            $customerDetail = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->paginate(20);
+            return response()->json([
+                $customerDetail
+            ]);
+
         }
-    }
-
-    public function filtered($customerDetail)
-    {
-        $this->setBill($customerDetail);
-        $output = "";
-        foreach ($customerDetail as $key => $bill) {
-
-
-            if($bill->balance_amount===0){
-                $paid = '<span class="badge badge-success">Paid</span>';
-            }else{
-                $paid = $bill->balance_amount;
-            }
-           
-      
-            $output .=
-                '<tr>
-            <td> ' . $key + 1 . '</td>
-              <td class="w-25"> ' . $bill->name . ' </td>     
-              <td> ' . $bill->grand_total . ' </td>
-              <td> ' . $bill->paid_amount . ' </td>
-              <td> ' . $paid . ' </td>
-              <td> ' . $bill->ordered_date . ' </td>
-              <td> ' . $bill->delivery_date . ' </td>
-              <td> ' . $bill->users->name . ' </td>
-              <td>  
-              <a href="search/' . $bill->qr_code . '" target="_blank" class="btn btn-success"><i class="far fa-eye"></i></a>
-              <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-              <a href="bills/' . $bill->id . '" target="_blank" class="btn btn-warning"><i class="fas fas fa-print"></i></a>
-              </td>
-            </tr>';
-        }
-        return $output;
     }
 }
