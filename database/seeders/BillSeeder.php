@@ -15,6 +15,6 @@ class BillSeeder extends Seeder
      */
     public function run()
     {
-       Bill::factory()->count(10000)->create();
+       Bill::factory()->count(10)->create();
     }
 }

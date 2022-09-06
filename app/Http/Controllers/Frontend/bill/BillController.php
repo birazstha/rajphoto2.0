@@ -12,7 +12,9 @@ use App\Services\frontend\OrderService;
 use App\Services\System\BillOrderService;
 use App\Services\System\BillService;
 use App\Services\System\FrontendUserService;
+use App\Traits\BillTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BillController extends Controller
 {

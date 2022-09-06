@@ -3,14 +3,12 @@
 namespace App\Services\System;
 
 use App\Model\Bill;
-
-use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Services\Service;
 
-
 class BillService extends Service
 {
+
      protected $orderService,$frontendUser;
     public function __construct(Bill $bill)
     {
@@ -34,10 +32,10 @@ class BillService extends Service
             $query->select($selectedColumns);
         }
 
-        if(isset($data->today)){
-           
-            return $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->paginate(10);
-        }
+        // if(isset($data->today)){
+            
+        //     $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->paginate(10);
+        // }
 
         if(isset($data->order_id)){
             return $query->where('order_id',$data->order_id)->paginate(PAGINATE);   
@@ -46,9 +44,6 @@ class BillService extends Service
         if ($pagination) {
             return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
         }
-
-      
-
         return $query->orderBy('id', 'ASC')->get();
     }
 
