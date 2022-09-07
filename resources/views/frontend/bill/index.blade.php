@@ -1,12 +1,6 @@
 @extends('frontend.layout.master')
 @section('main-content')
     <div class="mb-4">
-
-
-        <div class="loader d-none">
-            <img src="{{ asset('images/loader.gif') }}" alt="" height="50px">
-        </div>
-
         <form class="d-flex">
             @csrf
             <div class="input-group input-group">
@@ -20,20 +14,15 @@
         </form>
     </div>
 
-    {{-- <div class="loader">
+    <div class="loader">
         <img src="{{ asset('images/loader.gif') }}" alt="" height="50px">
-    </div> --}}
-
-    <div class="table">
-        <div class="table-responsive">
-            <table class="table table-bordered table-bills" id="content">
-               
-            </table>
-
-            <div class="no-data d-none text-center text-danger">No data found</div>
-        </div>
-
     </div>
+   
+
+    <div id="table"></div>
+
+   
+
 @endsection
 
 

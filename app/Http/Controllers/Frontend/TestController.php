@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Model\Bill;
 use App\Model\Order;
 use App\Model\Size;
-use App\Traits\BillTrait;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
-    use BillTrait;
+
     
     public function getOrderById(Request $request)
     {
@@ -28,33 +27,18 @@ class TestController extends Controller
     public function getRateBySize(Request $request)
     {
         $size = Size::find($request->input('size_id'));
-        // dd($size);
         return $size->rate;
     }
 
     public function getCustomerInfo(Request $request)
     {
-
         if ($request->customer_name) {
-            $customerDetail = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(10);
-            return response()->json([
-                $customerDetail
-            ]);
+            $bills = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(10);
+            return view('frontend.bill.include.table',compact('bills'))->render();
 
         } else {
-            $customerDetail = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->orderBy('created_at','DESC')->paginate(10);
-            return response()->json([
-                $customerDetail
-            ]);
-
+            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->paginate(10);
+            return view('frontend.bill.include.table',compact('bills'))->render();
         }
-    }
-
-    public function darkmode(Request $request){
-        // if($request->btnName==='dark'){
-        //     Session::put('darkStatus',1);
-        // }else{
-        //     Session::put('darkStatus',0);
-        // }
-    }
+    }   
 }
