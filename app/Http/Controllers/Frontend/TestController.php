@@ -8,6 +8,7 @@ use App\Model\Order;
 use App\Model\Size;
 use App\Traits\BillTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
@@ -35,17 +36,25 @@ class TestController extends Controller
     {
 
         if ($request->customer_name) {
-            $customerDetail = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(20);
+            $customerDetail = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(10);
             return response()->json([
                 $customerDetail
             ]);
 
         } else {
-            $customerDetail = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->paginate(20);
+            $customerDetail = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->orderBy('created_at','DESC')->paginate(10);
             return response()->json([
                 $customerDetail
             ]);
 
         }
+    }
+
+    public function darkmode(Request $request){
+        // if($request->btnName==='dark'){
+        //     Session::put('darkStatus',1);
+        // }else{
+        //     Session::put('darkStatus',0);
+        // }
     }
 }

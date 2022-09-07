@@ -19,27 +19,18 @@
 
         </form>
     </div>
+
+    {{-- <div class="loader">
+        <img src="{{ asset('images/loader.gif') }}" alt="" height="50px">
+    </div> --}}
+
     <div class="table">
         <div class="table-responsive">
-            <table class="table table-bordered table-bills">
-                <thead>
-                    <tr>
-                        <th>S.No</th>
-                        <th style="width: 20rem">Name</th>
-                        <th>Total</th>
-                        <th>Advance</th>
-                        <th>Balance Amount</th>
-                        <th>Ordered Date</th>
-                        <th>Delivery Date</th>
-                        <th>Prepared By</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="content">
-                    <td colspan="9" style="height: 50rem"> <img src="{{ asset('images/loader.gif') }}" alt="" height="50px"></td>
-                </tbody>
+            <table class="table table-bordered table-bills" id="content">
+               
             </table>
 
+            <div class="no-data d-none text-center text-danger">No data found</div>
         </div>
 
     </div>

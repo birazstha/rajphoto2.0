@@ -263,17 +263,5 @@
             $('#cash_return').val(cashReturn);
         });
     });
-
-
-    var el = document.documentElement;
-    $('.fullScreen').on('click',function(){
-        if(el.requestFullscreen){
-            el.requestFullscreen()
-        }
-    })
-
-
-
-
 </script>
 

@@ -1,22 +1,31 @@
 <script>
-    
-    function getCustomerInfo(data){
-        var path = "{{ URL::route('bill.getCustomerInfo') }}";
+    function getCustomerInfo(data) {
+        var path = "/getCustomerInfo";
         $.ajax({
-            method: 'post',
+            method: 'get',
             url: path,
             data: data,
             dataType: 'html',
             success: function(response) {
                 const responseData = JSON.parse(response);
                 const data = responseData[0]?.data;
-
-                let html = '';
+                let thead = `<thead>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Total</th>
+                    <th>Advance</th>
+                    <th>Balance Amount</th>
+                    <th>Ordered Date</th>
+                    <th>Delivery Date</th>
+                    <th>Prepared By</th>
+                    <th>Action</th>
+                </thead>`;
+                let html = thead ;
                 for (let i = 0; i < data.length; i++) {
-
                     const item = data[i];
-                    html +=
-                        `<tr>
+                    html +=`
+                    <tbody>
+                        <tr>
                         <td>${i+1}</td>
                         <td>${item.name}</td>     
                         <td>${item.grand_total}</td>
@@ -30,16 +39,36 @@
                         <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         <a href="bills/${item.id}" target="_blank" class="btn btn-warning"><i class="fas fas fa-print"></i></a>
                         </td>
-                    </tr>`
+                    </tr>
+                    </tbody>   
+                    `
                 }
-
-
-                if (html !== "") {
+                
+                if (data.length>0) {
                     $("#content").html(html);
+                    $('.no-data').addClass('d-none');
                 } else {
-                    $("#content").html(
-                        '<tr><td colspan="9" class="text-center text-danger">No data found</td></tr>'
-                    );
+
+                    $('.no-data').removeClass('d-none');
+    
+                    $("#content").html(`${thead}
+                <tbody>
+                    <tr>
+                        <tr>
+                        <td>-</td>
+                        <td>-</td>     
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>- </td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>  
+                        -
+                        </td>
+                    </tbody>
+                
+                `);
                 }
             },
         });

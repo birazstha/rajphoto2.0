@@ -1,11 +1,8 @@
 @extends('frontend.layout.master')
 @section('main-content')
 
-
     <div class="form">
 
-        <div class="table">
-            <div class="table-responsive">
                 {{ Form::open(['route' => 'bills.store']) }}
                 <!--Name-->
                 <div class="form-group row">
@@ -173,22 +170,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row error-msg d-none">
-                        <label for="" class="col-2"></label>
-                        <span class="col-10 text text-danger" style="top: -10px">Please fill the
-                            previous order details to add a new order. </span>
-
-                    </div>
                 @endif
                 <div class="{{ isset($item) ? 'd-none' : '' }}">
-                    <button type="button" class="btn btn-success btn-sm " id="btnAdd">Add</button>
+                <button type="button" class="btn btn-info btn-sm" id="btnAdd"><i class="fas fa-plus"></i>&nbspAdd</button>
                 </div>
-
-                {{-- Action --}}
-
-
-
-
+                
                 <!--Grand Total-->
                 <div class="row">
                     <div class="col-4">
@@ -274,8 +260,8 @@
                             <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
                             <div class="col-sm-8">
                                 <input type="text" name="delivery_date" required
-                                    value="{{ $item->delivery_date ?? '' }}" class="form-control"
-                                    id="delivery-date" {{ isset($item) ? 'readonly' : '' }}>
+                                    value="{{ $item->delivery_date ?? '' }}" class="form-control" id="delivery-date"
+                                    {{ isset($item) ? 'readonly' : '' }}>
                             </div>
                         </div>
                         @error('delivery_date')
@@ -309,36 +295,36 @@
                             @enderror
                         </div>
                     </div>
-                    <button class="btn btn-success">Submit</button>
+
                 </div>
+                <button class="btn btn-success btn-sm">Submit</button>
                 {!! Form::close() !!}
-            </div>
+    </div>
 
-        </div>
-
-    @endsection
+@endsection
 
 
-    @section('js')
-        @include('frontend.bill.include.script')
-        {{-- For nepali date picker --}}
-        <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
-            type="text/javascript"></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                $('#order-date').nepaliDatePicker({
-                    language:"english",
-                });
-                var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-                $('#order-date').val(currentBsDate);
+@section('js')
+    @include('frontend.bill.include.script')
+    {{-- For nepali date picker --}}
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            $('#order-date').nepaliDatePicker({
+                language: "english",
+            });
+            var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+            $('#order-date').val(currentBsDate);
 
-                //Delivery date
-                $('#delivery-date').nepaliDatePicker({
-                    language:"english",
-                });
-                var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions.GetCurrentBsDate(), 1),'YYYY-MM-DD')
-                $('#delivery-date').val(deliveryDate);
-    
-            };
-        </script>
-    @endsection
+            //Delivery date
+            $('#delivery-date').nepaliDatePicker({
+                language: "english",
+            });
+            var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions
+                .GetCurrentBsDate(), 1), 'YYYY-MM-DD')
+            $('#delivery-date').val(deliveryDate);
+
+        };
+    </script>
+@endsection

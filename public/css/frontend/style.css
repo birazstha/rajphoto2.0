@@ -5,11 +5,16 @@
 }
 
 
-.form .table {
+/* body{
+    background-color: 151515;
+} */
+
+
+.form {
     margin: 1rem auto;
     border-radius: 5px;
-    box-shadow: 0 0 20px -10px black; /**use inset for inner shadow*/
-    /* width: 50rem; */
+    box-shadow: 0 0 20px -10px black; 
+    width: 65rem;
     padding: 20px;
     background-color: white  ;
     display: flex;
@@ -22,12 +27,7 @@
   display: flex;
     justify-content: space-around;
 }
-#bill-container{
 
-    border: 1px solid grey;
-    margin: 1rem auto;
-    width: 40rem;
-}
 .prepare{
     /*border: 1px solid red;*/
     float: right;
@@ -69,6 +69,19 @@ th,td{
   width: 50rem;
 }
 
+
+
+.dark-mode-btn{
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+}
 
 
 

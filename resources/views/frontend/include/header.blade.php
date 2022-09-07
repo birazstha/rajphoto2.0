@@ -25,10 +25,11 @@
     <link rel="stylesheet" href="{{ asset('css/frontend/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend/dashboard.css') }}">
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" type="text/css"/>
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
      <title>Raj Photo Studio - {{ $pageTitle??'' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>  
 
 </head>
 
@@ -60,7 +61,9 @@
                     <button class="btn btn-success" type="submit"><i class="fas fa-search search-icon"></i></button>
                  
                 </form>
-                <i class="fas fa-expand fullScreen ml-3"></i>
+                <div class="dark-mode-btn">
+                    <i class="fas fa-lightbulb dark-mode ml-2" data-mode="dark"></i>
+                </div>
             </div>
         </div>
     </nav>

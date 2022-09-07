@@ -3,7 +3,6 @@
 <script>
 
 var fetchBillInfo = function(name) {
-
         var path = "{{ URL::route('bill.getCustomerInfo') }}";
         var data = {
                 'customer_name': name,
@@ -14,7 +13,7 @@ var fetchBillInfo = function(name) {
 
     $(document).ready(function() {
         fetchBillInfo();    
-        $(".customerName").on("keyup", ($.debounce(1000, function() {
+        $(".customerName").on("keyup", ($.debounce(500, function() {
             var name = $(this).val();
             fetchBillInfo(name);
         })))
