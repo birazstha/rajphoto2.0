@@ -34,11 +34,13 @@ class TestController extends Controller
     {
         if ($request->customer_name) {
             $bills = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(10);
-            return view('frontend.bill.include.table',compact('bills'))->render();
+            $totalBill =  Bill::count();
+            return view('frontend.bill.include.table',compact('bills','totalBill'))->render();
 
         } else {
             $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->paginate(10);
-            return view('frontend.bill.include.table',compact('bills'))->render();
+            $totalBill =  Bill::count();
+            return view('frontend.bill.include.table',compact('bills','totalBill'))->render();
         }
     }   
 }

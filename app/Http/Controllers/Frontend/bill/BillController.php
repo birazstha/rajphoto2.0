@@ -33,6 +33,7 @@ class BillController extends Controller
         $data = [
             'pageTitle' => 'Bills',
             'bills' =>$this->billService->getAllData($request->merge(['today'=>true])),
+    
         ];
         return view('frontend.bill.index', $data);
     }

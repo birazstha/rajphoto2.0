@@ -15,17 +15,12 @@
     </div>
 
     <div class="loader">
-        <img src="{{ asset('images/loader.gif') }}" alt="" height="50px">
+        <img src="{{ asset('images/loader.gif') }}" alt="">
     </div>
    
-
     <div id="table"></div>
 
-   
-
 @endsection
-
-
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
@@ -33,4 +28,5 @@
 
     @include('frontend.bill.include.filter')
     @include('frontend.bill.include.scripts.nepalidate')
+    @include('frontend.bill.include.pagination')
 @endsection

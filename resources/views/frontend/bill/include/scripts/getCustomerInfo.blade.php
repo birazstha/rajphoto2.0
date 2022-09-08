@@ -1,6 +1,6 @@
 <script>
     function getCustomerInfo(data) {
-        var path = "{{ URL::route('bill.getCustomerInfo') }}";
+        var path = "{{ URL::route('bill.getCustomerInfo') }}" + "?page=" + data ;
         $.ajax({
             method: 'get',
             url: path,
