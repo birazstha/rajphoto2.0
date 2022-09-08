@@ -26,7 +26,7 @@ class BillService extends Service
         $query = $this->query();
 
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('label', 'LIKE', '%'.$data->keyword.'%');
+            $query->where('name', 'ILIKE', '%'.$data->keyword.'%');
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);

@@ -305,7 +305,7 @@
 
 
 @section('js')
-    @include('frontend.bill.include.script')
+    @include('frontend.bill.include.scripts.script')
     {{-- For nepali date picker --}}
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>

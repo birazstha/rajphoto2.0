@@ -18,7 +18,12 @@
         <img src="{{ asset('images/loader.gif') }}" alt="">
     </div>
    
-    <div id="table"></div>
+    <div id="table">
+
+    </div>
+
+
+
 
 @endsection
 @section('js')
@@ -26,7 +31,7 @@
         type="text/javascript"></script>
     <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 
-    @include('frontend.bill.include.filter')
+    @include('frontend.bill.include.scripts.filter')
     @include('frontend.bill.include.scripts.nepalidate')
-    @include('frontend.bill.include.pagination')
+    @include('frontend.bill.include.scripts.pagination')
 @endsection
