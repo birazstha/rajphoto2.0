@@ -32,20 +32,18 @@ class TestController extends Controller
 
     public function getCustomerInfo(Request $request)
     {
-        if ($request->customer_name) {
+        $customerName =  $request->customer_name;
+        $date =  $request->date;
+        if ($customerName) {
             $bills = Bill::where('name', 'ILIKE', '%' . $request->customer_name . '%')->with('users')->paginate(10);
             $totalBill =  Bill::count();
             return view('frontend.bill.include.searchResult',compact('bills','totalBill'))->render();
 
-        } elseif($request->date) {
-            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->with('users')->paginate(10);
+        } elseif($date) {
+            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at','DESC')->with('users')->paginate(10);
             $totalBill =  Bill::count();
             return view('frontend.bill.include.searchResult',compact('bills','totalBill'))->render();
-        }else{
-            $bills = Bill::paginate(10);
-            $totalBill =  Bill::count();
-            return view('frontend.bill.include.table',compact('bills','totalBill'))->render();
-
         }
+        
     }   
 }

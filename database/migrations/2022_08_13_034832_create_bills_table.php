@@ -18,7 +18,7 @@ class CreateBillsTable extends Migration
             $table->string('name');
             $table->integer('grand_total');
             $table->integer('paid_amount');
-            $table->integer('balance_amount');
+            $table->integer('due_amount');
             $table->integer('cash_received');
             $table->integer('cash_return');
             $table->string('ordered_date');

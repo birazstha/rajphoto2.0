@@ -207,7 +207,7 @@
                     <div class="col-4">
                         <!--Balance Amount-->
                         <div class="form-group row">
-                            {!! Form::label('total', 'Balance Amount', ['class' => 'col-sm-4 col-form-label']) !!}
+                            {!! Form::label('total', 'Due Amount', ['class' => 'col-sm-4 col-form-label']) !!}
                             <div class="col-sm-6">
                                 <td><input type="text" name="balance_amount" id="balance_amount"
                                         value="{{ $item->balance_amount ?? '' }}" readonly class="form-control"></td>

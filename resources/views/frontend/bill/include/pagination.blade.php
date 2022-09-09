@@ -14,7 +14,7 @@
     @if ($dataCount >= 10)
 
         <ul class="pagination">
-            <li class="page-item previous disabled" data-type="previous"><a class="page-link" href="">Previous</a></li>
+            <li class="page-item previous" data-type="previous"><a class="page-link" href="">Previous</a></li>
              <li class="page-item" data-type="next"><a class="page-link" href="http://127.0.0.1:8000?page=4">Next</a></li>
         </ul>
     @endif

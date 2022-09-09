@@ -95,8 +95,8 @@ class BillController extends Controller
     }
 
     public function searchBill(Request $request){
-        dd($request->qr_code);
-
+     
+    
         $items = Bill::where('qr_code',$request->qrcode)->first();
         $data = [
             'item' => $items,

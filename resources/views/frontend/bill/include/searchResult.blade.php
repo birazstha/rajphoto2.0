@@ -8,9 +8,10 @@ $count = 1;
             <thead>
                 <th>S.No</th>
                 <th>Name</th>
+                <th>Order Detail</th>
                 <th>Total</th>
                 <th>Advance</th>
-                <th>Balance Amount</th>
+                <th>Due Amount</th>
                 <th>Ordered Date</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
@@ -21,13 +22,21 @@ $count = 1;
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $bill->name }}</td>
+                        <td class="change">
+                            @foreach ($bill->billOrders as $key => $billOrder)
+                                <div class="order-detail">
+                                    {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }} - {{ $billOrder->quantity }} pc
+                                </div>
+                            @endforeach
+
+                        </td>
                         <td> Rs.{{ $bill->grand_total }}</td>
                         <td>
                             @if ($bill->paid_amount === 0)
-                            <span class="badge badge-danger">Unpaid</span>
-                        @else
-                            Rs.{{ $bill->paid_amount }}
-                        @endif
+                                <span class="badge badge-danger">Unpaid</span>
+                            @else
+                                Rs.{{ $bill->paid_amount }}
+                            @endif
                         </td>
                         <td>
                             @if ($bill->balance_amount === 0)
@@ -48,7 +57,7 @@ $count = 1;
                         </td>
                     </tr>
                 @empty
-                    <td colspan="9" class="text text-danger">No dat found</td>
+                    <td colspan="9" class="text text-danger">No data found</td>
                 @endforelse
             </tbody>
         </table>
@@ -56,17 +65,21 @@ $count = 1;
 
         {{-- Show pagination when exceeds 10 --}}
         <div class="d-flex justify-content-between">
-            <div class="">
-                Showing 1 to {{ $bills->count() }} entries of {{ $bills->count() }} entries.
-            </div>
-            @if ($dataCount >= 10)
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=3">3</a></li>
-                    <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=4">Next</a></li>
-                </ul>
+
+
+            @if ($bills->count() != 0)
+                <div class="">
+                    Showing 1 to {{ $bills->count() }} entries of {{ $bills->count() }} entries.
+                </div>
+                @if ($dataCount >= 10)
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=3">3</a></li>
+                        <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000?page=4">Next</a></li>
+                    </ul>
+                @endif
             @endif
         </div>
     </div>

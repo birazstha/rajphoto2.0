@@ -53,19 +53,13 @@
 }
 
 
-th,td{
+#table th,td{
     text-align: center;
 }
 
 #todays-date{
     cursor: pointer;
 }
-
-.table-bills td{
-  width: 50rem;
-}
-
-
 
 .dark-mode-btn{
     font-size: 2rem;
@@ -77,10 +71,20 @@ th,td{
     align-items: center;
     justify-content: center;
     height: 500px;
-    /* border: 1px solid red; */
+}
+
+#bill{
+    border: 1px solid rgb(194, 194, 194);
+    display: flex;
+    margin: auto;
+    width: 50rem;
 }
 
 
-
-
+.order-detail{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left:4rem ;
+}
 

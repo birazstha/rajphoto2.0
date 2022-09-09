@@ -127,7 +127,7 @@
                      
                                 {!! Form::label('order_id', 'Order', ['class' => 'col-sm-2 col-form-label']) !!}
                                 <div class="col-sm-2">
-                                    <select name="bill[${billCount}][order_id]" id="${count}" data-id="order" class="form-control">
+                                    <select name="bill[${billCount}][order_id]" id="${count}" data-id="order" class="form-control" required>
                                         <option value="" selected>Select Order Type</option>
                                         @foreach ($orders as $order)
                                             <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -141,7 +141,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('size_id', 'Size', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <select name="bill[${billCount}][size_id]" id="size_id_${count}" data-id="${count}" data-class="size" class="form-control">
+                                    <select name="bill[${billCount}][size_id]" id="size_id_${count}" data-id="${count}" data-class="size" class="form-control" required>
                                         <option value="" selected>Select a size</option>
                                     </select>
                                 </div>
@@ -151,7 +151,7 @@
                             <div class="col-2 form-group row">
                                 {!! Form::label('rate', 'Rate', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-9">
-                                    <input type="number" name="bill[${billCount}][rate]" id="rate${count}" data-id="${count}" data-type="rate" class="form-control">
+                                    <input type="number" name="bill[${billCount}][rate]" id="rate${count}" data-id="${count}" data-type="rate" class="form-control" required>
                                     @error('rate')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -162,7 +162,7 @@
                                <div class="col-2 form-group row">
                                 {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
-                                    <input type="number" name="bill[${billCount}][quantity]" id="quantity${count}" data-id="${count}" data-type="quantity" value="1" class="form-control">
+                                    <input type="number" name="bill[${billCount}][quantity]" id="quantity${count}" data-id="${count}" data-type="quantity" value="1" class="form-control" required>
                                     @error('quantity')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
