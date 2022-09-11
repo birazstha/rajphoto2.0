@@ -40,9 +40,18 @@ class TestController extends Controller
             $customers = Customer::where('name', 'ILIKE', '%' . $request->customer_name . '%')->paginate(10);
             return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill'))->render();
         } elseif (isset($date)) {
-            
+
             $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(10);
             return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill'))->render();
         }
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $data = Customer::select("name as value", "id")
+            ->where('name', 'ILIKE', '%' . $request->get('search') . '%')
+            ->get();
+
+        return response()->json($data);
     }
 }

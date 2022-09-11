@@ -2,7 +2,6 @@
 @section('main-content')
 
     <div class="form">
-
         {{ Form::open(['route' => 'bills.store']) }}
         <div class="form-group row">
             <div class="col-6">
@@ -10,9 +9,8 @@
                 <div class="form-group row">
                     <label for="order_date" class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
-                        <input type="text" value="" name="name"
-                            class="form-control" id="name"
-                            >
+                        <input type="text" value="{{ $item->customers->name ?? '' }}" name="name" class="form-control"
+                            id="customer_name" {{ isset($item) ? 'readonly' : '' }}>
                     </div>
                 </div>
 
@@ -22,12 +20,13 @@
                 <div class="form-group row">
                     <label for="texr" class="col-sm-4 col-form-label">Phone Number</label>
                     <div class="col-sm-8">
-                        <input type="number" name="phone_number" required value=""
-                            class="form-control" id="phone_number">
+                        <input type="number" name="phone_number" required id="customer_contact"
+                            value="{{ $item->customers->phone_number ?? '' }}" class="form-control" id="phone_number"
+                            {{ isset($item) ? 'readonly' : '' }}>
                     </div>
                 </div>
             </div>
-           
+
         </div>
 
         {{-- For delivery --}}
@@ -235,7 +234,7 @@
                     <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
                     <div class="col-sm-8">
                         <input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
-                        id="cash_received" class="form-control" required>
+                            id="cash_received" class="form-control" required>
                     </div>
                 </div>
 
@@ -245,8 +244,8 @@
                 <div class="form-group row">
                     <label for="texr" class="col-sm-4 col-form-label">Cash Return</label>
                     <div class="col-sm-8">
-                        <input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}" id="cash_return"
-                        class="form-control" readonly>
+                        <input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}"
+                            id="cash_return" class="form-control" readonly>
                     </div>
                 </div>
                 @error('delivery_date')
@@ -321,6 +320,10 @@
 
 @section('js')
     @include('frontend.bill.include.scripts.script')
+
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
     {{-- For nepali date picker --}}
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
@@ -341,5 +344,53 @@
             $('#delivery-date').val(deliveryDate);
 
         };
+
+        //Auto complete f
+       
+
+        $("#customer_name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('autocompleteName') }}",
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            select: function(event, ui) {
+                $('#customer_name').val(ui.item.label);
+                console.log(ui.item);
+                return false;
+            }
+        });
+
+        $("#customer_contact").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: path,
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            select: function(event, ui) {
+                $('#customer_contact').val(ui.item.label);
+                console.log(ui.item);
+                return false;
+            }
+        });
+
+
+
     </script>
 @endsection

@@ -5,15 +5,16 @@
 }
 
 
-/* body{
+body{
     background-color: #cccccc;
-} */
+}
+
 
 
 .form {
     margin: 1rem auto;
     border-radius: 5px;
-    box-shadow: 0 0 20px -10px black; 
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
     width: 65rem;
     padding: 20px;
     background-color: white  ;
@@ -52,9 +53,14 @@
     color: red;
 }
 
+#table{
+    background-color: white;
+    padding: 1rem;
+}
 
 #table th,td{
     text-align: center;
+    /* border: 1px solid red; */
 }
 
 #todays-date{
@@ -66,11 +72,16 @@
     cursor: pointer;
 }
 
+.loader img{
+    height: 50px;
+}
+
 .loader{
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 30rem;
 }
 
 #bill{
@@ -85,5 +96,13 @@
     align-items: center;
     flex-direction: row;
     margin-left:2rem ;
+}
+
+.bill-index{
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
+    padding: 1rem;
+    background: white;
+    border-radius: 5px;
+    height: 40rem;
 }
 

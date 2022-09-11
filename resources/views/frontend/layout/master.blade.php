@@ -31,7 +31,7 @@
             $('.table-bills').css('background','#b3b3b3');
             $('.dark-mode-btn').html('<i class="far fa-lightbulb dark-mode ml-2" data-mode="light"></i>');
         }else{
-            $('body').css("background-color", 'white');
+            $('body').css("background-color", '#cccccc');
             $('.dark-mode-btn').html('<i class="fas fa-lightbulb dark-mode ml-2" data-mode="dark"></i>   ');
             $('.table-bills').css('background','white');
 

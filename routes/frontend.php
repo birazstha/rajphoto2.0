@@ -14,7 +14,5 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/getRateBySize', 'TestController@getRateBySize')->name('size.getRate');
     Route::get('/getCustomerInfo', 'TestController@getCustomerInfo')->name('bill.getCustomerInfo');
     Route::post('/darkmode', 'TestController@darkmode')->name('frontend.darkmode');
-
-
-    
+    Route::get('autocomplete', 'TestController@autocomplete')->name('autocompleteName');
 });

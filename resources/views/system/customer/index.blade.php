@@ -29,6 +29,7 @@
         <th scope="col">Name</th>
         <th scope="col">Contact No.</th>
         <th scope="col">Customer ID</th>
+        <th scope="col">Orders</th>
     </tr>
 @endsection
 
@@ -40,6 +41,7 @@
             <td>{{ $item->name }}</td>
             <td>{{ $item->phone_number }}</td>
             <td>{{ $item->customer_id }}</td>
+            <td>{{ count($item->bills) }}</td>
         </tr>
     @endforeach
 @endsection
