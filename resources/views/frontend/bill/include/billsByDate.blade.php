@@ -8,6 +8,7 @@ $count = 1;
             <thead>
                 <th>S.No</th>
                 <th>Name</th>
+                <th>Phone Number</th>
                 <th>Order Detail</th>
                 <th>Total</th>
                 <th>Advance</th>
@@ -18,10 +19,12 @@ $count = 1;
                 <th>Action</th>
             </thead>
             <tbody>
+                
                 @forelse ($bills as $key => $bill)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $bill->name }}</td>
+                        <td>{{ $bill->customers->name }}</td>
+                        <td>{{ $bill->customers->phone_number}}</td>
                         <td class="change">
                             @foreach ($bill->billOrders as $key => $billOrder)
                                 <div class="order-detail">
@@ -39,10 +42,10 @@ $count = 1;
                             @endif
                         </td>
                         <td>
-                            @if ($bill->balance_amount === 0)
+                            @if ($bill->due_amount === 0)
                                 <span class="badge badge-success">Paid</span>
                             @else
-                                Rs.{{ $bill->balance_amount }}
+                                Rs.{{ $bill->due_amount }}
                             @endif
                         </td>
                         <td>{{ $bill->ordered_date }}</td>

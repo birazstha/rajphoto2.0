@@ -22,6 +22,7 @@ $sizeBaseUrl = '/sizes';
 $billsBaseUrl = '/bills';
 $ratesBaseUrl = '/rates';
 $frontendUserBaseUrl = '/frontend-users';
+$customerBaseUrl = '/customers';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -177,84 +178,84 @@ return  [
                 ],
             ],
         ],
-        // [
-        //     'name' => 'System configs',
-        //     'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
-        //     'hasSubmodules' => true,
-        //     'submodules' => [
-        //         [
-        //             'name' => 'Email Templates',
-        //             'icon' => "<i class='fa fa-envelope' aria-hidden='true'></i>",
-        //             'route' => $emailTemplateBaseUrl,
-        //             'hasSubmodules' => false,
-        //             'permissions' => [
-        //                 [
-        //                     'name' => 'View Email Templates',
-        //                     'route' => [
-        //                         'url' => $emailTemplateBaseUrl,
-        //                         'method' => $getMethod,
-        //                     ],
-        //                 ],
-        //                 [
-        //                     'name' => 'Edit Email Templates',
-        //                     'route' => [
-        //                         [
-        //                             'url' => $emailTemplateBaseUrl.'/*/edit',
-        //                             'method' => $getMethod,
-        //                         ],
-        //                         [
-        //                             'url' => $emailTemplateBaseUrl.'/*',
-        //                             'method' => $putMethod,
-        //                         ],
-        //                     ],
-        //                 ],
-        //                 [
-        //                     'name' => 'Delete Email Templates',
-        //                     'route' => [
-        //                         'url' => $emailTemplateBaseUrl.'/*',
-        //                         'method' => $deleteMethod,
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'name' => 'Configs',
-        //             'icon' => '<i class="fa fa-cog" aria-hidden="true"></i>',
-        //             'route' => $configBaseUrl,
-        //             'hasSubmodules' => false,
-        //             'permissions' => [
-        //                 [
-        //                     'name' => 'View Configs',
-        //                     'route' => [
-        //                         'url' => $configBaseUrl,
-        //                         'method' => $getMethod,
-        //                     ],
-        //                 ],
-        //                 [
-        //                     'name' => 'Create Config',
-        //                     'route' => [
-        //                         'url' => $configBaseUrl,
-        //                         'method' => $postMethod,
-        //                     ],
-        //                 ],
-        //                 [
-        //                     'name' => 'Edit Config',
-        //                     'route' => [
-        //                         'url' => $configBaseUrl.'/*',
-        //                         'method' => $putMethod,
-        //                     ],
-        //                 ],
-        //                 [
-        //                     'name' => 'Delete Config',
-        //                     'route' => [
-        //                         'url' => $configBaseUrl.'/*',
-        //                         'method' => $deleteMethod,
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //     ],
-        // ],
+        [
+            'name' => 'System configs',
+            'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
+            'hasSubmodules' => true,
+            'submodules' => [
+                [
+                    'name' => 'Email Templates',
+                    'icon' => "<i class='fa fa-envelope' aria-hidden='true'></i>",
+                    'route' => $emailTemplateBaseUrl,
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Email Templates',
+                            'route' => [
+                                'url' => $emailTemplateBaseUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Email Templates',
+                            'route' => [
+                                [
+                                    'url' => $emailTemplateBaseUrl.'/*/edit',
+                                    'method' => $getMethod,
+                                ],
+                                [
+                                    'url' => $emailTemplateBaseUrl.'/*',
+                                    'method' => $putMethod,
+                                ],
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Email Templates',
+                            'route' => [
+                                'url' => $emailTemplateBaseUrl.'/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Configs',
+                    'icon' => '<i class="fa fa-cog" aria-hidden="true"></i>',
+                    'route' => $configBaseUrl,
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Configs',
+                            'route' => [
+                                'url' => $configBaseUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Config',
+                            'route' => [
+                                'url' => $configBaseUrl,
+                                'method' => $postMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Config',
+                            'route' => [
+                                'url' => $configBaseUrl.'/*',
+                                'method' => $putMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Config',
+                            'route' => [
+                                'url' => $configBaseUrl.'/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
         [
             'name' => 'Basic Setup',
             'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
@@ -499,6 +500,56 @@ return  [
                     'name' => 'Delete Category',
                     'route' => [
                         'url' => $frontendUserBaseUrl.'/*',
+                        'method' => $deleteMethod,
+                    ],
+                ],
+            ],
+        ],
+
+        [
+            'name' => 'Customer Management',
+            'icon' => '<i class="fas fa-users"></i>',
+            'hasSubmodules' => false,
+            'route' => $customerBaseUrl,
+            'permissions' => [
+                [
+                    'name' => 'View Category',
+                    'route' => [
+                        'url' => $customerBaseUrl,
+                        'method' => $getMethod,
+                    ],
+                ],
+                [
+                    'name' => 'Create Category',
+                    'route' => [
+                        [
+                            'url' => $customerBaseUrl.'/create',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $customerBaseUrl,
+                            'method' => $postMethod,
+                        ],
+
+                    ],
+                ],
+                [
+                    'name' => 'Edit Category',
+                    'route' => [
+                        [
+                            'url' => $customerBaseUrl.'/*/edit',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $customerBaseUrl.'/*',
+                            'method' => $putMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Delete Category',
+                    'route' => [
+                        'url' => $customerBaseUrl.'/*',
                         'method' => $deleteMethod,
                     ],
                 ],

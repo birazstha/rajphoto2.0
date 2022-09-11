@@ -11,7 +11,7 @@ class Bill extends Model
   use HasFactory;
 
     protected $table = 'bills';
-    protected $fillable = ['name','quantity','name','rate','total','grand_total','paid_amount','balance_amount','cash_received','cash_return','ordered_date','delivery_date','user_id','qr_code'];
+    protected $fillable = ['customer_id','quantity','rate','total','grand_total','paid_amount','due_amount','cash_received','cash_return','ordered_date','delivery_date','user_id','qr_code'];
 
    public function billOrders(){
      return $this->hasMany(BillOrder::class);
@@ -20,4 +20,10 @@ class Bill extends Model
    public function users(){
     return $this->belongsTo(FrontendUser::class,'user_id');
    }
+
+   public function customers(){
+    return $this->belongsTo(Customer::class,'customer_id');
+   }
+
+   
 }

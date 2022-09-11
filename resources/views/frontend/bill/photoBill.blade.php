@@ -27,10 +27,10 @@
                     </div>
                     <tr>
                         <td colspan="11">
-                            <b>Name:</b> {{ $data['row']->name }}
+                            <b>Name:</b> {{ $data['row']->customers->name }}
                         </td>
                         <td>
-                            <b>Bill Type:</b> Photo
+                            <b>Phone No:</b> {{ $data['row']->customers->phone_number }}
                         </td>
                     </tr>
                     <tr>

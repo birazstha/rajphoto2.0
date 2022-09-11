@@ -32,6 +32,5 @@
     <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 
     @include('frontend.bill.include.scripts.filter')
-    @include('frontend.bill.include.scripts.nepalidate')
     @include('frontend.bill.include.scripts.pagination')
 @endsection

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CountriesTableSeeder::class);
         $this->call(OrderSeeder::class);
         $this->call(SizeSeeder::class);
-        $this->call(BillSeeder::class);
+        // $this->call(BillSeeder::class);
 
     }
 }

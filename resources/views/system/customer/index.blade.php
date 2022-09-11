@@ -26,12 +26,9 @@
 @section('table-heading')
     <tr>
         <th scope="col">S.No</th>
-        <th scope="col">Customer's Name</th>
-        <th scope="col" style="width: 5px">QR Code</th>
-
-        <th scope="col">Prepared By</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
+        <th scope="col">Name</th>
+        <th scope="col">Contact No.</th>
+        <th scope="col">Customer ID</th>
     </tr>
 @endsection
 
@@ -39,21 +36,10 @@
     @php $pageIndex = pageIndex($items); @endphp
     @foreach ($items as $key => $item)
         <tr>
-
             <td>{{ SN($pageIndex, $key) }}</td>
-            <td>{{ $item->customers->name }}</td>
-            <td >
-                {!! QrCode::size(100)->generate($item->qr_code) !!}
-            </td>
-            <td>
-              {{ $item->users->name }}
-            </td>
-
-
-            <td>
-                @include('system.partials.editButton')
-                @include('system.partials.deleteButton')
-            </td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->phone_number }}</td>
+            <td>{{ $item->customer_id }}</td>
         </tr>
     @endforeach
 @endsection

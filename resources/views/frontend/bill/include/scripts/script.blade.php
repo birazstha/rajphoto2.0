@@ -254,7 +254,7 @@
         //Calculate balance amount
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
-            $('#balance_amount').val(balanceAmt);
+            $('#due_amount').val(balanceAmt);
         });
 
         //Calculate cash return

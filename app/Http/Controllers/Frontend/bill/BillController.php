@@ -6,19 +6,19 @@ use App\Exceptions\CustomGenericException;
 use App\Http\Controllers\Controller;
 use App\Model\Bill;
 use App\Model\BillOrder;
+use App\Model\Customer;
 use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Services\frontend\OrderService;
 use App\Services\System\BillOrderService;
 use App\Services\System\BillService;
+use App\Services\System\CustomerService;
 use App\Services\System\FrontendUserService;
-use App\Traits\BillTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class BillController extends Controller
 {
-    protected $orderService,$billOrderService,$frontendUser;
+    protected $orderService,$billOrderService,$frontendUser,$customerService;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
@@ -26,6 +26,7 @@ class BillController extends Controller
         $this->billOrderService = new BillOrderService(new BillOrder);
         $this->frontendUser = new FrontendUserService(new FrontendUser);
         $this->orderService = new OrderService(new Order);
+        $this->customerService = new CustomerService(new Customer);
     }
 
     public function index(Request $request)
@@ -41,7 +42,6 @@ class BillController extends Controller
 
     public function create(Request $request)
     {
-
         $data = [
             'pageTitle' => $this->moduleName,
             'orders' => $this->orderService->getAllData($request),
@@ -55,12 +55,16 @@ class BillController extends Controller
         try{
             $data = $request;
             $data['qr_code'] = uniqid();
-            $bill = $this->billService->store($data); // Bill Create Operation+
+            $customerId = uniqid();
+            $customer = $this->customerService->store($request->merge(['customer_id'=>$customerId]));
+            $data['customer_id'] = $customer->id;
+            $bill = $this->billService->store($data); // Bill Create Operation
             $this->billOrderService->store($request->merge(['bill_id'=>$bill->id]));  
             if($bill){
                 return redirect()->route('bills.show',$bill->id);
             }
         }catch(\Exception $e){
+            dd($e);
            throw new CustomGenericException($e->getMessage());
         }
     }

@@ -6,7 +6,7 @@
 
 
 /* body{
-    background-color: 151515;
+    background-color: #cccccc;
 } */
 
 
@@ -80,11 +80,10 @@
     width: 50rem;
 }
 
-
 .order-detail{
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-left:4rem ;
+    margin-left:2rem ;
 }
 
