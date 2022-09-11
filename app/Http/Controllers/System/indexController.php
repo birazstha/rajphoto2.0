@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Model\Bill;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class indexController extends ResourceController
@@ -17,8 +19,11 @@ class indexController extends ResourceController
      */
     public function index(Request $request, $id = '')
     {
-        $data['breadcrumbs'] = $this->breadcrumbForIndex();
 
+        $data = [
+            'breadcrumbs' => $this->breadcrumbForIndex(),
+            'income' => Bill::whereDate('created_at',Carbon::today())->sum('paid_amount')
+        ];
         return $this->renderView('index', $data);
     }
 

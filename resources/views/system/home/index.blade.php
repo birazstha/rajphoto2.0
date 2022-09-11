@@ -12,10 +12,10 @@
 <div class="panel panel-default">
     <div class="panel-body">
         @include('system.partials.message')
-        {{translate('Welcome to your dashboard')}}
-        {{--@if(flashMessage('notification'))
-  <span>{{ flashMessage('notification') }}</span>
-        @endif--}}
+       
+        <div>Today's Income:</div><h1> Rs. {{ $income }}</h1>
+
+        
     </div>
 </div>
 @endsection

@@ -13,7 +13,6 @@ $count = 1;
                 <th>Total</th>
                 <th>Advance</th>
                 <th>Due Amount</th>
-                <th>Ordered Date</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
                 <th>Action</th>
@@ -48,7 +47,6 @@ $count = 1;
                                 Rs.{{ $bill->due_amount }}
                             @endif
                         </td>
-                        <td>{{ $bill->ordered_date }}</td>
                         <td>{{ $bill->delivery_date }}</td>
                         <td>{{ $bill->users->name }}</td>
                         <td>

@@ -29,11 +29,8 @@
             //If name is not given, show todays biull.
             else {
                 getCustomerInfo(currentBsDate, 'date');
+                $('#todays-date').val(currentBsDate);
             }
-
-
-
-
         })))
 
         //Search bill by Nepali date
