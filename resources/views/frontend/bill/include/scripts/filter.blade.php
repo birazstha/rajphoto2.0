@@ -37,6 +37,7 @@
         $('#todays-date').nepaliDatePicker({
             language: "english",
             disableDaysAfter: 0,
+            disableDaysBefore: 3,
             onChange: function() {
                 $('.allData').addClass('d-none');
                 var selectedDate = $('#todays-date').val();

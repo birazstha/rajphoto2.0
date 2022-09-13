@@ -14,7 +14,7 @@
 
             </form>
         </div>
-
+        @include('frontend.bill.include.modal')
         <div class="loader">
             <img src="{{ asset('images/loader.gif') }}" alt="">
         </div>

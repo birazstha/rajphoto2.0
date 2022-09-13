@@ -10,7 +10,6 @@ body{
 }
 
 
-
 .form {
     margin: 1rem auto;
     border-radius: 5px;
@@ -85,7 +84,9 @@ body{
 }
 
 #bill{
-    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    padding: 1rem;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
     display: flex;
     margin: auto;
     width: 50rem;

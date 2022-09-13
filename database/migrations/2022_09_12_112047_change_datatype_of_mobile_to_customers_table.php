@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomersTable extends Migration
+class ChangeDatatypeOfMobileToCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('customer_id')->unique();
-            $table->string('phone_number')->unique();
-            $table->timestamps();
+        Schema::table('customers', function (Blueprint $table) {
+           $table->string('phone_number')->change();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->bigInteger('phone_number');
+        });
     }
 }

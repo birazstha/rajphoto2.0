@@ -46,12 +46,27 @@ class TestController extends Controller
         }
     }
 
-    public function autocomplete(Request $request)
+    public function autocompletePhone(Request $request)
     {
-        $data = Customer::select("name as value", "id")
-            ->where('name', 'ILIKE', '%' . $request->get('search') . '%')
+        $data = Customer::select("phone_number as value", "id")
+            ->where('phone_number', 'ILIKE', '%' . $request->get('search') . '%')
             ->get();
 
         return response()->json($data);
+
+        // $data = $request->all();
+        // $query = $data['query'];
+        // $filter_data = Customer::where('customer_id', 'ILIKE', '%' . $query . '%')
+        //     ->get();
+        // return response()->json($filter_data);
+    }
+
+    public function autocompleteName(Request $request)
+    {      
+        $data = $request->all();
+        $query = $data['query'];
+        $filter_data = Customer::where('name', 'ILIKE', '%' . $query . '%')
+            ->get();
+        return response()->json($filter_data);
     }
 }

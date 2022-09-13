@@ -22,7 +22,8 @@ class indexController extends ResourceController
 
         $data = [
             'breadcrumbs' => $this->breadcrumbForIndex(),
-            'income' => Bill::whereDate('created_at',Carbon::today())->sum('paid_amount')
+            'income' => Bill::whereDate('created_at',Carbon::today())->sum('paid_amount'),
+            'bills'=>Bill::all(),
         ];
         return $this->renderView('index', $data);
     }

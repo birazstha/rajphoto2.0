@@ -27,8 +27,6 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Customer's Name</th>
-        <th scope="col" style="width: 5px">QR Code</th>
-
         <th scope="col">Prepared By</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
@@ -42,9 +40,6 @@
 
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->customers->name }}</td>
-            <td >
-                {!! QrCode::size(100)->generate($item->qr_code) !!}
-            </td>
             <td>
               {{ $item->users->name }}
             </td>

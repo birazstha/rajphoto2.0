@@ -83,8 +83,8 @@ $count = 1;
 
                             @foreach ($customer->bills as $bill)
                                 <a href="{{ route('bill.searches', $bill->qr_code) }}" target="_blank"
-                                    class="btn btn-success"><i class="far fa-eye"></i></a>
-                                <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    class="btn btn-success mb-1"><i class="far fa-eye"></i></a>
+                                {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
                                 <a href="{{ route('bills.show', $bill->id) }}" target="_blank"
                                     class="btn btn-warning"><i class="fas fas fa-print"></i></a>
                             @endforeach

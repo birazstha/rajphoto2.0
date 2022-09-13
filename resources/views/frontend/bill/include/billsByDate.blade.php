@@ -18,16 +18,17 @@ $count = 1;
                 <th>Action</th>
             </thead>
             <tbody>
-                
+
                 @forelse ($bills as $key => $bill)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $bill->customers->name }}</td>
-                        <td>{{ $bill->customers->phone_number}}</td>
+                        <td>{{ $bill->customers->phone_number }}</td>
                         <td class="change">
                             @foreach ($bill->billOrders as $key => $billOrder)
                                 <div class="order-detail">
-                                    {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }} - {{ $billOrder->quantity }} pc
+                                    {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }}
+                                    - {{ $billOrder->quantity }} pc
                                 </div>
                             @endforeach
 
@@ -50,9 +51,9 @@ $count = 1;
                         <td>{{ $bill->delivery_date }}</td>
                         <td>{{ $bill->users->name }}</td>
                         <td>
-                            <a href="{{ route('bill.searches', $bill->qr_code) }}" target="_blank"
-                                class="btn btn-success"><i class="far fa-eye"></i></a>
-                            <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                            <a href="" data-toggle="modal" data-target="#exampleModal" target="_blank"
+                                class="btn btn-success mb-1"><i class="far fa-eye"></i></a>
+                            {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
                             <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-warning"><i
                                     class="fas fas fa-print"></i></a>
                         </td>
