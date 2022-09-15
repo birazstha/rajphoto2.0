@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Model\Bill;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class indexController extends ResourceController
 {
@@ -20,11 +21,16 @@ class indexController extends ResourceController
     public function index(Request $request, $id = '')
     {
 
+        $mytime = Carbon::now()->toDateTimeString();
+        // dd($mytime);
+
         $data = [
             'breadcrumbs' => $this->breadcrumbForIndex(),
-            'income' => Bill::whereDate('created_at',Carbon::today())->sum('paid_amount'),
+            'income' => Bill::where('created_at',$mytime)->sum('paid_amount'),
             'bills'=>Bill::all(),
         ];
+
+
         return $this->renderView('index', $data);
     }
 

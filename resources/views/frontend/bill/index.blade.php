@@ -1,11 +1,14 @@
 @extends('frontend.layout.master')
 @section('main-content')
+
+            
+
     <div class="bill-index">
         <div class="mb-4">
             <form class="d-flex">
                 @csrf
                 <div class="input-group input-group">
-                    <input type="text" class="form-control customerName" placeholder="Enter a custome's name">
+                    <input type="text" class="form-control customerName" placeholder="Enter Customer's Name or Phone number">
                     <span class="input-group-append">
                         <input type="text" value="" name="todays-date" class="form-control text-center"
                             id="todays-date">
@@ -13,8 +16,9 @@
                 </div>
 
             </form>
+
         </div>
-        @include('frontend.bill.include.modal')
+       
         <div class="loader">
             <img src="{{ asset('images/loader.gif') }}" alt="">
         </div>

@@ -27,6 +27,7 @@ class BillController extends Controller
         $this->frontendUser = new FrontendUserService(new FrontendUser);
         $this->orderService = new OrderService(new Order);
         $this->customerService = new CustomerService(new Customer);
+        $this->userService = new FrontendUserService(new FrontendUser);
     }
 
     public function index(Request $request)
@@ -34,7 +35,6 @@ class BillController extends Controller
         $data = [
             'pageTitle' => 'Bills',
             'bills' =>$this->billService->getAllData($request->merge(['today'=>true])),
-    
         ];
         return view('frontend.bill.index', $data);
     }

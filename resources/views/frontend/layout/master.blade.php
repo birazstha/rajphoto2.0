@@ -48,7 +48,55 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
 
+<script>
+    $(document).on("click", ".open-AddBookDialog", function(e) {
+        var totalAmount;
+        var bill = $(this).data('bill');
+        var customer = $(this).data('customer');
+        $("h5").text(`Bill of ${customer.name} (${customer.phone_number})`);
+
+        if (bill.due_amount === 0) {
+            $('#cash_received').attr('readonly',true);
+            $('#cash_return').attr('readonly',true);
+            $('#cash_return').attr('readonly',true);
+            $('#discount').attr('readonly',true);
+            $('#total').attr('readonly',true);
+            $(".modal-body #due_amount").val('');
+            $(".modal-body #total").val('');
+            $(".modal-body #due_amount").attr('type','text').val('Paid');
+        } else {
+            $(".modal-body #due_amount").val(bill.due_amount);
+            $(".modal-body #total").val(bill.due_amount);
+            $('#cash_received').attr('readonly',false);
+            $('#discount').attr('readonly',false);
+            $('#cash_return').attr('readonly',false);
+            $('#cash_return').attr('readonly',false);
+            $('#total').attr('readonly',false);
+        }
+
+        //Calculate total amount.
+        $('#discount').keyup(function(){
+            var dueAmount = $('#due_amount').val();
+            var discountAmount = $(this).val();
+            totalAmount = parseInt(dueAmount) - parseInt(discountAmount);
+            $('#total').val(totalAmount);
+        });
+
+        //Calculate cash return
+        $('#cash_received').blur(function(){
+                var cashReceived = $(this).val();
+                var total =  $('#total').val();
+                var cashReturn = parseInt(cashReceived) - parseInt(total);
+               $('#cash_return').val(cashReturn);
+        });
+
+     
+
+    });
+</script>
+
 
 
 </body>
+
 </html>

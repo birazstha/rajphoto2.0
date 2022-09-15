@@ -7,8 +7,7 @@ $count = 1;
         <table class="table table-bordered table-bills">
             <thead>
                 <th>S.No</th>
-                <th>Name</th>
-                <th>Phone Number</th>
+                <th>Customer's Detail</th>
                 <th>Order Detail</th>
                 <th>Total</th>
                 <th>Advance</th>
@@ -23,8 +22,18 @@ $count = 1;
                 @forelse ($customers as $key => $customer)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->phone_number }}</td>
+                        <td class="center">
+                            <div class="customer-detail">
+                                <div>
+                                    <span class="font-weight-bold">Name:</span> {{ $customer->name }}
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Phone:</span> {{ $customer->phone_number }}
+                                </div>
+                            </div>
+                        </td>
+
+                        {{-- <td>{{ $customer->phone_number }}</td> --}}
                         <td class="change">
                             @foreach ($customer->bills as $bill)
                                 @foreach ($bill->billOrders as $key => $billOrder)
@@ -82,8 +91,10 @@ $count = 1;
                         <td>
 
                             @foreach ($customer->bills as $bill)
-                                <a href="{{ route('bill.searches', $bill->qr_code) }}" target="_blank"
-                                    class="btn btn-success mb-1"><i class="far fa-eye"></i></a>
+                                <button data-toggle="modal" data-target="#billDetail" data-bill="{{ $bill }}"
+                                    data-customer="{{ $bill->customers }}" target="_blank"
+                                    class="btn btn-success open-AddBookDialog"><i class="far fa-eye"></i></button>
+                                @include('frontend.bill.include.modal')
                                 {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
                                 <a href="{{ route('bills.show', $bill->id) }}" target="_blank"
                                     class="btn btn-warning"><i class="fas fas fa-print"></i></a>

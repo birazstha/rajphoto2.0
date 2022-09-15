@@ -7,12 +7,12 @@ $count = 1;
         <table class="table table-bordered table-bills">
             <thead>
                 <th>S.No</th>
-                <th>Name</th>
-                <th>Phone Number</th>
-                <th>Order Detail</th>
+                <th>Customer's Detail</th>
+                <th>Order's Detail</th>
                 <th>Total</th>
                 <th>Advance</th>
                 <th>Due Amount</th>
+                <th>Ordered Date</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
                 <th>Action</th>
@@ -22,8 +22,16 @@ $count = 1;
                 @forelse ($bills as $key => $bill)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $bill->customers->name }}</td>
-                        <td>{{ $bill->customers->phone_number }}</td>
+                        <td class="center">
+                            <div class="customer-detail">
+                                <div>
+                                    <span class="font-weight-bold">Name:</span> {{ $bill->customers->name }}
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Phone:</span> {{ $bill->customers->phone_number }}
+                                </div>
+                            </div>
+                        </td>
                         <td class="change">
                             @foreach ($bill->billOrders as $key => $billOrder)
                                 <div class="order-detail">
@@ -48,12 +56,16 @@ $count = 1;
                                 Rs.{{ $bill->due_amount }}
                             @endif
                         </td>
+                        <td>{{ $bill->ordered_date }}</td>
                         <td>{{ $bill->delivery_date }}</td>
                         <td>{{ $bill->users->name }}</td>
                         <td>
-                            <a href="" data-toggle="modal" data-target="#exampleModal" target="_blank"
-                                class="btn btn-success mb-1"><i class="far fa-eye"></i></a>
-                            {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
+                            
+                            <button data-toggle="modal" data-target="#billDetail" data-bill="{{ $bill }}" data-customer="{{ $bill->customers }}"  target="_blank"
+                                class="btn btn-success open-AddBookDialog"><i class="far fa-eye"></i></button>
+                                @include('frontend.bill.include.modal')
+
+                            <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-warning"><i
                                     class="fas fas fa-print"></i></a>
                         </td>
