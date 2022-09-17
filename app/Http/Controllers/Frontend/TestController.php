@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Bill;
 use App\Model\Customer;
 use App\Model\FrontendUser;
+use App\Model\Income;
 use App\Model\Order;
 use App\Model\Size;
 use App\User;
@@ -42,7 +43,6 @@ class TestController extends Controller
             $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
             return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill','users'))->render();
         } elseif (isset($date)) {
-
             $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(10);
             return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill','users'))->render();
         }
@@ -69,5 +69,11 @@ class TestController extends Controller
         $filter_data = Customer::where('name', 'ILIKE', '%' . $query . '%')
             ->get();
         return response()->json($filter_data);
+    }
+
+    public function getIncome(Request $request){
+        $income = Income::where('date',$request->date)->get();
+        return view('system.home.income', compact('income'))->render();
+     
     }
 }

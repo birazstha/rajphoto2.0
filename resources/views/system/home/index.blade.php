@@ -1,53 +1,53 @@
 @extends('system.layouts.master')
 @section('content')
-
     <div class="panel panel-default">
         <div class="panel-body">
             @include('system.partials.message')
 
+            <input type="text" value="" name="todays-date" class="form-control" id="todays-date">
+
             <div>Today's Income:</div>
-            <h1> Rs. {{ $income }}</h1>
+            <div id="income"></div>
 
 
         </div>
-        
 
-    @section('table-heading')
-        <tr>
-            <th scope="col">S.No</th>
-            <th scope="col">Customer's Name</th>
-            <th scope="col" style="width: 5px">QR Code</th>
-
-            <th scope="col">Prepared By</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-        </tr>
-    @endsection
+    </div>
+@endsection
 
 
-    @section('table-data')
-        @php $pageIndex = pageIndex($bills); @endphp
-        @foreach ($bills as $key => $item)
-            <tr>
+@section('scripts')
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
+        type="text/javascript"></script>
 
-                <td>{{ SN($pageIndex, $key) }}</td>
-                <td>{{ $item->customers->name }}</td>
-                <td>
-                    {!! QrCode::size(100)->generate($item->qr_code) !!}
-                </td>
-                <td>
-                    {{ $item->users->name }}
-                </td>
+    <script>
+        $(document).ready(function() {
+            var date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+            $('#todays-date').nepaliDatePicker({
+                language: "english",
+                disableDaysAfter: 0,
+                disableBefore: "2079-05-24",
+                onChange: function() {
+                    var selectedDate = $('#todays-date').val();
+
+                    $.ajax({
+                        method: 'get',
+                        url: "{{ URL::route('bill.getIncome') }}",
+                        data: {
+                            'date': selectedDate,
+                            '_token': "{{ csrf_token() }}"
+                        },
+                        dataType: 'html',
+                        success: function(response) {
+                           $('#income').html(response);
+                        },
+                    });
+                }
+            });
+
+            $("#todays-date").val(date);
 
 
-                <td>
-                    @include('system.partials.editButton')
-                    @include('system.partials.deleteButton')
-                </td>
-            </tr>
-        @endforeach
-    @endsection
-
-
-</div>
+        });
+    </script>
 @endsection

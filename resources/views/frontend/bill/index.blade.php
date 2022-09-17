@@ -37,8 +37,6 @@
 
     <script>
         var clearedDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-
-
         $(document).on("click", ".open-AddBookDialog", function() {
             var dueAmount = $(this).data('bill');
             var totalAmount;
