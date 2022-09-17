@@ -15,9 +15,9 @@ class CreateIncomesTable extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bill_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nepali_date');
-            $table->timestamps();
+            $table->string('date');
+            $table->integer('amount');
+            $table->string('type');
         });
     }
 

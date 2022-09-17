@@ -5,7 +5,7 @@
     $(document).ready(function() {
         //Fetch the bills of todays NP date onload.
         var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-        getCustomerInfo('2079-05-30', 'date');
+        getCustomerInfo(currentBsDate, 'date');
 
         //Fetch bills according the the name entered
         $(".customerName").on("keydown", ($.debounce(300, function(e) {

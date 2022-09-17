@@ -91,9 +91,12 @@ $count = 1;
                         <td>
 
                             @foreach ($customer->bills as $bill)
-                                <button data-toggle="modal" data-target="#billDetail" data-bill="{{ $bill }}"
-                                    data-customer="{{ $bill->customers }}" target="_blank"
-                                    class="btn btn-success open-AddBookDialog"><i class="far fa-eye"></i></button>
+                                <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}"
+                                    data-bill="{{ $bill }}" data-customer="{{ $bill->customers }}"
+                                    target="_blank" class="btn btn-success open-AddBookDialog"><i
+                                        class="far fa-eye"></i></button>
+                                        
+
                                 @include('frontend.bill.include.modal')
                                 {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
                                 <a href="{{ route('bills.show', $bill->id) }}" target="_blank"

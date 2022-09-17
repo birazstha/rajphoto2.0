@@ -2,7 +2,13 @@
 $dataCount = $bills->count();
 $count = 1;
 @endphp
+
+<div class="d-flex justify-content-between mb-2 align-items-center">
+    <h2>Bills</h2>
+    <a href="{{ route('bills.create') }}" class="btn btn-success"><i class="fa fa-plus"></i>&nbspCreate</a>
+</div>
 <div class="table">
+
     <div class="table-responsive">
         <table class="table table-bordered table-bills">
             <thead>
@@ -15,6 +21,7 @@ $count = 1;
                 <th>Ordered Date</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
+                <th>Status</th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -22,6 +29,7 @@ $count = 1;
                 @forelse ($bills as $key => $bill)
                     <tr>
                         <td>{{ $key + 1 }}</td>
+                        {{-- <td>{{ $bill->id }}</td> --}}
                         <td class="center">
                             <div class="customer-detail">
                                 <div>
@@ -60,14 +68,21 @@ $count = 1;
                         <td>{{ $bill->delivery_date }}</td>
                         <td>{{ $bill->users->name }}</td>
                         <td>
-                            
-                            <button data-toggle="modal" data-target="#billDetail" data-bill="{{ $bill }}" data-customer="{{ $bill->customers }}"  target="_blank"
-                                class="btn btn-success open-AddBookDialog"><i class="far fa-eye"></i></button>
-                                @include('frontend.bill.include.modal')
+                            @if ($bill->status)
+                                <span class="badge badge-success">Delivered</span>
+                            @else
+                                <span class="badge badge-info">Pending</span>
+                            @endif
+                        </td>
+                        <td>
 
-                            <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                            <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-warning"><i
-                                    class="fas fas fa-print"></i></a>
+                            <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
+                                data-bill={{ $bill->due_amount }} class="btn btn-success open-AddBookDialog"><i
+                                    class="far fa-eye"></i></button>
+                            @include('frontend.bill.include.modal')
+
+                            {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
+                            <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 @empty

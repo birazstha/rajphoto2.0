@@ -127,7 +127,7 @@
                     </tr>
                     <tr>
                         <th colspan="5">Balance Amount</th>
-                        <td>रु{{ $data['row']->balance_amount }}</td>
+                        <td>रु{{ $data['row']->due_amount }}</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Received</th>
