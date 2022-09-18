@@ -24,6 +24,7 @@ class SizeSeeder extends Seeder
                 'name' => 'PP',
                 'status' => 1,
                 'rate'=>'150',
+
             ],
             1 => [
                 'order_id' => 1,
@@ -259,6 +260,24 @@ class SizeSeeder extends Seeder
                 'status' => 1,
                 'rate'=>'120',
             ],
+
+            38=>[
+                'order_id' => 7,
+                'name' => '3.5 X 8',
+                'status' => 1,
+                'rate'=>'400', 
+            ],
+            39=>[
+                'order_id' => 8,
+                'name' => '3.5 X 8',
+                'status' => 1,
+                'rate'=>'800', 
+            ]
+
+
+
+            //
+
         ]);
     }
 }

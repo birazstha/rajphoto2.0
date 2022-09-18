@@ -17,37 +17,37 @@
 
 
 @section('scripts')
-    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
-        type="text/javascript"></script>
-
     <script>
+        const getIncomeInfo = function(data) {
+            $.ajax({
+                method: 'get',
+                url: "{{ URL::route('bill.getIncome') }}",
+                data: {
+                    'date': data,
+                    '_token': "{{ csrf_token() }}"
+                },
+                dataType: 'html',
+                success: function(response) {
+                    $('#income').html(response);
+                },
+            });
+        };
+
         $(document).ready(function() {
-            var date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+            var todaysDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+            getIncomeInfo(todaysDate);
+          
             $('#todays-date').nepaliDatePicker({
                 language: "english",
                 disableDaysAfter: 0,
                 disableBefore: "2079-05-24",
                 onChange: function() {
                     var selectedDate = $('#todays-date').val();
+                    getIncomeInfo(selectedDate);
 
-                    $.ajax({
-                        method: 'get',
-                        url: "{{ URL::route('bill.getIncome') }}",
-                        data: {
-                            'date': selectedDate,
-                            '_token': "{{ csrf_token() }}"
-                        },
-                        dataType: 'html',
-                        success: function(response) {
-                           $('#income').html(response);
-                        },
-                    });
                 }
             });
-
-            $("#todays-date").val(date);
-
-
+            $("#todays-date").val(todaysDate);
         });
     </script>
 @endsection

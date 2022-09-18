@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', 'dashboard\DashboardController@dashboard')->name('home');
     Route::resource('bills', 'bill\BillController');
+    Route::resource('other-incomes', 'otherIncome\OtherIncomeController');
+
     Route::get('/qrcode', 'bill\BillController@scanQrCode')->name('bill.qrcode');
     Route::get('/search', 'bill\BillController@searchBill')->name('bill.search');
     Route::get('/search/{qr_code}', 'bill\BillController@searchBillFromIndex')->name('bill.searches');

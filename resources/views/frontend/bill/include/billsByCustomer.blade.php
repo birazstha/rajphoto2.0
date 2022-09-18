@@ -8,13 +8,14 @@ $count = 1;
             <thead>
                 <th>S.No</th>
                 <th>Customer's Detail</th>
-                <th>Order Detail</th>
+                <th>Order's Detail</th>
                 <th>Total</th>
                 <th>Advance</th>
                 <th>Due Amount</th>
                 <th>Ordered Date</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
+                <th>Status</th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -89,18 +90,25 @@ $count = 1;
                             @endforeach
                         </td>
                         <td>
+                            @foreach ($customer->bills as $bill)
+                                @if ($bill->status)
+                                    <span class="badge badge-success">Delivered</span>
+                                @else
+                                    <span class="badge badge-info">Pending</span>
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>
 
                             @foreach ($customer->bills as $bill)
                                 <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}"
-                                    data-bill="{{ $bill }}" data-customer="{{ $bill->customers }}"
-                                    target="_blank" class="btn btn-success open-AddBookDialog"><i
-                                        class="far fa-eye"></i></button>
-                                        
-
+                                    target="_blank" data-bill={{ $bill->due_amount }}
+                                    class="btn btn-success open-AddBookDialog"><i class="far fa-eye"></i></button>
                                 @include('frontend.bill.include.modal')
+
                                 {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
-                                <a href="{{ route('bills.show', $bill->id) }}" target="_blank"
-                                    class="btn btn-warning"><i class="fas fas fa-print"></i></a>
+                                <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info"><i
+                                        class="fas fa-info-circle"></i></a>
                             @endforeach
 
                         </td>

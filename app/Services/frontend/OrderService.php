@@ -15,6 +15,7 @@ class OrderService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
+       
 
 
         $query = $this->query();
@@ -25,9 +26,20 @@ class OrderService extends Service
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
         }
+
+        if($data->details == 'required'){
+            $query->where('details_required',true)->get();
+        }
+
+        if($data->details == 'not-required'){
+            $query->where('details_required',false)->get();
+        }
+
         if ($pagination) {
             return $query->orderBy('id', 'ASC')->get();
         }
+
+
 
         // return $query->orderBy('id', 'ASC')->get();
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\bill;
+namespace App\Http\Controllers\Frontend\otherIncome;
 
 use App\Exceptions\CustomGenericException;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ use App\Services\System\FrontendUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BillController extends Controller
+class OtherIncomeController extends Controller
 {
     protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService;
     public function __construct(BillService $billService)
@@ -48,10 +48,10 @@ class BillController extends Controller
     {
         $data = [
             'pageTitle' => $this->moduleName,
-            'orders' => $this->orderService->getAllData($request->merge(['details'=>'required'])),
+            'orders' => $this->orderService->getAllData($request->merge(['details'=>'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
         ];
-        return view('frontend.bill.form', $data);
+        return view('frontend.bill.other-income', $data);
     }
 
     public function store(Request $request)

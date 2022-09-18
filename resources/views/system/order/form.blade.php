@@ -34,8 +34,8 @@
                 'required' => true,
                 'default' => old('details_required') ?? 0,
                 'options' => [
-                    ['value' => '0', 'label' => 'Yes'], //Send Activation Link
-                    ['value' => '1', 'label' => 'No'], //Set Password
+                    ['value' => '1', 'label' => 'Yes'], //Send Activation Link
+                    ['value' => '0', 'label' => 'No'], //Set Password
                 ],
             ]" />
         </x-slot>

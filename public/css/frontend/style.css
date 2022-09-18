@@ -1,118 +1,181 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-body{
-    background-color: #cccccc;
+body {
+  background-color: #cccccc;
+  zoom: 80%;
 }
-
 
 .form {
-    margin: 1rem auto;
-    border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
-    width: 65rem;
-    padding: 20px;
-    background-color: white  ;
-    display: flex;
-    justify-content: center;
+  margin: 1rem auto;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  width: 65rem;
+  padding: 20px;
+  background-color: white;
+  /* display: flex;
+  justify-content: center; */
 }
 
-
-
-.qrcode{
+.qrcode {
   display: flex;
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
-.prepare{
-    /*border: 1px solid red;*/
-    float: right;
-    padding: .3rem;
+.prepare {
+  /*border: 1px solid red;*/
+  float: right;
+  padding: 0.3rem;
 }
 
-.dashboard a{
-    text-decoration: none;
-    color: black;
+.dashboard a {
+  text-decoration: none;
+  color: black;
 }
 
-.remove-order{
-
-    display: flex;
-    justify-content:end;
-    margin-top: -40px;
-    height: 10px;
+.remove-order {
+  display: flex;
+  justify-content: end;
+  margin-top: -40px;
+  height: 10px;
 }
 
-.remove-order i{
-    cursor: pointer;
-    color: red;
+.remove-order i {
+  cursor: pointer;
+  color: red;
 }
 
-#table{
-    background-color: white;
-    padding: 1rem;
+#table {
+  background-color: white;
+  padding: 1rem;
 }
 
-#table th,td{
-    text-align: center;
-    /* border: 1px solid red; */
+#table th,
+td {
+  text-align: center;
+  /* border: 1px solid red; */
 }
 
-#todays-date{
-    cursor: pointer;
+#todays-date {
+  cursor: pointer;
 }
 
-.dark-mode-btn{
-    font-size: 2rem;
-    cursor: pointer;
+.dark-mode-btn {
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-.loader img{
-    height: 50px;
+.loader img {
+  height: 50px;
 }
 
-.loader{
-    /* border: 1px solid red; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30rem;
+.loader {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
 }
 
-#bill{
-    background-color: white;
-    padding: 1rem;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
-    display: flex;
-    margin: auto;
-    width: 50rem;
+#bill {
+  background-color: white;
+  padding: 1rem;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  display: flex;
+  margin: auto;
+  width: 50rem;
 }
 
-.order-detail{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    margin-left:2rem ;
+.order-detail {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 2rem;
 }
 
-.bill-index{
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; 
-    padding: 1rem;
-    background: white;
-    border-radius: 5px;
-    height: 40rem;
+.bill-index {
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  padding: 1rem;
+  background: white;
+  border-radius: 5px;
+  height: 50rem;
 }
 
-.customer-detail{
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+.customer-detail {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
+.tab-slider--nav {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+}
 
+.tab-slider--tabs {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  border-radius: 35px;
+  overflow: hidden;
+  background: #fff;
+  height: 35px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tab-slider--tabs:after {
+  content: '';
+  width: 50%;
+  background: #345f90;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  border-radius: 35px;
+}
+
+.tab-slider--tabs.slide:after {
+  left: 50%;
+}
+
+.tab-slider--trigger {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: bold;
+  color: #345f90;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 11px 20px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-transition: color 250ms ease-in-out;
+  transition: color 250ms ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tab-slider--trigger.active {
+  color: #fff;
+}
+
+.tab-slider--body {
+  margin-bottom: 20px;
+}
