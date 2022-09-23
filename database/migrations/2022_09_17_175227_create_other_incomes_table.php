@@ -15,17 +15,15 @@ class CreateOtherIncomesTable extends Migration
     {
         Schema::create('other_incomes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->boolean('status')->default(0);
+            $table->foreignId('order_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('date');
+            $table->integer('rate');
+            $table->integer('quantity');
+            $table->integer('total');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('other_incomes');

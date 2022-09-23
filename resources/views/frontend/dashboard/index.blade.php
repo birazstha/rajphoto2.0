@@ -11,11 +11,10 @@
             </section>
         </a>
 
-        <a href="{{ route('other-incomes.create') }}">
+        <a href="{{ route('transactions.create') }}">
             <section class="icon">
                 <i class="fas fa-money-bill-wave"></i>
-                <span>Other Incomes</span>
-            
+                <span>Income/Expenses</span>
             </section>
         </a>
 

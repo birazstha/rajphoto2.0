@@ -7,8 +7,7 @@
                 <div class="form-group row">
                     <label for="order_date" class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
-                        <input type="text" value="" name="name" class="form-control" id="customer_name"
-                            {{ isset($item) ? 'readonly' : '' }}>
+                        <input type="text" value="" name="name" class="form-control" id="customer_name" placeholder="Enter customer's name">
                     </div>
                 </div>
 
@@ -19,8 +18,7 @@
                 <div class="form-group row">
                     <label for="order_date" class="col-sm-4 col-form-label">Phone</label>
                     <div class="col-sm-8">
-                        <input type="text" value="" name="phone_number" class="form-control" id="phone_number"
-                            {{ isset($item) ? 'readonly' : '' }}>
+                        <input type="text" value="" name="phone_number" class="form-control" id="phone_number" placeholder="Enter customer's phone number.">
                     </div>
                 </div>
 
@@ -123,7 +121,7 @@
                     {!! Form::label('paid_amount', 'Paid Amount', ['class' => 'col-sm-3 col-form-label']) !!}
                     <div class="col-sm-6">
                         <td><input type="number" name="paid_amount" value="{{ $item->paid_amount ?? '' }}"
-                                id="paid_amount" class="form-control" {{ isset($item) ? 'readonly' : '' }} required>
+                                id="paid_amount" class="form-control"  required>
                         </td>
                     </div>
                 </div>
@@ -180,7 +178,7 @@
                     <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
                     <div class="col-sm-8">
                         <input type="text" value="{{ $item->ordered_date ?? '' }}" name="ordered_date"
-                            class="form-control" id="order-date" {{ isset($item) ? 'readonly' : '' }}
+                            class="form-control order-date" id="order-date" 
                             readonly="readonly">
                     </div>
                 </div>
@@ -192,7 +190,7 @@
                     <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
                     <div class="col-sm-8">
                         <input type="text" name="delivery_date" required value="{{ $item->delivery_date ?? '' }}"
-                            class="form-control" id="delivery-date" {{ isset($item) ? 'readonly' : '' }}>
+                            class="form-control" id="delivery-date" >
                     </div>
                 </div>
                 @error('delivery_date')
@@ -229,6 +227,8 @@
             </div>
 
         </div>
-        <button class="btn btn-success btn-sm">Save</button>
+        <button class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save</button>
+        <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-recycle"></i> Reset</button>
+
     </form>
 </div>

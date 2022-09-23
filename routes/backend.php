@@ -74,6 +74,7 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/bills', 'bill\BillController');
         Route::resource('/customers', 'customer\CustomerController');
         Route::resource('/frontend-users', 'frontendUser\FrontendUserController');
+        Route::resource('/expenses', 'expense\ExpenseController');
        
 
       

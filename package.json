@@ -26,7 +26,8 @@
     "dependencies": {
         "epic-spinners": "^1.1.0",
         "husky": "^7.0.4",
-        "jquery-typeahead": "^2.11.1"
+        "jquery-typeahead": "^2.11.1",
+        "toastr": "^2.1.4"
     },
     "husky": {
         "hooks": {

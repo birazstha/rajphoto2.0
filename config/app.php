@@ -166,6 +166,7 @@ return [
 
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Flasher\Laravel\FlasherServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'Flasher' => Flasher\Laravel\Facade\Flasher::class,
         // 'Laravel\Passport\Bridge\UserRepository' => App\OAuth\PassportUserRepository::class,
 
     ],

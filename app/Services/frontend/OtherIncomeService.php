@@ -1,41 +1,34 @@
 <?php
 
-namespace App\Services\System;
+namespace App\Services\frontend;
 
-use App\Model\Bill;
+use App\Model\Income;
 use App\Model\Order;
+use App\Model\OtherIncome;
+use App\Services\frontend\IncomeService;
 use App\Services\Service;
 
-class BillService extends Service
+class OtherIncomeService extends Service
 {
-
     protected $orderService, $frontendUser;
-    public function __construct(Bill $bill)
+    public function __construct(OtherIncome $bill)
     {
-
         parent::__construct($bill);
         $this->orderService = new OrderService(new Order);
+        $this->incomeService = new IncomeService(new Income);
 
         $this->module = 'Prepare Bill';
     }
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
-
-
         $query = $this->query();
-
         if (isset($data->keyword) && $data->keyword !== null) {
             $query->where('name', 'ILIKE', '%' . $data->keyword . '%');
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
         }
-
-        // if(isset($data->today)){
-
-        //     $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->paginate(10);
-        // }
 
         if (isset($data->order_id)) {
             return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
@@ -47,7 +40,15 @@ class BillService extends Service
         return $query->orderBy('id', 'ASC')->get();
     }
 
-    
+    public function store($request)
+    {
+        $income['amount'] =  $request->total;
+        $income['date'] =  $request->date;
+        $income['type'] =  'other';
+        $this->incomeService->store($income);
+        return $this->model->create($request->except('_token'));
+    }
+
 
 
     public function createPageData($request)

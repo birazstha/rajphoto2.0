@@ -12,6 +12,8 @@
 
         </div>
 
+       
+
     </div>
 @endsection
 
@@ -36,7 +38,7 @@
         $(document).ready(function() {
             var todaysDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
             getIncomeInfo(todaysDate);
-          
+
             $('#todays-date').nepaliDatePicker({
                 language: "english",
                 disableDaysAfter: 0,

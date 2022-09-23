@@ -23,6 +23,7 @@ $billsBaseUrl = '/bills';
 $ratesBaseUrl = '/rates';
 $frontendUserBaseUrl = '/frontend-users';
 $customerBaseUrl = '/customers';
+$expenseBaseUrl = '/expenses';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -369,36 +370,36 @@ return  [
                     ],
                 ],
                 [
-                    'name' => 'Bill Type',
-                    'icon' => '<i class="fas fa-tape"></i>',
-                    'route' => $configBaseUrl,
+                    'name' => 'Expenses',
+                    'icon' => '<i class="fas fa-arrow-circle-up"></i>',
+                    'route' => $expenseBaseUrl,
                     'hasSubmodules' => false,
                     'permissions' => [
                         [
                             'name' => 'View Configs',
                             'route' => [
-                                'url' => $configBaseUrl,
+                                'url' => $expenseBaseUrl,
                                 'method' => $getMethod,
                             ],
                         ],
                         [
                             'name' => 'Create Config',
                             'route' => [
-                                'url' => $configBaseUrl,
+                                'url' => $expenseBaseUrl,
                                 'method' => $postMethod,
                             ],
                         ],
                         [
                             'name' => 'Edit Config',
                             'route' => [
-                                'url' => $configBaseUrl . '/*',
+                                'url' => $expenseBaseUrl . '/*',
                                 'method' => $putMethod,
                             ],
                         ],
                         [
                             'name' => 'Delete Config',
                             'route' => [
-                                'url' => $configBaseUrl . '/*',
+                                'url' => $expenseBaseUrl . '/*',
                                 'method' => $deleteMethod,
                             ],
                         ],

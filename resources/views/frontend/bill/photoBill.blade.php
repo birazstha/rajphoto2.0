@@ -113,7 +113,7 @@
                         @endif
                     </tr>
 
-        
+
                     <tr>
                         <th colspan="5">Grand Total</th>
                         <td>रु{{ $data['row']->grand_total }}</td>
@@ -167,6 +167,8 @@
 
         });
     </script>
+
+   
 @endsection
 
 @include('frontend.layout.master')

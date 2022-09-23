@@ -1,5 +1,8 @@
 @extends('frontend.layout.master')
 @section('main-content')
+    {{ Session::has('success') }}
+
+
     <div class="bill-index">
         <div class="mb-4">
 
@@ -20,13 +23,22 @@
 
         </div>
 
-
-        <div class="loader">
-            <img src="{{ asset('images/loader.gif') }}" alt="">
+        <div class="d-flex justify-content-between mb-2 align-items-center">
+            <h2>Bills</h2>
+            <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
+                class="fa fa-plus"></i>&nbspCreate</button>
+                @include('frontend.bill.include.create')
+            
         </div>
 
 
 
+   
+
+        <div class="loader">
+            <img src="{{ asset('images/loader.gif') }}" alt="">
+        </div>
+        
         <div id="table"></div>
     </div>
 @endsection
@@ -60,8 +72,30 @@
                 $(".cash_return").val(cashReturn);
             });
         });
+
+        window.onload = function() {
+            $('#order-date').nepaliDatePicker({
+                language: "english",
+            });
+            var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+            $('.order-date').val(currentBsDate);
+
+            //Delivery date
+            $('#delivery-date').nepaliDatePicker({
+                language: "english",
+            });
+            var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions
+                .GetCurrentBsDate(), 1), 'YYYY-MM-DD')
+            $('#delivery-date').val(deliveryDate);
+
+        };
     </script>
+
+
+
+
 
     @include('frontend.bill.include.scripts.filter')
     @include('frontend.bill.include.scripts.pagination')
+    @include('frontend.bill.include.scripts.script')
 @endsection

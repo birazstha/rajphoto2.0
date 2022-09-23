@@ -3,10 +3,7 @@ $dataCount = $bills->count();
 $count = 1;
 @endphp
 
-<div class="d-flex justify-content-between mb-2 align-items-center">
-    <h2>Bills</h2>
-    <a href="{{ route('bills.create') }}" class="btn btn-success"><i class="fa fa-plus"></i>&nbspCreate</a>
-</div>
+
 <div class="table">
 
     <div class="table-responsive">
@@ -15,10 +12,7 @@ $count = 1;
                 <th>S.No</th>
                 <th>Customer's Detail</th>
                 <th>Order's Detail</th>
-                <th>Total</th>
-                <th>Advance</th>
-                <th>Due Amount</th>
-                <th>Ordered Date</th>
+                <th>Amount Details</th>
                 <th>Delivery Date</th>
                 <th>Prepared By</th>
                 <th>Status</th>
@@ -49,32 +43,44 @@ $count = 1;
                             @endforeach
 
                         </td>
-                        <td> Rs.{{ $bill->grand_total }}</td>
+
                         <td>
-                            @if ($bill->paid_amount === 0)
-                                <span class="badge badge-danger">Unpaid</span>
-                            @else
-                                Rs.{{ $bill->paid_amount }}
-                            @endif
+                            <div class="amounts">
+                                <div>
+                                    <div class="font-weight-bold">Total Amount:</div>
+                                    <div class="font-weight-bold">Advance Amount:</div>
+                                    <div class="font-weight-bold">Due Amount:</div>
+                                </div>
+                                <div>
+                                    <div>Rs. {{ $bill->grand_total }}</div>
+                                    <div>
+                                        @if ($bill->paid_amount === 0)
+                                            <span class="badge badge-danger badge-sm">Unpaid</span>
+                                        @else
+                                            Rs. {{ $bill->paid_amount }}
+                                        @endif
+                                    </div>
+                                    <div>
+                                        @if ($bill->due_amount === 0)
+                                            <span class="badge badge-success ">Paid</span>
+                                        @else
+                                            Rs. {{ $bill->due_amount }}
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
                         </td>
-                        <td>
-                            @if ($bill->due_amount === 0)
-                                <span class="badge badge-success">Paid</span>
-                            @else
-                                Rs.{{ $bill->due_amount }}
-                            @endif
-                        </td>
-                        <td>{{ $bill->ordered_date }}</td>
-                        <td>{{ $bill->delivery_date }}</td>
-                        <td>{{ $bill->users->name }}</td>
-                        <td>
+                        <td class="text-center">{{ $bill->delivery_date }}</td>
+                        <td class="text-center">{{ $bill->users->name }}</td>
+                        <td class="text-center">
                             @if ($bill->status)
                                 <span class="badge badge-success">Delivered</span>
                             @else
                                 <span class="badge badge-info">Pending</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
 
                             <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
                                 data-bill={{ $bill->due_amount }} class="btn btn-success open-AddBookDialog"><i
@@ -82,11 +88,12 @@ $count = 1;
                             @include('frontend.bill.include.modal')
 
                             {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
-                            <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                            <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info"><i
+                                    class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 @empty
-                    <td colspan="9" class="text text-danger">No data found</td>
+                    <td colspan="9" class="text text-danger text-center">No data found</td>
                 @endforelse
             </tbody>
         </table>
