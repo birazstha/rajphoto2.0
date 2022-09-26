@@ -10,18 +10,20 @@ use App\Model\Customer;
 use App\Model\FrontendUser;
 use App\Model\Income;
 use App\Model\Order;
+use App\Model\Transaction;
 use App\Services\frontend\IncomeService;
 use App\Services\frontend\OrderService;
 use App\Services\System\BillOrderService;
 use App\Services\System\CustomerService;
 use App\Services\System\FrontendUserService;
 use App\Services\frontend\OtherIncomeService;
+use App\Services\frontend\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OtherIncomeController extends Controller
 {
-    protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService;
+    protected $orderService, $billOrderService, $frontendUser, $customerService, $transactionService, $billService;
     public function __construct(OtherIncomeService $otherIncomeService)
     {
         $this->otherIncomeService = $otherIncomeService;
@@ -31,7 +33,7 @@ class OtherIncomeController extends Controller
         $this->orderService = new OrderService(new Order);
         $this->customerService = new CustomerService(new Customer);
         $this->userService = new FrontendUserService(new FrontendUser);
-        $this->incomeService = new IncomeService(new Income);
+        $this->transactionService = new TransactionService(new Transaction);
     }
 
     public function index(Request $request)
@@ -56,7 +58,10 @@ class OtherIncomeController extends Controller
 
     public function store(Request $request)
     {
-        $this->otherIncomeService->store($request);
+        $transaction['date'] =  $request->date;
+        $transaction['amount'] =  $request->total;
+        $transaction['income_id'] = $request->order_id;
+        $this->transactionService->store($transaction);
         return redirect()->route('bills.index')->with('success', 'Recorded successfully!!');
     }
 

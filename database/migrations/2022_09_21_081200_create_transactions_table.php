@@ -18,6 +18,8 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('income_id')->nullable()->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('expense_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('saving_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('bill_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('bill_type')->default(0);
             $table->integer('amount');
             $table->string('date');
             $table->timestamps();

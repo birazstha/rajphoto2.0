@@ -9,6 +9,7 @@ use App\Model\FrontendUser;
 use App\Model\Income;
 use App\Model\Order;
 use App\Model\Size;
+use App\Model\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -72,8 +73,12 @@ class TestController extends Controller
     }
 
     public function getIncome(Request $request){
-        $income = Income::where('date',$request->date)->get();
-        return view('system.home.income', compact('income'))->render();
-     
+        $transactions = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with('bills')->get();
+        return view('system.home.transactions', compact('transactions'))->render();
+    }
+
+    public function getRate(Request $request){
+        // dd($request->all());
+         return Order::where('id',$request->order_id)->pluck('rate')->first();
     }
 }

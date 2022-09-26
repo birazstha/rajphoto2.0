@@ -25,20 +25,21 @@
 
         <div class="d-flex justify-content-between mb-2 align-items-center">
             <h2>Bills</h2>
-            <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
-                class="fa fa-plus"></i>&nbspCreate</button>
-                @include('frontend.bill.include.create')
-            
+            <button data-toggle="modal" data-target="#createBill" target="_blank"
+                class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
+
+            @include('frontend.bill.include.create')
+
         </div>
 
 
 
-   
+
 
         <div class="loader">
             <img src="{{ asset('images/loader.gif') }}" alt="">
         </div>
-        
+
         <div id="table"></div>
     </div>
 @endsection
@@ -46,6 +47,18 @@
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
     <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+
+    @include('frontend.bill.include.scripts.filter')
+    @include('frontend.bill.include.scripts.pagination')
+    @include('frontend.bill.include.scripts.script')
 
     <script>
         var clearedDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
@@ -73,29 +86,56 @@
             });
         });
 
-        window.onload = function() {
-            $('#order-date').nepaliDatePicker({
-                language: "english",
-            });
-            var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-            $('.order-date').val(currentBsDate);
 
-            //Delivery date
-            $('#delivery-date').nepaliDatePicker({
-                language: "english",
-            });
-            var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions
-                .GetCurrentBsDate(), 1), 'YYYY-MM-DD')
-            $('#delivery-date').val(deliveryDate);
+        $('#order-date').nepaliDatePicker({
+            language: "english",
+        });
+        var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+        $('.order-date').val(currentBsDate);
 
-        };
+        //Delivery date
+        $('#delivery-date').nepaliDatePicker({
+            language: "english",
+        });
+        var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions
+            .GetCurrentBsDate(), 1), 'YYYY-MM-DD')
+        $('#delivery-date').val(deliveryDate);
     </script>
 
+    <script>
+        $("input[name='phone_number']").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('autocompletePhone') }}",
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        response(data);
+                    },
+                });
+            },
+            delay: 200,
+            select: function(event, ui) {
+                $("input[name='phone_number']").val(ui.item.label);
+                console.log(ui.item);
+                return false;
+            },
+        });
 
-
-
-
-    @include('frontend.bill.include.scripts.filter')
-    @include('frontend.bill.include.scripts.pagination')
-    @include('frontend.bill.include.scripts.script')
+        var path = "{{ route('autocompleteName') }}";
+        $("#customer_name").typeahead({
+            source: function(query, process) {
+                return $.get(path, {
+                    query: query
+                }, function(data) {
+                    console.log(data);
+                    return process(data);
+                });
+            }
+        });
+    </script>
 @endsection

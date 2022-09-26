@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('bills.store') }}" method="POST" autocomplete="off">
+                <form action="{{ route('bills.store') }}"  method="POST" autocomplete="off">
                     @csrf
                     <div class="form-group row">
                         <div class="col-6">
