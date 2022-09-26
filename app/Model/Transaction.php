@@ -26,5 +26,9 @@ class Transaction extends Model
     return $this->belongsTo(Bill::class,'bill_id');
    }
 
+   public function savings(){
+    return $this->belongsTo(Saving::class,'saving_id');
+   }
+
    
 }

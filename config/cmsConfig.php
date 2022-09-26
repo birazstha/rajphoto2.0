@@ -24,6 +24,7 @@ $ratesBaseUrl = '/rates';
 $frontendUserBaseUrl = '/frontend-users';
 $customerBaseUrl = '/customers';
 $expenseBaseUrl = '/expenses';
+$savingBaseUrl = '/savings';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -405,6 +406,42 @@ return  [
                         ],
                     ],
                 ],
+                [
+                    'name' => 'Savings',
+                    'icon' => '<i class="fas fa-piggy-bank"></i>',
+                    'route' => $savingBaseUrl,
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Configs',
+                            'route' => [
+                                'url' => $savingBaseUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Config',
+                            'route' => [
+                                'url' => $savingBaseUrl,
+                                'method' => $postMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Config',
+                            'route' => [
+                                'url' => $savingBaseUrl . '/*',
+                                'method' => $putMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Config',
+                            'route' => [
+                                'url' => $savingBaseUrl . '/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ],
         [
@@ -456,58 +493,6 @@ return  [
                 ],
             ],
         ],
-
-        [
-            'name' => 'Other Income Management',
-            'icon' => '<i class="fas fa-money-bill-wave"></i>',
-            'hasSubmodules' => false,
-            'route' => $billsBaseUrl,
-            'permissions' => [
-                [
-                    'name' => 'View Category',
-                    'route' => [
-                        'url' => $billsBaseUrl,
-                        'method' => $getMethod,
-                    ],
-                ],
-                [
-                    'name' => 'Create Category',
-                    'route' => [
-                        [
-                            'url' => $billsBaseUrl . '/create',
-                            'method' => $getMethod,
-                        ],
-                        [
-                            'url' => $billsBaseUrl,
-                            'method' => $postMethod,
-                        ],
-
-                    ],
-                ],
-                [
-                    'name' => 'Edit Category',
-                    'route' => [
-                        [
-                            'url' => $billsBaseUrl . '/*/edit',
-                            'method' => $getMethod,
-                        ],
-                        [
-                            'url' => $billsBaseUrl . '/*',
-                            'method' => $putMethod,
-                        ],
-                    ],
-                ],
-                [
-                    'name' => 'Delete Category',
-                    'route' => [
-                        'url' => $billsBaseUrl . '/*',
-                        'method' => $deleteMethod,
-                    ],
-                ],
-            ],
-        ],
-
-
 
         [
             'name' => 'Customer Management',

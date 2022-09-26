@@ -52,9 +52,6 @@ class BillService extends Service
 
     public function store($request)
     {
-        // dd($request->bill[0]['order_id']);
-
-
         $orderType = $request->bill[0]['order_id'];
         DB::beginTransaction();
         try {
@@ -96,8 +93,9 @@ class BillService extends Service
 
     public function update($request, $id)
     {
+        // dd($request->all());
+        DB::beginTransaction();
         try {
-
             $item = $this->itemByIdentifier($id);
             $data['status'] = true;
             $data['cleared_by'] = $request->user_id;
@@ -107,10 +105,17 @@ class BillService extends Service
             $item = $this->itemByIdentifier($id);
             $item->update($data);
 
-   
+            $transaction['date'] =  $request->cleared_date;
+            $transaction['amount'] =  $request->total;
+            $transaction['bill_id'] = $request->bill_id;
+            $transaction['bill_type'] = 1;
+            
+            $this->transactionService->store($transaction);
 
+            DB::commit();
             return $item;
         } catch (\Exception $e) {
+            DB::rollBack();
             dd($e);
             throw new CustomGenericException($e->getMessage());
         }

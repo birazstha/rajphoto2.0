@@ -1,49 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\bill;
+namespace App\Http\Controllers\Frontend\expense;
 
+use App\Exceptions\CustomGenericException;
+use App\Http\Controllers\Controller;
 use App\Model\Bill;
-use App\Model\Order;
-use App\Model\Income;
-use App\Model\Customer;
-use App\Model\BillOrder;
-use App\Model\FrontendUser;
+use App\Model\Transaction;
+use App\Services\frontend\ExpenseService;
+use App\Services\frontend\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Services\frontend\BillService;
-use App\Services\frontend\OrderService;
-use App\Services\frontend\IncomeService;
-use App\Services\System\CustomerService;
-use App\Services\System\BillOrderService;
-use App\Exceptions\CustomGenericException;
-use App\Services\System\FrontendUserService;
-use Brian2694\Toastr\Facades\Toastr;
 
-class BillController extends Controller
+class ExpenseController extends Controller
 {
-    protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService;
-    public function __construct(BillService $billService)
+    protected $expenseService, $transactionService;
+    public function __construct(ExpenseService $expenseService)
     {
-        $this->billService = $billService;
+        $this->expenseService = $expenseService;
         $this->moduleName = 'Create Bill';
-        $this->billOrderService = new BillOrderService(new BillOrder);
-        $this->frontendUser = new FrontendUserService(new FrontendUser);
-        $this->orderService = new OrderService(new Order);
-        $this->customerService = new CustomerService(new Customer);
-        $this->userService = new FrontendUserService(new FrontendUser);
-        $this->incomeService = new IncomeService(new Income);
+        $this->transactionService = new TransactionService(new Transaction);
     }
 
     public function index(Request $request)
     {
         $data = [
             'pageTitle' => 'Bills',
-            'orders' => $this->orderService->getAllData($request),
-            'users'=>$this->frontendUser->getAllData($request),
             'bills' => $this->billService->getAllData($request->merge(['today' => true])),
         ];
-
         return view('frontend.bill.index', $data);
     }
 
@@ -52,23 +35,21 @@ class BillController extends Controller
     {
         $data = [
             'pageTitle' => $this->moduleName,
-            'orders' => $this->orderService->getAllData($request->merge(['details' => 'required'])),
-            'general' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
+            'orders' => $this->orderService->getAllData($request->merge(['details'=>'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
         ];
-        return view('frontend.bill.form', $data);
+        return view('frontend.bill.other-income', $data);
     }
 
     public function store(Request $request)
     {
-        try {
-            $bill =  $this->billService->store($request);
-          
-            return redirect()->route('bills.show', $bill->id)->with('success', 'Bill has been created successfully!!');
-        } catch (\Exception $e) {
-            throw new CustomGenericException($e->getMessage());
-        }
+        $transaction['date'] =  $request->date;
+        $transaction['amount'] =  $request->amount;
+        $transaction['expense_id'] = $request->expense_id;
+        $this->transactionService->store($transaction);
+        return redirect()->route('bills.index')->with('success', 'Recorded successfully!!');
     }
+
 
     public function show($id)
     {
@@ -86,8 +67,15 @@ class BillController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $income['amount'] =  $request->total;
+            $income['date'] =  $request->cleared_date;
+            $income['type'] =  'deliver';
+            
             $this->billService->update($request, $id);
-            return redirect()->route('bills.index')->with('success', 'Bill has been cleared successfully!!');
+            $this->incomeService->store($income);
+
+
+            return redirect()->route('bills.index');
         } catch (\Exception $e) {
             DB::rollback();
             throw new CustomGenericException($e->getMessage());

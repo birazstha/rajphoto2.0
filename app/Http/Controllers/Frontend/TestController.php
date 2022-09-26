@@ -73,7 +73,7 @@ class TestController extends Controller
     }
 
     public function getIncome(Request $request){
-        $transactions = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with('bills')->get();
+        $transactions = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with(['bills','expenses','savings'])->get();
         return view('system.home.transactions', compact('transactions'))->render();
     }
 

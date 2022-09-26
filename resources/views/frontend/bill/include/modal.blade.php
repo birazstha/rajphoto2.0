@@ -75,6 +75,8 @@
 
                     <input type="text" hidden name="cleared_date" class="cleared_date" value=""
                         id="cleared_date">
+                        
+                        <input type="hidden" name="bill_id" value="{{ $bill->id }}">
 
 
                     <div class="modal-footer">

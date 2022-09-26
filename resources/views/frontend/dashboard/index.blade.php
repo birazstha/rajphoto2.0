@@ -18,6 +18,13 @@
             </section>
         </a>
 
+        <a href="{{ route('saving.create') }}">
+            <section>
+                <i class="fas fa-piggy-bank"></i>
+                <span>Savings</span>
+            </section>
+        </a>
+
         <a href="{{ route('bill.qrcode') }}">
             <section>
                 <i class="fas fa-qrcode"></i>
