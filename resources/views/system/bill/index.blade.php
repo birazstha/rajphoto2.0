@@ -27,6 +27,8 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Customer's Name</th>
+        <th scope="col">Order</th>
+        <th scope="col">Date</th>
         <th scope="col">Prepared By</th>
         <th scope="col">QR Code</th>
         <th scope="col">Status</th>
@@ -42,8 +44,12 @@
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->customers->name }}</td>
             <td>
-              {{ $item->users->name }}
+                @foreach ($item->billOrders as $billOrder )
+                    {{ $billOrder->sizes->name }}
+                @endforeach
             </td>
+            <td>{{ $item->ordered_date }}</td>
+            <td> {{ $item->users->name }}</td>
             <td>{{ $item->qr_code }}</td>
 
 

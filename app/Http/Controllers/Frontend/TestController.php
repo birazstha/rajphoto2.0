@@ -68,17 +68,21 @@ class TestController extends Controller
         $data = $request->all();
         $query = $data['query'];
         $filter_data = Customer::where('name', 'ILIKE', '%' . $query . '%')
-            ->get();
+            ->get(); 
         return response()->json($filter_data);
     }
 
     public function getIncome(Request $request){
-        $transactions = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with(['bills','expenses','savings'])->get();
-        return view('system.home.transactions', compact('transactions'))->render();
+        $data ['transactions'] = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with(['bills','expenses','savings'])->get();
+        $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
+        $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount'); 
+        $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
+        $data['closingBalance'] =  $data['totalIncome']- $data['totalExpense']-$data['totalSaving'];
+
+       return view('system.home.transactions', $data)->render();
     }
 
     public function getRate(Request $request){
-        // dd($request->all());
          return Order::where('id',$request->order_id)->pluck('rate')->first();
     }
 }

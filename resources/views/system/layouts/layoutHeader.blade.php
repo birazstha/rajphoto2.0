@@ -8,6 +8,12 @@
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.min.css"
         rel="stylesheet" type="text/css" />
 
+  <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('adminLte/dist/css/adminlte.min.css') }}">
+
+
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf" content="{{ csrf_token() }}">
 

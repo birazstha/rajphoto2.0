@@ -40,8 +40,6 @@ class TransactionController extends Controller
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
             'expenses' => $this->expenseService->getAllData($request),
-    
-
         ];
         return view('frontend.transactions.form', $data);
     }

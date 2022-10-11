@@ -3,17 +3,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             @include('system.partials.message')
-
             <input type="text" value="" name="todays-date" class="form-control" id="todays-date">
-
-            <div>Today's Income:</div>
+     
             <div id="income"></div>
-
-
         </div>
-
-       
-
     </div>
 @endsection
 
