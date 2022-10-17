@@ -28,21 +28,14 @@ class BillService extends Service
         if (isset($data->keyword) && $data->keyword !== null) {
             $query->where('name', 'ILIKE', '%' . $data->keyword . '%');
         }
-        if (count($selectedColumns) > 0) {
-            $query->select($selectedColumns);
-        }
-
-        // if(isset($data->today)){
-
-        //     $query->where('created_at', 'ILIKE', '%'. date('Y-m-d') . '%')->paginate(10);
-        // }
+    
 
         if (isset($data->order_id)) {
             return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
         }
 
         if ($pagination) {
-            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
+            return $query->orderBy('created_at', 'DESC')->paginate(PAGINATE);
         }
         return $query->orderBy('id', 'ASC')->get();
     }

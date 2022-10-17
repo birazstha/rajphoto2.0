@@ -35,6 +35,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
+
+
     <title>Raj Photo Studio - {{ $pageTitle ?? '' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -42,12 +44,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
+
 </head>
 
 <body id="body">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary no_print">
+
+    <header>
+
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('logo.png') }}" alt="logo">
+        </a>
+        <nav>
+            <ul>
+
+                   
+                
+
+                @if (request()->segment(1))
+                    <li>
+                        <a href="{{ route('home') }}" class="">Home<a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('home') }}" class="active-link">Home</a>
+                    </li>
+                @endif
+
+
+                <li><a href="{{ route('bills.index') }}"
+                        class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
+                <li><a href="{{ route('transactions.create') }}"
+                        class="{{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}">Transaction</a>
+                </li>
+                <li><a href="{{ route('saving.create') }}"
+                        class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-primary no_print">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('logo.png') }}" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -62,6 +101,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('bills.index') }}">Bills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('transactions.create') }}">Income/Expenses</a>
                     </li>
 
 
@@ -78,4 +120,4 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> --}}

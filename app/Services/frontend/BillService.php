@@ -126,7 +126,7 @@ class BillService extends Service
     {
 
         return [
-            'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
+            // 'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
             'users' => $this->frontendUser->getAllData($request),
             'status' => $this->status(),
             'order_id' => $request->order_id,

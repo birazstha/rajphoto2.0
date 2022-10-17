@@ -18,7 +18,6 @@ use App\Services\System\CustomerService;
 use App\Services\System\BillOrderService;
 use App\Exceptions\CustomGenericException;
 use App\Services\System\FrontendUserService;
-use Brian2694\Toastr\Facades\Toastr;
 
 class BillController extends Controller
 {
@@ -39,24 +38,12 @@ class BillController extends Controller
     {
         $data = [
             'pageTitle' => 'Bills',
-            'orders' => $this->orderService->getAllData($request),
+            'orders' => $this->orderService->getAllData($request->merge(['details'=>'required'])),
             'users'=>$this->frontendUser->getAllData($request),
             'bills' => $this->billService->getAllData($request->merge(['today' => true])),
         ];
 
         return view('frontend.bill.index', $data);
-    }
-
-
-    public function create(Request $request)
-    {
-        $data = [
-            'pageTitle' => $this->moduleName,
-            'orders' => $this->orderService->getAllData($request->merge(['details' => 'required'])),
-            'general' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
-            'users' => $this->frontendUser->getAllData($request),
-        ];
-        return view('frontend.bill.form', $data);
     }
 
     public function store(Request $request)

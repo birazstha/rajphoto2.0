@@ -30,6 +30,7 @@
         <th scope="col">Contact No.</th>
         <th scope="col">Customer ID</th>
         <th scope="col">Orders</th>
+        <th scope="col">Action</th>
     </tr>
 @endsection
 
@@ -42,6 +43,9 @@
             <td>{{ $item->phone_number }}</td>
             <td>{{ $item->customer_id }}</td>
             <td>{{ count($item->bills) }}</td>
+            <td>
+                @include('system.partials.deleteButton')
+            </td>
         </tr>
     @endforeach
 @endsection

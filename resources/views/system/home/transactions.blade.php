@@ -2,7 +2,8 @@
 <h2> Transactions</h2>
 <ul class="list-group">
     <div class="row">
-           <!-- ./col -->
+          
+      {{-- Opening Balance --}}
            <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
@@ -18,6 +19,8 @@
             </div>
           </div>
 
+      {{-- Income --}}
+
         <div class="col-lg-2 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
@@ -32,7 +35,10 @@
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+        
+
+      {{-- Expense --}}
+
         <div class="col-lg-2 col-6">
           <!-- small box -->
           <div class="small-box bg-danger">
@@ -48,7 +54,9 @@
                 <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+   
+      {{-- Savings --}}
+
         <div class="col-lg-2 col-6">
           <!-- small box -->
           <div class="small-box bg-primary">
@@ -64,7 +72,8 @@
           </div>
         </div>
      
-        <!-- ./col -->
+        {{-- Adjustments --}}
+
         <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
@@ -79,13 +88,14 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+
+      {{-- With Drawn --}}
           <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>{{ $closingBalance }}</h3>
-  
-                <p>Closing Balance</p>
+                <p>With Drawn</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -94,6 +104,22 @@
             </div>
           </div>
       </div>
+
+      {{-- Closing Balance --}}
+      <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{ $closingBalance }}</h3>
+            <p>Closing Balance</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+  </div>
 
 
 </ul>
