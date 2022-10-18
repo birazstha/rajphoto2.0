@@ -47,9 +47,9 @@ $count = 1;
                         <td>
                             <div class="amounts">
                                 <div>
-                                    <div class="font-weight-bold">Total Amount:</div>
-                                    <div class="font-weight-bold">Advance Amount:</div>
-                                    <div class="font-weight-bold">Due Amount:</div>
+                                    <div class="font-weight-bold">Total:</div>
+                                    <div class="font-weight-bold">Advance:</div>
+                                    <div class="font-weight-bold">Due:</div>
                                 </div>
                                 <div>
                                     <div>Rs. {{ $bill->grand_total }}</div>
