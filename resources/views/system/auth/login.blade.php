@@ -6,7 +6,7 @@
                 <h1 style="color:{{ getCmsConfig('cms theme color') }}">{{ translate('Login') }}</h1>
                 @include('system.partials.message')
                 <div class="login-form">
-                    <form method="post" action="{{ route('login') }}">
+                    <form method="post" action="{{ route('login') }}" id="submitForm">
                         @csrf
                         <div class="form-group login-group  @error('email') has-error @enderror">
                             <div class="input-group">
@@ -29,7 +29,11 @@
                                 <p class="invalid-text text-danger">{{ translate($message) }}</p>
                             @enderror
 
-                      
+                            @if ($errors->has('token'))
+                                <span class="text-danger">{{ $errors->first('token') }}</span>
+                            @endif
+
+
                         </div>
                         <h2>{{ translate('You are current using IP') }} - <strong>{{ Request::ip() }}</strong></h2>
                         <div class="form-group">
@@ -47,5 +51,17 @@
 @endsection
 
 @section('js')
-    <script src="https://www.google.com/recaptcha/api.js?render=6LepNI4iAAAAAFPOy9ySiXb7XzVslU1PLKKuT2J-"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+    <script>
+        $('#submitForm').submit(function(event) {
+            event.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute("{{ env('RECAPTCHA_SITE_KEY') }}").then(function(token) {
+                    $('#submitForm').prepend('<input type="hidden" name="token" value="' +
+                        token + '">');
+                    $('#submitForm').unbind('submit').submit();
+                });;
+            });
+        });
+    </script>
 @endsection
