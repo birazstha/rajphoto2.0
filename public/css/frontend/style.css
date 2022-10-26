@@ -16,7 +16,6 @@ body {
   width: 65rem;
   padding: 20px;
   background-color: white;
-
 }
 
 .qrcode {
@@ -172,21 +171,18 @@ body {
   margin-bottom: 20px;
 }
 
-.form{
+.form {
   /* height: 40rem; */
 }
 
-
-.amounts{
+.amounts {
   /* border: 1px solid red; */
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
-
 
 .modal-body {
   width: 1000px;
-
 }
 
 .modal-dialog {
@@ -194,8 +190,97 @@ body {
   margin: 2rem auto;
 }
 
+.room-table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 1rem;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 5px #b4b4b4;
+  width: 100%;
+}
+.room-table thead {
+  background-color: #3569c7;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  border-radius: 20px;
+}
 
+.room-table td,
+th {
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  align-items: center;
+}
+.room-table td {
+  background-color: #f4f4f4;
+}
 
+.room-table thead {
+  border-radius: 5px 5px 0 0;
+}
 
+.room-table tbody tr:last-of-type {
+  border-bottom: 2px solid #3569c7;
+}
 
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
 
+.room-table button {
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+}
+.room-table button:hover {
+  transform: scale(1.04);
+}
+
+.view {
+  background-color: green;
+}
+
+.delete {
+  background-color: red;
+}
+.edit {
+  background-color: #0e5dae;
+}
+
+.success-alert {
+  margin-top: 10px;
+  width: 100%;
+  height: 3rem;
+  background-color: green;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions button {
+  margin-right: 0.1rem;
+}
+
+.table-center td {
+  text-align: center;
+}
+
+.table-center td a {
+  color: blue;
+  font-weight: bolder;
+}

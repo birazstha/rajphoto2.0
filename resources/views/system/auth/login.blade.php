@@ -57,7 +57,7 @@
             event.preventDefault();
             grecaptcha.ready(function() {
                 grecaptcha.execute("{{ env('RECAPTCHA_SITE_KEY') }}").then(function(token) {
-                    $('#submitForm').prepend('<input type="hidden" name="token" value="' +
+                    $('#submitForm').prepend('<input type="hidden" name="recaptcha-token" value="' +
                         token + '">');
                     $('#submitForm').unbind('submit').submit();
                 });;
