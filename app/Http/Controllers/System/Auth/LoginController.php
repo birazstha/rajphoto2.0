@@ -63,7 +63,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {  
-        dd($request->all());
         $this->validateLogin($request);
         try {
             if (

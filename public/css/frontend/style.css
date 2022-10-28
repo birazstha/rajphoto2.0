@@ -213,9 +213,9 @@ th {
   padding: 10px;
   align-items: center;
 }
-.room-table td {
+/* .room-table td {
   background-color: #f4f4f4;
-}
+} */
 
 .room-table thead {
   border-radius: 5px 5px 0 0;
@@ -284,3 +284,8 @@ th {
   color: blue;
   font-weight: bolder;
 }
+
+.transaction-expense {
+  background-color: red;
+}
+

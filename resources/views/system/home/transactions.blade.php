@@ -1,125 +1,124 @@
-
 <h2> Transactions</h2>
 <ul class="list-group">
     <div class="row">
-          
-      {{-- Opening Balance --}}
-           <div class="col-lg-2 col-6">
+
+        {{-- Opening Balance --}}
+        <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>65</h3>
-  
-                <p>Opening Balance</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+                <div class="inner">
+                    <h3>65</h3>
 
-      {{-- Income --}}
+                    <p>Opening Balance</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        {{-- Income --}}
 
         <div class="col-lg-2 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>Rs.{{ $totalIncome }}/-</h3>
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>Rs.{{ $totalIncome }}/-</h3>
 
-              <p>Income</p>
+                    <p>Income</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-                <i class="fas fa-hand-holding-usd"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-        
 
-      {{-- Expense --}}
+
+        {{-- Expense --}}
 
         <div class="col-lg-2 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3> Rs.{{ $totalExpense }}/-</h3>
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3> Rs.{{ $totalExpense }}/-</h3>
 
-              <p>Expense</p>
+                    <p>Expense</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info
+                    <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-                <i class="fas fa-money-bill-wave"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info 
-                <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-   
-      {{-- Savings --}}
+
+        {{-- Savings --}}
 
         <div class="col-lg-2 col-6">
-          <!-- small box -->
-          <div class="small-box bg-primary">
-            <div class="inner">
-              <h3> Rs.{{$totalSaving }}/-</h3>
+            <!-- small box -->
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3> Rs.{{ $totalSaving }}/-</h3>
 
-              <p>Savings</p>
+                    <p>Savings</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-                <i class="fas fa-piggy-bank"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-     
+
         {{-- Adjustments --}}
 
         <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
-              <div class="inner">
-                <h3>65</h3>
-  
-                <p>Adjustments</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+                <div class="inner">
+                    <h3>65</h3>
 
-      {{-- With Drawn --}}
-          <div class="col-lg-2 col-6">
+                    <p>Adjustments</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        {{-- With Drawn --}}
+        <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $closingBalance }}</h3>
-                <p>With Drawn</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <div class="inner">
+                    <h3>{{ $closingBalance }}</h3>
+                    <p>With Drawn</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
 
-      {{-- Closing Balance --}}
-      <div class="col-lg-2 col-6">
+    {{-- Closing Balance --}}
+    <div class="col-lg-2 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
-          <div class="inner">
-            <h3>{{ $closingBalance }}</h3>
-            <p>Closing Balance</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-pie-graph"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <div class="inner">
+                <h3>{{ $closingBalance }}</h3>
+                <p>Closing Balance</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-      </div>
-  </div>
+    </div>
+    </div>
 
 
 </ul>
@@ -135,8 +134,7 @@
     </thead>
     <tbody>
         @forelse ($transactions as $key => $transaction)
-            <tr
-                class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger' )) }}">
+            <tr class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
                 <th scope="row">{{ $key + 1 }}</th>
                 <td>
                     @if (isset($transaction->bill_id))

@@ -5,6 +5,7 @@ namespace App\Services\frontend;
 
 use App\Model\Transaction;
 use App\Services\Service;
+use Carbon\Carbon;
 
 class TransactionService extends Service
 {
@@ -26,21 +27,24 @@ class TransactionService extends Service
             $query->select($selectedColumns);
         }
 
-        if (isset($data->order_id)) {
-            return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
-        }
+        // if (isset($data->order_id)) {
+        //     return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
+        // }
 
-        if ($pagination) {
-            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
-        }
-        return $query->orderBy('id', 'ASC')->get();
+        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->select('income_id','expense_id','amount')->paginate(5);
+    }
+
+    public function getSavingsDetail(){
+        $query = $this->query();
+        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->whereNotNull('saving_id')->get();
+  
     }
 
 
     public function store($request)
     {
-
-        return $this->model->create($request);
+        $this->model->create($request);
+        return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');    
     }
 
    

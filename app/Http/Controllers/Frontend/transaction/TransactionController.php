@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    protected $orderService,$frontendUser,$expenseService;
+    protected $orderService,$frontendUser,$expenseService,$transactionService;
      public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
@@ -27,37 +27,14 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'pageTitle' => 'Bills',
-           
-        ];
-        return view('frontend.bill.index', $data);
-    }
-
-
-    public function create(Request $request)
-    {
-        $data = [
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
             'expenses' => $this->expenseService->getAllData($request),
+            'transactions'=>$this->transactionService->getAllData($request),
+            'pageTitle'=>'Transaction'
+
         ];
-        return view('frontend.transactions.form', $data);
+        return view('frontend.transactions.index', $data);
     }
-
-    public function store(Request $request)
-    {
-        $this->transactionService->store($request);
-        return redirect()->route('bills.index')->with('success', 'Recorded successfully!!');
-    }
-
-
-    public function show($id)
-    {
-        $data['row'] = Bill::where('id', $id)->first();
-        return view('frontend.bill.photoBill', compact('data'));
-    }
-
-
-   
 
 }

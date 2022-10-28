@@ -47,7 +47,7 @@ class ExpenseController extends Controller
         $transaction['amount'] =  $request->amount;
         $transaction['expense_id'] = $request->expense_id;
         $this->transactionService->store($transaction);
-        return redirect()->route('bills.index')->with('success', 'Recorded successfully!!');
+        return redirect()->route('transactions.create')->with('success', 'Transaction recorded successfully!!');
     }
 
 

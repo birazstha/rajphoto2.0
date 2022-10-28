@@ -74,10 +74,10 @@
 
                 <li><a href="{{ route('bills.index') }}"
                         class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
-                <li><a href="{{ route('transactions.create') }}"
+                <li><a href="{{ route('transactions.index') }}"
                         class="{{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}">Transaction</a>
                 </li>
-                <li><a href="{{ route('saving.create') }}"
+                <li><a href="{{ route('saving.index') }}"
                         class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
             </ul>
         </nav>

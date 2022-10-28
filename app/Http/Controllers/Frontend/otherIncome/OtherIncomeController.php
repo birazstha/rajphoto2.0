@@ -62,7 +62,7 @@ class OtherIncomeController extends Controller
         $transaction['amount'] =  $request->total;
         $transaction['income_id'] = $request->order_id;
         $this->transactionService->store($transaction);
-        return redirect()->route('bills.index')->with('success', 'Recorded successfully!!');
+        return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
 
 
