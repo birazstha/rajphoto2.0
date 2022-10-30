@@ -11,14 +11,14 @@
             </section>
         </a>
 
-        <a href="{{ route('transactions.create') }}">
+        <a href="{{ route('transactions.index') }}">
             <section class="icon">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>Income/Expenses</span>
             </section>
         </a>
 
-        <a href="{{ route('saving.create') }}">
+        <a href="{{ route('saving.index') }}">
             <section>
                 <i class="fas fa-piggy-bank"></i>
                 <span>Savings</span>

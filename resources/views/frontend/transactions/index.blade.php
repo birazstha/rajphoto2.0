@@ -34,14 +34,8 @@
 
             <tbody>
 
-                @foreach ($transactions as $transa)
-                    <ul>
-
-                    </ul>
-                @endforeach
-
                 @forelse ($transactions as $key => $transaction)
-                    @if ($transaction->saving_id === null)
+                
                         <tr
                             class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
                             <th scope="row">{{ $key + 1 }}</th>
@@ -61,7 +55,7 @@
                                 Rs.{{ $transaction->amount }}/-
                             </td>
                         </tr>
-                    @endif
+                   
 
                 @empty
                     <tr>
@@ -77,7 +71,7 @@
 
         </table>
 
-        {{-- {{ $transactions }} --}}
+        {{ $transactions }}
 
     </div>
 @endsection
@@ -147,8 +141,16 @@
         $("#other_quantity").on('keyup change', function() {
             var quantity = $(this).val()
             var currRate = $("#other_rate").val();
-            var totaldd = quantity * currRate;
+            var incomeTitle = $('#other').val();
+            if(incomeTitle == 15){
+                newTotal = (parseInt(currRate) + quantity * 100) - 100
+                $("#other_total").val(newTotal);
+            }else{
+                var totaldd = quantity * currRate;
             $("#other_total").val(totaldd);
+            }
+          
+            
 
         });
 
