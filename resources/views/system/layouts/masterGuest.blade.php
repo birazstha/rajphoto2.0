@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <link href="{{ asset('images/eklogo.png') }}" rel="shortcut icon">
+  <link href="{{ asset('public/images/eklogo.png') }}" rel="shortcut icon">
   <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
@@ -25,13 +25,13 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="public/compiledCssAndJs/css/system.css" rel="stylesheet" media="screen">
+  <link href="{{ asset('public/compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
   <title>
     {{translate($title ?? 'Login')}}
   </title>
 </head>
 
-<body style="background-color: rgba(228, 14, 14, 0.09);">
+<body style="">
 
   <style>
     html,

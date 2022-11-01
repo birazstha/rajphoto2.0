@@ -21,7 +21,7 @@
         type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="public/css/frontend/style.css">
+    <link rel="stylesheet" href="{{ asset('public/css/frontend/style.css') }}">
     <link rel="stylesheet" href="public/css/frontend/nav.css">
     <link rel="stylesheet" href="public/css/frontend/dashboard.css">
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css"
@@ -48,7 +48,6 @@
 </head>
 
 <body id="body">
-
 
     <header>
 

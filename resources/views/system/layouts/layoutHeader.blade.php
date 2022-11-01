@@ -11,7 +11,11 @@
   <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-    <link rel="stylesheet" href="public/adminLte/dist/css/adminlte.min.css">
+
+    {{-- <link rel="stylesheet" href="{{ asset('adminLte/dist/css/adminlte.min.css') }}"> --}}
+    
+    {{-- Localhost --}}
+    <link rel="stylesheet" href="{{ asset('public/adminLte/dist/css/adminlte.min.css') }}">
 
 
     <meta name="theme-color" content="#ffffff">
@@ -22,8 +26,13 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/f0dad6a07d.js" crossorigin="anonymous"></script>
-    <link href="public/compiledCssAndJs/css/system.css" rel="stylesheet" media="screen">
-    <link href="public/toast/jquery.toast.min.css" rel="stylesheet">
+    {{-- <link href="{{ asset('compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen"> --}}
+
+    {{-- Localhost --}}
+    <link href="{{ asset('public/compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
+
+
+    <link href="{{ asset('public/toast/jquery.toast.min.css') }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
         integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"

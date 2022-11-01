@@ -4,7 +4,7 @@
       <div class="header-left clearfix pull-left">
         <h1 class="pull-left logo-tag">
           <a href="{{route('home')}}">
-            <img src="{{asset('uploads/config/')}}/{{ getCmsConfig('cms logo')}}" alt="Ek logo" height="20">
+            <img src="{{asset('public/uploads/config/')}}/{{ getCmsConfig('cms logo')}}" alt="Ek logo" height="20">
             <span>{{getCmsConfig('cms title')}}</span>
           </a>
         </h1>
@@ -28,7 +28,7 @@
 
           <li class="nav-item dropdown header-user">
             <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="header-avatar js-lazy-loaded" src="{{asset('images/avatar.png')}}" width="23" height="23" alt="profile">
+              <img class="header-avatar js-lazy-loaded" src="{{asset('public/images/avatar.png')}}" width="23" height="23" alt="profile">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropDown">
               <div class="li-user dropdown-item">
