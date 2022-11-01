@@ -31,7 +31,7 @@ class TransactionService extends Service
         //     return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
         // }
 
-        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->select('income_id','expense_id','amount')->paginate(5);
+        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->whereNull('saving_id')->paginate(5);
     }
 
     public function getSavingsDetail(){

@@ -80,35 +80,10 @@
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
     <script>
-        $("document").ready(function() {
-            $(".tab-slider--body").hide();
-            $(".tab-slider--body:first").show();
-        });
-
-        $(".tab-slider--nav li").click(function() {
-            $(".tab-slider--body").hide();
-            var activeTab = $(this).attr("rel");
-            $("#" + activeTab).fadeIn();
-            if ($(this).attr("rel") == "tab2") {
-                $('.tab-slider--tabs').addClass('slide');
-            } else {
-                $('.tab-slider--tabs').removeClass('slide');
-            }
-            $(".tab-slider--nav li").removeClass("active");
-            $(this).addClass("active");
-        });
-
-
         var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
         $('.order-date').val(currentBsDate);
 
-
-
-
-
-
-        //For Other Incomes
-
+        //For Transactions
         const calculatetotal = function(data) {
             var quantity = $("#other_quantity").val();
             var total = quantity * data;
@@ -117,7 +92,9 @@
         };
 
         $("#other").change(function() {
+            $('#other_quantity').val(1);
             var incomeTitle = $(this).val();
+
             $.ajax({
                 method: 'get',
                 url: "{{ URL::route('bill.getRate') }}",

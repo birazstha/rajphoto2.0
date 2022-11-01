@@ -25,13 +25,13 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="{{ asset('compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
+  <link href="public/compiledCssAndJs/css/system.css" rel="stylesheet" media="screen">
   <title>
     {{translate($title ?? 'Login')}}
   </title>
 </head>
 
-<body style="background-color: rgba(41, 41, 97, 0.09);">
+<body style="background-color: rgba(228, 14, 14, 0.09);">
 
   <style>
     html,

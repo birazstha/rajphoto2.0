@@ -18,6 +18,7 @@ use App\Services\System\CustomerService;
 use App\Services\System\FrontendUserService;
 use App\Services\frontend\OtherIncomeService;
 use App\Services\frontend\TransactionService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -61,6 +62,7 @@ class OtherIncomeController extends Controller
         $transaction['date'] =  $request->date;
         $transaction['amount'] =  $request->total;
         $transaction['income_id'] = $request->order_id;
+        $transaction['created_at'] = Carbon::now();
         $this->transactionService->store($transaction);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
