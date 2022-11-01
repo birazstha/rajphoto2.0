@@ -17,6 +17,7 @@
           </button>
         </div>
         <div class="modal-body">
+          hello
           {{$body}}
         </div>
         <div class="modal-footer">

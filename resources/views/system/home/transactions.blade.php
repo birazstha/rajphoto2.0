@@ -1,4 +1,9 @@
-<h2> Transactions</h2>
+<div class="d-flex justify-content-between mt-2 mb-2">
+    <h2> Transactions</h2>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#adjustments"> <i class="fa fa-plus"></i> Adjustment</button>
+
+</button>
+</div>
 <ul class="list-group">
     <div class="row">
 
@@ -134,7 +139,8 @@
     </thead>
     <tbody>
         @forelse ($transactions as $key => $transaction)
-            <tr class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
+            <tr
+                class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
                 <th scope="row">{{ $key + 1 }}</th>
                 <td>
                     @if (isset($transaction->bill_id))
