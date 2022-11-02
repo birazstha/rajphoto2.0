@@ -42,10 +42,10 @@ class TestController extends Controller
         $date =  $request->date;
         if (isset($customerName)) {
             $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
-            return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill','users'))->render();
+            return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
             $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(10);
-            return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill','users'))->render();
+            return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill', 'users'))->render();
         }
     }
 
@@ -64,25 +64,49 @@ class TestController extends Controller
     }
 
     public function autocompleteName(Request $request)
-    {      
+    {
         $data = $request->all();
         $query = $data['query'];
         $filter_data = Customer::where('name', 'ILIKE', '%' . $query . '%')
-            ->get(); 
+            ->get();
         return response()->json($filter_data);
     }
 
-    public function getIncome(Request $request){
-        $data ['transactions'] = Transaction::where('date',$request->date)->orderBy('created_at','DESC')->with(['bills','expenses','savings'])->get();
-        $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
-        $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount'); 
-        $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
-        $data['closingBalance'] =  $data['totalIncome']- $data['totalExpense']-$data['totalSaving'];
+    public function getIncome(Request $request)
+    {
 
-       return view('system.home.transactions', $data)->render();
+        //Closing Balance
+        $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
+        $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
+        $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
+        $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
+
+        $data['closingBalance'] =  $data['totalIncome'] - $data['totalExpense'] - $data['totalSaving'];
+
+
+
+        //Opening Balance
+        $data['transactions_opening'] = Transaction::where('date', $request->yesterdayDate)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
+        $data['totalIncomeClosing'] = collect($data['transactions_opening'])->where('bill_id')->sum('amount') + collect($data['transactions_opening'])->where('income_id')->sum('amount');
+        $data['totalExpenseClosing'] = collect($data['transactions_opening'])->where('expense_id')->sum('amount');
+        $data['totalSavingClosing'] =  collect($data['transactions_opening'])->where('saving_id')->sum('amount');
+
+        $data['openingBalance'] =  $data['totalIncomeClosing'] - $data['totalExpenseClosing'] - $data['totalSavingClosing'];
+
+
+        return view('system.home.transactions', $data)->render();
     }
 
-    public function getRate(Request $request){
-         return Order::where('id',$request->order_id)->pluck('rate')->first();
+    public function getOpeningBalance(Request $request)
+    {
+
+
+        $data['openingBalance'] = 100;
+    }
+
+
+    public function getRate(Request $request)
+    {
+        return Order::where('id', $request->order_id)->pluck('rate')->first();
     }
 }

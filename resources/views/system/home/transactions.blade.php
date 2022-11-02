@@ -12,7 +12,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3>Rs. {{ $openingBalance }}/-</h3>
 
                     <p>Opening Balance</p>
                 </div>
@@ -114,7 +114,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>{{ $closingBalance }}</h3>
+                <h3>Rs.{{ $closingBalance }}/-</h3>
                 <p>Closing Balance</p>
             </div>
             <div class="icon">
