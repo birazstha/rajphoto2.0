@@ -3,6 +3,8 @@ $(document).ready(function () {
   translation.init()
 })
 
+
+
 const languageSelector = (function () {
   const $countrySelector = $('#country_id')
   const $languageSelecor = $('#language_code')

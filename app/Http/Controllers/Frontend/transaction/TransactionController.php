@@ -37,4 +37,12 @@ class TransactionController extends Controller
         return view('frontend.transactions.index', $data);
     }
 
+    public function store(Request $request){
+        $data['is_withdrawn'] =  true;
+        $data['amount'] = $request->withdrawn_amount;
+        $data['date'] =  $request->date;
+        $this->transactionService->store($data);
+        return redirect()->back()->with('success', 'Recorded successfully!!');
+    }
+
 }

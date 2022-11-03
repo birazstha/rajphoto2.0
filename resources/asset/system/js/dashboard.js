@@ -11,12 +11,14 @@ const setUpCSRF = () => {
 }
 
 $(function () {
-    const getIncomeInfo = function (data) {
+    const getIncomeInfo =  (data,previousDate) => {
+        
         $.ajax({
             method: 'get',
             url: window.location.origin + '/rajphoto2.0/getIncome',
             data: {
                 date: data,
+                prevDate: previousDate,
             },
             dataType: 'html',
             success: function (response) {
@@ -25,6 +27,14 @@ $(function () {
         })
     }
 
+    const previousDate = (date) => {
+        var yesterdayDate = NepaliFunctions.ConvertDateFormat(
+            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, -1),
+            'YYYY-MM-DD',
+        )
+        return yesterdayDate;
+    };
+
 
 
     var todaysDate = NepaliFunctions.ConvertDateFormat(
@@ -32,25 +42,12 @@ $(function () {
         'YYYY-MM-DD',
     )
 
+    getIncomeInfo(todaysDate,previousDate(todaysDate))
 
-    const previousDate = (date) => {
-        var yesterdayDate = NepaliFunctions.ConvertDateFormat(
-            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, -1),
-            'YYYY-MM-DD',
-        )
+    //Setting Todays date at Dashboard.
+    $('#todays-date').val(todaysDate)
+    $('#yesterday-date').val(previousDate(todaysDate))
 
-        return yesterdayDate;
-    };
-
-    
-    getIncomeInfo(todaysDate)
-
-
-
-
-
-   
-  
 
     $('#todays-date').nepaliDatePicker({
         language: 'english',
@@ -59,11 +56,11 @@ $(function () {
         onChange: function () {
             var selectedDate = $('#todays-date').val()
             $('#yesterday-date').val(previousDate(selectedDate))
-            getIncomeInfo(selectedDate)
+            getIncomeInfo(selectedDate,previousDate(selectedDate))
         },
     })
 
 
-    $('#todays-date').val(todaysDate)
-    $('#yesterday-date').val(previousDate(todaysDate))
+
+   
 })

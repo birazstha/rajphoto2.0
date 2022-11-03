@@ -77,12 +77,7 @@
 @endsection
 @section('js')
 @section('js')
-    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
-        type="text/javascript"></script>
     <script>
-        var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-        $('.order-date').val(currentBsDate);
-
         //For Transactions
         const calculatetotal = function(data) {
             var quantity = $("#other_quantity").val();

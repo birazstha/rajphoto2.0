@@ -38,4 +38,6 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"
         integrity="sha256-H2TaUgwe8vbd8Uf3Pki5UcggDC05eieuDNDCjzEngWU=" crossorigin="anonymous"></script>
     <script src="public/tinymce/tinymce.min.js"></script>
-</head>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
+
+  </head>

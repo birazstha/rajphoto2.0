@@ -74,26 +74,32 @@ class TestController extends Controller
 
     public function getIncome(Request $request)
     {
-        // dd($request->all());
-
+    
         //Closing Balance
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
 
-        $data['closingBalance'] =  $data['totalIncome'] - $data['totalExpense'] - $data['totalSaving'];
-
+     
 
 
         //Opening Balance
-        $data['transactions_opening'] = Transaction::where('date', $request->yesterdayDate)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
+        $data['transactions_opening'] = Transaction::where('date', $request->prevDate)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncomeClosing'] = collect($data['transactions_opening'])->where('bill_id')->sum('amount') + collect($data['transactions_opening'])->where('income_id')->sum('amount');
         $data['totalExpenseClosing'] = collect($data['transactions_opening'])->where('expense_id')->sum('amount');
         $data['totalSavingClosing'] =  collect($data['transactions_opening'])->where('saving_id')->sum('amount');
 
         $data['openingBalance'] =  $data['totalIncomeClosing'] - $data['totalExpenseClosing'] - $data['totalSavingClosing'];
 
+
+        $data['withdrawn'] = $data['transactions']->where('is_withdrawn',true)->sum('amount');
+    
+
+        $data['closingBalance'] =  $data['openingBalance'] +  $data['totalIncome'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'];
+
+
+       
 
         return view('system.home.transactions', $data)->render();
     }

@@ -41,11 +41,8 @@
                                 @enderror
                             </div>
                         </div>
-                    
                 
-                
-                  
-                    <input type="hidden" name="date" class="order-date" value="">
+                    <input type="hidden" name="date" class="current_date" value="">
                 
                     <button class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save</button>
                     <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-recycle"></i> Reset</button>

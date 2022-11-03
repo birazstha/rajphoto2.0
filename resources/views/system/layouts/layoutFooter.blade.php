@@ -10,6 +10,9 @@
 <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
 type="text/javascript"></script>
 
+  <script src="{{ asset('public/compiledCssAndJs/js/currentDate.js') }}"></script>
+
+
 <script>
   $(function() {
     var check = `{{$errors->first('success')}}`;

@@ -1,8 +1,13 @@
 <div class="d-flex justify-content-between mt-2 mb-2">
     <h2> Transactions</h2>
-    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#adjustments"> <i class="fa fa-plus"></i> Adjustment</button>
 
-</button>
+    <div>
+        <button class="btn btn-success" data-toggle="modal" data-target="#adjustments"> <i class="fa fa-plus"></i>
+            Adjustment</button>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#withdraw"> <i class="fa fa-plus"></i>
+            Withdraw</button>
+    </div>
+
 </div>
 <ul class="list-group">
     <div class="row">
@@ -98,7 +103,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $closingBalance }}</h3>
+                    <h3>Rs.{{ $withdrawn }}/-</h3>
                     <p>With Drawn</p>
                 </div>
                 <div class="icon">
@@ -149,6 +154,8 @@
                         {{ $transaction->expenses->title }}
                     @elseif (isset($transaction->saving_id))
                         {{ $transaction->savings->bank_name }}
+                        @elseif($transaction->is_withdrawn == true)
+                       Withdrawn
                     @else
                         {{ $transaction->incomes->name }}
                     @endif
