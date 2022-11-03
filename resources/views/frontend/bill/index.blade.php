@@ -32,14 +32,8 @@
 
         </div>
 
-
-
-
-
         <div class="loader">
-            {{-- <img src="{{ asset('images/loader.gif') }}" alt=""> --}}
-            <img src="public/images/loader.gif" alt="">
-
+            <img src="{{ asset('public/images/loader.gif') }}" alt="">
         </div>
 
         <div id="table"></div>

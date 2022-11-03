@@ -74,6 +74,7 @@ class TestController extends Controller
 
     public function getIncome(Request $request)
     {
+        // dd($request->all());
 
         //Closing Balance
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
