@@ -2,7 +2,7 @@
     <h2> Transactions</h2>
 
     <div>
-        <button class="btn btn-success" data-toggle="modal" data-target="#adjustments"> <i class="fa fa-plus"></i>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#adjustments"> <i class="fa fa-plus"></i>
             Adjustment</button>
         <button class="btn btn-danger" data-toggle="modal" data-target="#withdraw"> <i class="fa fa-plus"></i>
             Withdraw</button>
@@ -17,7 +17,8 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>Rs. {{ $openingBalance }}/-</h3>
+                    {{-- <h3>Rs. {{ $openingBalance }}/-</h3> --}}
+                    <h3>Rs. 0/-</h3>
 
                     <p>Opening Balance</p>
                 </div>
@@ -120,7 +121,7 @@
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>Rs.{{ $closingBalance }}/-</h3>
-                <p>Closing Balance</p>
+                <p>Total</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -128,10 +129,31 @@
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+
+      {{-- Closing Balance --}}
+      <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Rs.{{ $closingBalance }}/-</h3>
+                <p>Total</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+
+
+
     </div>
 
 
 </ul>
+
+
 <table class="table table-striped">
     <thead class="table-active">
         <tr>
@@ -154,8 +176,8 @@
                         {{ $transaction->expenses->title }}
                     @elseif (isset($transaction->saving_id))
                         {{ $transaction->savings->bank_name }}
-                        @elseif($transaction->is_withdrawn == true)
-                       Withdrawn
+                    @elseif($transaction->is_withdrawn == true)
+                        Withdrawn
                     @else
                         {{ $transaction->incomes->name }}
                     @endif

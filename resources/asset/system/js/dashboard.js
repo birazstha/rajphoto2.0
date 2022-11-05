@@ -1,16 +1,7 @@
-const init = () => {
-    setUpCSRF()
-}
-
-const setUpCSRF = () => {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf"]').attr('content'),
-        },
-    })
-}
 
 $(function () {
+
+   
     const getIncomeInfo =  (data,previousDate) => {
         
         $.ajax({
@@ -19,6 +10,7 @@ $(function () {
             data: {
                 date: data,
                 prevDate: previousDate,
+                
             },
             dataType: 'html',
             success: function (response) {
@@ -29,7 +21,7 @@ $(function () {
 
     const previousDate = (date) => {
         var yesterdayDate = NepaliFunctions.ConvertDateFormat(
-            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, -1),
+            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, 1),
             'YYYY-MM-DD',
         )
         return yesterdayDate;
@@ -46,7 +38,7 @@ $(function () {
 
     //Setting Todays date at Dashboard.
     $('#todays-date').val(todaysDate)
-    $('#yesterday-date').val(previousDate(todaysDate))
+    $('#tomorrow_date').val(previousDate(todaysDate))
 
 
     $('#todays-date').nepaliDatePicker({
@@ -55,7 +47,7 @@ $(function () {
         disableBefore: '2079-05-24',
         onChange: function () {
             var selectedDate = $('#todays-date').val()
-            $('#yesterday-date').val(previousDate(selectedDate))
+            $('#tomorrow_date').val(previousDate(selectedDate))
             getIncomeInfo(selectedDate,previousDate(selectedDate))
         },
     })
