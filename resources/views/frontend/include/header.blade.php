@@ -10,8 +10,8 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/f0dad6a07d.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ asset('toast/jquery.toast.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('public/toast/jquery.toast.min.css') }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
         integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"
@@ -22,8 +22,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('public/css/frontend/style.css') }}">
-    <link rel="stylesheet" href="public/css/frontend/nav.css">
-    <link rel="stylesheet" href="public/css/frontend/dashboard.css">
+    <link rel="stylesheet" href="{{ asset('public/css/frontend/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/frontend/dashboard.css') }}">
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css"
         rel="stylesheet" type="text/css" />
 
@@ -55,7 +55,7 @@
 
         <a href="{{ route('home') }}">
             {{-- <img src="{{ asset('logo.png') }}" alt="logo"> --}}
-            <img src="public/logo.png" alt="logo">
+            <img src="{{ asset('public/logo.png') }}" alt="logo">
         </a>
         <nav>
             <ul>
@@ -87,39 +87,3 @@
     </header>
 
 
-
-    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-primary no_print">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('logo.png') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bills.index') }}">Bills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('transactions.create') }}">Income/Expenses</a>
-                    </li>
-
-
-                </ul>
-                <form class="d-flex" action="">
-                    @csrf
-                    <input class="form-control me-2" type="search" name="id" id="id"
-                        placeholder="Enter customer's name" aria-label="Search">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-search search-icon"></i></button>
-
-                </form>
-                <div class="dark-mode-btn">
-                    <i class="fas fa-lightbulb dark-mode ml-2" data-mode="dark"></i>
-                </div>
-            </div>
-        </div>
-    </nav> --}}

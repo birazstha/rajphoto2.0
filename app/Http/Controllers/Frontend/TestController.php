@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Adjustment;
 use App\Model\Bill;
 use App\Model\Customer;
 use App\Model\FrontendUser;
@@ -10,11 +11,18 @@ use App\Model\Income;
 use App\Model\Order;
 use App\Model\Size;
 use App\Model\Transaction;
+use App\Services\System\AdjustmentService;
 use App\User;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+
+    protected $adjustmentService;
+    public function __construct()
+    {
+        $this->adjustmentService = new AdjustmentService(new Adjustment);
+    }
 
 
     public function getOrderById(Request $request)
@@ -75,32 +83,31 @@ class TestController extends Controller
     public function getIncome(Request $request)
     {
 
-         //A day before Income,Expense and Savings
-        $data['transactions_closing'] = Transaction::where('date', $request->prevDate)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
-        $data['totalIncomeClosing'] = collect($data['transactions_closing'])->where('bill_id')->sum('amount') + collect($data['transactions_closing'])->where('income_id')->sum('amount');
-        $data['totalExpenseClosing'] = collect($data['transactions_closing'])->where('expense_id')->sum('amount');
-        $data['totalSavingClosing'] =  collect($data['transactions_closing'])->where('saving_id')->sum('amount');
-        $data['withdrawnClosing'] = $data['transactions_closing']->where('is_withdrawn',true)->sum('amount');
-        $data['adjustment'] = 100;
-        //Calculating Closing Balance for previous day which will be the opening balance for next day.
-        // $data['openingBalance'] =  $data['totalIncomeClosing'] - $data['totalExpenseClosing'] - $data['totalSavingClosing'] -  $data['withdrawnClosing'];
+    
 
-    
-    
+             
+        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
+      
         
-        //Selected days Income,Expense and Savings
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn',true)->sum('amount');
+    
         
-        //Calculating Total Closing Balance for selected day
-        $data['closingBalance'] =  $data['totalIncome'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'];
+        $data['adjustment'] = Adjustment::where('date',$request->date)->first()->adjusted_amount ?? 0; 
+     
 
+        //Calculating Total Closing Balance for selected day
+        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'];
 
      
-        return view('system.home.transactions', $data)->render();
+
+        $data['todaysDate'] = $request->date;
+        
+     
+        return view('system.home.transactions', $data);
     }
 
     public function getOpeningBalance(Request $request)

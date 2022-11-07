@@ -21,7 +21,7 @@ $(function () {
 
     const previousDate = (date) => {
         var yesterdayDate = NepaliFunctions.ConvertDateFormat(
-            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, 1),
+            NepaliFunctions.BsAddDays(NepaliFunctions.ParseDate(date).parsedDate, -1),
             'YYYY-MM-DD',
         )
         return yesterdayDate;
@@ -38,19 +38,32 @@ $(function () {
 
     //Setting Todays date at Dashboard.
     $('#todays-date').val(todaysDate)
-    $('#tomorrow_date').val(previousDate(todaysDate))
+    $('#yesterday-date').val(previousDate(todaysDate))
 
 
     $('#todays-date').nepaliDatePicker({
         language: 'english',
-        disableDaysAfter: 0,
-        disableBefore: '2079-05-24',
+        // disableDaysAfter: 0,
+        // disableBefore: '2079-05-24',
         onChange: function () {
             var selectedDate = $('#todays-date').val()
-            $('#tomorrow_date').val(previousDate(selectedDate))
+            $('#yesterday-date').val(previousDate(selectedDate))
             getIncomeInfo(selectedDate,previousDate(selectedDate))
         },
     })
+
+    $(document).on('blur','#closing_balance',function(){
+       var cashInDrawer = $(this).val();
+       var closingBalance = $('#closing').val();
+      
+       var netClosingBalance = cashInDrawer - closingBalance;
+
+       $('#adjustment').val(netClosingBalance);
+    
+
+        
+    });
+   
 
 
 

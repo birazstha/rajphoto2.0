@@ -7,7 +7,7 @@
         <button class="btn btn-danger" data-toggle="modal" data-target="#withdraw"> <i class="fa fa-plus"></i>
             Withdraw</button>
     </div>
-
+ 
 </div>
 <ul class="list-group">
     <div class="row">
@@ -18,7 +18,7 @@
             <div class="small-box bg-warning">
                 <div class="inner">
                     {{-- <h3>Rs. {{ $openingBalance }}/-</h3> --}}
-                    <h3>Rs. 0/-</h3>
+                    <h3>Rs. {{ $openingBalance }}/-</h3>
 
                     <p>Opening Balance</p>
                 </div>
@@ -88,7 +88,7 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3>{{ $adjustment }}</h3>
 
                     <p>Adjustments</p>
                 </div>
@@ -121,7 +121,7 @@
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>Rs.{{ $closingBalance }}/-</h3>
-                <p>Total</p>
+                <p>Closing Balance</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -130,21 +130,59 @@
         </div>
     </div>
 
-      {{-- Closing Balance --}}
-      <div class="col-lg-2 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>Rs.{{ $closingBalance }}/-</h3>
-                <p>Total</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
+
+    <div class="modal fade" id="adjustments" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('adjustment.store') }}" method="POST">
+                <div class="modal-content">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Adjustment</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        
+                            <div class="form-group">
+                                <label class="form-label" for="">Closing Balance</label>
+                                <input type="text" readonly name="closing" id="closing" class="form-control"
+                                    value="{{ $closingBalance }}">
+                            </div>
+
+                            {{-- Cash In drawer --}}
+                            <div class="form-group">
+                                <label class="form-label" for="">Cash In Drawer</label>
+                                <input type="number" class="form-control" name="closing_balance" id="closing_balance"
+                                    value="">
+                            </div>
+
+                            {{-- Adjustment --}}
+                            <div class="form-group">
+                                <label class="form-label" for="">Adjustment</label>
+                                <input type="text" class="form-control" name="adjusted_amount" value="" id="adjustment" readonly>
+                            </div>
+
+                            <input type="hidden" class="form-control" value="{{ $todaysDate }}" id="date"
+                                name="date">
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa fa-save"></i> {{ translate('Save') }}
+                        </button>
+
+                        <button type="reset" class="btn btn-sm btn-secondary">
+                            <i class="fa fa-save"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
 
 
 

@@ -111,7 +111,7 @@ class SizeSeeder extends Seeder
                 'order_id' => 2,
                 'name' => '8X12',
                 'status' => 1,
-                'rate'=>'100',
+                'rate'=>'1000',
             ],
             15 => [
                 'order_id' => 2,
