@@ -88,7 +88,7 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
                 <div class="inner">
-                    <h3>{{ $adjustment }}</h3>
+                    <h3>Rs.{{ $adjustment }}/-</h3>
 
                     <p>Adjustments</p>
                 </div>
