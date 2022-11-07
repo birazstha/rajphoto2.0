@@ -111,10 +111,12 @@
         });
 
         $("#other_quantity").on('keyup change', function() {
+          
             var quantity = $(this).val()
             var currRate = $("#other_rate").val();
-            var incomeTitle = $('#other').val();
-            if(incomeTitle == 15){
+            var incomeTitle = $('#other option:selected').text();
+            
+            if(incomeTitle == 'EDV'){
                 newTotal = (parseInt(currRate) + quantity * 100) - 100
                 $("#other_total").val(newTotal);
             }else{

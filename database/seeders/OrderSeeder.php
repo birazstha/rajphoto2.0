@@ -113,6 +113,14 @@ class OrderSeeder extends Seeder
                 'details_required' => 0,
                 'rate' => null,
             ],
+            11 => [
+                'name' => 'EDV',
+                'status' => 1,
+                'rank' => 1,
+                'details_required' => 0,
+                'rate' => 250,
+            ],
+
 
 
 
