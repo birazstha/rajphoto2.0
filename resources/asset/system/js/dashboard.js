@@ -43,8 +43,8 @@ $(function () {
 
     $('#todays-date').nepaliDatePicker({
         language: 'english',
-        // disableDaysAfter: 0,
-        // disableBefore: '2079-05-24',
+        disableDaysAfter: 0,
+        disableBefore: '2079-07-21',
         onChange: function () {
             var selectedDate = $('#todays-date').val()
             $('#yesterday-date').val(previousDate(selectedDate))
