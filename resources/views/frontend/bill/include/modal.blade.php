@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form" action="{{ route('bills.update', $bill->id) }}">
+                <form method="post"  action="{{ route('bills.update', $bill->id) }}">
                     @csrf
                     @method('put')
                     {{-- Due Amount --}}

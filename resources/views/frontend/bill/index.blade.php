@@ -129,7 +129,7 @@
                 return $.get(path, {
                     query: query
                 }, function(data) {
-                    console.log(data);
+                    console.log(data);y
                     return process(data);
                 });
             }
