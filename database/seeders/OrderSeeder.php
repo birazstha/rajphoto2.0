@@ -107,18 +107,18 @@ class OrderSeeder extends Seeder
 
             ],
             11 => [
-                'name' => 'Others',
-                'status' => 1,
-                'rank' => 1,
-                'details_required' => 0,
-                'rate' => null,
-            ],
-            11 => [
                 'name' => 'EDV',
                 'status' => 1,
                 'rank' => 1,
                 'details_required' => 0,
                 'rate' => 250,
+            ],
+            12 => [
+                'name' => 'Others',
+                'status' => 1,
+                'rank' => 1,
+                'details_required' => 0,
+                'rate' => 0,
             ],
 
 

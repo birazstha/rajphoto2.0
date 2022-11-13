@@ -1,4 +1,5 @@
-<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,12 +12,12 @@
 
                 <form action="{{ route('other-incomes.store') }}" method="POST" autocomplete="off">
                     @csrf
-                    <!--Prepared by-->
+                    <!--Income-->
                     <div class="form-group row">
                         {!! Form::label('order_id', 'Income', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
 
-                            <select name="order_id" id="other" class="form-control" required>
+                            <select name="order_id" id="other_income" class="form-control" required>
                                 <option value="" selected>Select Income Title</option>
                                 @foreach ($orders as $order)
                                     <option value="{{ $order->id }}">{{ $order->name }}</option>
@@ -28,6 +29,20 @@
                             @enderror
                         </div>
                     </div>
+
+                    <!--Description-->
+                    <div class="form-group row">
+                        {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
+
+                            <textarea name="" id="" cols="10" rows="3" class="form-control" name="description"></textarea>
+
+                            @error('description')
+                                <span class="text text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
 
 
                     <!--Rate-->
@@ -46,14 +61,14 @@
                         <!--Quantity-->
                         <div class="col-4">
                             <div class="form-group row">
-                                {!! Form::label('paid_amount', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="number" name="quantity" value="1" id="other_quantity"
                                             class="form-control" {{ isset($item) ? 'readonly' : '' }} required>
                                     </td>
                                 </div>
                             </div>
-                            @error('paid_amount')
+                            @error('quantity')
                                 <p class="text text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -61,7 +76,7 @@
                         <div class="col-4">
                             <!--Total-->
                             <div class="form-group row">
-                                {!! Form::label('total', 'Total', ['class' => 'col-sm-4 col-form-label']) !!}
+                                {!! Form::label('other_total', 'Total', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="text" name="total" id="other_total"
                                             value="{{ $item->due_amount ?? '' }}" readonly class="form-control"></td>

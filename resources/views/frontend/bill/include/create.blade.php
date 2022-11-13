@@ -8,13 +8,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('bills.store') }}"  method="POST" autocomplete="off">
+                <form action="{{ route('bills.store') }}" method="POST" autocomplete="off">
                     @csrf
                     <div class="form-group row">
                         <div class="col-6">
                             <!--Name-->
                             <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Name</label>
+                                <label for="name" class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
                                     <input type="text" value="" name="name" class="form-control"
                                         id="customer_name" placeholder="Enter customer's name">
@@ -26,9 +26,9 @@
                         <div class="col-6">
                             <!--Phone-->
                             <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Phone</label>
+                                <label for="phone_number" class="col-sm-4 col-form-label">Phone</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="" name="phone_number" class="form-control"
+                                    <input type="number" value="" name="phone_number" class="form-control"
                                         id="phone_number" placeholder="Enter customer's phone number.">
                                 </div>
                             </div>
@@ -186,24 +186,17 @@
 
 
 
-                    <div class="row">
-                        <div class="col-6">
-                            <!--Ordered Data-->
-                            <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Ordered Date</label>
-                                <div class="col-sm-8">
-                                    <input type="text" value=""
-                                        name="ordered_date" class="form-control order-date" id="order-date"
-                                        readonly="readonly">
-                                </div>
-                            </div>
+                    <input type="hidden" value="" name="ordered_date" class="form-control order-date"
+                        id="order-date" readonly="readonly">
 
-                        </div>
-                        <div class="col-6">
+
+                    <div class="row">
+
+                        <div class="">
                             <!--Delivery Date-->
                             <div class="form-group row">
-                                <label for="texr" class="col-sm-4 col-form-label">Delivery Date</label>
-                                <div class="col-sm-8">
+                                <label for="texr" class="col-sm-2 col-form-label">Delivery Date</label>
+                                <div class="col-sm-10">
                                     <input type="text" name="delivery_date" required
                                         value="{{ $item->delivery_date ?? '' }}" class="form-control"
                                         id="delivery-date">

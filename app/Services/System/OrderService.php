@@ -24,9 +24,10 @@ class OrderService extends Service
             $query->select($selectedColumns);
         }
 
-        if(isset($data->pluck)){
-            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
-        }
+        if (isset($data->pluck)) {
+
+            return $query->orderBy('id', 'ASC')->where('details_required',true)->pluck('name', 'id');
+       }
 
         if(isset($data->details)){
             if($data->details === 'required'){

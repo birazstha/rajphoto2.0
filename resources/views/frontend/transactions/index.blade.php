@@ -76,7 +76,6 @@
     </div>
 @endsection
 @section('js')
-@section('js')
     <script>
         //For Transactions
         const calculatetotal = function(data) {
@@ -86,8 +85,8 @@
 
         };
 
-        $("#other").change(function() {
-            $('#other_quantity').val(1);
+        $("#other_income").change(function() {
+          
             var incomeTitle = $(this).val();
 
             $.ajax({
@@ -138,4 +137,4 @@
 @endsection
 
 
-@endsection
+
