@@ -11,6 +11,7 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Name</th>
+        <th scope="col">Rank</th>
         <th scope="col">Status</th>
         <th scope="col">Detail Required?</th>
         <th scope="col">Action</th>
@@ -23,6 +24,7 @@
         <tr>
             <td>{{ SN($pageIndex, $key) }}</td>
             <td>{{ $item->name }}</td>
+            <td>{{ $item->rank }}</td>
             <td>
                 @if ($item->status == 1)
                     <span class="badge badge-success">Active</span>

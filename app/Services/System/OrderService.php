@@ -31,9 +31,9 @@ class OrderService extends Service
 
         if(isset($data->details)){
             if($data->details === 'required'){
-                 $query->where('details_required',true)->get();
+                 $query->where('details_required',true)->orderBy('rank','ASC')->get();
             }else{
-                 $query->where('details_required',false)->get();
+                 $query->where('details_required',false)->orderBy('rank','ASC')->get();
             }
         }
 

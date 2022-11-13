@@ -26,6 +26,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
+
         $data = [
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
