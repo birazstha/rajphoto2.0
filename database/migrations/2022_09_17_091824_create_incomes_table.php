@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateIncomesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+   
     public function up()
     {
         Schema::create('incomes', function (Blueprint $table) {

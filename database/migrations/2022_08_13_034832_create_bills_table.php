@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBillsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
@@ -23,6 +19,9 @@ class CreateBillsTable extends Migration
             $table->integer('cash_return');
             $table->string('ordered_date');
             $table->string('delivery_date');
+            $table->boolean('status')->default(0);
+            $table->string('cleared_date')->nullable();
+            $table->foreignId('cleared_by')->nullable()->constrained('frontend_users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained('frontend_users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('qr_code')->unique()->nullable();
             $table->timestamps();

@@ -99,10 +99,28 @@
                 <td colspan="9" class="text text-danger text-center">No data found</td>
             @endforelse
 
-
-
-
         </tbody>
 
     </table>
+
+     {{-- Show pagination when exceeds 10 --}}
+     <div class="d-flex justify-content-between">
+
+
+       @if ($bills->count() != 0)
+            <div class="">
+                Showing 1 to {{ $bills->count() }} entries of {{ $bills->count() }} entries.
+            </div>
+            @if ($dataCount >= 1)
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=3">3</a></li>
+                    <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=4">Next</a></li>
+                </ul>
+            @endif
+        @endif 
+    </div>
+
 

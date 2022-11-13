@@ -6,16 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSizesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->integer('rate')->nullable();
             $table->string('name');
             $table->boolean('status');
             $table->timestamps();

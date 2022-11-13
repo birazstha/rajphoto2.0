@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ExpenseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         
@@ -22,9 +18,14 @@ class ExpenseSeeder extends Seeder
                 'status' => 1,
             ],
             1 => [
-                'bank_name' => 'Breakfast',
+                'title' => 'Breakfast',
                 'status' => 1,
             ],
+            2 => [
+                'title' => 'Other',
+                'status' => 1,
+            ],
+            
 
         ]);
     }

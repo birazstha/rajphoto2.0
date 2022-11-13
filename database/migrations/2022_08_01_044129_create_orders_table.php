@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->boolean('status')->default('0');
             $table->boolean('details_required')->default('1');
             $table->integer('rate')->nullable();

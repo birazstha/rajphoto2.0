@@ -52,7 +52,7 @@ class TestController extends Controller
             $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
             return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
-            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(10);
+            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(5);
             return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill', 'users'))->render();
         }
     }

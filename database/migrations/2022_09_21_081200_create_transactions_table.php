@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('expense_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('saving_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('bill_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('is_withdrawn')->after('bill_id')->default(0);
             $table->boolean('bill_type')->default(0);
             $table->integer('amount');
             $table->string('date');
