@@ -16,10 +16,12 @@ use App\Services\System\BillOrderService;
 use App\Services\System\CustomerService;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isNull;
+
 class BillService extends Service
 {
 
-    protected $orderService, $frontendUser;
+    protected $orderService, $frontendUser, $customerService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -55,7 +57,7 @@ class BillService extends Service
         $orderType = $request->bill[0]['order_id'];
         DB::beginTransaction();
         try {
-             //Urgent Order value is 4
+            //Urgent Order value is 4
             $data = $request->all();
             $data['qr_code'] = uniqid();
             if ($orderType == 4) {
@@ -64,11 +66,14 @@ class BillService extends Service
                 $data['status'] = true;
             }
             $customerId = uniqid();
-            $customer = $this->customerService->store($request->merge(['customer_id' => $customerId]));
-          
-    
-            // Bill Create Operation
-            $data['customer_id'] = $customer->id;
+
+            if (empty($request->oldCustomer)) {
+                $customer = $this->customerService->store($request->merge(['customer_id' => $customerId]));
+                // Bill Create Operation
+                $data['customer_id'] = $customer->id;
+            } else {
+                $data['customer_id'] = $request->oldCustomer;
+            }
             $bill = $this->model->create($data);
 
             //For recording transactions
@@ -76,8 +81,8 @@ class BillService extends Service
             $transaction['amount'] =  $request->paid_amount;
             $transaction['bill_id'] = $bill->id;
             $this->transactionService->store($transaction);
-           
-    
+
+
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
 
@@ -86,7 +91,7 @@ class BillService extends Service
         } catch (\Exception $e) {
             DB::rollback();
             dd($e);
-    
+
             throw new CustomGenericException($e->getMessage());
         }
     }
@@ -109,7 +114,7 @@ class BillService extends Service
             $transaction['amount'] =  $request->total;
             $transaction['bill_id'] = $request->bill_id;
             $transaction['bill_type'] = 1;
-            
+
             $this->transactionService->store($transaction);
 
             DB::commit();

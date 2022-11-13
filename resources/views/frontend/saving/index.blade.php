@@ -31,7 +31,7 @@
                     <tr class="table-primary">
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $saving->savings->bank_name }}</td>
-                        <td>{{ $saving->amount }}</td>
+                        <td>Rs.{{ $saving->amount }}/-</td>
                     </tr>
                 @empty
                     <tr>

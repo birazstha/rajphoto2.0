@@ -48,9 +48,13 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
+
+
+        //Check if this user already exist or not
+        $customerId = $this->customerService->getCustomerId($request);
+         
         try {
-            $bill =  $this->billService->store($request);
-          
+            $bill =  $this->billService->store($request->merge(['oldCustomer'=>$customerId]));  
             return redirect()->route('bills.show', $bill->id)->with('success', 'Bill has been created successfully!!');
         } catch (\Exception $e) {
             throw new CustomGenericException($e->getMessage());

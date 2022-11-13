@@ -58,18 +58,18 @@
                         <td>1</td>
                         <td>{{ $data['row']->billOrders[0]->orders->name }}</td>
                         <td>{{ $data['row']->billOrders[0]->sizes->name }}</td>
-                        <td>{{ $data['row']->billOrders[0]->rate }}</td>
+                        <td>रु{{ $data['row']->billOrders[0]->rate }}/-</td>
                         <td>{{ $data['row']->billOrders[0]->quantity }}</td>
-                        <td>रु{{ $data['row']->billOrders[0]->total }}</td>
+                        <td>रु{{ $data['row']->billOrders[0]->total }}/-</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         @if (isset($data['row']->billOrders[1]))
                             <td>{{ $data['row']->billOrders[1]->orders->name }}</td>
                             <td>{{ $data['row']->billOrders[1]->sizes->name }}</td>
-                            <td>{{ $data['row']->billOrders[1]->rate }}</td>
+                            <td>रु{{ $data['row']->billOrders[1]->rate }}/-</td>
                             <td>{{ $data['row']->billOrders[1]->quantity }}</td>
-                            <td>रु{{ $data['row']->billOrders[1]->total }}</td>
+                            <td>रु{{ $data['row']->billOrders[1]->total }}/-</td>
                         @else
                             <td></td>
                             <td></td>
@@ -84,9 +84,9 @@
                         @if (isset($data['row']->billOrders[2]))
                             <td>{{ $data['row']->billOrders[2]->orders->name }}</td>
                             <td>{{ $data['row']->billOrders[2]->sizes->name }}</td>
-                            <td>{{ $data['row']->billOrders[2]->rate }}</td>
+                            <td>रु{{ $data['row']->billOrders[2]->rate }}/-</td>
                             <td>{{ $data['row']->billOrders[2]->quantity }}</td>
-                            <td>रु{{ $data['row']->billOrders[2]->total }}</td>
+                            <td>रु{{ $data['row']->billOrders[2]->total }}/-</td>
                         @else
                             <td></td>
                             <td></td>
@@ -101,9 +101,9 @@
                         @if (isset($data['row']->billOrders[3]))
                             <td>{{ $data['row']->billOrders[3]->orders->name }}</td>
                             <td>{{ $data['row']->billOrders[3]->sizes->name }}</td>
-                            <td>{{ $data['row']->billOrders[3]->rate }}</td>
+                            <td>रु{{ $data['row']->billOrders[3]->rate }}/-</td>
                             <td>{{ $data['row']->billOrders[3]->quantity }}</td>
-                            <td>रु{{ $data['row']->billOrders[3]->total }}</td>
+                            <td>रु{{ $data['row']->billOrders[3]->total }}/-</td>
                         @else
                             <td></td>
                             <td></td>
@@ -116,26 +116,27 @@
 
                     <tr>
                         <th colspan="5">Grand Total</th>
-                        <td>रु{{ $data['row']->grand_total }}</td>
+                        <td>रु{{ $data['row']->grand_total }}/-</td>
                     </tr>
 
 
 
                     <tr>
                         <th colspan="5">Amount Paid</th>
-                        <td>रु{{ $data['row']->paid_amount }}</td>
+                        <td>{{ $data['row']->paid_amount == 0 ? '----' : 'रु'.$data['row']->paid_amount}}/-</td>
                     </tr>
                     <tr>
                         <th colspan="5">Balance Amount</th>
-                        <td>रु{{ $data['row']->due_amount }}</td>
+                        <td>{!! $data['row']->due_amount == 0 ? '<span class="badge badge-success">Paid</span>' : 'रु'.$data['row']->due_amount!!}/-</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Received</th>
-                        <td>रु{{ $data['row']->cash_received }}</td>
+                        <td>{{ $data['row']->cash_received == 0 ? '----' : 'रु'.$data['row']->cash_received}}/-</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Returned</th>
-                        <td>रु{{ $data['row']->cash_return }}</td>
+                        <td>{{ $data['row']->cash_return == 0 ? '----' : 'रु'.$data['row']->cash_return}}/-</td>
+
                     </tr>
                 </table>
                 <div class="prepare">Bill Prepared By: {{ $data['row']->users->name }}</div>
