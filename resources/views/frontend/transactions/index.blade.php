@@ -35,27 +35,28 @@
             <tbody>
 
                 @forelse ($transactions as $key => $transaction)
-                
-                        <tr
-                            class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
-                            <th scope="row">{{ $key + 1 }}</th>
-                            <td>
-                                @if (isset($transaction->bill_id))
-                                    Bill ( {{ $transaction->bills->qr_code }})
-                                @elseif (isset($transaction->expense_id))
-                                    {{ $transaction->expenses->title }}
-                                @elseif (isset($transaction->saving_id))
-                                    {{ $transaction->savings->bank_name }}
-                                @elseif(isset($transaction->income_id))
-                                    {{ $transaction->incomes->name }}
-                             
-                                @endif
-                            </td>
-                            <td>
-                                Rs.{{ $transaction->amount }}/-
-                            </td>
-                        </tr>
-                   
+                    <tr
+                        class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
+                        <th scope="row">{{ $key + 1 }}</th>
+                        <td>
+                            @if (isset($transaction->bill_id))
+                                Bill ( {{ $transaction->bills->qr_code }})
+                            @elseif (isset($transaction->expense_id))
+                                {{ $transaction->expenses->title }}
+                                {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
+
+                            @elseif (isset($transaction->saving_id))
+                                {{ $transaction->savings->bank_name }}
+                            @elseif(isset($transaction->income_id))
+                                {{ $transaction->incomes->name }}
+                                {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
+                            @endif
+                        </td>
+                        <td>
+                            Rs.{{ $transaction->amount }}/-
+                        </td>
+                    </tr>
+
 
                 @empty
                     <tr>
@@ -86,9 +87,13 @@
         };
 
         $("#other_income").change(function() {
-          
+            var title = $('#other_income option:selected').text();
+            if (title == 'Others') {
+                $('#toggle-description').removeClass('d-none');
+            } else {
+                $('#toggle-description').addClass('d-none')
+            }
             var incomeTitle = $(this).val();
-
             $.ajax({
                 method: 'get',
                 url: "{{ URL::route('bill.getRate') }}",
@@ -104,26 +109,37 @@
             });
         });
 
+        $("#expense").change(function() {
+        
+            var title = $('#expense option:selected').text();
+            if (title == 'Other') {
+                $('#toggle-description-expense').removeClass('d-none');
+            } else {
+                $('#toggle-description-expense').addClass('d-none')
+            }
+        });
+
+
         $("#other_rate").on('keyup change', function() {
             var rate = $(this).val()
             calculatetotal(rate);
         });
 
         $("#other_quantity").on('keyup change', function() {
-          
+
             var quantity = $(this).val()
             var currRate = $("#other_rate").val();
             var incomeTitle = $('#other option:selected').text();
-            
-            if(incomeTitle == 'EDV'){
+
+            if (incomeTitle == 'EDV') {
                 newTotal = (parseInt(currRate) + quantity * 100) - 100
                 $("#other_total").val(newTotal);
-            }else{
+            } else {
                 var totaldd = quantity * currRate;
-            $("#other_total").val(totaldd);
+                $("#other_total").val(totaldd);
             }
-          
-            
+
+
 
         });
 
@@ -135,6 +151,3 @@
         });
     </script>
 @endsection
-
-
-

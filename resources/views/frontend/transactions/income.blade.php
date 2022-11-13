@@ -1,5 +1,4 @@
-<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,11 +30,11 @@
                     </div>
 
                     <!--Description-->
-                    <div class="form-group row">
+                    <div class="form-group row d-none" id="toggle-description">
                         {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
 
-                            <textarea name="" id="" cols="10" rows="3" class="form-control" name="description"></textarea>
+                            <textarea name="description" id="" cols="10" rows="3" class="form-control" name="description"></textarea>
 
                             @error('description')
                                 <span class="text text-danger">{{ $message }}</span>
@@ -61,14 +60,14 @@
                         <!--Quantity-->
                         <div class="col-4">
                             <div class="form-group row">
-                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
+                                {!! Form::label('paid_amount', 'Quantity', ['class' => 'col-sm-3 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="number" name="quantity" value="1" id="other_quantity"
                                             class="form-control" {{ isset($item) ? 'readonly' : '' }} required>
                                     </td>
                                 </div>
                             </div>
-                            @error('quantity')
+                            @error('paid_amount')
                                 <p class="text text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -76,7 +75,7 @@
                         <div class="col-4">
                             <!--Total-->
                             <div class="form-group row">
-                                {!! Form::label('other_total', 'Total', ['class' => 'col-sm-4 col-form-label']) !!}
+                                {!! Form::label('total', 'Total', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-6">
                                     <td><input type="text" name="total" id="other_total"
                                             value="{{ $item->due_amount ?? '' }}" readonly class="form-control"></td>

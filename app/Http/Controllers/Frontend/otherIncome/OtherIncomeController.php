@@ -62,6 +62,7 @@ class OtherIncomeController extends Controller
         $transaction['date'] =  $request->date;
         $transaction['amount'] =  $request->total;
         $transaction['income_id'] = $request->order_id;
+        $transaction['description'] = $request->description;
         $transaction['created_at'] = Carbon::now();
         $this->transactionService->store($transaction);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');

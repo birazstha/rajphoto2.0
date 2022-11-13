@@ -46,6 +46,7 @@ class ExpenseController extends Controller
         $transaction['date'] =  $request->date;
         $transaction['amount'] =  $request->amount;
         $transaction['expense_id'] = $request->expense_id;
+        $transaction['description'] = $request->description;
         $this->transactionService->store($transaction);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
