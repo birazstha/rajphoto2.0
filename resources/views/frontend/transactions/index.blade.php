@@ -26,9 +26,9 @@
         <table class="table room-table">
             <thead>
                 <tr>
-                    <th>S.No</th>
-                    <th>Title</th>
-                    <th>Amount</th>
+                    <th class="text-center">S.No</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Amount</th>
                 </tr>
             </thead>
 
@@ -37,14 +37,13 @@
                 @forelse ($transactions as $key => $transaction)
                     <tr
                         class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
-                        <th scope="row">{{ $key + 1 }}</th>
-                        <td>
+                        <th class="text-center" scope="row">{{ $key + 1 }}</th>
+                        <td class="text-center">
                             @if (isset($transaction->bill_id))
                                 Bill ( {{ $transaction->bills->qr_code }})
                             @elseif (isset($transaction->expense_id))
                                 {{ $transaction->expenses->title }}
                                 {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
-
                             @elseif (isset($transaction->saving_id))
                                 {{ $transaction->savings->bank_name }}
                             @elseif(isset($transaction->income_id))
@@ -52,7 +51,7 @@
                                 {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
                             Rs.{{ $transaction->amount }}/-
                         </td>
                     </tr>
@@ -60,7 +59,7 @@
 
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center text-danger"> No Transactions found</td>
+                        <td colspan="3" class="text-danger"> No Transactions found</td>
                     </tr>
                 @endforelse
 
@@ -110,7 +109,7 @@
         });
 
         $("#expense").change(function() {
-        
+
             var title = $('#expense option:selected').text();
             if (title == 'Other') {
                 $('#toggle-description-expense').removeClass('d-none');

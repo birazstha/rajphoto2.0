@@ -9,14 +9,14 @@
 <table class="room-table">
     <thead>
         <tr>
-            <th>S.No</th>
-            <th>Customer's Detail</th>
-            <th>Order's Detail</th>
-            <th>Amount Details</th>
-            <th>Delivery Date</th>
-            <th>Prepared By</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th class="text-center">S.No</th>
+            <th class="text-center">Customer's Detail</th>
+            <th class="text-center">Order's Detail</th>
+            <th class="text-center">Amount Details</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Prepared By</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Action</th>
 
         </tr>
     </thead>
@@ -25,7 +25,7 @@
 
         @forelse ($bills as $key => $bill)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td class="text-center">{{ $key + 1 }}</td>
                 {{-- <td>{{ $bill->id }}</td> --}}
                 <td class="center">
 
@@ -96,20 +96,20 @@
                 <td class="text-center">{{ $bill->users->name }}</td>
                 <td class="text-center">
                     @if ($bill->status)
-                        <span class="badge badge-success">Delivered</span>
+                        <span class="badge badge-success btn-sm">Delivered</span>
                     @else
-                        <span class="badge badge-info">Pending</span>
+                        <span class="badge badge-info btn-sm">Pending</span>
                     @endif
                 </td>
                 <td class="text-center">
 
                     <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
-                        data-bill={{ $bill->due_amount }} class="btn btn-success open-AddBookDialog"><i
+                        data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
                             class="far fa-eye"></i></button>
                     @include('frontend.bill.include.modal')
 
-                    {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
-                    <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info"><i
+                    
+                    <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info btn-sm"><i
                             class="fas fa-info-circle"></i></a>
                 </td>
             </tr>
