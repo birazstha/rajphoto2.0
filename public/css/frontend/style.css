@@ -25,7 +25,7 @@ body {
 }
 
 .prepare {
-  /*border: 1px solid red;*/
+  /**/
   float: right;
   padding: 0.3rem;
 }
@@ -65,7 +65,7 @@ body {
 }
 
 .loader {
-  /* border: 1px solid red; */
+  /*  */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,9 +83,8 @@ body {
 
 .order-detail {
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin-left: 2rem;
+  justify-content: center;
+
 }
 
 .bill-index {
@@ -97,87 +96,25 @@ body {
 }
 
 .customer-detail {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
-.tab-slider--nav {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  /* border: 1px solid red; */
-}
-
-.tab-slider--tabs {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
-  border-radius: 35px;
-  overflow: hidden;
-  background: #fff;
-  height: 35px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.tab-slider--tabs:after {
-  content: '';
-  width: 50%;
-  background: #345f90;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-transition: all 250ms ease-in-out;
-  transition: all 250ms ease-in-out;
-  border-radius: 35px;
-}
-
-.tab-slider--tabs.slide:after {
-  left: 50%;
-}
-
-.tab-slider--trigger {
-  font-size: 12px;
-  line-height: 1;
-  font-weight: bold;
-  color: #345f90;
-  text-transform: uppercase;
-  padding: 11px 20px;
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
-  display: inline-block;
-  -webkit-transition: color 250ms ease-in-out;
-  transition: color 250ms ease-in-out;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.tab-slider--trigger.active {
-  color: #fff;
-}
-
-.tab-slider--body {
-  margin-bottom: 20px;
-}
 
 .form {
   /* height: 40rem; */
 }
 
+.test3{
+  display:  flex;
+  align-items: center;;
+  justify-content: center;
+}
+
 .amounts {
-  /* border: 1px solid red; */
+  width: 10rem;
   display: flex;
   justify-content: space-between;
 }
@@ -210,6 +147,7 @@ body {
 
 .room-table td,
 th {
+  /* border: 1px solid green; */
   border-bottom: 1px solid grey;
   padding: 10px;
   align-items: center;
@@ -224,6 +162,11 @@ th {
 
 .room-table tbody tr:last-of-type {
   border-bottom: 2px solid #3569c7;
+}
+
+.test1{
+  
+  width: 15rem;
 }
 
 .table-container {
