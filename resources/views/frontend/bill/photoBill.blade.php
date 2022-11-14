@@ -22,7 +22,12 @@
 
                 <table class="table table-bordered">
                     <div class="qrcode">
-                        <h1>Raj Photo Studio</h1>
+                        {{-- <h1>Raj Photo Studio</h1> --}}
+
+                        <div class="">
+                            <img src="{{ asset('public/logo.png') }}" alt="" height="100px">
+                        </div>
+
                         {!! QrCode::size(100)->generate($data['row']->qr_code) !!}
                     </div>
                     <tr>
@@ -123,19 +128,21 @@
 
                     <tr>
                         <th colspan="5">Amount Paid</th>
-                        <td>{{ $data['row']->paid_amount == 0 ? '----' : 'रु'.$data['row']->paid_amount}}/-</td>
+                        <td>{{ $data['row']->paid_amount == 0 ? '----' : 'रु' . $data['row']->paid_amount }}/-</td>
                     </tr>
                     <tr>
                         <th colspan="5">Balance Amount</th>
-                        <td>{!! $data['row']->due_amount == 0 ? '<span class="badge badge-success">Paid</span>' : 'रु'.$data['row']->due_amount!!}/-</td>
+                        <td>{!! $data['row']->due_amount == 0
+                            ? '<span class="badge badge-success">Paid</span>'
+                            : 'रु' . $data['row']->due_amount !!}/-</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Received</th>
-                        <td>{{ $data['row']->cash_received == 0 ? '----' : 'रु'.$data['row']->cash_received}}/-</td>
+                        <td>{{ $data['row']->cash_received == 0 ? '----' : 'रु' . $data['row']->cash_received .'/-' }}</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Returned</th>
-                        <td>{{ $data['row']->cash_return == 0 ? '----' : 'रु'.$data['row']->cash_return}}/-</td>
+                        <td>{{ $data['row']->cash_return == 0 ? '----' : 'रु' . $data['row']->cash_return .'/-' }}</td>
 
                     </tr>
                 </table>
@@ -168,8 +175,6 @@
 
         });
     </script>
-
-   
 @endsection
 
 @include('frontend.layout.master')

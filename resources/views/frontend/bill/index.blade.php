@@ -5,8 +5,6 @@
 
     <div class="bill-index">
         <div class="mb-4">
-
-
             <form class="d-flex">
                 @csrf
                 <div class="input-group input-group">
@@ -17,10 +15,7 @@
                             id="todays-date">
                     </span>
                 </div>
-
             </form>
-
-
         </div>
 
         <div class="d-flex justify-content-between mb-2 align-items-center">

@@ -14,15 +14,15 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/search', 'bill\BillController@searchBill')->name('bill.search');
     Route::get('/search/{qr_code}', 'bill\BillController@searchBillFromIndex')->name('bill.searches');
 
-    Route::post('/getOrderById', 'TestController@getOrderById')->name('order.getSize');
-    Route::post('/getRateBySize', 'TestController@getRateBySize')->name('size.getRate');
-    Route::get('/getCustomerInfo', 'TestController@getCustomerInfo')->name('bill.getCustomerInfo');
-    Route::get('/getRate', 'TestController@getRate')->name('bill.getRate');
-    Route::get('/getIncome', 'TestController@getIncome')->name('bill.getIncome');
-    Route::get('/getOpeningBalance', 'TestController@getOpeningBalance')->name('bill.getOpeningBalance');
-    Route::post('/darkmode', 'TestController@darkmode')->name('frontend.darkmode');
-    Route::get('autocompletename', 'TestController@autocompleteName')->name('autocompleteName');
-    Route::get('autocompletephone', 'TestController@autocompletePhone')->name('autocompletePhone');
+    Route::post('/getOrderById', 'AjaxController@getOrderById')->name('order.getSize');
+    Route::post('/getRateBySize', 'AjaxController@getRateBySize')->name('size.getRate');
+    Route::get('/getCustomerInfo', 'AjaxController@getCustomerInfo')->name('bill.getCustomerInfo');
+    Route::get('/getRate', 'AjaxController@getRate')->name('bill.getRate');
+    Route::get('/getIncome', 'AjaxController@getIncome')->name('bill.getIncome');
+    Route::get('/getOpeningBalance', 'AjaxController@getOpeningBalance')->name('bill.getOpeningBalance');
+    Route::post('/darkmode', 'AjaxController@darkmode')->name('frontend.darkmode');
+    Route::get('autocompletename', 'AjaxController@autocompleteName')->name('autocompleteName');
+    Route::get('autocompletephone', 'AjaxController@autocompletePhone')->name('autocompletePhone');
 
     Route::resource('transactions', 'transaction\transactionController');
     

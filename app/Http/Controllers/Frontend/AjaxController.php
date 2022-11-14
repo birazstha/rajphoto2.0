@@ -13,9 +13,10 @@ use App\Model\Size;
 use App\Model\Transaction;
 use App\Services\System\AdjustmentService;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class AjaxController extends Controller
 {
 
     protected $adjustmentService;
@@ -49,8 +50,10 @@ class TestController extends Controller
         $users = FrontendUser::all();
         $date =  $request->date;
         if (isset($customerName)) {
-            $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
-            return view('frontend.bill.include.billsByCustomer', compact('customers', 'totalBill', 'users'))->render();
+            $bills = Bill::whereHas('customers', function ($query) use ($request) {
+                $query->where('name', 'ILIKE', '%' . $request->customer_name . '%');
+            })->get();
+            return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
             $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(5);
             return view('frontend.bill.include.billsByDate', compact('bills', 'totalBill', 'users'))->render();
@@ -81,15 +84,15 @@ class TestController extends Controller
     }
 
     public function getIncome(Request $request)
-    { 
-        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);   
+    {
+        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
-        $data['withdrawn'] = $data['transactions']->where('is_withdrawn',true)->sum('amount');
-        $data['adjustment'] = Adjustment::where('date',$request->date)->first()->adjusted_amount ?? 0; 
-     
+        $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
+        $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
+
 
         //Calculating Total Closing Balance for selected day
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'];
