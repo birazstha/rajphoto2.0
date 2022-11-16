@@ -23,7 +23,7 @@
             <button data-toggle="modal" data-target="#createBill" target="_blank"
                 class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
 
-            @include('frontend.bill.include.create')
+            @include('frontend.bill.include.form')
 
         </div>
 
@@ -124,14 +124,22 @@
                 return $.get(path, {
                     query: query
                 }, function(data) {
-                    console.log(data);y
                     return process(data);
                 });
             }
         });
 
 
-        
+        $(document).on('change', '#payment_method', function() {
+            var method = $(this).val();
+            if (method == 'online') {
+                $('#toggle-payment').removeClass('d-none');
+                $('#cash-transaction').addClass('d-none');
+            } else {
+                $('#toggle-payment').addClass('d-none');
+                $('#cash-transaction').removeClass('d-none');
 
+            }
+        });
     </script>
 @endsection

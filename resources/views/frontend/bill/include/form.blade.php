@@ -156,15 +156,44 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!--Payment Method-->
+                    <div class="form-group row d-none" id="toggle-payment-method">
+                        {!! Form::label('', 'Payment Method', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
+
+                            <select name="" class="form-control" id="payment_method" required>
+                                <option value="cash" selected>Cash</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- Payment Gateway --}}
+                    <div class="form-group row d-none" id="toggle-payment">
+                        {!! Form::label('payment_method', 'Payment Gateway', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10" style="display: flex; flex-direction:row; align-item:center">
+                            @foreach ($payments as $payment)
+                                <div class="form-check" style="display: flex; align-items:center;">
+                                    <input class="form-check-input" name="payment_method" type="radio"
+                                        id="flexRadioDefault1" value="{{ $payment->id }}">
+                                    <label class="form-check-label mr-2" for="flexRadioDefault1">
+                                        <img src="{{ asset('public/uploads/payment-method/' . $payment->image) }}"
+                                            height="50px" alt="">
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+                    <div class="row d-none" id="cash-transaction">
                         <div class="col-6">
                             <!--Cash Received-->
                             <div class="form-group row">
                                 <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
                                 <div class="col-sm-8">
-                                    <input type="number" name="cash_received"
-                                        value="{{ $item->cash_received ?? '' }}" id="cash_received"
-                                        class="form-control" required>
+                                    <input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}" id="cash_received"
+                                        class="form-control">
                                 </div>
                             </div>
 

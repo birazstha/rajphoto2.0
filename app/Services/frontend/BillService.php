@@ -21,7 +21,7 @@ use function PHPUnit\Framework\isNull;
 class BillService extends Service
 {
 
-    protected $orderService, $frontendUser, $customerService;
+    protected $orderService, $frontendUser, $customerService,$transactionService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -66,7 +66,6 @@ class BillService extends Service
                 $data['status'] = true;
             }
             $customerId = uniqid();
-
             if (empty($request->oldCustomer)) {
                 $customer = $this->customerService->store($request->merge(['customer_id' => $customerId]));
                 // Bill Create Operation
@@ -81,7 +80,6 @@ class BillService extends Service
             $transaction['amount'] =  $request->paid_amount;
             $transaction['bill_id'] = $bill->id;
             $this->transactionService->store($transaction);
-
 
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));

@@ -78,6 +78,8 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/savings', 'saving\SavingController');
 
         Route::resource('/adjustment','adjustment\AdjustmentController');
+
+        Route::resource('/payment-methods','paymentMethod\PaymentMethodController');
        
 
       

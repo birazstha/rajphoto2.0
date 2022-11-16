@@ -35,6 +35,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
+    {{-- <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/favicon/apple-touch-icon.png') }}"> --}}
+    {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/favicon/favicon-32x32.png') }}"> --}}
+    <link rel="icon" type="image/png" sizes="50x50" href="{{ asset('public/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('public/favicon/site.webmanifest') }}">
 
 
     <title>Raj Photo Studio - {{ $pageTitle ?? '' }}</title>
@@ -44,7 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
 
 
 </head>
@@ -60,8 +64,8 @@
         <nav>
             <ul>
 
-                   
-                
+
+
 
                 @if (request()->segment(1))
                     <li>
@@ -85,5 +89,3 @@
         </nav>
 
     </header>
-
-

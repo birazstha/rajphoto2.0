@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   sidebar.init()
   confirmDelete.init()

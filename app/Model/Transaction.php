@@ -11,7 +11,7 @@ class Transaction extends Model
   use HasFactory;
   
     protected $table = 'transactions';
-    protected $fillable = ['income_id','bill_id','expense_id','saving_id','is_withdrawn','amount','date','bill_type','description'];
+    protected $fillable = ['income_id','bill_id','expense_id','saving_id','is_withdrawn','amount','date','bill_type','description','payment_method'];
 
 
    public function incomes(){

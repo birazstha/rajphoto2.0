@@ -17,11 +17,13 @@ use App\Services\frontend\IncomeService;
 use App\Services\System\CustomerService;
 use App\Services\System\BillOrderService;
 use App\Exceptions\CustomGenericException;
+use App\Model\PaymentMethod;
 use App\Services\System\FrontendUserService;
+use App\Services\System\PaymentMethodService;
 
 class BillController extends Controller
 {
-    protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService;
+    protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService,$paymentMethodService;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
@@ -32,6 +34,7 @@ class BillController extends Controller
         $this->customerService = new CustomerService(new Customer);
         $this->userService = new FrontendUserService(new FrontendUser);
         $this->incomeService = new IncomeService(new Income);
+        $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
     }
 
     public function index(Request $request)
@@ -41,6 +44,7 @@ class BillController extends Controller
             'orders' => $this->orderService->getAllData($request->merge(['details'=>'required'])),
             'users'=>$this->frontendUser->getAllData($request),
             'bills' => $this->billService->getAllData($request->merge(['today' => true])),
+            'payments'=>  $this->paymentMethodService->getAllData($request),
         ];
 
         return view('frontend.bill.index', $data);
@@ -48,11 +52,8 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
-
-
         //Check if this user already exist or not
         $customerId = $this->customerService->getCustomerId($request);
-         
         try {
             $bill =  $this->billService->store($request->merge(['oldCustomer'=>$customerId]));  
             return redirect()->route('bills.show', $bill->id)->with('success', 'Bill has been created successfully!!');

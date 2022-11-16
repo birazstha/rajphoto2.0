@@ -7,13 +7,9 @@ use Illuminate\Database\Seeder;
 
 class ConfigSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
-    {
+    { 
         $settings = Config::where('id', 1)->first();
         if (! isset($settings)) {
             $directory = public_path().'/uploads/config';
@@ -26,7 +22,7 @@ class ConfigSeeder extends Seeder
                 'type' => 'file',
                 'value' => 'cms_logo.png',
 
-            ]);
+            ]); 
         }
 
         $settings2 = Config::where('id', 2)->first();

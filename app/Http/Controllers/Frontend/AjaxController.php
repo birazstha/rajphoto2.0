@@ -91,6 +91,7 @@ class AjaxController extends Controller
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);   
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
+        $data['online-payment'] = collect($data['transactions'])->where('payment_method')->where('bill_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn',true)->sum('amount');
@@ -98,7 +99,7 @@ class AjaxController extends Controller
      
 
         //Calculating Total Closing Balance for selected day
-        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'];
+        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment'];
         $data['todaysDate'] = $request->date;
         return view('system.home.transactions', $data);
     }

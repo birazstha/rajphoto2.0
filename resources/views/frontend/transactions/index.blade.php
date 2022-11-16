@@ -59,7 +59,7 @@
 
                 @empty
                     <tr>
-                        <td colspan="3" class="text-danger"> No Transactions found</td>
+                        <td colspan="3" class="text-danger text-center">No data found.</td>
                     </tr>
                 @endforelse
 

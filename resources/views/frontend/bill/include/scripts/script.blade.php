@@ -252,9 +252,20 @@
 
 
         //Calculate balance amount
-        $('#paid_amount').on('keyup change', function() {
+        $('#paid_amount').on('blur', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             $('#due_amount').val(balanceAmt);
+
+            var paidAmt = $(this).val();
+            if(paidAmt == 0){
+                $('#toggle-payment-method').addClass('d-none');
+                $('#cash_received').val(0);
+
+            }else{
+                $('#toggle-payment-method').removeClass('d-none');
+                $('#cash-transaction').removeClass('d-none');
+            }
+
         });
 
         //Calculate cash return

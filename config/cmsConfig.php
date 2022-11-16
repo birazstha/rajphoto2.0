@@ -25,6 +25,7 @@ $frontendUserBaseUrl = '/frontend-users';
 $customerBaseUrl = '/customers';
 $expenseBaseUrl = '/expenses';
 $savingBaseUrl = '/savings';
+$paymentBaseUrl = '/payment-methods';
 
 return  [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -437,6 +438,42 @@ return  [
                             'name' => 'Delete Config',
                             'route' => [
                                 'url' => $savingBaseUrl . '/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Payments Method',
+                    'icon' => '<i class="fas fa-money-check-alt"></i>',
+                    'route' => $paymentBaseUrl,
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Configs',
+                            'route' => [
+                                'url' => $paymentBaseUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Config',
+                            'route' => [
+                                'url' => $paymentBaseUrl,
+                                'method' => $postMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Config',
+                            'route' => [
+                                'url' => $paymentBaseUrl . '/*',
+                                'method' => $putMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Config',
+                            'route' => [
+                                'url' => $paymentBaseUrl . '/*',
                                 'method' => $deleteMethod,
                             ],
                         ],
