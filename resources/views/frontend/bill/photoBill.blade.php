@@ -134,7 +134,7 @@
                         <th colspan="5">Balance Amount</th>
                         <td>{!! $data['row']->due_amount == 0
                             ? '<span class="badge badge-success">Paid</span>'
-                            : 'रु' . $data['row']->due_amount !!}/-</td>
+                            : 'रु' . $data['row']->due_amount. '/-' !!}</td>
                     </tr>
                     <tr>
                         <th colspan="5">Cash Received</th>

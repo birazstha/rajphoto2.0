@@ -76,6 +76,7 @@ class BillService extends Service
             $bill = $this->model->create($data);
 
             //For recording transactions
+            $transaction = $request->except('_token');
             $transaction['date'] =  $request->ordered_date;
             $transaction['amount'] =  $request->paid_amount;
             $transaction['bill_id'] = $bill->id;

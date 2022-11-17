@@ -59,6 +59,7 @@ class OtherIncomeController extends Controller
 
     public function store(Request $request)
     {
+        $transaction = $request->except('_token');
         $transaction['date'] =  $request->date;
         $transaction['amount'] =  $request->total;
         $transaction['income_id'] = $request->order_id;

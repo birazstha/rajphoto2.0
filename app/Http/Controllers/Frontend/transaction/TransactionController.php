@@ -5,22 +5,25 @@ use App\Http\Controllers\Controller;
 use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Order;
+use App\Model\PaymentMethod;
 use App\Services\frontend\TransactionService;
 use App\Services\System\ExpenseService;
 use App\Services\System\FrontendUserService;
 use App\Services\System\OrderService;
+use App\Services\System\PaymentMethodService;
 use Illuminate\Http\Request;
 
 
 class TransactionController extends Controller
 {
-    protected $orderService,$frontendUser,$expenseService,$transactionService;
+    protected $orderService,$frontendUser,$expenseService,$transactionService,$paymentMethodService;
      public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
         $this->orderService = new OrderService(new Order);
         $this->frontendUser = new FrontendUserService(new FrontendUser);
         $this->expenseService = new ExpenseService(new Expense);
+        $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
 
     }
 
@@ -28,11 +31,12 @@ class TransactionController extends Controller
     {
 
         $data = [
+            'pageTitle'=>'Transaction',
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
             'expenses' => $this->expenseService->getAllData($request),
             'transactions'=>$this->transactionService->getAllData($request),
-            'pageTitle'=>'Transaction'
+            'payments'=>  $this->paymentMethodService->getAllData($request),
 
         ];
         return view('frontend.transactions.index', $data);

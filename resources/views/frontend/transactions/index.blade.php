@@ -137,16 +137,28 @@
                 var totaldd = quantity * currRate;
                 $("#other_total").val(totaldd);
             }
-
-
-
         });
 
-        $("#other_cash_received").on('keyup', function() {
+        $("#other_cash_received").on('change', function() {
             var cashReceived = $(this).val();
             var total = $("#other_total").val();
             var cashReturn = cashReceived - total;
             $("#other_cash_return").val(cashReturn);
         });
+
+        $(document).on('change', '#payment_method_other', function() {
+            var method = $(this).val();
+            if (method == 'online') {
+                $('#toggle-payment-other').removeClass('d-none');
+                $('#cash-transaction-other').addClass('d-none');
+            } else {
+                $('#toggle-payment-other').addClass('d-none');
+                $('#cash-transaction-other').removeClass('d-none');
+
+            }
+        });
+
+
+
     </script>
 @endsection

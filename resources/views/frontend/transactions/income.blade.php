@@ -1,8 +1,9 @@
-<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="incomeTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Transaction - Income</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Record Transaction - Income</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -84,14 +85,44 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!--Payment Method-->
+                    <div class="form-group row" id="toggle-payment-method-other">
+                        {!! Form::label('', 'Payment Method', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
+
+                            <select name="" class="form-control" id="payment_method_other" required>
+                                <option value="cash" selected>Cash</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- Payment Gateway --}}
+                    <div class="form-group row d-none" id="toggle-payment-other">
+                        {!! Form::label('payment_method', 'Payment Gateway', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10" style="display: flex; flex-direction:row; align-item:center">
+                            @foreach ($payments as $payment)
+                                <div class="form-check" style="display: flex; align-items:center;">
+                                    <input class="form-check-input" name="payment_method" type="radio"
+                                        id="flexRadioDefault1" value="{{ $payment->id }}">
+                                    <label class="form-check-label mr-2" for="flexRadioDefault1">
+                                        <img src="{{ asset('public/uploads/payment-method/' . $payment->image) }}"
+                                            height="50px" alt="">
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+                    <div class="row" id="cash-transaction-other" >
                         <div class="col-6">
                             <!--Cash Received-->
                             <div class="form-group row">
                                 <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
                                 <div class="col-sm-8">
                                     <input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}"
-                                        id="other_cash_received" class="form-control" required>
+                                        id="other_cash_received" class="form-control">
                                 </div>
                             </div>
 
