@@ -63,7 +63,7 @@
             });
         });
 
-        $(document).on('change', 'select[data-class=size]', function() {
+        $(document).on('change', 'select[data-class=size]', ($.debounce(200,function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
@@ -75,8 +75,6 @@
             $(`${quantityId}`).val('1');
            
            
-          
-            
             let oldTotalAmount = $(totalId).val();
             var path = "{{ URL::route('size.getRate') }}";
             $.ajax({
@@ -104,7 +102,7 @@
                     calculateGrandTotal(response, oldTotalAmount);
                 },
             });
-        });
+        })));
 
 
            //Append new order 
@@ -273,6 +271,26 @@
             cashReturn = $('#cash_received').val() - $("#paid_amount").val();
             $('#cash_return').val(cashReturn);
         });
+
+        //Phone Number Validation
+        $(document).on('keyup','#phone_number',function(){
+           var phoneNumber= $(this).val();
+           if(phoneNumber.length > 10 ){
+                $('#error-phone').text('Phone Number should not be greater than 10 digits.');
+           }else{
+            $('#error-phone').text('');
+           }
+        })
+
+        $(document).on('blur','#phone_number',function(){
+           var phoneNumber= $(this).val();
+           if(phoneNumber.length < 10 ){
+                $('#error-phone').text('Phone Number must be of 10 digits.');
+           }else{
+            $('#error-phone').text('');
+           }
+        })
+
     });
 </script>
 

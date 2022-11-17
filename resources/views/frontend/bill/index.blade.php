@@ -2,7 +2,6 @@
 @section('main-content')
     {{ Session::has('success') }}
 
-
     <div class="bill-index">
         <div class="mb-4">
             <form class="d-flex">
@@ -23,7 +22,7 @@
             <button data-toggle="modal" data-target="#createBill" target="_blank"
                 class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
 
-            @include('frontend.bill.include.form')
+            @include('frontend.bill.form')
 
         </div>
 
@@ -37,7 +36,6 @@
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
-    <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -95,28 +93,28 @@
     </script>
 
     <script>
-        $("input[name='phone_number']").autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: "{{ route('autocompletePhone') }}",
-                    type: 'GET',
-                    dataType: "json",
-                    data: {
-                        search: request.term
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        response(data);
-                    },
-                });
-            },
-            delay: 200,
-            select: function(event, ui) {
-                $("input[name='phone_number']").val(ui.item.label);
-                console.log(ui.item);
-                return false;
-            },
-        });
+        // $("input[name='phone_number']").autocomplete({
+        //     source: function(request, response) {
+        //         $.ajax({
+        //             url: "{{ route('autocompletePhone') }}",
+        //             type: 'GET',
+        //             dataType: "json",
+        //             data: {
+        //                 search: request.term
+        //             },
+        //             success: function(data) {
+        //                 console.log(data);
+        //                 response(data);
+        //             },
+        //         });
+        //     },
+        //     delay: 200,
+        //     select: function(event, ui) {
+        //         $("input[name='phone_number']").val(ui.item.label);
+        //         console.log(ui.item);
+        //         return false;
+        //     },
+        // });
 
         var path = "{{ route('autocompleteName') }}";
         $("#customer_name").typeahead({

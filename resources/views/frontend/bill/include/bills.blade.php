@@ -106,7 +106,7 @@
                     <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
                         data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
                             class="far fa-eye"></i></button>
-                    @include('frontend.bill.include.modal')
+                    @include('frontend.bill.include.clearBill')
 
                     
                     <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info btn-sm"><i
