@@ -4,19 +4,21 @@ header{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3rem;
-    padding: 1rem;
+    padding: .8rem;
+    padding: .8rem;
     border-bottom:1px solid rgb(136, 136, 136) ;
 }
 
 header .logo-nav{
   display: flex;
   /* border: 1px solid red; */
+  align-items: center;
 }
 
   
   
   header img{
-    height: 60px;
+    height: 70px;
   }
 
   nav div{

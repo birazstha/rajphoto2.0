@@ -34,7 +34,7 @@ class PaymentMethodSeeder extends Seeder
         \File::copy(public_path('images/esewa.png'), public_path('uploads/payment-method/esewa.png'));
         PaymentMethod::create([
             'title' => 'Esewa',
-            'image' => 'esewa.png',
+            'image' => 'esewa.png', 
             'status' => 1,
         ]);
 

@@ -65,6 +65,7 @@ class BillController extends Controller
     public function show($id)
     {
         $data['row'] = Bill::where('id', $id)->first();
+        $data['payments'] = PaymentMethod::all();
         return view('frontend.bill.photoBill', compact('data'));
     }
 
