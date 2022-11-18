@@ -51,10 +51,10 @@ class AjaxController extends Controller
         $date =  $request->date;
         if (isset($customerName)) {
             // $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
-          
+
 
             $bills = Bill::whereHas('customers', function ($query) use ($request) {
-                $query->where('name', 'ILIKE','%'. $request->customer_name.'%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
+                $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
@@ -87,32 +87,38 @@ class AjaxController extends Controller
     }
 
     public function getIncome(Request $request)
-    { 
-        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);   
+    {
+        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'savings'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['online-payment-bill'] = collect($data['transactions'])->where('payment_method')->where('bill_id')->sum('amount');
         $data['online-payment-other'] = collect($data['transactions'])->where('payment_method')->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
-        $data['withdrawn'] = $data['transactions']->where('is_withdrawn',true)->sum('amount');
-        $data['adjustment'] = Adjustment::where('date',$request->date)->first()->adjusted_amount ?? 0; 
-     
+        $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
+        $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
+
 
         //Calculating Total Closing Balance for selected day
-        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill']- $data['online-payment-other'];
+        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill'] - $data['online-payment-other'];
         $data['todaysDate'] = $request->date;
         return view('system.home.transactions', $data);
-    }
-
-    public function getOpeningBalance(Request $request)
-    {
-        $data['openingBalance'] = 100;
     }
 
 
     public function getRate(Request $request)
     {
         return Order::where('id', $request->order_id)->pluck('rate')->first();
+    }
+
+    public function autoCompleteSearch(Request $request)
+    {
+
+        //Search bill with the help of customer
+
+        $data = Customer::select("name as value","id","phone_number")
+            ->where('name', 'ILIKE', '%' . $request->search . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->search . '%')
+            ->get();
+        return $data;
     }
 }

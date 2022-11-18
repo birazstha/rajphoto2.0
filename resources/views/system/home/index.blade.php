@@ -4,9 +4,9 @@
         <div class="panel-body">
             @include('system.partials.message')
             <input type="text" name="todays-date" class="form-control" id="todays-date">
-           
+
             <input type="hidden" name="yesterday-date" class="form-control" id="yesterday-date">
-     
+
 
             <div id="income"></div>
 
@@ -15,17 +15,8 @@
             </div> --}}
         </div>
     </div>
-
-    {{-- Modal --}}
-    
-
-
-
-   
-    
-
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/compiledCssAndJs/js/dashboard.js') }}"></script>
+    <script src="{{ asset('public/compiledCssAndJs/js/dashboard.js') }}"></script>
 @endsection

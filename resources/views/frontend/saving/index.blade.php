@@ -1,10 +1,6 @@
 @extends('frontend.layout.master')
 @section('main-content')
     {{ Session::has('success') }}
-
-
-    <div class="bill-index">
-
         <div class="d-flex justify-content-between mb-2 align-items-center">
             <h2>Savings</h2>
             <div>
@@ -40,10 +36,6 @@
                 @endforelse
             </tbody>
         </table>
-
-        {{-- {{ $transactions }} --}}
-
-    </div>
 @endsection
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"

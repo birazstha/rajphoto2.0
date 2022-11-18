@@ -1,8 +1,20 @@
 @extends('frontend.layout.master')
 @section('main-content')
     {{ Session::has('success') }}
+        
 
-    <div class="bill-index">
+        <div class="d-flex justify-content-between mb-2 align-items-center">
+            <h2>Bills</h2>
+            <button data-toggle="modal" data-target="#createBill" target="_blank"
+                class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
+
+                
+
+            @include('frontend.bill.form')
+            
+
+        </div>
+
         <div class="mb-4">
             <form class="d-flex">
                 @csrf
@@ -17,21 +29,12 @@
             </form>
         </div>
 
-        <div class="d-flex justify-content-between mb-2 align-items-center">
-            <h2>Bills</h2>
-            <button data-toggle="modal" data-target="#createBill" target="_blank"
-                class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
-
-            @include('frontend.bill.form')
-
-        </div>
-
         <div class="loader">
             <img src="{{ asset('public/images/loader.gif') }}" alt="">
         </div>
 
         <div id="table"></div>
-    </div>
+    
 @endsection
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
@@ -93,7 +96,10 @@
     </script>
 
     <script>
-        // $("input[name='phone_number']").autocomplete({
+
+        // jQuery
+      
+        //         });  // $("input[name='phone_number']").autocomplete({
         //     source: function(request, response) {
         //         $.ajax({
         //             url: "{{ route('autocompletePhone') }}",
@@ -106,7 +112,6 @@
         //                 console.log(data);
         //                 response(data);
         //             },
-        //         });
         //     },
         //     delay: 200,
         //     select: function(event, ui) {
@@ -116,6 +121,8 @@
         //     },
         // });
 
+
+        //Type Ahead
         var path = "{{ route('autocompleteName') }}";
         $("#customer_name").typeahead({
             source: function(query, process) {

@@ -1,28 +1,39 @@
 header{
-    background-color: white;
+    background-color: #343a40;
     display: flex;
     align-items: center;
-    /* justify-content: space-around; */
-    margin-bottom: 1rem;
-    padding: 5px;
-  }
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border-bottom:1px solid rgb(136, 136, 136) ;
+}
+
+header .logo-nav{
+  display: flex;
+  /* border: 1px solid red; */
+}
+
+  
   
   header img{
     height: 60px;
   }
 
   nav div{
+
     color: black;
   }
 
   ul a{
+    font-family:Arial, Helvetica, sans-serif;
     text-decoration: none;
-    color: black;
+    color: rgb(213, 213, 213);
   }
 
   ul a:hover{
+    transition: all ease-in-out 0.20s;
     text-decoration: none;
-    color:green;
+    color:rgb(172, 172, 172);
   }
 
   .nav{
@@ -43,17 +54,12 @@ header{
   .active-link{
     padding:5px;
     border-radius: 5px;
-    color: green;
+    color: white;
     font-weight: bold;
     width: 20rem;
   }
 
   .active-link:hover{
-    /* padding:5px;
-    background-color: blue;
-    opacity: 1;
-    border-radius: 5px;
     color: white;
-    text-decoration: none; */
   }
   

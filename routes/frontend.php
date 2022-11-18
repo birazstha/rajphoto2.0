@@ -23,9 +23,14 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/darkmode', 'AjaxController@darkmode')->name('frontend.darkmode');
     Route::get('autocompletename', 'AjaxController@autocompleteName')->name('autocompleteName');
     Route::get('autocompletephone', 'AjaxController@autocompletePhone')->name('autocompletePhone');
+   
+    Route::get('autocompleteSearch', 'AjaxController@autoCompleteSearch')->name('autoCompleteSearch');
+
 
     Route::resource('transactions', 'transaction\transactionController');
-    
+
+    Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');
+
     
  
 });

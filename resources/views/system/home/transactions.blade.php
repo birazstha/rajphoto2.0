@@ -7,7 +7,7 @@
         <button class="btn btn-danger" data-toggle="modal" data-target="#withdraw"> <i class="fa fa-plus"></i>
             Withdraw</button>
     </div>
- 
+
 </div>
 <ul class="list-group">
     <div class="row">
@@ -84,7 +84,7 @@
 
         {{-- Adjustments --}}
 
-        <div class="col-lg-2 col-6">
+        {{-- <div class="col-lg-2 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
                 <div class="inner">
@@ -97,7 +97,7 @@
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div> --}}
 
         {{-- With Drawn --}}
         <div class="col-lg-2 col-6">
@@ -113,22 +113,24 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-    </div>
 
-    {{-- Closing Balance --}}
-    <div class="col-lg-2 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>Rs.{{ $closingBalance }}/-</h3>
-                <p>Closing Balance</p>
+        {{-- Closing Balance --}}
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>Rs.{{ $closingBalance }}/-</h3>
+                    <p>Closing Balance</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+
+
 
 
 
@@ -145,28 +147,29 @@
                     </div>
 
                     <div class="modal-body">
-                        
-                            <div class="form-group">
-                                <label class="form-label" for="">Closing Balance</label>
-                                <input type="text" readonly name="closing" id="closing" class="form-control"
-                                    value="{{ $closingBalance }}">
-                            </div>
 
-                            {{-- Cash In drawer --}}
-                            <div class="form-group">
-                                <label class="form-label" for="">Cash In Drawer</label>
-                                <input type="number" class="form-control" name="closing_balance" id="closing_balance"
-                                    value="">
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label" for="">Closing Balance</label>
+                            <input type="text" readonly name="closing" id="closing" class="form-control"
+                                value="{{ $closingBalance }}">
+                        </div>
 
-                            {{-- Adjustment --}}
-                            <div class="form-group">
-                                <label class="form-label" for="">Adjustment</label>
-                                <input type="text" class="form-control" name="adjusted_amount" value="" id="adjustment" readonly>
-                            </div>
+                        {{-- Cash In drawer --}}
+                        <div class="form-group">
+                            <label class="form-label" for="">Cash In Drawer</label>
+                            <input type="number" class="form-control" name="closing_balance" id="closing_balance"
+                                value="">
+                        </div>
 
-                            <input type="hidden" class="form-control" value="{{ $todaysDate }}" id="date"
-                                name="date">
+                        {{-- Adjustment --}}
+                        <div class="form-group">
+                            <label class="form-label" for="">Adjustment</label>
+                            <input type="text" class="form-control" name="adjusted_amount" value=""
+                                id="adjustment" readonly>
+                        </div>
+
+                        <input type="hidden" class="form-control" value="{{ $todaysDate }}" id="date"
+                            name="date">
 
                     </div>
                     <div class="modal-footer">

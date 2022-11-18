@@ -4,10 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #cccccc;
-  /* zoom: 80%; */
-}
+
 
 #form {
   margin: 1rem auto;
@@ -227,3 +224,8 @@ th {
 .transaction-expense {
   background-color: red;
 }
+
+#search{
+  width: 20%;
+}
+

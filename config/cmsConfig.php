@@ -131,6 +131,56 @@ return  [
                         ],
                     ],
                 ],
+               
+                [
+                    'name' => 'Frontend Users',
+                    'icon' => "<i class='fa fa-tags'></i>",
+                    'route' => $frontendUserBaseUrl,
+
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Roles',
+                            'route' => [
+                                'url' => $frontendUserBaseUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Roles',
+                            'route' => [
+                                [
+                                    'url' => $frontendUserBaseUrl . '/create',
+                                    'method' => $getMethod,
+                                ],
+                                [
+                                    'url' => $frontendUserBaseUrl,
+                                    'method' => $postMethod,
+                                ],
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Roles',
+                            'route' => [
+                                [
+                                    'url' => $frontendUserBaseUrl . '/*/edit',
+                                    'method' => $getMethod,
+                                ],
+                                [
+                                    'url' => $frontendUserBaseUrl . '/*',
+                                    'method' => $putMethod,
+                                ],
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Roles',
+                            'route' => [
+                                'url' => $frontendUserBaseUrl . '/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
                 [
                     'name' => 'Roles',
                     'icon' => "<i class='fa fa-tags'></i>",
@@ -581,55 +631,7 @@ return  [
             ],
         ],
 
-        [
-            'name' => 'User Management',
-            'icon' => '<i class="fas fa-user-shield"></i>',
-            'hasSubmodules' => false,
-            'route' => $frontendUserBaseUrl,
-            'permissions' => [
-                [
-                    'name' => 'View Category',
-                    'route' => [
-                        'url' => $frontendUserBaseUrl,
-                        'method' => $getMethod,
-                    ],
-                ],
-                [
-                    'name' => 'Create Category',
-                    'route' => [
-                        [
-                            'url' => $frontendUserBaseUrl . '/create',
-                            'method' => $getMethod,
-                        ],
-                        [
-                            'url' => $frontendUserBaseUrl,
-                            'method' => $postMethod,
-                        ],
-
-                    ],
-                ],
-                [
-                    'name' => 'Edit Category',
-                    'route' => [
-                        [
-                            'url' => $frontendUserBaseUrl . '/*/edit',
-                            'method' => $getMethod,
-                        ],
-                        [
-                            'url' => $frontendUserBaseUrl . '/*',
-                            'method' => $putMethod,
-                        ],
-                    ],
-                ],
-                [
-                    'name' => 'Delete Category',
-                    'route' => [
-                        'url' => $frontendUserBaseUrl . '/*',
-                        'method' => $deleteMethod,
-                    ],
-                ],
-            ],
-        ],
+     
 
 
 

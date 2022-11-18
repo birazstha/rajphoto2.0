@@ -40,6 +40,7 @@
     <link rel="icon" type="image/png" sizes="50x50" href="{{ asset('public/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('public/favicon/site.webmanifest') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <title>Raj Photo Studio - {{ $pageTitle ?? '' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -49,43 +50,43 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   
 
 </head>
 
-<body id="body">
+<body>
 
     <header>
 
-        <a href="{{ route('home') }}">
-            {{-- <img src="{{ asset('logo.png') }}" alt="logo"> --}}
-            <img src="{{ asset('public/logo.png') }}" alt="logo">
-        </a>
-        <nav>
-            <ul>
+        <div class="logo-nav">
+            <a href="{{ route('home') }}">
+                {{-- <img src="{{ asset('logo.png') }}" alt="logo"> --}}
+                <img src="{{ asset('public/logo.png') }}" alt="logo">
+            </a>
+            <nav>
+                <ul>
+                    @if (request()->segment(1))
+                        <li>
+                            <a href="{{ route('home') }}" class="">Home<a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ route('home') }}" class="active-link">Home</a>
+                        </li>
+                    @endif
 
 
-
-
-                @if (request()->segment(1))
-                    <li>
-                        <a href="{{ route('home') }}" class="">Home<a>
+                    <li><a href="{{ route('bills.index') }}"
+                            class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
+                    <li><a href="{{ route('transactions.index') }}"
+                            class="{{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}">Transaction</a>
                     </li>
-                @else
-                    <li>
-                        <a href="{{ route('home') }}" class="active-link">Home</a>
-                    </li>
-                @endif
+                    <li><a href="{{ route('saving.index') }}"
+                            class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
+                </ul>
+            </nav>
+        </div>
 
-
-                <li><a href="{{ route('bills.index') }}"
-                        class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
-                <li><a href="{{ route('transactions.index') }}"
-                        class="{{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}">Transaction</a>
-                </li>
-                <li><a href="{{ route('saving.index') }}"
-                        class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
-            </ul>
-        </nav>
-
+        <input class="typeahead form-control" id="search" placeholder="Search Customer" type="text" autocomplete="off">
     </header>
