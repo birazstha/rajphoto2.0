@@ -84,7 +84,7 @@
 
                             <!--Quantity-->
                             <div class="col-2 form-group row">
-                                {!! Form::label('quantity', 'Quantity', ['class' => 'col-sm-4 col-form-label']) !!}
+                                {!! Form::label('quantity', 'Qty', ['class' => 'col-sm-4 col-form-label']) !!}
                                 <div class="col-sm-8">
                                     <input type="number" min="1" name="bill[0][quantity]" id="quantity1"
                                         data-id="1" data-type="quantity" value="1" class="form-control">

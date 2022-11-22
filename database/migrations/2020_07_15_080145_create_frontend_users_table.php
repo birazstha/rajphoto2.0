@@ -15,7 +15,7 @@ class CreateFrontendUsersTable extends Migration
     {
         Schema::create('frontend_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->boolean('status');
             $table->timestamps();
         });

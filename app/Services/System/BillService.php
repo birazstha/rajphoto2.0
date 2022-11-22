@@ -21,8 +21,6 @@ class BillService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
-
-
         $query = $this->query();
 
         if (isset($data->keyword) && $data->keyword !== null) {
@@ -76,4 +74,14 @@ class BillService extends Service
             'order_id' => $request->order_id,
         ];
     }
+
+    public function getBillByCustomer($id)
+    {
+       $query = $this->query();
+
+       return $query->where('customer_id',$id)->get();
+
+        # code...
+    }
+
 }

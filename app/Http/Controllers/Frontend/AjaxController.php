@@ -50,40 +50,23 @@ class AjaxController extends Controller
         $users = FrontendUser::all();
         $date =  $request->date;
         if (isset($customerName)) {
-            // $customers = Customer::where('phone_number', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('name', 'ILIKE', '%' . $request->customer_name . '%')->get();
-
-
             $bills = Bill::whereHas('customers', function ($query) use ($request) {
                 $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
-            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->paginate(5);
+            $bills = Bill::where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->get();
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
         }
     }
 
+  
+
     public function autocompletePhone(Request $request)
     {
         $data = Customer::select("phone_number as value", "id")
-            ->where('phone_number', 'ILIKE', '%' . $request->get('search') . '%')
-            ->get();
-        return response()->json($data);
-
-        // $data = $request->all();
-        // $query = $data['query'];
-        // $filter_data = Customer::where('customer_id', 'ILIKE', '%' . $query . '%')
-        //     ->get();
-        // return response()->json($filter_data);
-    }
-
-    public function autocompleteName(Request $request)
-    {
-        $data = $request->all();
-        $query = $data['query'];
-        $filter_data = Customer::where('name', 'ILIKE', '%' . $query . '%')
-            ->get();
-        return response()->json($filter_data);
+            ->where('phone_number', 'ILIKE', '%' . $request->search . '%')->get();
+        return $data;
     }
 
     public function getIncome(Request $request)
@@ -116,7 +99,7 @@ class AjaxController extends Controller
 
         //Search bill with the help of customer
 
-        $data = Customer::select("name as value","id","phone_number")
+        $data = Customer::select("name as value", "id", "phone_number")
             ->where('name', 'ILIKE', '%' . $request->search . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->search . '%')
             ->get();
         return $data;

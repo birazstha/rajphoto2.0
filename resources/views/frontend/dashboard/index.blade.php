@@ -14,7 +14,7 @@
         <a href="{{ route('transactions.index') }}">
             <section class="icon">
                 <i class="fas fa-money-bill-wave"></i>
-                <span>Income/Expenses</span>
+                <span>Transactions</span>
             </section>
         </a>
 

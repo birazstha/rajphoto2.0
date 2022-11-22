@@ -23,7 +23,7 @@ class PaymentMethodSeeder extends Seeder
 
         //Fonepay
         \File::copy(public_path('images/fonepay.png'), public_path('uploads/payment-method/fonepay.png'));
-        PaymentMethod::create([
+        PaymentMethod::firstOrCreate([
             'title' => 'Fonepay',
             'image' => 'fonepay.png',
             'status' => 1,
@@ -32,7 +32,7 @@ class PaymentMethodSeeder extends Seeder
 
         //eSewa
         \File::copy(public_path('images/esewa.png'), public_path('uploads/payment-method/esewa.png'));
-        PaymentMethod::create([
+        PaymentMethod::firstOrCreate([
             'title' => 'Esewa',
             'image' => 'esewa.png', 
             'status' => 1,
@@ -40,7 +40,7 @@ class PaymentMethodSeeder extends Seeder
 
          //Khalti
          \File::copy(public_path('images/khalti.png'), public_path('uploads/payment-method/khalti.png'));
-         PaymentMethod::create([
+         PaymentMethod::firstOrCreate([
              'title' => 'Fonepay',
              'image' => 'khalti.png',
              'status' => 1,

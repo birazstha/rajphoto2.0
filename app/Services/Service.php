@@ -58,6 +58,7 @@ class Service
 
     public function store($request)
     {
+        dd('ok');
         return $this->model->create($request->except('_token'));
     }
 

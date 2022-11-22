@@ -37,7 +37,7 @@
         integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"
         integrity="sha256-H2TaUgwe8vbd8Uf3Pki5UcggDC05eieuDNDCjzEngWU=" crossorigin="anonymous"></script>
-    <script src="public/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('public/tinymce/tinymce.min.js') }}"></script>
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
 
   </head>

@@ -1,40 +1,38 @@
 @extends('frontend.layout.master')
 @section('main-content')
     {{ Session::has('success') }}
-        
 
-        <div class="d-flex justify-content-between mb-2 align-items-center">
-            <h2>Bills</h2>
-            <button data-toggle="modal" data-target="#createBill" target="_blank"
-                class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspCreate</button>
 
-                
+    <div class="d-flex justify-content-between mb-2 align-items-center">
+        <h2>Bills</h2>
+        <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
+                class="fa fa-plus"></i>&nbspCreate</button>
 
-            @include('frontend.bill.form')
-            
 
-        </div>
 
-        <div class="mb-4">
-            <form class="d-flex">
-                @csrf
-                <div class="input-group input-group">
-                    <input type="text" class="form-control customerName"
-                        placeholder="Enter Customer's Name or Phone number">
-                    <span class="input-group-append">
-                        <input type="text" value="" name="todays-date" class="form-control text-center"
-                            id="todays-date">
-                    </span>
-                </div>
-            </form>
-        </div>
+        @include('frontend.bill.form')
 
-        <div class="loader">
-            <img src="{{ asset('public/images/loader.gif') }}" alt="">
-        </div>
 
-        <div id="table"></div>
-    
+    </div>
+
+    <div class="mb-4">
+        <form class="d-flex">
+            @csrf
+            <div class="input-group input-group">
+                <input type="text" class="form-control customerName" placeholder="Enter Customer's Name or Phone number">
+                <span class="input-group-append">
+                    <input type="text" value="" name="todays-date" class="form-control text-center"
+                        id="todays-date">
+                </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="loader">
+        <img src="{{ asset('public/images/loader.gif') }}" alt="">
+    </div>
+
+    <div id="table"></div>
 @endsection
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
@@ -96,43 +94,33 @@
     </script>
 
     <script>
+     
 
-        // jQuery
-      
-        //         });  // $("input[name='phone_number']").autocomplete({
-        //     source: function(request, response) {
-        //         $.ajax({
-        //             url: "{{ route('autocompletePhone') }}",
-        //             type: 'GET',
-        //             dataType: "json",
-        //             data: {
-        //                 search: request.term
-        //             },
-        //             success: function(data) {
-        //                 console.log(data);
-        //                 response(data);
-        //             },
-        //     },
-        //     delay: 200,
-        //     select: function(event, ui) {
-        //         $("input[name='phone_number']").val(ui.item.label);
-        //         console.log(ui.item);
-        //         return false;
-        //     },
-        // });
-
-
-        //Type Ahead
-        var path = "{{ route('autocompleteName') }}";
-        $("#customer_name").typeahead({
-            source: function(query, process) {
-                return $.get(path, {
-                    query: query
-                }, function(data) {
-                    return process(data);
-                });
+        $( "#phone_number" ).autocomplete({
+        source: function( request, response ) {
+          $.ajax({
+            url: "{{ route('autoCompletePhone') }}",
+            type: 'GET',
+            dataType: "json",
+            data: {
+               search: request.term
+            },
+            success: function( data ) {
+               response( data );
             }
-        });
+          });
+        },
+        select: function (event, ui) {
+            console.log('here');
+           $('#phone_number').val(ui.item.label);
+           console.log(ui.item); 
+           return false;
+        }
+      });
+
+
+
+        
 
 
         $(document).on('change', '#payment_method', function() {

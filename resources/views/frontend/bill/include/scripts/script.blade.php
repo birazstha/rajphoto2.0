@@ -250,7 +250,7 @@
 
 
         //Calculate balance amount
-        $('#paid_amount').on('blur', function() {
+        $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             $('#due_amount').val(balanceAmt);
 

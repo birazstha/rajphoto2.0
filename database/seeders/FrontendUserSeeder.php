@@ -15,21 +15,28 @@ class FrontendUserSeeder extends Seeder
      */
     public function run()
     {
-        
-        \DB::table('frontend_users')->insert([
-            0 => [
+
+        FrontendUser::firstOrCreate(
+            [
                 'name' => 'Raj Shrestha',
                 'status' => 1,
-            ],
-            1 => [
+            ]
+        );
+
+        FrontendUser::firstOrCreate(
+            [
                 'name' => 'Biraj Shrestha',
                 'status' => 1,
-            ],
-            2 => [
+            ]
+        );
+
+        FrontendUser::firstOrCreate(
+            [
                 'name' => 'Rajeev Shrestha',
                 'status' => 1,
-            ],
+            ]
+        );
 
-        ]);
+
     }
 }

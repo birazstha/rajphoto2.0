@@ -28,7 +28,8 @@
         "ramsey/uuid": "^4.1",
         "simplesoftwareio/simple-qrcode": "~4",
         "spatie/laravel-activitylog": "^3.14",
-        "spatie/laravel-translation-loader": "^2.6"
+        "spatie/laravel-translation-loader": "^2.6",
+        "superbalist/laravel-google-cloud-storage": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
