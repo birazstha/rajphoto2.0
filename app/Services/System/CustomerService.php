@@ -32,9 +32,9 @@ class CustomerService extends Service
         }
 
         if ($pagination) {
-            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
+            return $query->orderBy('created_at', 'DESC')->paginate(PAGINATE);
         }
-        return $query->orderBy('id', 'ASC')->get();
+        // return $query->orderBy('created_at', 'DESC')->get();
     }
 
     public function store($request)
