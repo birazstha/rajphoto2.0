@@ -255,8 +255,12 @@
             grandTotal = $('#grand_total').val();
             
             $('#due_amount').val(balanceAmt);
+           
 
             var paidAmt = $(this).val();
+
+            $('#cash_received').val(paidAmt);
+
             if(parseInt(paidAmt) > parseInt(grandTotal)  ){
                 $('#error-paid-amount').text("Paid amount can't be greater than grand total");
             }else{
