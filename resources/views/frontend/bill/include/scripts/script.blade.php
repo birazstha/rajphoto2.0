@@ -252,9 +252,18 @@
         //Calculate balance amount
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
+            grandTotal = $('#grand_total').val();
+            
             $('#due_amount').val(balanceAmt);
 
             var paidAmt = $(this).val();
+            if(parseInt(paidAmt) > parseInt(grandTotal)  ){
+                $('#error-paid-amount').text("Paid amount can't be greater than grand total");
+            }else{
+                $('#error-paid-amount').text('');
+            }
+
+
             if(paidAmt == 0){
                 $('#toggle-payment-method').addClass('d-none');
                 $('#cash_received').val(0);

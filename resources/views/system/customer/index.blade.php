@@ -27,6 +27,7 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Name</th>
+        <th scope="col">Name</th>
         <th scope="col">Contact No.</th>
         <th scope="col">Customer ID</th>
         <th scope="col">Orders</th>

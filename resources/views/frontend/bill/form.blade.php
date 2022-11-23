@@ -139,6 +139,7 @@
                                             value="{{ $item->paid_amount ?? '' }}" id="paid_amount"
                                             class="form-control" required>
                                     </td>
+                                    <span class="text text-danger" id="error-paid-amount"></span>
                                 </div>
                             </div>
                             @error('paid_amount')

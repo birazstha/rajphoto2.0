@@ -94,33 +94,28 @@
     </script>
 
     <script>
-     
-
-        $( "#phone_number" ).autocomplete({
-        source: function( request, response ) {
-          $.ajax({
-            url: "{{ route('autoCompletePhone') }}",
-            type: 'GET',
-            dataType: "json",
-            data: {
-               search: request.term
+        $("#phone_number").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('autoCompletePhone') }}",
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
             },
-            success: function( data ) {
-               response( data );
+            select: function(event, ui) {
+                console.log('here');
+                $('#phone_number').val(ui.item.label);
+                console.log(ui.item);
+                return false;
             }
-          });
-        },
-        select: function (event, ui) {
-            console.log('here');
-           $('#phone_number').val(ui.item.label);
-           console.log(ui.item); 
-           return false;
-        }
-      });
+        });
 
-
-
-        
 
 
         $(document).on('change', '#payment_method', function() {
