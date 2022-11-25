@@ -212,7 +212,8 @@
                 <th scope="row">{{ $key + 1 }}</th>
                 <td>
                     @if (isset($transaction->bill_id))
-                        Bill ( {{ $transaction->bills->qr_code }})
+                    {{ $transaction->bills->status ? 'Prepared' : 'Cleared' }}
+                        Bill ({{ $transaction->bills->qr_code }})
                     @elseif (isset($transaction->expense_id))
                         {{ $transaction->expenses->title }}
                     @elseif (isset($transaction->saving_id))

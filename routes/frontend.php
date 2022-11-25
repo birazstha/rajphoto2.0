@@ -26,7 +26,11 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('autocompleteSearch', 'AjaxController@autoCompleteSearch')->name('autoCompleteSearch');
 
 
-    Route::resource('transactions', 'transaction\transactionController');
+    Route::resource('transactions', 'transaction\TransactionController');
+
+    Route::resource('customers', 'customer\customerController');
+
+
 
     Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');
 

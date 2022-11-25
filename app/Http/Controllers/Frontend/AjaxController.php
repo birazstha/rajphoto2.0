@@ -50,7 +50,7 @@ class AjaxController extends Controller
         $users = FrontendUser::all();
         $date =  $request->date;
         if (isset($customerName)) {
-            $bills = Bill::whereHas('customers', function ($query) use ($request) {
+            $bills = Bill::where('status',false)->whereHas('customers', function ($query) use ($request) {
                 $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
