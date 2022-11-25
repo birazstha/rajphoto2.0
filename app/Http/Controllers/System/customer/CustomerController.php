@@ -14,7 +14,7 @@ class CustomerController extends ResourceController
     public function __construct(CustomerService $customerService)
     {
         parent::__construct($customerService);
-        $this->orderService = new OrderService(new Order);
+       
     }
 
     // public function storeValidationRequest()
@@ -26,6 +26,12 @@ class CustomerController extends ResourceController
     // {
     //     return 'App\Http\Requests\system\sizeRequest';
     // }
+
+
+    public function indexUrl()
+    {
+        'rajphoto2.0'.'/'.PREFIX.'/'.$this->moduleName();
+    }
 
     public function moduleName()
     {

@@ -22,9 +22,8 @@ class BillService extends Service
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
         $query = $this->query();
-
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('name', 'ILIKE', '%' . $data->keyword . '%');
+            $query->where('qr_code', 'ILIKE', '%' . $data->keyword . '%');
         }
     
 

@@ -27,6 +27,12 @@ class BillController extends ResourceController
     //     return 'App\Http\Requests\system\sizeRequest';
     // }
 
+
+    public function indexUrl()
+    {
+        'rajphoto2.0'.'/'.PREFIX.'/'.$this->moduleName();
+    }
+
     public function moduleName()
     {
         return 'bills';
