@@ -42,9 +42,12 @@ class CustomerService extends Service
         return $this->model->create($request->except('_token'));
     }
 
+  
+
+        
+
     public function getCustomerId($request){
         $query = $this->query();
-
         return $query->where('phone_number',$request->phone_number)->first()->id ?? null;
 
     }

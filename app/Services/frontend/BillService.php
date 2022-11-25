@@ -21,7 +21,7 @@ use function PHPUnit\Framework\isNull;
 class BillService extends Service
 {
 
-    protected $orderService, $frontendUser, $customerService,$transactionService;
+    public $orderService, $frontendUser, $customerService,$transactionService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -67,8 +67,8 @@ class BillService extends Service
             }
             $customerId = uniqid();
             if (empty($request->oldCustomer)) {
-                $customer = $this->customerService->store($request->merge(['customer_id' => $customerId]));
-                // Bill Create Operation
+                $name = $this->changeNameFormat($request->name);
+                $customer = $this->customerService->store($request->merge(['name'=>$name,'customer_id' => $customerId]));
                 $data['customer_id'] = $customer->id;
             } else {
                 $data['customer_id'] = $request->oldCustomer;
@@ -84,14 +84,20 @@ class BillService extends Service
 
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
-
             DB::commit();
             return $bill;
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
-
             throw new CustomGenericException($e->getMessage());
+        }
+    }
+
+    public function changeNameFormat($name){
+        $nameArray = explode(' ', $name);
+        if(count($nameArray) == 2){
+           return ucfirst($nameArray[0]).' '. ucfirst($nameArray[1]);
+        }else{
+            return ucfirst($nameArray[0]).' '. ucfirst($nameArray[1]).' '.ucfirst($nameArray[2]);
         }
     }
 

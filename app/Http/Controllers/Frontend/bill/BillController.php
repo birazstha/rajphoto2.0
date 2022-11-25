@@ -23,7 +23,7 @@ use App\Services\System\PaymentMethodService;
 
 class BillController extends Controller
 {
-    protected $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService,$paymentMethodService;
+    public $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService,$paymentMethodService;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;

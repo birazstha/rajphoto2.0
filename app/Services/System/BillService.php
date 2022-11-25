@@ -21,11 +21,18 @@ class BillService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
-        $query = $this->query();
+        $query = $this->query(['customers']);
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('qr_code', 'ILIKE', '%' . $data->keyword . '%');
+            $query->where(function ($q) use ($data) {
+                $query = $q;
+                $keyword = $data->keyword;
+                $query =  $query->where('qr_code', 'ILIKE', '%' . $keyword . '%')->
+                 orWhereHas('customers', function ($q) use ($data) {
+                    $keyword = $data->keyword;
+                    return $q->where('name', 'ILIKE', '%' . $keyword . '%');
+                });
+            });   
         }
-    
 
         if (isset($data->order_id)) {
             return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
@@ -37,7 +44,7 @@ class BillService extends Service
         return $query->orderBy('id', 'ASC')->get();
     }
 
-    
+
 
 
     public function createPageData($request)
@@ -76,11 +83,10 @@ class BillService extends Service
 
     public function getBillByCustomer($id)
     {
-       $query = $this->query();
+        $query = $this->query();
 
-       return $query->where('customer_id',$id)->get();
+        return $query->where('customer_id', $id)->get();
 
         # code...
     }
-
 }

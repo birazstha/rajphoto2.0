@@ -17,10 +17,6 @@ class CustomerController extends ResourceController
        
     }
 
-    // public function storeValidationRequest()
-    // {   
-    //     return 'App\Http\Requests\system\sizeRequest';
-    // }
 
     // public function updateValidationRequest()
     // {
@@ -28,10 +24,7 @@ class CustomerController extends ResourceController
     // }
 
 
-    public function indexUrl()
-    {
-        'rajphoto2.0'.'/'.PREFIX.'/'.$this->moduleName();
-    }
+   
 
     public function moduleName()
     {

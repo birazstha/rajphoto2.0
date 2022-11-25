@@ -493,42 +493,42 @@ return  [
                         ],
                     ],
                 ],
-                [
-                    'name' => 'Payments Method',
-                    'icon' => '<i class="fas fa-money-check-alt"></i>',
-                    'route' => $paymentBaseUrl,
-                    'hasSubmodules' => false,
-                    'permissions' => [
-                        [
-                            'name' => 'View Configs',
-                            'route' => [
-                                'url' => $paymentBaseUrl,
-                                'method' => $getMethod,
-                            ],
-                        ],
-                        [
-                            'name' => 'Create Config',
-                            'route' => [
-                                'url' => $paymentBaseUrl,
-                                'method' => $postMethod,
-                            ],
-                        ],
-                        [
-                            'name' => 'Edit Config',
-                            'route' => [
-                                'url' => $paymentBaseUrl . '/*',
-                                'method' => $putMethod,
-                            ],
-                        ],
-                        [
-                            'name' => 'Delete Config',
-                            'route' => [
-                                'url' => $paymentBaseUrl . '/*',
-                                'method' => $deleteMethod,
-                            ],
-                        ],
-                    ],
-                ],
+                // [
+                //     'name' => 'Payments Method',
+                //     'icon' => '<i class="fas fa-money-check-alt"></i>',
+                //     'route' => $paymentBaseUrl,
+                //     'hasSubmodules' => false,
+                //     'permissions' => [
+                //         [
+                //             'name' => 'View Configs',
+                //             'route' => [
+                //                 'url' => $paymentBaseUrl,
+                //                 'method' => $getMethod,
+                //             ],
+                //         ],
+                //         [
+                //             'name' => 'Create Config',
+                //             'route' => [
+                //                 'url' => $paymentBaseUrl,
+                //                 'method' => $postMethod,
+                //             ],
+                //         ],
+                //         [
+                //             'name' => 'Edit Config',
+                //             'route' => [
+                //                 'url' => $paymentBaseUrl . '/*',
+                //                 'method' => $putMethod,
+                //             ],
+                //         ],
+                //         [
+                //             'name' => 'Delete Config',
+                //             'route' => [
+                //                 'url' => $paymentBaseUrl . '/*',
+                //                 'method' => $deleteMethod,
+                //             ],
+                //         ],
+                //     ],
+                // ],
             ],
         ],
         [

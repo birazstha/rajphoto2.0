@@ -2,7 +2,7 @@
 
 @section('header')
 
-
+{{-- {{ $indexUrl }} --}}
     <x-system.search-form :action="$indexUrl">
         <x-slot name="inputs">
             <x-system.form.form-inline-group :input="['name' => 'keyword', 'placeholder' => 'Keyword', 'default' => Request::get('keyword')]"></x-system.form.form-inline-group>
@@ -29,7 +29,6 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Name</th>
-        <th scope="col">Name</th>
         <th scope="col">Contact No.</th>
         <th scope="col">Customer ID</th>
         <th scope="col">Orders</th>
@@ -47,6 +46,7 @@
             <td>{{ $item->customer_id }}</td>
             <td>{{ count($item->bills) }}</td>
             <td>
+                @include('system.partials.editButton')
                 @include('system.partials.deleteButton')
             </td>
         </tr>

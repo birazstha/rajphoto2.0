@@ -67,7 +67,6 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
 
 
         //Custom
-
         Route::resource('/order', 'order\OrderController');
         Route::resource('/sizes', 'size\SizeController');
         Route::resource('/rates', 'rate\RateController');
@@ -76,12 +75,6 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/frontend-users', 'frontendUser\FrontendUserController');
         Route::resource('/expenses', 'expense\ExpenseController');
         Route::resource('/savings', 'saving\SavingController');
-
-        Route::resource('/adjustment','adjustment\AdjustmentController');
-
-        Route::resource('/payment-methods','paymentMethod\PaymentMethodController');
-       
-
-      
+        Route::resource('/adjustment','adjustment\AdjustmentController');      
     });
 });

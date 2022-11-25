@@ -98,7 +98,7 @@
                     @if ($bill->status)
                         <span class="badge badge-success btn-sm">Delivered</span>
                     @else
-                        <span class="badge badge-info btn-sm">Pending</span>
+                        <span class="badge badge-danger btn-sm">Pending</span>
                     @endif
                 </td>
                 <td class="text-center">

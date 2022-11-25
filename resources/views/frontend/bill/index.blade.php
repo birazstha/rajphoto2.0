@@ -68,7 +68,7 @@
             });
 
             //Calculation Cash return
-            $(document).on('blur', '#cash_received', function() {
+            $(document).on('keyup', '#cash_received', function() {
                 var cashReceived = $(this).val();
                 var totalAmt = $('.total').val();
                 cashReturn = cashReceived - totalAmt;

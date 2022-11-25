@@ -1,5 +1,8 @@
 @props(['action', 'method'])
-<form method="{{ $method ?? 'get' }}" action="{{$action}}" class="mb-2">
+
+
+
+<form method="{{ $method ?? 'get' }}"  class="mb-2">
     <div class="form-row align-items-center">
         {{$inputs}}
         <div class="form-row align-items-center">
