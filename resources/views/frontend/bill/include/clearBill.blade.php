@@ -8,9 +8,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div>`
             <div class="modal-body">
-                <form method="post"  action="{{ route('bills.update', $bill->id) }}">
+                <form method="post" action="{{ route('bills.update', $bill->id) }}">
                     @csrf
                     @method('put')
                     {{-- Due Amount --}}
@@ -75,8 +75,8 @@
 
                     <input type="text" hidden name="cleared_date" class="cleared_date" value=""
                         id="cleared_date">
-                        
-                        <input type="hidden" name="bill_id" value="{{ $bill->id }}">
+
+                    <input type="hidden" name="bill_id" value="{{ $bill->id }}">
 
 
                     <div class="modal-footer">

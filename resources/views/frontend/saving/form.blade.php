@@ -9,43 +9,43 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{ route('saving.store') }}" method="POST" autocomplete="off">
+                <form action="{{ route('bank.store') }}" method="POST" autocomplete="off">
                     @csrf
                     <!--Prepared by-->
                     <div class="form-group row">
                         {!! Form::label('saving_id', 'Bank Name', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                    
-                
+
+
                             <select name="saving_id" id="other" class="form-control" required>
                                 <option value="" selected>Select Expense Title</option>
                                 @foreach ($banks as $bank)
                                     <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
                                 @endforeach
                             </select>
-                
+
                             @error('saving_id')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                
-                        <!--Amount-->
-                        <div class="form-group row">
-                            {!! Form::label('amount', 'Amount', ['class' => 'col-sm-2 col-form-label']) !!}
-                            <div class="col-sm-10">
-                                <input type="number" name="amount" value="" id="amount"
-                                class="form-control">
-                                @error('amount')
-                                    <span class="text text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+
+                    <!--Amount-->
+                    <div class="form-group row">
+                        {!! Form::label('amount', 'Amount', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
+                            <input type="number" name="amount" value="" id="amount" class="form-control">
+                            @error('amount')
+                                <span class="text text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                
+                    </div>
+
                     <input type="hidden" name="date" class="current_date" value="">
-                
+
                     <button class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save</button>
-                    <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-recycle"></i> Reset</button>
+                    <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-recycle"></i>
+                        Reset</button>
                 </form>
             </div>
 

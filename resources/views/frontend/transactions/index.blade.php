@@ -130,10 +130,12 @@
             } else {
                 var totaldd = quantity * currRate;
                 $("#other_total").val(totaldd);
+                $("#other_cash_received").val(totaldd);
+
             }
         });
 
-        $("#other_cash_received").on('change', function() {
+        $("#other_cash_received").on('keyup', function() {
             var cashReceived = $(this).val();
             var total = $("#other_total").val();
             var cashReturn = cashReceived - total;

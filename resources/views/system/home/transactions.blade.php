@@ -217,7 +217,7 @@
                     @elseif (isset($transaction->expense_id))
                         {{ $transaction->expenses->title }}
                     @elseif (isset($transaction->saving_id))
-                        {{ $transaction->savings->bank_name }}
+                        {{ $transaction->banks->bank_name }}
                     @elseif($transaction->is_withdrawn == true)
                         Withdrawn
                     @else

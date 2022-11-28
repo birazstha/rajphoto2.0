@@ -81,6 +81,8 @@ class AjaxController extends Controller
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
 
+        // dd($data['adjustment']);
+
 
         //Calculating Total Closing Balance for selected day
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill'] - $data['online-payment-other'];

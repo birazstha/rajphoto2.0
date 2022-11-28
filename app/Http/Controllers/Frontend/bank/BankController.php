@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\saving;
+namespace App\Http\Controllers\Frontend\bank;
 
 
 use App\Http\Controllers\Controller;
@@ -9,7 +9,7 @@ use App\Services\frontend\SavingService;
 use App\Services\frontend\TransactionService;
 use Illuminate\Http\Request;
 
-class SavingController extends Controller
+class BankController extends Controller
 {
     protected $expenseService, $transactionService;
     public function __construct(SavingService $savingService)
@@ -35,6 +35,6 @@ class SavingController extends Controller
         $transaction['amount'] =  $request->amount;
         $transaction['saving_id'] = $request->saving_id;
         $this->transactionService->store($transaction);
-        return redirect()->route('saving.index')->with('success', 'Recorded successfully!!');
+        return redirect()->route('bank.index')->with('success', 'Recorded successfully!!');
     }
 }

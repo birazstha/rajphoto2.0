@@ -85,7 +85,7 @@
                     <li><a href="{{ route('transactions.index') }}"
                             class="{{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}">Transaction</a>
                     </li>
-                    <li><a href="{{ route('saving.index') }}"
+                    <li><a href="{{ route('bank.index') }}"
                             class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
                 </ul>
             </nav>

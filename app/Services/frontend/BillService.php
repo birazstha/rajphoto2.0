@@ -2,26 +2,28 @@
 
 namespace App\Services\frontend;
 
-use App\Exceptions\CustomGenericException;
 use App\Model\Bill;
-use App\Model\BillOrder;
-use App\Model\Customer;
-use App\Model\Income;
 use App\Model\Order;
-use App\Model\Transaction;
-use App\Services\frontend\IncomeService;
-use App\Services\frontend\TransactionService;
+use App\Model\Income;
+use App\Model\Customer;
+use App\Model\BillOrder;
+use App\Model\Adjustment;
 use App\Services\Service;
-use App\Services\System\BillOrderService;
-use App\Services\System\CustomerService;
+use App\Model\Transaction;
 use Illuminate\Support\Facades\DB;
-
 use function PHPUnit\Framework\isNull;
+use App\Services\frontend\IncomeService;
+use App\Services\System\CustomerService;
+use App\Services\System\BillOrderService;
+use App\Exceptions\CustomGenericException;
+
+use App\Services\frontend\AdjustmentService;
+use App\Services\frontend\TransactionService;
 
 class BillService extends Service
 {
 
-    public $orderService, $frontendUser, $customerService,$transactionService;
+    public $orderService, $frontendUser, $customerService,$transactionService,$adjustmentService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -29,6 +31,7 @@ class BillService extends Service
         $this->customerService = new CustomerService(new Customer);
         $this->transactionService = new TransactionService(new Transaction);
         $this->billOrderService = new BillOrderService(new BillOrder);
+        $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->module = 'Prepare Bill';
     }
 
@@ -54,6 +57,9 @@ class BillService extends Service
 
     public function store($request)
     {
+       
+
+
         $orderType = $request->bill[0]['order_id'];
         DB::beginTransaction();
         try {
@@ -82,11 +88,17 @@ class BillService extends Service
             $transaction['bill_id'] = $bill->id;
             $this->transactionService->store($transaction);
 
+            //Check if closing balance is already adjusted or not
+            $this->adjustmentService->updateAdjustment($request);
+
+          
+
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
             DB::commit();
             return $bill;
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             throw new CustomGenericException($e->getMessage());
         }
