@@ -44,6 +44,9 @@
 
     <title>Raj Photo Studio - {{ $pageTitle ?? '' }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
@@ -51,7 +54,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-   
+
 
 </head>
 
@@ -88,5 +91,14 @@
             </nav>
         </div>
 
-        <input class="typeahead form-control" id="search" placeholder="Search Customer" type="text" autocomplete="off">
+        <div class="w-25 search-setting">
+
+            <input class="typeahead form-control mr-4" id="search" placeholder="Search Customer" type="text"
+                autocomplete="off">
+
+            <a href="{{ route('home.system') }}" target="_blank">
+                <i class="fas fa-cog" style="color: white; font-size:20px"></i>
+            </a>
+        </div>
+
     </header>

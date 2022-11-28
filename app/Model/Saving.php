@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Saving extends Model
 {
 
-    protected $table = 'savings';
+    protected $table = 'banks';
     protected $fillable = ['bank_name','status'];
 
     public function orders(){

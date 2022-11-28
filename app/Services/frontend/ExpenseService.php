@@ -26,17 +26,7 @@ class ExpenseService extends Service
         if (isset($data->keyword) && $data->keyword !== null) {
             $query->where('name', 'ILIKE', '%' . $data->keyword . '%');
         }
-        if (count($selectedColumns) > 0) {
-            $query->select($selectedColumns);
-        }
-
-        if (isset($data->order_id)) {
-            return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
-        }
-
-        if ($pagination) {
-            return $query->orderBy('id', 'ASC')->paginate(PAGINATE);
-        }
+        
         return $query->orderBy('id', 'ASC')->get();
     }
 
@@ -51,18 +41,17 @@ class ExpenseService extends Service
 
 
 
-    public function createPageData($request)
-    {
+    // public function createPageData($request)
+    // {
+    //     return [
+    //         'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
+    //         'users' => $this->frontendUser->getAllData($request),
+    //         'status' => $this->status(),
+    //         'order_id' => $request->order_id,
+    //         'pageTitle' => $this->module,
 
-        return [
-            'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
-            'users' => $this->frontendUser->getAllData($request),
-            'status' => $this->status(),
-            'order_id' => $request->order_id,
-            'pageTitle' => $this->module,
-
-        ];
-    }
+    //     ];
+    // }
 
 
     public function editPageData($request, $id)

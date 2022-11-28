@@ -8,6 +8,13 @@ class Expense extends Model
 {
     protected $table = 'expenses';
     protected $fillable = [
-        'title', 'status',
+        'title', 'status', 'rank'
     ];
+
+    public function scopeActive($query)
+    {
+        dd($query);
+        return $query->where('status', 1);
+    }
+
 }

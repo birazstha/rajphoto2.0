@@ -16,7 +16,7 @@ class OrderService extends Service
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
 
-        $query = $this->query();
+        $query = $this->query()->active();
 
         if (isset($data->keyword) && $data->keyword !== null) {
             $query->where('label', 'LIKE', '%'.$data->keyword.'%');
@@ -33,13 +33,7 @@ class OrderService extends Service
             $query->where('details_required',false)->get();
         }
 
-        if ($pagination) {
             return $query->orderBy('id', 'ASC')->get();
-        }
-
-
-
-        // return $query->orderBy('id', 'ASC')->get();
     }
 
    

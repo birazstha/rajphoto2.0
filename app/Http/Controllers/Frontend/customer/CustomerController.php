@@ -31,8 +31,6 @@ class CustomerController extends Controller
     }
 
     public function update(Request $request, $id){
-        // $user = $this->customerService->itemByIdentifier($id);
-
         try{
             $this->customerService->update($request,$id);
             return redirect()->back()->with('success', 'Customer Info Updated!!');

@@ -27,10 +27,6 @@ class TransactionService extends Service
             $query->select($selectedColumns);
         }
 
-        // if (isset($data->order_id)) {
-        //     return $query->where('order_id', $data->order_id)->paginate(PAGINATE);
-        // }
-
         return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->whereNull(['saving_id','bill_id'])->where('is_withdrawn',false)->paginate(10);
     }
 

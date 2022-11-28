@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\System\saving;
+namespace App\Http\Controllers\System\bank;
 
 use App\Http\Controllers\System\ResourceController;
 use App\Services\System\SavingService;
 
-class SavingController extends ResourceController
+class BankController extends ResourceController
 {
     
     public function __construct(SavingService $savingService)
@@ -25,7 +25,7 @@ class SavingController extends ResourceController
 
     public function moduleName()
     {
-        return 'savings';
+        return 'banks';
     }
 
     public function viewFolder()

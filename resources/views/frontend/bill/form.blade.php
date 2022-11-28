@@ -17,7 +17,7 @@
                                 <label for="name" class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
                                     <input type="text" value="" name="name" class="form-control"
-                                        id="customer_name" placeholder="Enter customer's name">
+                                        id="customer_name" placeholder="Enter customer's name" required>
                                 </div>
                             </div>
 
@@ -30,9 +30,9 @@
                                 <div class="col-sm-8">
                                     <input type="number" value="" name="phone_number" class="form-control"
                                         id="phone_number" placeholder="Enter customer's phone number.">
-                                        <span class="text text-danger" id="error-phone"></span>
+                                    <span class="text text-danger" id="error-phone" required></span>
                                 </div>
-                              
+
                             </div>
 
                         </div>
@@ -195,7 +195,8 @@
                             <div class="form-group row">
                                 <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
                                 <div class="col-sm-8">
-                                    <input type="number" name="cash_received" value="{{ $item->cash_received ?? '' }}" id="cash_received"
+                                    <input type="number" name="cash_received"
+                                        value="{{ $item->cash_received ?? '' }}" id="cash_received"
                                         class="form-control">
                                 </div>
                             </div>

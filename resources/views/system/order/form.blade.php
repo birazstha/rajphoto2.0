@@ -31,7 +31,7 @@
             <x-system.form.input-radio :input="[
                 'name' => 'details_required',
                 'required' => true,
-                'default' => old('details_required') ?? 1,
+                'default' => $item->details_required ?? '1',
                 'options' => [
                     ['value' => '1', 'label' => 'Yes'], //Send Activation Link
                     ['value' => '0', 'label' => 'No'], //Set Password

@@ -26,7 +26,7 @@ class Transaction extends Model
     return $this->belongsTo(Bill::class,'bill_id');
    }
 
-   public function savings(){
+   public function banks(){
     return $this->belongsTo(Saving::class,'saving_id');
    }
 

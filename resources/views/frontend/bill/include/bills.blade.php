@@ -15,7 +15,6 @@
             <th class="text-center">Amount Details</th>
             <th class="text-center">Date</th>
             <th class="text-center">Prepared By</th>
-            <th class="text-center">Status</th>
             <th class="text-center">Action</th>
 
         </tr>
@@ -32,7 +31,12 @@
                     <div class="customer-detail">
                         <div class="test1">
                             <div>
-                                <span class="font-weight-bold">Name:</span> <a href="{{ route('customerResult',$bill->customers->id) }}" style="text-decoration: none; color:black">{{ $bill->customers->name }}</a> 
+                                <span class="font-weight-bold">Name:</span>
+                                <span id="customer-name">
+                                    <a id=""
+                                        href="{{ route('customerResult', $bill->customers->id) }}">{{ $bill->customers->name }}
+                                    </a>
+                                </span>
                             </div>
                             <div>
                                 <span class="font-weight-bold">Phone:</span> {{ $bill->customers->phone_number }}
@@ -94,13 +98,7 @@
                     </div>
                 </td>
                 <td class="text-center">{{ $bill->users->name }}</td>
-                <td class="text-center">
-                    @if ($bill->status)
-                        <span class="badge badge-success btn-sm">Delivered</span>
-                    @else
-                        <span class="badge badge-info btn-sm">Pending</span>
-                    @endif
-                </td>
+
                 <td class="text-center">
 
                     <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
@@ -108,7 +106,7 @@
                             class="far fa-eye"></i></button>
                     @include('frontend.bill.include.clearBill')
 
-                    
+
                     <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info btn-sm"><i
                             class="fas fa-info-circle"></i></a>
                 </td>

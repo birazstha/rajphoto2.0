@@ -11,6 +11,7 @@
     <tr>
         <th scope="col">S.No</th>
         <th scope="col">Name</th>
+        <th scope="col">Rank</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
@@ -28,6 +29,9 @@
                 @else
                     <span class="badge badge-danger">Danger</span>
                 @endif
+            </td>
+            <td>
+                {{ $item->rank }}
             </td>
         
             <td>

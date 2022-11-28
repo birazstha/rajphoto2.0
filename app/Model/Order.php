@@ -15,4 +15,9 @@ class Order extends Model
         return $this->hasMany(Size::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+
 }

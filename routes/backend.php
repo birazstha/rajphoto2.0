@@ -30,7 +30,7 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
     });
 
     Route::group(['middleware' => ['auth', 'permission', 'twofa', 'reset.password']], function () {
-        Route::get('/home', 'indexController@index')->name('home');
+        Route::get('/home', 'indexController@index')->name('home.system');
         Route::resource('/roles', 'user\RoleController', ['except' => ['show']]);
 
         Route::resource('/users', 'user\UserController', ['except' => ['show']]);
@@ -74,7 +74,7 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/customers', 'customer\CustomerController');
         Route::resource('/frontend-users', 'frontendUser\FrontendUserController');
         Route::resource('/expenses', 'expense\ExpenseController');
-        Route::resource('/savings', 'saving\SavingController');
+        Route::resource('/banks', 'bank\BankController');
         Route::resource('/adjustment','adjustment\AdjustmentController');      
     });
 });

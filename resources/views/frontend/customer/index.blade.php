@@ -5,9 +5,9 @@
         <h2>Customer Detail</h2>
         <hr>
         <div>
-            <button data-toggle="modal" data-target="#edit-customer" target="_blank" class="btn btn-primary open-AddBookDialog"><i
-                    class="fa fa-pen"></i>&nbspEdit</button>
-                    
+            <button data-toggle="modal" data-target="#edit-customer" target="_blank"
+                class="btn btn-primary open-AddBookDialog"><i class="fa fa-pen"></i>&nbspEdit</button>
+
 
             @include('frontend.customer.edit')
         </div>
@@ -58,18 +58,16 @@
                 <th class="text-center">Date</th>
                 <th class="text-center">Prepared By</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
-    
             </tr>
         </thead>
-    
+
         <tbody>
-    
+
             @forelse ($bills as $key => $bill)
                 <tr>
                     <td class="text-center">{{ $key + 1 }}</td>
                     {{-- <td>{{ $bill->id }}</td> --}}
-                   
+
                     <td class="change">
                         @foreach ($bill->billOrders as $key => $billOrder)
                             <div class="order-detail">
@@ -77,9 +75,9 @@
                                 - {{ $billOrder->quantity }} pc
                             </div>
                         @endforeach
-    
+
                     </td>
-    
+
                     <td>
                         <div class="test3">
                             <div class="amounts">
@@ -105,13 +103,13 @@
                                         @endif
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                     </td>
-    
+
                     <td class="text-center">
-    
+
                         <div class="customer-detail">
                             <div class="test1">
                                 <div>
@@ -123,34 +121,25 @@
                             </div>
                         </div>
                     </td>
-                <td class="text-center">{{ $bill->users->name }}</td>
+                    <td class="text-center">{{ $bill->users->name }}</td>
 
                     <td class="text-center">
                         @if ($bill->status)
-                            <span class="badge badge-success btn-sm">Delivered</span>
+                            <span class="badge badge-success btn-sm">Cleared</span>
                         @else
                             <span class="badge badge-info btn-sm">Pending</span>
                         @endif
                     </td>
-                    <td class="text-center">
-    
-                        <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
-                            data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
-                                class="far fa-eye"></i></button>
-    
-                        
-                        <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info btn-sm"><i
-                                class="fas fa-info-circle"></i></a>
-                    </td>
+
                 </tr>
             @empty
                 <td colspan="9" class="text text-danger text-center">No data found</td>
             @endforelse
-    
+
         </tbody>
-    
+
     </table>
-    
+
 
 @endsection
 @section('js')

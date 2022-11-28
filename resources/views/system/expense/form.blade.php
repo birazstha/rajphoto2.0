@@ -10,6 +10,16 @@
         'error' => $errors->first('title'),
     ]" />
 
+    {{-- Rank --}}
+    <x-system.form.form-group :input="[
+        'type'=>'number',
+        'name' => 'rank',
+        'required' => 'true',
+        'label' => 'Rank',
+        'default' => $item->rank ?? old('rank'),
+        'error' => $errors->first('rank'),
+    ]" />
+
 
 {{-- Status --}}
     <x-system.form.form-group :input="['label' => 'Status']">

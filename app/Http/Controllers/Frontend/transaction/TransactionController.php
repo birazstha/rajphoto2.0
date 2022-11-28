@@ -7,9 +7,9 @@ use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Model\PaymentMethod;
 use App\Services\frontend\TransactionService;
-use App\Services\System\ExpenseService;
+use App\Services\frontend\ExpenseService;
 use App\Services\System\FrontendUserService;
-use App\Services\System\OrderService;
+use App\Services\frontend\OrderService;
 use App\Services\System\PaymentMethodService;
 use Illuminate\Http\Request;
 
@@ -29,7 +29,6 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-
         $data = [
             'pageTitle'=>'Transaction',
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
@@ -37,7 +36,6 @@ class TransactionController extends Controller
             'expenses' => $this->expenseService->getAllData($request),
             'transactions'=>$this->transactionService->getAllData($request),
             'payments'=>  $this->paymentMethodService->getAllData($request),
-
         ];
         return view('frontend.transactions.index', $data);
     }
