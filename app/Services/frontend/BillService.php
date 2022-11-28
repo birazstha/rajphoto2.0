@@ -115,7 +115,7 @@ class BillService extends Service
 
     public function update($request, $id)
     {
-        // dd($request->all());
+
         DB::beginTransaction();
         try {
             $item = $this->itemByIdentifier($id);
@@ -133,6 +133,8 @@ class BillService extends Service
             $transaction['bill_type'] = 1;
 
             $this->transactionService->store($transaction);
+
+            $this->adjustmentService->updateAdjustment($request);
 
             DB::commit();
             return $item;

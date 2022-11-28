@@ -7,7 +7,7 @@
             <section class="icon">
                 <i class="fas fa-file-invoice"></i>
                 <span>Bills</span>
-              
+
             </section>
         </a>
 
@@ -18,7 +18,7 @@
             </section>
         </a>
 
-        <a href="{{ route('saving.index') }}">
+        <a href="{{ route('bank.index') }}">
             <section>
                 <i class="fas fa-piggy-bank"></i>
                 <span>Savings</span>
@@ -33,5 +33,3 @@
         </a>
     </div>
 @endsection
-
-

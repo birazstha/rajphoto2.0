@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Frontend\transaction;
 use App\Http\Controllers\Controller;
+use App\Model\Adjustment;
 use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Model\PaymentMethod;
+use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\TransactionService;
 use App\Services\frontend\ExpenseService;
 use App\Services\System\FrontendUserService;
@@ -16,7 +18,7 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    protected $orderService,$frontendUser,$expenseService,$transactionService,$paymentMethodService;
+    protected $orderService,$frontendUser,$expenseService,$transactionService,$paymentMethodService,$adjustmentService;
      public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
@@ -24,6 +26,7 @@ class TransactionController extends Controller
         $this->frontendUser = new FrontendUserService(new FrontendUser);
         $this->expenseService = new ExpenseService(new Expense);
         $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
+        $this->adjustmentService = new AdjustmentService(new Adjustment);
 
     }
 
@@ -41,9 +44,11 @@ class TransactionController extends Controller
     }
 
     public function store(Request $request){
+        
         $data['is_withdrawn'] =  true;
         $data['amount'] = $request->withdrawn_amount;
         $data['date'] =  $request->date;
+        $this->adjustmentService->deductClosingBalance($request);
         $this->transactionService->store($data);
         return redirect()->back()->with('success', 'Recorded successfully!!');
     }

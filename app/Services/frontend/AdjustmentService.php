@@ -13,9 +13,24 @@ class AdjustmentService extends Service
     }
 
     public function updateAdjustment($request){
-        $data = $this->model->where('date',$request->ordered_date);
+       
+        $data = $this->model->where('date',$request->ordered_date)
+        ->orWhere('date',$request->cleared_date)
+        ->orWhere('date',$request->date);
         $closingAmount = $data->first()->closing_balance;
-        $updatedClosingAmnt = $closingAmount + $request->paid_amount;
+        $updatedClosingAmnt = $closingAmount + $request->paid_amount + $request->due_amount + $request->total;
+        if($data){
+            $data->update([
+                'closing_balance'=>$updatedClosingAmnt,
+            ]);
+        }
+    }
+
+    public function deductClosingBalance($request)
+    {
+        $data = $this->model->where('date',$request->date);
+        $closingAmount = $data->first()->closing_balance;
+        $updatedClosingAmnt = $closingAmount - $request->amount - $request->withdrawn_amount;
         if($data){
             $data->update([
                 'closing_balance'=>$updatedClosingAmnt,

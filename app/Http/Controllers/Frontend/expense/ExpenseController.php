@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend\expense;
 
 use App\Exceptions\CustomGenericException;
 use App\Http\Controllers\Controller;
+use App\Model\Adjustment;
 use App\Model\Bill;
 use App\Model\Transaction;
+use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\ExpenseService;
 use App\Services\frontend\TransactionService;
 use Illuminate\Http\Request;
@@ -13,12 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
-    protected $expenseService, $transactionService;
+    protected $expenseService, $transactionService,$adjustmentService;
     public function __construct(ExpenseService $expenseService)
     {
         $this->expenseService = $expenseService;
         $this->moduleName = 'Create Bill';
         $this->transactionService = new TransactionService(new Transaction);
+        $this->adjustmentService = new AdjustmentService(new Adjustment);
     }
 
     public function index(Request $request)
@@ -48,6 +51,7 @@ class ExpenseController extends Controller
         $transaction['expense_id'] = $request->expense_id;
         $transaction['description'] = $request->description;
         $this->transactionService->store($transaction);
+        $this->adjustmentService->deductClosingBalance($request);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
 

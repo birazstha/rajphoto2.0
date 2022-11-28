@@ -78,7 +78,6 @@ class BillController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
             $this->billService->update($request, $id);
             return redirect()->route('bills.index')->with('success', 'Bill has been cleared successfully!!');

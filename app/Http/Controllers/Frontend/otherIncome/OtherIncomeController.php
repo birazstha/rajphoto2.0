@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\otherIncome;
 
 use App\Exceptions\CustomGenericException;
 use App\Http\Controllers\Controller;
+use App\Model\Adjustment;
 use App\Model\Bill;
 use App\Model\BillOrder;
 use App\Model\Customer;
@@ -11,6 +12,7 @@ use App\Model\FrontendUser;
 use App\Model\Income;
 use App\Model\Order;
 use App\Model\Transaction;
+use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\IncomeService;
 use App\Services\frontend\OrderService;
 use App\Services\System\BillOrderService;
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\DB;
 
 class OtherIncomeController extends Controller
 {
-    protected $orderService, $billOrderService, $frontendUser, $customerService, $transactionService, $billService;
+    protected $orderService, $billOrderService, $frontendUser, $customerService, $transactionService, $billService,$adjustmentService;
     public function __construct(OtherIncomeService $otherIncomeService)
     {
         $this->otherIncomeService = $otherIncomeService;
@@ -35,6 +37,7 @@ class OtherIncomeController extends Controller
         $this->customerService = new CustomerService(new Customer);
         $this->userService = new FrontendUserService(new FrontendUser);
         $this->transactionService = new TransactionService(new Transaction);
+        $this->adjustmentService = new AdjustmentService(new Adjustment);
     }
 
     public function index(Request $request)
@@ -66,6 +69,7 @@ class OtherIncomeController extends Controller
         $transaction['description'] = $request->description;
         $transaction['created_at'] = Carbon::now();
         $this->transactionService->store($transaction);
+        $this->adjustmentService->updateAdjustment($request);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
 
