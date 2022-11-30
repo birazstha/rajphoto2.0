@@ -4,6 +4,7 @@ namespace App\Services\frontend;
 
 use App\Model\Adjustment;
 use App\Services\Service;
+use Carbon\Carbon;
 
 class AdjustmentService extends Service
 {
@@ -38,6 +39,16 @@ class AdjustmentService extends Service
         }
     }
 
+    public function getClosingBalance(){
+         return $this->model->where('created_at', '>=',Carbon::yesterday())->first()->closing_balance ?? 0;
+    }
+
+    public function store($request)
+    {
+         $this->model->create($request->except('_token')); 
+       
+     }
+     
 
 }
 

@@ -59,6 +59,7 @@ class Service
     public function store($request)
     {
         return $this->model->create($request->except('_token'));
+        
     }
 
     // store bulk records

@@ -72,6 +72,9 @@ class AjaxController extends Controller
     public function getIncome(Request $request)
     {
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
+
+       
+
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['online-payment-bill'] = collect($data['transactions'])->where('payment_method')->where('bill_id')->sum('amount');
@@ -81,8 +84,7 @@ class AjaxController extends Controller
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
 
-        // dd($data['adjustment']);
-
+        
 
         //Calculating Total Closing Balance for selected day
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill'] - $data['online-payment-other'];

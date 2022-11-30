@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 
 
     Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');
+    Route::post('/adjustment', 'adjustment\AdjustmentController@store')->name('frontend.adjustment.store');
 
     
  

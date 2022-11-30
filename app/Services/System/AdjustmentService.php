@@ -14,6 +14,7 @@ class AdjustmentService extends Service
     }
 
     public function getClosingBalance($request){
+       
         $query = $this->query();
         return $query->where('date', $request->prevDate)->first()->closing_balance ?? 0;
     }

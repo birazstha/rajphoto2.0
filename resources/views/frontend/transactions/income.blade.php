@@ -115,7 +115,7 @@
                     </div>
 
 
-                    <div class="row" id="cash-transaction-other" >
+                    <div class="row" id="cash-transaction-other">
                         <div class="col-6">
                             <!--Cash Received-->
                             <div class="form-group row">

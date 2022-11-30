@@ -126,8 +126,14 @@
             } else {
                 $('#toggle-payment').addClass('d-none');
                 $('#cash-transaction').removeClass('d-none');
-
             }
+        });
+
+
+        $(document).ready(function() {
+            $('#createBill').on('shown.bs.modal', function() {
+                $('#customer_name').focus();
+            })
         });
     </script>
 @endsection

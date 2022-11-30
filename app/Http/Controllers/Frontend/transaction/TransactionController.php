@@ -44,7 +44,6 @@ class TransactionController extends Controller
     }
 
     public function store(Request $request){
-        
         $data['is_withdrawn'] =  true;
         $data['amount'] = $request->withdrawn_amount;
         $data['date'] =  $request->date;
