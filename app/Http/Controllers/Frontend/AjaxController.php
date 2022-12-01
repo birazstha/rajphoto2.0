@@ -50,7 +50,7 @@ class AjaxController extends Controller
         $users = FrontendUser::all();
         $date =  $request->date;
         if (isset($customerName)) {
-            $bills = Bill::where('status',false)->whereHas('customers', function ($query) use ($request) {
+            $bills = Bill::where('status', false)->whereHas('customers', function ($query) use ($request) {
                 $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
@@ -60,11 +60,17 @@ class AjaxController extends Controller
         }
     }
 
-  
+
 
     public function autocompletePhone(Request $request)
     {
-        $data = Customer::select("phone_number as value", "id")
+        // $data = Customer::select("phone_number as value", "id")
+        //     ->where('phone_number', 'ILIKE', '%' . $request->search . '%')->get();
+        // return $data;
+
+        //Search bill with the help of customer
+
+        $data = Customer::select("phone_number as value", "id", "phone_number")
             ->where('phone_number', 'ILIKE', '%' . $request->search . '%')->get();
         return $data;
     }
@@ -73,7 +79,7 @@ class AjaxController extends Controller
     {
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
 
-       
+
 
         $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
@@ -84,7 +90,7 @@ class AjaxController extends Controller
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
 
-        
+
 
         //Calculating Total Closing Balance for selected day
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill'] - $data['online-payment-other'];

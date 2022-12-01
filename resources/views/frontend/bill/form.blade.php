@@ -10,14 +10,17 @@
             <div class="modal-body">
                 <form action="{{ route('bills.store') }}" method="POST" autocomplete="off">
                     @csrf
+
+
                     <div class="form-group row">
                         <div class="col-6">
                             <!--Name-->
                             <div class="form-group row">
                                 <label for="name" class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="" name="name" class="form-control"
-                                        id="customer_name" placeholder="Enter customer's name" required>
+                                    <input type="text" value="" name="name"
+                                        class="typeahead form-control search-name" id="customer_name"
+                                        placeholder="Enter customer's name" required>
                                 </div>
                             </div>
 
@@ -28,8 +31,9 @@
                             <div class="form-group row">
                                 <label for="phone_number" class="col-sm-4 col-form-label">Phone</label>
                                 <div class="col-sm-8">
-                                    <input type="number" value="" name="phone_number" class="form-control"
-                                        id="phone_number" placeholder="Enter customer's phone number.">
+                                    <input type="number" value="" name="phone_number"
+                                        class="form-control search-phone" id="phone_number"
+                                        placeholder="Enter customer's phone number.">
                                     <span class="text text-danger" id="error-phone" required></span>
                                 </div>
 
@@ -189,33 +193,10 @@
                     </div>
 
 
-                    {{-- <div class="row d-none" id="cash-transaction">
-                        <div class="col-6">
-                            <!--Cash Received-->
-                            <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
-                                <div class="col-sm-8">
-                                    <input type="number" name="cash_received"
-                                        value="{{ $item->cash_received ?? '' }}" id="cash_received"
-                                        class="form-control">
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col-6">
-                            <!--Cash Return-->
-                            <div class="form-group row">
-                                <label for="texr" class="col-sm-4 col-form-label">Cash Return</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}"
-                                        id="cash_return" class="form-control" readonly>
-                                </div>
-                            </div>
-                            @error('delivery_date')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div> --}}
+
+
+
 
 
 

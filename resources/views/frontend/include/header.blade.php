@@ -57,8 +57,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-
+    <style>
+        .ui-autocomplete {
+            z-index: 2147483647;
+        }
+    </style>
 </head>
 
 <body>
@@ -96,8 +99,7 @@
 
         <div class="w-25 search-setting">
 
-            <input class="typeahead form-control mr-4" id="search" placeholder="Search Customer" type="text"
-                autocomplete="off">
+            <input class="form-control mr-4 search" placeholder="Search Customer" type="text" autocomplete="off">
 
             <a href="{{ route('home.system') }}" target="_blank">
                 <i class="fas fa-cog" style="color: white; font-size:20px"></i>

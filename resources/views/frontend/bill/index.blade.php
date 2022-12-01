@@ -1,18 +1,12 @@
 @extends('frontend.layout.master')
 @section('main-content')
     {{ Session::has('success') }}
-
-
     <div class="d-flex justify-content-between mb-2 align-items-center">
         <h2>Bills</h2>
         <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
                 class="fa fa-plus"></i>&nbspCreate</button>
 
-
-
         @include('frontend.bill.form')
-
-
     </div>
 
     <div class="mb-4">
@@ -37,18 +31,9 @@
 @section('js')
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"
         type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
-
-    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-
-    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 
     @include('frontend.bill.include.scripts.filter')
-    @include('frontend.bill.include.scripts.pagination')
+    {{-- @include('frontend.bill.include.scripts.pagination') --}}
     @include('frontend.bill.include.scripts.script')
 
     <script>
@@ -94,30 +79,6 @@
     </script>
 
     <script>
-        // $("#phone_number").autocomplete({
-        //     source: function(request, response) {
-        //         $.ajax({
-        //             url: "{{ route('autoCompletePhone') }}",
-        //             type: 'GET',
-        //             dataType: "json",
-        //             data: {
-        //                 search: request.term
-        //             },
-        //             success: function(data) {
-        //                 response(data);
-        //             }
-        //         });
-        //     },
-        //     select: function(event, ui) {
-        //         console.log('here');
-        //         $('#phone_number').val(ui.item.label);
-        //         console.log(ui.item);
-        //         return false;
-        //     }
-        // });
-
-
-
         $(document).on('change', '#payment_method', function() {
             var method = $(this).val();
             if (method == 'online') {
@@ -134,6 +95,56 @@
             $('#createBill').on('shown.bs.modal', function() {
                 $('#customer_name').focus();
             })
+
+            //Search Customer by name
+            $(".search-name").autocomplete({
+                classes: {
+                    "ui-autocomplete": "highlight"
+                },
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{ route('autoCompleteSearch') }}",
+                        type: 'GET',
+                        dataType: "json",
+                        data: {
+                            search: request.term
+                        },
+                        success: function(data) {
+                            response(data.slice(0, 10));
+                        }
+                    });
+                },
+                select: function(event, ui) {
+                    $('.search-name').val(ui.item.label);
+                    return false;
+                }
+            });
+
+            //Search Customer by phone
+            $(".search-phone").autocomplete({
+                classes: {
+                    "ui-autocomplete": "highlight"
+                },
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{ route('autoCompletePhone') }}",
+                        type: 'GET',
+                        dataType: "json",
+                        data: {
+                            search: request.term
+                        },
+                        success: function(data) {
+                            response(data.slice(0, 10));
+                        }
+                    });
+                },
+                select: function(event, ui) {
+                    $('.search-phone').val(ui.item.label);
+                    return false;
+                }
+            });
+
+
         });
     </script>
 @endsection
