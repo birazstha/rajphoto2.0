@@ -18,7 +18,7 @@
         <div class="row">
 
             {{-- Opening Balance --}}
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
@@ -36,7 +36,7 @@
 
             {{-- Income --}}
 
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -54,8 +54,7 @@
 
 
             {{-- Expense --}}
-
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
@@ -72,8 +71,7 @@
             </div>
 
             {{-- Savings --}}
-
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
@@ -88,25 +86,25 @@
                 </div>
             </div>
 
-            {{-- Adjustments --}}
-
-            {{-- <div class="col-lg-2 col-6">
+            {{-- Online Payment --}}
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-secondary">
+                <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>Rs.{{ $adjustment }}/-</h3>
-    
-                        <p>Adjustments</p>
+                        <h3>Rs.{{ $totalOnlinePayment }}/-</h3>
+
+                        <p>Online Payment</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fas fa-globe"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-            </div> --}}
+            </div>
+
 
             {{-- With Drawn --}}
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -114,14 +112,30 @@
                         <p>With Drawn</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            {{-- Adjustments --}}
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-secondary">
+                    <div class="inner">
+                        <h3>Rs.{{ $adjustment }}/-</h3>
+
+                        <p>Adjustments</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-balance-scale"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
             {{-- Closing Balance --}}
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -135,6 +149,7 @@
                 </div>
             </div>
         </div>
+
 
     </ul>
 
@@ -158,6 +173,7 @@
                         @if (isset($transaction->bill_id))
                             {{ $transaction->bills->status ? 'Cleared' : 'Prepared' }}
                             Bill ({{ $transaction->bills->qr_code }})
+                            {!! $transaction->payment_method ? '<span class="text text-primary">[Online Payment]</span>' : '' !!}
                         @elseif (isset($transaction->expense_id))
                             {{ $transaction->expenses->title }}
                         @elseif (isset($transaction->saving_id))
@@ -166,6 +182,7 @@
                             Withdrawn
                         @else
                             {{ $transaction->incomes->name }}
+                            {!! $transaction->payment_method ? '<span class="text text-primary">[Online Payment]</span>' : '' !!}
                         @endif
                     </td>
                     <td>

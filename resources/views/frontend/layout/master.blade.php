@@ -88,41 +88,6 @@
 
 
 <script>
-    $(document).on('focus', '.search', function() {
-        $(this).autocomplete({
-            classes: {
-                "ui-autocomplete": "highlight",
-            },
-            source: function(request, response) {
-                $.ajax({
-                    url: "{{ route('autoCompleteSearch') }}",
-                    type: 'GET',
-                    dataType: "json",
-                    data: {
-                        search: request.term
-                    },
-                    success: function(data) {
-                        if (data.length > 0) {
-                            console.log(data);
-                            response(data);
-                        } else {
-                            response([{
-                                label: 'No data found.'
-                            }]);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $('.search').val(ui.item.label);
-                let id = ui.item.id;
-                let url = "{{ route('customerResult', ['id' => ':id']) }}";
-                let finalUrl = url.replace(':id', id);
-                window.location.href = finalUrl;
-                return false;
-            }
-        })
-    })
     $(".search").autocomplete({
         classes: {
             "ui-autocomplete": "highlight",
@@ -138,7 +103,7 @@
                 success: function(data) {
                     if (data.length > 0) {
                         console.log(data);
-                        response(data.slice(0, 10));
+                        response(data.slice(0, 6));
                     } else {
                         response([{
                             label: 'No data found.'

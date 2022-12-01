@@ -127,7 +127,7 @@
         <div class="">
             Showing 1 to {{ $bills->count() }} entries of {{ $bills->count() }} entries.
         </div>
-        @if ($dataCount >= 1)
+        {{-- @if ($dataCount >= 1)
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=1">1</a></li>
@@ -136,6 +136,6 @@
                 <li class="page-item"><a class="page-link" href="http://localhost/rajphoto2.0/bills?page=4">Next</a>
                 </li>
             </ul>
-        @endif
+        @endif --}}
     @endif
 </div>
