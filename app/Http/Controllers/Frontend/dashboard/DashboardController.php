@@ -23,7 +23,7 @@ class DashboardController extends Controller
    
     public function dashboard(Request $request){
         $data['pageTitle'] = $this->moduleName;
-        $data['transactions'] =  Transaction::where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->paginate(10);
+        $data['transactions'] =  Transaction::where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');

@@ -189,7 +189,7 @@
                     </div>
 
 
-                    <div class="row d-none" id="cash-transaction">
+                    {{-- <div class="row d-none" id="cash-transaction">
                         <div class="col-6">
                             <!--Cash Received-->
                             <div class="form-group row">
@@ -215,7 +215,7 @@
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
 
 

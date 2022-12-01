@@ -1,10 +1,8 @@
 @include('frontend.include.header')
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding: 0 2rem 0 2rem">
     @yield('main-content')
 </div>
-
-
 
 @yield('js')
 
