@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Model\Adjustment;
 use App\Model\Bill;
 use App\Model\Customer;
+use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Income;
 use App\Model\Order;
 use App\Model\Size;
 use App\Model\Transaction;
+use App\Services\frontend\ExpenseService;
+use App\Services\frontend\OrderService;
 use App\Services\System\AdjustmentService;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,10 +22,12 @@ use Illuminate\Http\Request;
 class AjaxController extends Controller
 {
 
-    protected $adjustmentService;
+    protected $adjustmentService, $orderService, $expenseService;
     public function __construct()
     {
         $this->adjustmentService = new AdjustmentService(new Adjustment);
+        $this->orderService = new OrderService(new Order);
+        $this->expenseService = new ExpenseService(new Expense);
     }
 
 
@@ -106,12 +111,30 @@ class AjaxController extends Controller
 
     public function autoCompleteSearch(Request $request)
     {
-
         //Search bill with the help of customer
-
         $data = Customer::select("name as value", "id", "phone_number")
             ->where('name', 'ILIKE', '%' . $request->search . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->search . '%')
             ->get();
         return $data;
+    }
+
+    public function getTransactionTitle(Request $request)
+    {
+        if ($request->transactionType === 'income') {
+            $incomes =  $this->orderService->getAllData($request->merge(['details' => 'not-required']));
+
+            $html = "<option value=''>Select Income Title</option>";
+            foreach ($incomes as $income) {
+                $html .= "<option value='$income->id'>$income->name</option>";
+            }
+            // dd($html);
+        } else {
+            $expenses =  $this->expenseService->getAllData($request);
+            $html = "<option value=''>Select Income Title</option>";
+            foreach ($expenses as $expense) {
+                $html .= "<option value='$expense->id'>$expense->title</option>";
+            }
+        }
+        return $html;
     }
 }

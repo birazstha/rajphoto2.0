@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', 'dashboard\DashboardController@dashboard')->name('home');
     Route::resource('bills', 'bill\BillController');
-    Route::resource('expense','expense\ExpenseController');
-    Route::resource('bank','bank\BankController');
-    Route::resource('other-incomes', 'otherIncome\OtherIncomeController');
+    Route::resource('expense', 'expense\ExpenseController');
+    Route::resource('bank', 'bank\BankController');
 
     Route::get('/qrcode', 'bill\BillController@scanQrCode')->name('bill.qrcode');
     Route::get('/search', 'bill\BillController@searchBill')->name('bill.search');
@@ -22,7 +21,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/getOpeningBalance', 'AjaxController@getOpeningBalance')->name('bill.getOpeningBalance');
     Route::post('/darkmode', 'AjaxController@darkmode')->name('frontend.darkmode');
     Route::get('autocompletephone', 'AjaxController@autocompletePhone')->name('autoCompletePhone');
-   
+    Route::post('getTransactionTitle', 'AjaxController@getTransactionTitle')->name('getTransactionTitle');
+
     Route::get('autocompleteSearch', 'AjaxController@autoCompleteSearch')->name('autoCompleteSearch');
 
 
@@ -34,7 +34,4 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');
     Route::post('/adjustment', 'adjustment\AdjustmentController@store')->name('frontend.adjustment.store');
-
-    
- 
 });

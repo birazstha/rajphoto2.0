@@ -199,8 +199,9 @@
     <thead class="table-active">
         <tr>
             <th scope="col">S. No</th>
-            <th scope="col">Income/Expense/Savings</th>
+            <th scope="col">Description</th>
             <th scope="col">Amount</th>
+            <th scope="col">Action</th>
             {{-- <th scope="col">Cash Flow</th> --}}
             {{-- <th scope="col">Handle</th> --}}
         </tr>
@@ -227,14 +228,27 @@
                 <td>
                     Rs.{{ $transaction->amount }}/-
                 </td>
+                <td>
+                    <button class="btn btn-info" data-toggle="modal"
+                        data-target="#editTrasaction{{ $transaction->id }}"><i
+                            class="fas fa-pencil-alt"></i></button>
+
+                    @include('system.home.edit')
+                </td>
 
             </tr>
+
+
 
         @empty
             <tr>
                 <td colspan="3" class="text-center text-danger"> No Transactions found</td>
             </tr>
         @endforelse
+
+        <!-- Button trigger modal -->
+
+
 
 
     </tbody>

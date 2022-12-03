@@ -42,22 +42,22 @@
 
 
                     {{-- Cash Received --}}
-                    <div class="mb-3 row">
+                    {{-- <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Cash Received</label>
                         <div class="col-sm-8">
                             <input type="number" name="cash_received" class="form-control" id="cash_received"
                                 {{ $bill->due_amount == 0 ? 'readonly' : '' }}>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Cash Return --}}
-                    <div class="mb-3 row">
+                    {{-- <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Cash Return</label>
                         <div class="col-sm-8">
                             <input type="number" name="cash_return" class="form-control cash_return" id="cash_return"
                                 readonly>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Cleared By --}}
                     <div class="mb-3 row">

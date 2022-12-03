@@ -8,7 +8,7 @@ use App\Services\Service;
 
 class SizeService extends Service
 {
-     protected $orderService;
+    protected $orderService;
     public function __construct(Size $size)
     {
         parent::__construct($size);
@@ -17,23 +17,23 @@ class SizeService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
-    
-        
+
+
         $query = $this->query();
 
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('name', 'ILIKE', '%'.$data->keyword.'%');
+            $query->where('name', 'ILIKE', '%' . $data->keyword . '%');
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
         }
 
-        if(isset($data->order_id)){
-            return $query->where('order_id',$data->order_id)->get();   
+        if (isset($data->order_id)) {
+            return $query->where('order_id', $data->order_id)->get();
         }
 
-        if(isset($data->pluck)){
-            return $query->orderBy('id', 'ASC')->pluck('name','id');
+        if (isset($data->pluck)) {
+            return $query->orderBy('id', 'ASC')->pluck('name', 'id');
         }
 
         if ($pagination) {
@@ -43,34 +43,32 @@ class SizeService extends Service
         return $query->orderBy('id', 'ASC')->get();
     }
 
-    public function createPageData($request){
-        return[
-            'orders' => $this->orderService->getAllData($request->merge(['pluck'=>true])),
-            'status'=>$this->status(),
-            'order_id'=>$request->order_id,
+    public function createPageData($request)
+    {
+        return [
+            'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
+            'status' => $this->status(),
+            'order_id' => $request->order_id,
         ];
     }
 
     public function editPageData($request, $id)
     {
-        return[
+        return [
             'item' => $this->itemByIdentifier($id),
-            'orders' => $this->orderService->getAllData($request->merge(['pluck'=>true])),
-            'status'=>$this->status(),
-            'order_id'=>$request->order_id,
+            'orders' => $this->orderService->getAllData($request->merge(['pluck' => true])),
+            'status' => $this->status(),
+            'order_id' => $request->order_id,
         ];
     }
-       
 
 
-    public function indexPageData($request){
-        return[
+
+    public function indexPageData($request)
+    {
+        return [
             'items' => $this->getAllData($request),
-            'order_id'=>$request->order_id,
+            'order_id' => $request->order_id,
         ];
     }
-
-    
-
-   
 }

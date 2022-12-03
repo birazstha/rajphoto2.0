@@ -119,7 +119,8 @@
             let finalUrl = url.replace(':id', id);
             window.location.href = finalUrl;
             return false;
-        }
+        },
+        delay: 100
     });
 </script>
 

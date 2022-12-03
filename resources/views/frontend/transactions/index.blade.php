@@ -4,14 +4,20 @@
     <div class="d-flex justify-content-between mb-2 align-items-center">
         <h2>Transactions</h2>
         <div>
-            <button data-toggle="modal" data-target="#incomeTransaction" target="_blank"
+
+            <button data-toggle="modal" data-target="#bothTransactions" target="_blank"
+                class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspAdd</button>
+
+            {{-- <button data-toggle="modal" data-target="#incomeTransaction" target="_blank"
                 class="btn btn-success open-AddBookDialog"><i class="fa fa-plus"></i>&nbspIncome</button>
             <button data-toggle="modal" data-target="#expenseTransaction" target="_blank"
-                class="btn btn-danger open-AddBookDialog"><i class="fa fa-plus"></i>&nbspExpenses</button>
+                class="btn btn-danger open-AddBookDialog"><i class="fa fa-plus"></i>&nbspExpenses</button> --}}
         </div>
 
         @include('frontend.transactions.income')
         @include('frontend.transactions.expense')
+        @include('frontend.transactions.form')
+
 
     </div>
 
@@ -79,27 +85,40 @@
 
         };
 
-        $("#other_income").change(function() {
-            var title = $('#other_income option:selected').text();
-            if (title == 'Others') {
-                $('#toggle-description').removeClass('d-none');
+        $("#transaction_title").change(function() {
+            let transactionType = $('#transaction-type').val();
+            if (transactionType === 'income') {
+                var title = $('#transaction_title option:selected').text();
+                if (title === 'Others') {
+                    $('#toggle-description-income').removeClass('d-none');
+                } else {
+                    $('#toggle-description-income').addClass('d-none')
+                }
+                var incomeTitle = $(this).val();
+                $.ajax({
+                    method: 'get',
+                    url: "{{ URL::route('bill.getRate') }}",
+                    data: {
+                        'order_id': incomeTitle,
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    dataType: 'text',
+                    success: function(response) {
+                        console.log(response);
+                        $("#other_rate").val(response);
+                        calculatetotal(response);
+                    },
+                });
             } else {
-                $('#toggle-description').addClass('d-none')
+                var title = $('#transaction_title option:selected').text();
+                if (title === 'Other') {
+                    $('#toggle-description-income').removeClass('d-none');
+                } else {
+                    $('#toggle-description-income').addClass('d-none')
+                }
             }
-            var incomeTitle = $(this).val();
-            $.ajax({
-                method: 'get',
-                url: "{{ URL::route('bill.getRate') }}",
-                data: {
-                    'order_id': incomeTitle,
-                    '_token': "{{ csrf_token() }}"
-                },
-                dataType: 'text',
-                success: function(response) {
-                    $("#other_rate").val(response);
-                    calculatetotal(response);
-                },
-            });
+
+
         });
 
         $("#expense").change(function() {
@@ -150,8 +169,49 @@
             } else {
                 $('#toggle-payment-other').addClass('d-none');
                 $('#cash-transaction-other').removeClass('d-none');
-
             }
+        });
+
+        $(document).ready(function() {
+            $('#bothTransactions').on('shown.bs.modal', function() {
+                $('#transaction-type').focus();
+            })
+
+            // $('#transaction-type').
+            // $("#transaction-type option[value='income']").attr('selected', 'selected');
+
+        });
+
+
+
+        //For showing selected transaction related titles
+        $('#transaction-type').change(function() {
+            let incomeType = $(this).val();
+
+            if (incomeType === 'income') {
+                $('.toggle-income').removeClass('d-none');
+                $('.toggle-expense').addClass('d-none');
+                $('#toggle-description-income').addClass('d-none');
+            } else {
+                $('.toggle-expense').removeClass('d-none');
+                $('.toggle-income').addClass('d-none');
+                $('#toggle-description-income').addClass('d-none');
+            }
+            var path = "{{ URL::route('getTransactionTitle') }}";
+            $.ajax({
+                url: path,
+                data: {
+                    'transactionType': incomeType,
+                    '_token': "{{ csrf_token() }}"
+                },
+                method: 'post',
+                dataType: 'text',
+                success: function(response) {
+                    $('#transaction_title').empty();
+                    $('#transaction_title').append(response);
+                }
+            });
+
         });
     </script>
 @endsection

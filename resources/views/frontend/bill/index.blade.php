@@ -22,6 +22,9 @@
         </form>
     </div>
 
+
+
+
     <div class="loader">
         <img src="{{ asset('public/images/loader.gif') }}" alt="">
     </div>

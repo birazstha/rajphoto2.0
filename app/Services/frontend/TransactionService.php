@@ -27,21 +27,24 @@ class TransactionService extends Service
             $query->select($selectedColumns);
         }
 
-        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->whereNull(['saving_id','bill_id'])->where('is_withdrawn',false)->paginate(10);
+        return $query->orderBy('created_at', 'DESC')->where('created_at', '>=', Carbon::today())->whereNull(['saving_id', 'bill_id'])->where('is_withdrawn', false)->paginate(10);
     }
 
-    public function getSavingsDetail(){
+    public function getTodaysTransactions()
+    {
+        return $this->model->where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
+    }
+
+    public function getSavingsDetail()
+    {
         $query = $this->query();
-        return $query->orderBy('created_at','DESC')->where('created_at', '>=', Carbon::today())->whereNotNull('saving_id')->get();
-  
+        return $query->orderBy('created_at', 'DESC')->where('created_at', '>=', Carbon::today())->whereNotNull('saving_id')->get();
     }
 
 
     public function store($request)
     {
         $this->model->create($request);
-        return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');    
+        return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
-
-   
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\transaction;
+
 use App\Http\Controllers\Controller;
 use App\Model\Adjustment;
 use App\Model\Expense;
@@ -18,8 +19,8 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    protected $orderService,$frontendUser,$expenseService,$transactionService,$paymentMethodService,$adjustmentService;
-     public function __construct(TransactionService $transactionService)
+    protected $orderService, $frontendUser, $expenseService, $transactionService, $paymentMethodService, $adjustmentService;
+    public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
         $this->orderService = new OrderService(new Order);
@@ -27,29 +28,38 @@ class TransactionController extends Controller
         $this->expenseService = new ExpenseService(new Expense);
         $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
         $this->adjustmentService = new AdjustmentService(new Adjustment);
-
     }
 
     public function index(Request $request)
     {
         $data = [
-            'pageTitle'=>'Transaction',
+            'pageTitle' => 'Transaction',
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'users' => $this->frontendUser->getAllData($request),
             'expenses' => $this->expenseService->getAllData($request),
-            'transactions'=>$this->transactionService->getAllData($request),
-            'payments'=>  $this->paymentMethodService->getAllData($request),
+            'transactions' => $this->transactionService->getAllData($request),
+            'payments' =>  $this->paymentMethodService->getAllData($request),
         ];
         return view('frontend.transactions.index', $data);
     }
 
-    public function store(Request $request){
-        $data['is_withdrawn'] =  true;
-        $data['amount'] = $request->withdrawn_amount;
+    public function store(Request $request)
+    {
+        if (isset($request->order_id)) {
+            $data['income_id'] = $request->order_id;
+            $this->adjustmentService->updateAdjustment($request);
+        }
+
+        if (isset($request->withdrawn_amount)) {
+            $data['is_withdrawn'] =  true;
+            $this->adjustmentService->deductClosingBalance($request);
+        }
+
+        $data['amount'] = $request->withdrawn_amount ?? $request->total;
         $data['date'] =  $request->date;
-        $this->adjustmentService->deductClosingBalance($request);
+
+
         $this->transactionService->store($data);
         return redirect()->back()->with('success', 'Recorded successfully!!');
     }
-
 }

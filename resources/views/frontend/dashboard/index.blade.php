@@ -1,8 +1,6 @@
 @extends('frontend.layout.master')
 @section('main-content')
-    <div class="d-flex justify-content-between mt-2 mb-2">
-        <h2> Transactions</h2>
-
+    <div class="d-flex justify-content-end mt-2 mb-2">
         <div>
             <button class="btn btn-secondary" id="adjustmentt" data-toggle="modal" data-target="#adjustments"> <i
                     class="fa fa-plus"></i>
@@ -96,7 +94,7 @@
                         <p>Online Payment</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -155,6 +153,18 @@
 
     @include('frontend.dashboard.adjustment')
     @include('frontend.dashboard.withdraw')
+
+    <div class="d-flex justify-content-between mt-2 mb-2">
+        <h2> Transactions</h2>
+        <select class="form-select w-25"
+            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+            <option selected>Open this select menu</option>
+            <option value="1" selected>All</option>
+            <option value="{{ route('home') . '/?income_id' }}">Incomes</option>
+            <option value="3">Expenses</option>
+            <option value="3">Savings</option>
+        </select>
+    </div>
 
     <table class="table table-striped">
         <thead class="table-active">
