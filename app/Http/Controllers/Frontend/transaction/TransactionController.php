@@ -45,9 +45,13 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        if (isset($request->order_id)) {
-            $data['income_id'] = $request->order_id;
+        if ($request->transaction_type === 'income') {
+            $data['income_id'] = $request->transaction_title_id;
+            $data['payment_method'] = $request->payment_method ?? null;
             $this->adjustmentService->updateAdjustment($request);
+        } elseif ($request->transaction_type === 'expense') {
+            $data['expense_id'] = $request->transaction_title_id;
+            $this->adjustmentService->deductClosingBalance($request);
         }
 
         if (isset($request->withdrawn_amount)) {
@@ -55,7 +59,7 @@ class TransactionController extends Controller
             $this->adjustmentService->deductClosingBalance($request);
         }
 
-        $data['amount'] = $request->withdrawn_amount ?? $request->total;
+        $data['amount'] = $request->withdrawn_amount ?? $request->total ?? $request->amount;
         $data['date'] =  $request->date;
 
 

@@ -16,13 +16,13 @@
                     <div class="form-group row">
                         {!! Form::label('order_id', 'Transaction Type', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="order_id" id="transaction-type" class="form-control" required>
+                            <select name="transaction_type" id="transaction-type" class="form-control" required>
                                 <option value="">Select Transaction Type</option>
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
                             </select>
 
-                            @error('order_id')
+                            @error('transaction_type')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -30,13 +30,13 @@
 
                     <!--Title-->
                     <div class="form-group row">
-                        {!! Form::label('order_id', 'Title', ['class' => 'col-sm-2 col-form-label']) !!}
+                        {!! Form::label('transaction_title_id', 'Title', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="order_id" id="transaction_title" class="form-control" required>
+                            <select name="transaction_title_id" id="transaction_title" class="form-control" required>
                                 <option value="" selected>Select Income Title</option>
                             </select>
 
-                            @error('order_id')
+                            @error('transaction_title_id')
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -144,6 +144,9 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="date" class="current_date" value="">
+
+
 
 
 
@@ -198,7 +201,6 @@
                             @enderror
                         </div>
 
-                        <input type="hidden" name="date" class="current_date" value="">
                     </div> --}}
 
                     <button class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save</button>
