@@ -23,7 +23,7 @@ use App\Services\frontend\TransactionService;
 class BillService extends Service
 {
 
-    public $orderService, $frontendUser, $customerService,$transactionService,$adjustmentService;
+    public $orderService, $frontendUser, $customerService, $transactionService, $adjustmentService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -57,9 +57,6 @@ class BillService extends Service
 
     public function store($request)
     {
-       
-
-
         $orderType = $request->bill[0]['order_id'];
         DB::beginTransaction();
         try {
@@ -74,7 +71,7 @@ class BillService extends Service
             $customerId = uniqid();
             if (empty($request->oldCustomer)) {
                 $name = $this->changeNameFormat($request->name);
-                $customer = $this->customerService->store($request->merge(['name'=>$name,'customer_id' => $customerId]));
+                $customer = $this->customerService->store($request->merge(['name' => $name, 'customer_id' => $customerId]));
                 $data['customer_id'] = $customer->id;
             } else {
                 $data['customer_id'] = $request->oldCustomer;
@@ -91,7 +88,6 @@ class BillService extends Service
             //Check if closing balance is already adjusted or not
             $this->adjustmentService->updateAdjustment($request);
 
-          
 
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
@@ -104,12 +100,13 @@ class BillService extends Service
         }
     }
 
-    public function changeNameFormat($name){
+    public function changeNameFormat($name)
+    {
         $nameArray = explode(' ', $name);
-        if(count($nameArray) == 2){
-           return ucfirst($nameArray[0]).' '. ucfirst($nameArray[1]);
-        }else{
-            return ucfirst($nameArray[0]).' '. ucfirst($nameArray[1]).' '.ucfirst($nameArray[2]);
+        if (count($nameArray) == 2) {
+            return ucfirst($nameArray[0]) . ' ' . ucfirst($nameArray[1]);
+        } else {
+            return ucfirst($nameArray[0]) . ' ' . ucfirst($nameArray[1]) . ' ' . ucfirst($nameArray[2]);
         }
     }
 

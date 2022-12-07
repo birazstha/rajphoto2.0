@@ -1,7 +1,6 @@
 <script>
     $(document).ready(function() {
         var count = 1;
-        var currentTotal;
         var balanceAmt = 0;
         var lastTotal;
         var billCount = 0;

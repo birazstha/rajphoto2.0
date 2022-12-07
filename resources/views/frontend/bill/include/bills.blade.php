@@ -107,7 +107,7 @@
                     @include('frontend.bill.include.clearBill')
 
 
-                    <a href="{{ route('bills.show', $bill->id) }}" target="_blank" class="btn btn-info btn-sm"><i
+                    <a href="{{ route('bills.show', $bill->qr_code) }}" target="_blank" class="btn btn-info btn-sm"><i
                             class="fas fa-info-circle"></i></a>
                 </td>
             </tr>

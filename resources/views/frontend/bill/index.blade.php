@@ -22,9 +22,6 @@
         </form>
     </div>
 
-
-
-
     <div class="loader">
         <img src="{{ asset('public/images/loader.gif') }}" alt="">
     </div>
@@ -119,6 +116,7 @@
                 },
                 select: function(event, ui) {
                     $('.search-name').val(ui.item.label);
+                    $('#phone_number').val(ui.item.phone_number);
                     return false;
                 }
             });

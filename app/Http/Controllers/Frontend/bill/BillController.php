@@ -23,7 +23,7 @@ use App\Services\System\PaymentMethodService;
 
 class BillController extends Controller
 {
-    public $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService,$paymentMethodService;
+    public $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService, $paymentMethodService;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
@@ -41,10 +41,10 @@ class BillController extends Controller
     {
         $data = [
             'pageTitle' => 'Bills',
-            'orders' => $this->orderService->getAllData($request->merge(['details'=>'required'])),
-            'users'=>$this->frontendUser->getAllData($request),
+            'orders' => $this->orderService->getAllData($request->merge(['details' => 'required'])),
+            'users' => $this->frontendUser->getAllData($request),
             'bills' => $this->billService->getAllData($request->merge(['today' => true])),
-            'payments'=>  $this->paymentMethodService->getAllData($request),
+            'payments' =>  $this->paymentMethodService->getAllData($request),
         ];
 
         return view('frontend.bill.index', $data);
@@ -55,8 +55,8 @@ class BillController extends Controller
         //Check if this user already exist or not
         $customerId = $this->customerService->getCustomerId($request);
         try {
-            $bill =  $this->billService->store($request->merge(['oldCustomer'=>$customerId]));  
-            return redirect()->route('bills.show', $bill->id)->with('success', 'Bill has been created successfully!!');
+            $bill =  $this->billService->store($request->merge(['oldCustomer' => $customerId]));
+            return redirect()->route('bills.show', $bill->qr_code)->with('success', 'Bill has been created successfully!!');
         } catch (\Exception $e) {
             throw new CustomGenericException($e->getMessage());
         }
@@ -64,7 +64,7 @@ class BillController extends Controller
 
     public function show($id)
     {
-        $data['row'] = Bill::where('id', $id)->first();
+        $data['row'] = Bill::where('qr_code', $id)->first();
         $data['payments'] = PaymentMethod::all();
         return view('frontend.bill.photoBill', compact('data'));
     }
