@@ -16,7 +16,7 @@
         <div class="row">
 
             {{-- Opening Balance --}}
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
@@ -34,7 +34,7 @@
 
             {{-- Income --}}
 
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -52,7 +52,7 @@
 
 
             {{-- Expense --}}
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
@@ -69,7 +69,7 @@
             </div>
 
             {{-- Savings --}}
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
@@ -85,7 +85,7 @@
             </div>
 
             {{-- Online Payment --}}
-            <div class="col-lg-3 col-6">
+            {{-- <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -98,11 +98,11 @@
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
+            </div> --}}
 
 
             {{-- With Drawn --}}
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -117,7 +117,7 @@
             </div>
 
             {{-- Adjustments --}}
-            <div class="col-lg-3 col-6">
+            {{-- <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-secondary">
                     <div class="inner">
@@ -130,15 +130,20 @@
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Closing Balance --}}
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-2 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>Rs.{{ $closingBalance }}/-</h3>
-                        <p>Closing Balance</p>
+                        <h3>Rs.{{ $closingBalance }}/- {!! $adjustment
+                            ? ($adjustment > 0
+                                ? "<span style='color:green'> [" . $adjustment . ']</span>'
+                                : "<span class='text text-danger'> [" . $adjustment . ']</span>')
+                            : '' !!}</h3>
+                        <p>Closing Balance </p>
+
                     </div>
                     <div class="icon">
                         <i class="fas fa-cloud-moon"></i>
