@@ -33,8 +33,8 @@
                                 <div class="col-sm-8">
                                     <input type="number" value="" name="phone_number"
                                         class="form-control search-phone" id="phone_number"
-                                        placeholder="Enter customer's phone number.">
-                                    <span class="text text-danger" id="error-phone" required></span>
+                                        placeholder="Enter customer's phone number." required>
+                                    <span class="text text-danger" id="error-phone"></span>
                                 </div>
 
                             </div>

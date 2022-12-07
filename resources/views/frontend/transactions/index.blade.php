@@ -172,16 +172,32 @@
             }
         });
 
+
+
+
         $(document).ready(function() {
+            getTransactionType('income');
             $('#bothTransactions').on('shown.bs.modal', function() {
                 $('#transaction-type').focus();
+
             })
-
-            // $('#transaction-type').
-            // $("#transaction-type option[value='income']").attr('selected', 'selected');
-
         });
 
+        const getTransactionType = (type) => {
+            $.ajax({
+                url: "{{ URL::route('getTransactionTitle') }}",
+                data: {
+                    'transactionType': type,
+                    '_token': "{{ csrf_token() }}"
+                },
+                method: 'post',
+                dataType: 'text',
+                success: function(response) {
+                    $('#transaction_title').empty();
+                    $('#transaction_title').append(response);
+                }
+            });
+        }
 
 
         //For showing selected transaction related titles
@@ -197,20 +213,7 @@
                 $('.toggle-income').addClass('d-none');
                 $('#toggle-description-income').addClass('d-none');
             }
-            var path = "{{ URL::route('getTransactionTitle') }}";
-            $.ajax({
-                url: path,
-                data: {
-                    'transactionType': incomeType,
-                    '_token': "{{ csrf_token() }}"
-                },
-                method: 'post',
-                dataType: 'text',
-                success: function(response) {
-                    $('#transaction_title').empty();
-                    $('#transaction_title').append(response);
-                }
-            });
+            getTransactionType(incomeType);
 
         });
     </script>

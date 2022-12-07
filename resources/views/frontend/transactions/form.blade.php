@@ -18,7 +18,7 @@
                         <div class="col-sm-10">
                             <select name="transaction_type" id="transaction-type" class="form-control" required>
                                 <option value="">Select Transaction Type</option>
-                                <option value="income">Income</option>
+                                <option value="income" selected>Income</option>
                                 <option value="expense">Expense</option>
                             </select>
 
@@ -58,7 +58,7 @@
 
 
 
-                    <div class="toggle-income d-none d-none">
+                    <div class="toggle-income">
                         <!--Rate-->
                         <div class="row">
                             <div class="col-4">
