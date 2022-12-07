@@ -154,15 +154,23 @@
     @include('frontend.dashboard.adjustment')
     @include('frontend.dashboard.withdraw')
 
+
     <div class="d-flex justify-content-between mt-2 mb-2">
         <h2> Transactions</h2>
         <select class="form-select w-25"
             onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-            <option selected>Open this select menu</option>
-            <option value="1" selected>All</option>
-            <option value="{{ route('home') . '/?income_id' }}">Incomes</option>
-            <option value="3">Expenses</option>
-            <option value="3">Savings</option>
+            <option value="{{ route('home') }}" selected>All</option>
+            <option value="{{ route('filter.trasactions', 'bill') }}"
+                {{ request()->segment(2) == 'bill' ? 'selected' : '' }}>Bill</option>
+
+            <option value="{{ route('filter.trasactions', 'income') }}"
+                {{ request()->segment(2) == 'income' ? 'selected' : '' }}>Incomes</option>
+            <option value="{{ route('filter.trasactions', 'expense') }}"
+                {{ request()->segment(2) == 'expense' ? 'selected' : '' }}>Expenses</option>
+            <option value="{{ route('filter.trasactions', 'savings') }}"
+                {{ request()->segment(2) == 'savings' ? 'selected' : '' }}>Savings</option>
+            <option value="{{ route('filter.trasactions', 'online-payment') }}"
+                {{ request()->segment(2) == 'online-payment' ? 'selected' : '' }}>Online Payment</option>
         </select>
     </div>
 
@@ -175,6 +183,9 @@
             </tr>
         </thead>
         <tbody>
+
+            {{ $income ?? '' }}
+
             @forelse ($transactions as $key => $transaction)
                 <tr
                     class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
@@ -183,7 +194,6 @@
                         @if (isset($transaction->bill_id))
                             {{ $transaction->bills->status ? 'Cleared' : 'Prepared' }}
                             Bill ({{ $transaction->bills->qr_code }})
-                            {!! $transaction->payment_method ? '<span class="text text-primary">[Online Payment]</span>' : '' !!}
                         @elseif (isset($transaction->expense_id))
                             {{ $transaction->expenses->title }}
                         @elseif (isset($transaction->saving_id))

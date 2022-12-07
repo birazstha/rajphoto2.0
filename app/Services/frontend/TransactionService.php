@@ -41,6 +41,31 @@ class TransactionService extends Service
         return $query->orderBy('created_at', 'DESC')->where('created_at', '>=', Carbon::today())->whereNotNull('saving_id')->get();
     }
 
+    public function fetchIncomeData()
+    {
+        return $this->model->whereNotNull('income_id')->where('created_at', '>=', Carbon::today())->get();
+    }
+
+    public function fetchExpenseData()
+    {
+        return $this->model->whereNotNull('expense_id')->where('created_at', '>=', Carbon::today())->get();
+    }
+
+    public function fetchSavingData()
+    {
+        return $this->model->whereNotNull('saving_id')->where('created_at', '>=', Carbon::today())->get();
+    }
+
+    public function fetchOnlinePaymentData()
+    {
+        return $this->model->whereNotNull('payment_method')->where('created_at', '>=', Carbon::today())->get();
+    }
+
+    public function fetchBillData()
+    {
+        return $this->model->whereNotNull('bill_id')->where('created_at', '>=', Carbon::today())->get();
+    }
+
 
     public function store($request)
     {

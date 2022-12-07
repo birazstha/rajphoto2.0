@@ -29,9 +29,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::resource('transactions', 'transaction\TransactionController');
 
     Route::resource('customers', 'customer\customerController');
-
-
-
     Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');
     Route::post('/adjustment', 'adjustment\AdjustmentController@store')->name('frontend.adjustment.store');
+
+    Route::get('/transaction-filter/{type}', 'dashboard\DashboardController@filter')->name('filter.trasactions');
 });
