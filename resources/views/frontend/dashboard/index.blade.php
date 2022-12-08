@@ -188,9 +188,6 @@
             </tr>
         </thead>
         <tbody>
-
-            {{ $income ?? '' }}
-
             @forelse ($transactions as $key => $transaction)
                 <tr
                     class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
@@ -236,6 +233,11 @@
             //Focus on Cash on Drawer
             $('#adjustments').on('shown.bs.modal', function() {
                 $('#closing_balancee').focus();
+            })
+
+            //Focus on Withdrawn amount
+            $('#withdraw').on('shown.bs.modal', function() {
+                $('#withdrawn_amount').focus();
             })
 
         });

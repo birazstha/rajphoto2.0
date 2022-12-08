@@ -17,7 +17,7 @@
                         <div class="col-sm-10">
 
 
-                            <select name="saving_id" id="other" class="form-control" required>
+                            <select name="saving_id" id="savingg" class="form-control" required>
                                 <option value="" selected>Select Expense Title</option>
                                 @foreach ($banks as $bank)
                                     <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>

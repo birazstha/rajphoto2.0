@@ -14,7 +14,8 @@
 
                         <div class="form-group">
                             <label class="form-label" for="">Amount</label>
-                            <input type="number" class="form-control" name="withdrawn_amount" value="">
+                            <input type="number" class="form-control" name="withdrawn_amount" value=""
+                                id="withdrawn_amount">
                         </div>
 
                         <input type="hidden" class="current_date" name="date">

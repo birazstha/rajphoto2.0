@@ -178,7 +178,7 @@
         $(document).ready(function() {
             getTransactionType('income');
             $('#bothTransactions').on('shown.bs.modal', function() {
-                $('#transaction-type').focus();
+                $('#transaction_title').focus();
 
             })
         });

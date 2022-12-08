@@ -5,7 +5,7 @@
         <h2>Savings</h2>
         <div>
             <button data-toggle="modal" data-target="#savings" target="_blank" class="btn btn-success open-AddBookDialog"><i
-                    class="fa fa-plus"></i>&nbspIncome</button>
+                    class="fa fa-plus"></i>&nbspAdd</button>
         </div>
 
 
@@ -43,5 +43,14 @@
     <script>
         var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
         $('.order-date').val(currentBsDate);
+
+        //
+        //Focus on Withdrawn amount
+
+        $(document).ready(function() {
+            $('#savings').on('shown.bs.modal', function() {
+                $('#savingg').focus();
+            })
+        });
     </script>
 @endsection
