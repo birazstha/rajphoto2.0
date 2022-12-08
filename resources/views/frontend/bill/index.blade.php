@@ -110,10 +110,13 @@
                             search: request.term
                         },
                         success: function(data) {
+                            console.log(data);
+
                             response(data.slice(0, 10));
                         }
                     });
                 },
+                delay: 100,
                 select: function(event, ui) {
                     $('.search-name').val(ui.item.label);
                     $('#phone_number').val(ui.item.phone_number);

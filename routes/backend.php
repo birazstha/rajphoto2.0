@@ -68,6 +68,11 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
 
         //Custom
         Route::resource('/order', 'order\OrderController');
+        Route::get('/order/{id}/status', 'order\OrderController@changeStatus')->name('brandBanner.changeStatus');
+
+
+
+
         Route::resource('/sizes', 'size\SizeController');
         Route::resource('/rates', 'rate\RateController');
         Route::resource('/bills', 'bill\BillController');
@@ -75,6 +80,6 @@ Route::group(['namespace' => 'System', 'prefix' => PREFIX], function () {
         Route::resource('/frontend-users', 'frontendUser\FrontendUserController');
         Route::resource('/expenses', 'expense\ExpenseController');
         Route::resource('/banks', 'bank\BankController');
-        Route::resource('/adjustment','adjustment\AdjustmentController');      
+        Route::resource('/adjustment', 'adjustment\AdjustmentController');
     });
 });

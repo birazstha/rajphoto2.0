@@ -15,39 +15,36 @@ class OrderService extends Service
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
     {
-
         $query = $this->query();
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('label', 'LIKE', '%'.$data->keyword.'%');
+            $query->where('label', 'LIKE', '%' . $data->keyword . '%');
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
         }
 
         if (isset($data->pluck)) {
-
-            return $query->orderBy('id', 'ASC')->where('details_required',true)->pluck('name', 'id');
-       }
-
-        if(isset($data->details)){
-            if($data->details === 'required'){
-                 $query->where('details_required',true)->orderBy('rank','ASC')->get();
-            }else{
-                 $query->where('details_required',false)->orderBy('rank','ASC')->get();
-            }
+            return $query->orderBy('id', 'ASC')->where('details_required', true)->pluck('name', 'id');
         }
 
+        if (isset($data->details)) {
+            if ($data->details === 'required') {
+                $query->where('details_required', true)->orderBy('rank', 'ASC')->get();
+            } else {
+                $query->where('details_required', false)->orderBy('rank', 'ASC')->get();
+            }
+        }
         if ($pagination) {
             return $query->orderBy('id', 'ASC')->get();
         }
-
-        
         return $query->orderBy('id', 'ASC')->get();
     }
 
-    
-
-   
-
-   
+    public function changeStatus($id)
+    {
+        $module = $this->itemByIdentifier($id);
+        $module->status = !$module->status;
+        $module->save();
+        return redirect()->back()->withErrors(['success' => 'Status has been changed']);
+    }
 }

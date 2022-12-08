@@ -13,8 +13,6 @@ class Expense extends Model
 
     public function scopeActive($query)
     {
-        dd($query);
         return $query->where('status', 1);
     }
-
 }

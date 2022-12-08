@@ -26,11 +26,15 @@
             <td>{{ $item->name }}</td>
             <td>{{ $item->rank }}</td>
             <td>
-                @if ($item->status == 1)
-                    <span class="badge badge-success">Active</span>
-                @else
-                    <span class="badge badge-danger">Inactive</span>
-                @endif
+                <a href="{{ url('system/order/' . $item->id . '/status') }}">
+                    @if ($item->status == 1)
+                        <span class="badge badge-success">Active</span>
+                    @else
+                        <span class="badge badge-danger">
+                            Inactive
+                        </span>
+                    @endif
+                </a>
             </td>
             <td>
                 @if ($item->details_required == 1)
@@ -43,10 +47,10 @@
             <td>
                 @include('system.partials.editButton')
                 @include('system.partials.deleteButton')
-                <a href="{{ route('sizes.create').'/?order_id='.$item->id }}">
+                <a href="{{ route('sizes.create') . '/?order_id=' . $item->id }}">
                     <button class="btn btn-info btn-sm"><i class="fas fa-plus"></i> Size</button>
                 </a>
-                <a href="{{ route('sizes.index').'/?order_id='.$item->id }}">
+                <a href="{{ route('sizes.index') . '/?order_id=' . $item->id }}">
                     <button class="btn btn-info btn-sm"><i class="fas fa-list"></i> Sizes</button>
                 </a>
             </td>

@@ -15,7 +15,7 @@ class orderController extends ResourceController
     }
 
     public function storeValidationRequest()
-    {   
+    {
         return 'App\Http\Requests\system\orderRequest';
     }
 
@@ -34,4 +34,8 @@ class orderController extends ResourceController
         return 'system.order';
     }
 
+    public function changeStatus($id)
+    {
+        return $this->service->changeStatus($id);
+    }
 }

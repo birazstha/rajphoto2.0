@@ -83,7 +83,7 @@ class AjaxController extends Controller
     public function getIncome(Request $request)
     {
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
-        $data['transactions'] = Transaction::where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
+        $data['transactions'] = Transaction::with('bills.customers')->where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['online-payment-bill'] = collect($data['transactions'])->where('payment_method')->where('bill_id')->sum('amount');
         $data['online-payment-other'] = collect($data['transactions'])->where('payment_method')->where('income_id')->sum('amount');

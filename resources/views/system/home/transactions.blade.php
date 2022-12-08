@@ -9,6 +9,7 @@
     </div>
 
 </div>
+
 <ul class="list-group">
     <div class="row">
 
@@ -207,6 +208,7 @@
         </tr>
     </thead>
     <tbody>
+
         @forelse ($transactions as $key => $transaction)
             <tr
                 class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
@@ -225,6 +227,7 @@
                         {{ $transaction->incomes->name }}
                     @endif
                 </td>
+
                 <td>
                     Rs.{{ $transaction->amount }}/-
                 </td>
@@ -232,11 +235,16 @@
                     <button class="btn btn-info" data-toggle="modal"
                         data-target="#editTrasaction{{ $transaction->id }}"><i
                             class="fas fa-pencil-alt"></i></button>
-
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteTransaction"><i
+                            class="fas
+                        fa-trash"></i></button>
                     @include('system.home.edit')
+                    @include('system.home.delete')
                 </td>
 
             </tr>
+
+
 
 
 

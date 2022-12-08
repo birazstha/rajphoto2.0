@@ -173,8 +173,6 @@
         });
 
 
-
-
         $(document).ready(function() {
             getTransactionType('income');
             $('#bothTransactions').on('shown.bs.modal', function() {
@@ -202,13 +200,16 @@
 
         //For showing selected transaction related titles
         $('#transaction-type').change(function() {
+
             let incomeType = $(this).val();
+
 
             if (incomeType === 'income') {
                 $('.toggle-income').removeClass('d-none');
                 $('.toggle-expense').addClass('d-none');
                 $('#toggle-description-income').addClass('d-none');
             } else {
+                $("#transaction_title").focus();
                 $('.toggle-expense').removeClass('d-none');
                 $('.toggle-income').addClass('d-none');
                 $('#toggle-description-income').addClass('d-none');
