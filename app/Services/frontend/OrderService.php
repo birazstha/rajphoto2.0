@@ -19,22 +19,24 @@ class OrderService extends Service
         $query = $this->query()->active();
 
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('label', 'LIKE', '%'.$data->keyword.'%');
+            $query->where('label', 'LIKE', '%' . $data->keyword . '%');
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
         }
 
-        if($data->details == 'required'){
-            $query->where('details_required',true)->get();
+        if ($data->details == 'required') {
+            $query->where('details_required', true)->get();
         }
 
-        if($data->details == 'not-required'){
-            $query->where('details_required',false)->get();
+        if ($data->details == 'not-required') {
+            $query->where('details_required', false)->get();
         }
-
-            return $query->orderBy('id', 'ASC')->get();
+        return $query->orderBy('id', 'ASC')->get();
     }
 
-   
+    public function getIncomes()
+    {
+        return $this->model->where('details_required', false)->orderBy('rank', 'ASC')->get();
+    }
 }

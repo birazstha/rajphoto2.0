@@ -10,13 +10,13 @@ use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Income;
 use App\Model\Order;
+use App\Model\PaymentMethod;
 use App\Model\Size;
 use App\Model\Transaction;
 use App\Services\frontend\ExpenseService;
 use App\Services\frontend\OrderService;
 use App\Services\System\AdjustmentService;
-use App\User;
-use Illuminate\Database\Eloquent\Builder;
+use App\Services\System\PaymentMethodService;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -28,6 +28,7 @@ class AjaxController extends Controller
         $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->orderService = new OrderService(new Order);
         $this->expenseService = new ExpenseService(new Expense);
+        $this->paymentService = new PaymentMethodService(new PaymentMethod());
     }
 
 
@@ -92,6 +93,9 @@ class AjaxController extends Controller
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', $request->date)->first()->adjusted_amount ?? 0;
 
+        $data['incomes'] =  $this->orderService->getIncomes();
+        $data['expenses'] =  $this->expenseService->getAllData($request);
+        $data['payments'] =  $this->paymentService->getAllData($request);
 
 
         //Calculating Total Closing Balance for selected day
@@ -127,7 +131,7 @@ class AjaxController extends Controller
             // dd($html);
         } else {
             $expenses =  $this->expenseService->getAllData($request);
-            $html = "<option value=''>Select Income Title</option>";
+            $html = "<option value=''>Select Expense Title</option>";
             foreach ($expenses as $expense) {
                 $html .= "<option value='$expense->id'>$expense->title</option>";
             }

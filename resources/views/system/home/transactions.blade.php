@@ -227,7 +227,6 @@
                         {{ $transaction->incomes->name }}
                     @endif
                 </td>
-
                 <td>
                     Rs.{{ $transaction->amount }}/-
                 </td>
@@ -241,13 +240,7 @@
                     @include('system.home.edit')
                     @include('system.home.delete')
                 </td>
-
             </tr>
-
-
-
-
-
         @empty
             <tr>
                 <td colspan="3" class="text-center text-danger"> No Transactions found</td>

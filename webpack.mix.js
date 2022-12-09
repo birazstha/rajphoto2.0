@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,14 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/toastr.scss', 'public/css');
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/toastr.scss", "public/css");
 
-mix.js('resources/asset/system/js/system.js', 'public/compiledCssAndJs/js/')
-    .js('resources/asset/system/js/dashboard.js','public/compiledCssAndJs/js/')
-    .js('resources/asset/system/js/currentDate.js','public/compiledCssAndJs/js/')
-    .sass('resources/asset/system/styles/system.scss', 'public/compiledCssAndJs/css')
+mix.js("resources/asset/system/js/system.js", "public/compiledCssAndJs/js/")
+    .js("resources/asset/system/js/dashboard.js", "public/compiledCssAndJs/js/")
+    .js(
+        "resources/asset/system/js/transaction.js",
+        "public/compiledCssAndJs/js/"
+    )
+    .js(
+        "resources/asset/system/js/currentDate.js",
+        "public/compiledCssAndJs/js/"
+    )
+    .sass(
+        "resources/asset/system/styles/system.scss",
+        "public/compiledCssAndJs/css"
+    )
     .options({
-        processCssUrls: false,
+        processCssUrls: false
     });

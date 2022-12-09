@@ -19,4 +19,5 @@
 
 @section('scripts')
     <script src="{{ asset('public/compiledCssAndJs/js/dashboard.js') }}"></script>
+    <script src="{{ asset('public/compiledCssAndJs/js/transaction.js') }}"></script>
 @endsection

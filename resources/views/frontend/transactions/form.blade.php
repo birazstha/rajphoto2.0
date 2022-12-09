@@ -16,7 +16,8 @@
                     <div class="form-group row">
                         {!! Form::label('order_id', 'Transaction Type', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="transaction_type" id="transaction-type" class="form-control" required>
+                            <select name="transaction_type" id="transaction-type" class="form-control transaction-type"
+                                required>
                                 <option value="">Select Transaction Type</option>
                                 <option value="income" selected>Income</option>
                                 <option value="expense">Expense</option>
@@ -32,7 +33,8 @@
                     <div class="form-group row">
                         {!! Form::label('transaction_title_id', 'Title', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
-                            <select name="transaction_title_id" id="transaction_title" class="form-control" required>
+                            <select name="transaction_title_id" id="transaction_title"
+                                class="form-control transaction_title" required>
                                 <option value="" selected>Select Income Title</option>
                             </select>
 
@@ -121,7 +123,8 @@
                             {!! Form::label('', 'Payment Method', ['class' => 'col-sm-2 col-form-label']) !!}
                             <div class="col-sm-10">
 
-                                <select name="" class="form-control" id="payment_method_other" required>
+                                <select name="" class="form-control payment_method_other"
+                                    id="payment_method_other" required>
                                     <option value="cash" selected>Cash</option>
                                     <option value="online">Online</option>
                                 </select>
@@ -148,13 +151,8 @@
 
 
 
-
-
-
-
-
                     {{-- Payment Gateway --}}
-                    <div class="form-group row d-none" id="toggle-payment-other">
+                    <div class="form-group row toggle-payment-other d-none" id="toggle-payment-other">
                         {!! Form::label('payment_method', 'Payment Gateway', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10" style="display: flex; flex-direction:row; align-item:center">
                             @foreach ($payments as $payment)
@@ -169,8 +167,6 @@
                             @endforeach
                         </div>
                     </div>
-
-
 
 
 
