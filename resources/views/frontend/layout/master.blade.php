@@ -122,6 +122,11 @@
         },
         delay: 100
     });
+
+    //Tooltip
+    $(function() {
+        $('.html-tooltip').tooltip();
+    });
 </script>
 
 

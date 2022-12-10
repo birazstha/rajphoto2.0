@@ -188,12 +188,6 @@
             </tr>
         </thead>
         <tbody>
-
-            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true"
-                title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-                Tooltip with HTML
-            </button>
-
             @forelse ($transactions as $key => $transaction)
                 <tr
                     class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
@@ -201,8 +195,9 @@
                     <td>
                         @if (isset($transaction->bill_id))
                             <p class="html-tooltip w-25" data-toggle="tooltip" data-placement="right"
-                                title=" <div class='text-left'>
-                                    <p>Transaction ID: {{ $transaction->id }}</p>
+                                title="<div class='text-left'>
+                                    <p>Name: {{ $transaction->bills->customers->name }}</p>
+                                    <p>Transaction ID:  {{ $transaction->id }}</p>
                                     <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
                                     </div>"
                                 data-html="true" style="cursor: pointer;">
@@ -262,6 +257,7 @@
             $(function() {
                 $('.html-tooltip').tooltip();
             });
+
 
         });
     </script>

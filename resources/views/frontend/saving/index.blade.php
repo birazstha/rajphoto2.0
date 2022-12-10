@@ -51,6 +51,12 @@
             $('#savings').on('shown.bs.modal', function() {
                 $('#savingg').focus();
             })
+
+            //When bank name selected focu on amount
+            $('#savingg').change(function() {
+                $('#amount').focus();
+
+            });
         });
     </script>
 @endsection

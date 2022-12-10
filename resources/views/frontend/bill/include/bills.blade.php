@@ -101,9 +101,9 @@
 
                 <td class="text-center">
 
-                    <button data-toggle="modal" id="billDetail" data-target="#billDetail{{ $bill->id }}"
-                        target="_blank" data-bill={{ $bill->due_amount }}
-                        class="btn btn-success btn-sm open-AddBookDialog"><i class="far fa-eye"></i></button>
+                    <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
+                        data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
+                            class="far fa-eye"></i></button>
                     @include('frontend.bill.include.clearBill')
 
 
