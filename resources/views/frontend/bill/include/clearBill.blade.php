@@ -63,7 +63,7 @@
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Cleared By</label>
                         <div class="col-sm-8">
-                            <select name="user_id" id="" class="form-control">
+                            <select name="user_id" id="user_id" class="form-control">
                                 <option value="">Select your name</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -76,7 +76,7 @@
                     <input type="text" hidden name="cleared_date" class="cleared_date" value=""
                         id="cleared_date">
 
-                    <input type="hidden" name="bill_id" value="{{ $bill->id }}">
+                    <input type="hidden" name="bill_id" id="bill_id" value="{{ $bill->id }}">
 
 
                     <div class="modal-footer">

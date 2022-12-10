@@ -1,4 +1,4 @@
-<div class="modal fade" id="withdraw" tabindex="-1" role="dialog">
+<div class="modal fade withdraws" id="withdraw" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('transactions.store') }}">
             <div class="modal-content">

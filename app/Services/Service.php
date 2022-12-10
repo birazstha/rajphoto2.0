@@ -28,7 +28,7 @@ class Service
             $query->select($selectedColumns);
         }
         if (isset($data->keyword) && $data->keyword !== null) {
-            $query->where('name', 'LIKE', '%'.$data->keyword.'%');
+            $query->where('name', 'LIKE', '%' . $data->keyword . '%');
         }
         if ($pagination) {
             return $query->orderBy('id', 'DESC')->paginate(Config::get('constants.PAGINATION'));
@@ -47,7 +47,7 @@ class Service
     public function findByEmail($email)
     {
         $data = $this->model->where('email', $email)->first();
-        if (! isset($data)) {
+        if (!isset($data)) {
             throw new ModelNotFoundException;
         }
 
@@ -59,7 +59,6 @@ class Service
     public function store($request)
     {
         return $this->model->create($request->except('_token'));
-        
     }
 
     // store bulk records
@@ -76,8 +75,6 @@ class Service
         $data = $request->except('_token');
         $update = $this->itemByIdentifier($id);
         $update->fill($data)->save();
-        $update = $this->itemByIdentifier($id);
-
         return $update;
     }
 

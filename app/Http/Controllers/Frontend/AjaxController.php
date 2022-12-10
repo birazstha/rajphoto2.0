@@ -59,6 +59,7 @@ class AjaxController extends Controller
             $bills = Bill::where('status', false)->whereHas('customers', function ($query) use ($request) {
                 $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
+
             return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
         } elseif (isset($date)) {
             $bills = Bill::where('status', false)->where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->get();
@@ -86,8 +87,8 @@ class AjaxController extends Controller
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
         $data['transactions'] = Transaction::with('bills.customers')->where('date', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
-        $data['online-payment-bill'] = collect($data['transactions'])->where('payment_method')->where('bill_id')->sum('amount');
-        $data['online-payment-other'] = collect($data['transactions'])->where('payment_method')->where('income_id')->sum('amount');
+        $data['online-payment-bill'] = collect($data['transactions'])->where('payment_gateway')->where('bill_id')->sum('amount');
+        $data['online-payment-other'] = collect($data['transactions'])->where('payment_gateway')->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');

@@ -124,4 +124,15 @@ const getTransactionType = type => {
             $(".transaction_title").append(response);
         }
     });
+
+    $(document).on("keyup", ".amount", function() {
+        let grandTotal = $(".grand_total").val();
+        let amountPaid = $(this).val();
+
+        if (parseInt(amountPaid) > parseInt(grandTotal)) {
+            $(".invalid-amount").removeClass("d-none");
+        } else {
+            $(".invalid-amount").addClass("d-none");
+        }
+    });
 };

@@ -9,6 +9,7 @@ use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Model\PaymentMethod;
+use App\Model\Transaction;
 use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\BillService;
 use App\Services\frontend\TransactionService;
@@ -31,7 +32,7 @@ class TransactionController extends Controller
         $this->expenseService = new ExpenseService(new Expense);
         $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
         $this->adjustmentService = new AdjustmentService(new Adjustment);
-        $this->bill = new Bill();
+        $this->billService = new BillService(new Bill());
     }
 
     public function index(Request $request)
@@ -49,9 +50,10 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+
         if ($request->transaction_type === 'income') {
             $data['income_id'] = $request->transaction_title_id;
-            $data['payment_method'] = $request->payment_method ?? null;
+            $data['payment_gateway'] = $request->payment_gateway ?? null;
             $this->adjustmentService->updateAdjustment($request);
         } elseif ($request->transaction_type === 'expense') {
             $data['expense_id'] = $request->transaction_title_id;
@@ -70,14 +72,35 @@ class TransactionController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
             $this->transactionService->update($request, $id);
+            $transaction =  $this->transactionService->itemByIdentifier($id);
+            $bill = $this->billService->itemByIdentifier($request->billId);
             if ($request->transactionType === "bill") {
-                $bill = $this->bill->where('id', $request->billId)->first();
                 $bill->update([
                     'paid_amount' => $request->amount,
                     'due_amount' => $bill->grand_total - $request->amount
+                ]);
+            } elseif ($request->transaction_type === "income") {
+                $transaction->update([
+                    'income_id' => $request->transaction_title_id,
+                    'expense_id' => null
+                ]);
+            } elseif ($request->transaction_type === "expense") {
+                $transaction->update([
+                    'expense_id' => $request->transaction_title_id,
+                    'income_id' => null
+                ]);
+            }
+
+            //Change Transaction Type
+            if ($request->payment_method === 'cash') {
+                $transaction->update([
+                    'payment_gateway' => null,
+                ]);
+            } elseif ($request->payment_method === 'online') {
+                $transaction->update([
+                    'payment_gateway' => $request->payment_gateway,
                 ]);
             }
             return redirect()->back()->with('success', 'Updated successfully!!');

@@ -157,7 +157,7 @@
                         <div class="col-sm-10" style="display: flex; flex-direction:row; align-item:center">
                             @foreach ($payments as $payment)
                                 <div class="form-check" style="display: flex; align-items:center;">
-                                    <input class="form-check-input" name="payment_method" type="radio"
+                                    <input class="form-check-input" name="payment_gateway" type="radio"
                                         id="flexRadioDefault1" value="{{ $payment->id }}">
                                     <label class="form-check-label mr-2" for="flexRadioDefault1">
                                         <img src="{{ asset('public/uploads/payment-method/' . $payment->image) }}"

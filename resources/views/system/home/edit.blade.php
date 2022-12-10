@@ -59,12 +59,23 @@
                               </div>
                           @endif
 
+                          @if (isset($transaction->bills))
+                              {{-- Grand Total --}}
+                              <div class="mb-3">
+                                  <label for="" class="form-label">Grand Total</label>
+                                  <input type="number" class="form-control grand_total" name="grand_total"
+                                      value="{{ $transaction->bills->grand_total }}" disabled>
+                              </div>
+                          @endif
+
 
                           {{-- Amount --}}
                           <div class="mb-3">
                               <label for="" class="form-label">Amount</label>
-                              <input type="number" class="form-control" name="amount"
+                              <input type="number" class="form-control amount" name="amount"
                                   value="{{ $transaction->amount }}">
+                              <span class="text text-danger d-none invalid-amount">Paid amount can't be greater than
+                                  grand total</span>
                           </div>
 
                           {{-- Bill Id --}}
@@ -75,12 +86,13 @@
 
 
 
+
                           {{-- Payment Method --}}
                           <div class="mb-3">
                               <label for="" class="form-label">Payment Gateway</label>
-                              <select name="" class="form-control payment_method_other" required>
+                              <select name="payment_method" class="form-control payment_method_other" required>
                                   <option value="cash">Cash</option>
-                                  <option value="online" {{ $transaction->payment_method ? 'selected' : '' }}>Online
+                                  <option value="online" {{ $transaction->payment_gateway ? 'selected' : '' }}>Online
                                   </option>
                               </select>
                           </div>
@@ -88,15 +100,15 @@
                           {{-- Payment Gateway --}}
 
                           <div
-                              class="form-group row toggle-payment-other {{ empty($transaction->payment_method) ? ' d-none' : '' }}">
+                              class="form-group row toggle-payment-other {{ empty($transaction->payment_gateway) ? ' d-none' : '' }}">
                               <div class="mb-3">
                                   <label for="" class="form-label col-sm-2">Amount</label>
                                   <div class="col-sm-10" style="display: flex; flex-direction:row; align-item:center">
                                       @foreach ($payments as $payment)
                                           <div class="form-check col-sm-5">
-                                              <input class="form-check-input" name="payment_method" type="radio"
+                                              <input class="form-check-input" name="payment_gateway" type="radio"
                                                   id="flexRadioDefault1" value="{{ $payment->id }}"
-                                                  {{ $payment->id === $transaction->payment_method ? 'checked' : '' }}>
+                                                  {{ $payment->id === $transaction->payment_gateway ? 'checked' : '' }}>
                                               <label class="form-check-label" for="flexRadioDefault1">
                                                   <img src="{{ asset('public/uploads/payment-method/' . $payment->image) }}"
                                                       height="50px" alt="">

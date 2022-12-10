@@ -9,7 +9,6 @@ use Carbon\Carbon;
 
 class TransactionService extends Service
 {
-
     protected $orderService, $frontendUser;
     public function __construct(Transaction $bill)
     {
@@ -58,7 +57,7 @@ class TransactionService extends Service
 
     public function fetchOnlinePaymentData()
     {
-        return $this->model->whereNotNull('payment_method')->where('created_at', '>=', Carbon::today())->get();
+        return $this->model->whereNotNull('payment_gateway')->where('created_at', '>=', Carbon::today())->get();
     }
 
     public function fetchBillData()

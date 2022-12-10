@@ -204,7 +204,6 @@
                             Withdrawn
                         @else
                             {{ $transaction->incomes->name }}
-                            {!! $transaction->payment_method ? '<span class="text text-primary">[Online Payment]</span>' : '' !!}
                         @endif
                     </td>
                     <td>
