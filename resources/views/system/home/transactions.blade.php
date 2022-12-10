@@ -195,7 +195,7 @@
 
 </ul>
 
-
+<input type="text" class="form-control mb-3" placeholder="Enter Transaction ID">
 <table class="table table-striped">
     <thead class="table-active">
         <tr>
