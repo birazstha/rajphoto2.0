@@ -94,7 +94,7 @@ footer div {
   .caraousel img {
     width: 100%; /* or any custom size */
     object-fit: cover;
-    height: 500px;
+    height: 495px;
   }
 
   .main-container {

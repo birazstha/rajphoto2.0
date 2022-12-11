@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Julius+Sans+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&family=Julius+Sans+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300&family=Inter:wght@100;200;300&family=Julius+Sans+One&display=swap");
+
+:root {
+  --main-color: #316a82;
+  /* --main-font: "Julius Sans One", sans-serif; */
+  --main-font: "Inria Serif", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  font-family: var(--main-font);
+}
+.main-container {
+  border: 2px solid rgb(157, 157, 157);
+  width: 21cm;
+  height: 29.7cm;
+  margin: 0 auto;
+}
+
+.header {
+  border-bottom: 1px solid #316a82;
+  height: 135px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__bar {
+  background-color: var(--main-color);
+  width: 15px;
+  height: 100%;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  padding: 15px 0 10px 0;
+}
+
+.logo-img img {
+  width: 100px;
+  margin: 0;
+  margin-right: 0.9rem;
+}
+
+.brand-name {
+  font-family: "Julius Sans One", sans-serif;
+  color: var(--main-color);
+  font-size: 40px;
+}
+
+.slogan {
+  font-family: "Inter", sans-serif;
+  color: var(--main-color);
+  font-size: 15px;
+}
+
+.bill-id {
+  width: 12rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.bill-id__background {
+  background-color: var(--main-color);
+  height: 30%;
+  width: 100%;
+  border-radius: 30px 0 0 30px;
+}
+
+.bill-id__background span {
+  color: white;
+  font-family: "Jua", sans-serif;
+  position: relative;
+  top: 10px;
+  left: 18px;
+}
+
+.customer-info {
+  padding-left: 1rem;
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.owner-detail {
+  display: flex;
+}
+
+.labels {
+  margin-right: 5rem;
+  font-weight: bold;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+
+.labels p,
+.details p {
+  margin-bottom: 1rem;
+}
+
+.details {
+  font-family: var(--main-font);
+}
+
+.bill-container {
+  margin-top: 5rem;
+  /* border: 1px solid red; */
+}
+
+.room-table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
+.room-table thead {
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px;
+  text-align: left;
+  border-radius: 20px;
+}
+
+.room-table td,
+th {
+  border-bottom: 1px solid grey;
+  padding: 15px;
+  align-items: center;
+}
+
+.room-table thead {
+  border-radius: 5px 5px 0 0;
+}
+
+.room-table tbody tr:last-of-type {
+  border-bottom: var(--main-color);
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-center td {
+  text-align: center;
+}
+
+.table-center td a {
+  color: blue;
+  font-weight: bolder;
+}
+
+.calculation {
+  display: flex;
+  justify-content: end;
+  margin-right: 89px;
+  position: relative;
+  left: 10px;
+}
+
+.grand-detail {
+  margin-right: 30px;
+  font-weight: bold;
+}
+
+footer {
+  background-color: var(--main-color);
+  height: 3rem;
+  position: relative;
+  top: 225px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.contact {
+  width: 200px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+}
+
+.contact i {
+  margin-right: 5px;
+}
