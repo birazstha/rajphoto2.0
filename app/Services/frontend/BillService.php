@@ -168,6 +168,10 @@ class BillService extends Service
     }
 
 
+    public function getBillByQr($id)
+    {
+        return $this->model->where('qr_code', $id)->first();
+    }
 
     public function indexPageData($request)
     {

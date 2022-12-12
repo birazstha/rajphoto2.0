@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/frontend/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/frontend/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/frontend/dashboard.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('public/css/frontend/bill.css') }}" media="all" /> --}}
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css"
         rel="stylesheet" type="text/css" />
 

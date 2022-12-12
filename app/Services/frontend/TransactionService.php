@@ -71,4 +71,9 @@ class TransactionService extends Service
         $this->model->create($request);
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
     }
+
+    public function getTransactionByBill($id)
+    {
+        return $this->model->where('bill_id', $id)->first();
+    }
 }

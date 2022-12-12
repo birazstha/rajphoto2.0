@@ -108,7 +108,7 @@
 
 
                     <a href="{{ route('bills.show', $bill->qr_code) }}" target="_blank" class="btn btn-info btn-sm"><i
-                            class="fas fa-info-circle"></i></a>
+                            class="fas fa-print"></i></a>
                 </td>
             </tr>
         @empty

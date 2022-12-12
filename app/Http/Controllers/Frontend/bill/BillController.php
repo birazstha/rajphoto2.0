@@ -18,12 +18,16 @@ use App\Services\System\CustomerService;
 use App\Services\System\BillOrderService;
 use App\Exceptions\CustomGenericException;
 use App\Model\PaymentMethod;
+use App\Model\Transaction;
+use App\Services\frontend\TransactionService;
 use App\Services\System\FrontendUserService;
 use App\Services\System\PaymentMethodService;
+use Illuminate\Support\Facades\Redirect;
 
 class BillController extends Controller
 {
-    public $orderService, $billOrderService, $frontendUser, $customerService, $incomeService, $billService, $paymentMethodService;
+    public $orderService, $billOrderService, $frontendUser, $customerService,
+        $incomeService, $billService, $paymentMethodService, $transactionService;
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
@@ -35,6 +39,7 @@ class BillController extends Controller
         $this->userService = new FrontendUserService(new FrontendUser);
         $this->incomeService = new IncomeService(new Income);
         $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
+        $this->transactionService = new TransactionService(new Transaction());
     }
 
     public function index(Request $request)
@@ -56,7 +61,8 @@ class BillController extends Controller
         $customerId = $this->customerService->getCustomerId($request);
         try {
             $bill =  $this->billService->store($request->merge(['oldCustomer' => $customerId]));
-            return redirect()->route('bills.show', $bill->qr_code)->with('success', 'Bill has been created successfully!!');
+            return redirect()->back()->with('success', 'Bill has been created successfully!!');
+            // return Redirect::away()->route('bills.show', $bill->qr_code)->with('success', 'Bill has been created successfully!!');;
         } catch (\Exception $e) {
             throw new CustomGenericException($e->getMessage());
         }
@@ -64,9 +70,13 @@ class BillController extends Controller
 
     public function show($id)
     {
-        $data['row'] = Bill::where('qr_code', $id)->first();
-        $data['payments'] = PaymentMethod::all();
-        return view('frontend.bill.photoBill', compact('data'));
+        $data = [
+            'bill' =>  $this->billService->getBillByQr($id),
+            'payments' => PaymentMethod::all(),
+        ];
+        $data['transaction'] = $this->transactionService->getTransactionByBill($data['bill']->id);
+
+        return view('frontend.bill.photoBill', $data);
     }
 
 
