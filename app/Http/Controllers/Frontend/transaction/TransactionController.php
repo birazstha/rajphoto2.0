@@ -50,6 +50,7 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
 
         if ($request->transaction_type === 'income') {
             $data['income_id'] = $request->transaction_title_id;
@@ -64,8 +65,15 @@ class TransactionController extends Controller
             $data['is_withdrawn'] =  true;
             $this->adjustmentService->deductClosingBalance($request);
         }
-        $data['amount'] = $request->withdrawn_amount ?? $request->total ?? $request->amount;
+        $data['amount'] = $request->withdrawn_amount ?? $request->amount ?? $request->total;
+        $data['description'] = $request->description_income ?? $request->description_expense;
         $data['date'] =  $request->date;
+        $data['bill_paid_to'] =  $request->bill_paid_to;
+
+        // dd($data);
+
+
+
         $this->transactionService->store($data);
         return redirect()->back()->with('success', 'Recorded successfully!!');
     }

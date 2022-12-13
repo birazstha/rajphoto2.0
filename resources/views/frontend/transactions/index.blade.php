@@ -40,17 +40,17 @@
                 <tr
                     class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
                     <th class="text-center" scope="row">{{ $key + 1 }}</th>
-                    <td class="text-center">
-                        @if (isset($transaction->bill_id))
-                            Bill ( {{ $transaction->bills->qr_code }})
-                        @elseif (isset($transaction->expense_id))
+                    <td class="text-center html-tooltip" data-toggle="tooltip" data-placement="right"
+                        title=" <div class='text-left'>
+                <p>Transaction ID: {{ $transaction->id }}</p>
+                <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
+                <p>Description: {{ $transaction->description ? $transaction->description : '--' }}</p>
+                </div>"
+                        data-html="true" style="cursor: pointer;">
+                        @if (isset($transaction->expense_id))
                             {{ $transaction->expenses->title }}
-                            {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
-                        @elseif (isset($transaction->saving_id))
-                            {{ $transaction->savings->bank_name }}
                         @elseif(isset($transaction->income_id))
                             {{ $transaction->incomes->name }}
-                            {{ $transaction->description ? '(' . $transaction->description . ')' : '' }}
                         @endif
                     </td>
                     <td class="text-center">
@@ -73,4 +73,9 @@
 @endsection
 @section('js')
     <script src="{{ asset('public/compiledCssAndJs/js/transaction.js') }}"></script>
+    <script>
+        $(function() {
+            $('.html-tooltip').tooltip();
+        });
+    </script>
 @endsection

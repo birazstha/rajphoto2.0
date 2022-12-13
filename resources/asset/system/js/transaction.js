@@ -27,9 +27,15 @@ $(".transaction_title").on("change", function() {
     if (transactionType === "income") {
         var title = $("#transaction_title option:selected").text();
         if (title === "Others") {
+            $(".toggle-expense").removeClass("d-none");
+            $(".toggle-other-amount").removeClass("d-none");
+            $(".toggle-rate").addClass("d-none");
             $("#toggle-description-income").removeClass("d-none");
         } else {
+            $(".toggle-expense").addClass("d-none");
             $("#toggle-description-income").addClass("d-none");
+            $(".toggle-other-amount").addClass("d-none");
+            $(".toggle-rate").removeClass("d-none");
         }
         var incomeTitle = $(this).val();
         $.ajax({
@@ -52,6 +58,12 @@ $(".transaction_title").on("change", function() {
             $("#toggle-description-income").removeClass("d-none");
         } else {
             $("#toggle-description-income").addClass("d-none");
+        }
+
+        if (title === "Bill Paid") {
+            $(".toggle-bill-paid").removeClass("d-none");
+        } else {
+            $(".toggle-bill-paid").addClass("d-none");
         }
     }
 });
