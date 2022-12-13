@@ -31,11 +31,13 @@ $(".transaction_title").on("change", function() {
             $(".toggle-other-amount").removeClass("d-none");
             $(".toggle-rate").addClass("d-none");
             $("#toggle-description-income").removeClass("d-none");
+            $(".toggle-other-title").removeClass("d-none");
         } else {
             $(".toggle-expense").addClass("d-none");
             $("#toggle-description-income").addClass("d-none");
             $(".toggle-other-amount").addClass("d-none");
             $(".toggle-rate").removeClass("d-none");
+            $(".toggle-other-title").addClass("d-none");
         }
         var incomeTitle = $(this).val();
         $.ajax({

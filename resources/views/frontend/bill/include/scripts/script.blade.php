@@ -33,7 +33,7 @@
             }
         }
         $(document).on('change', 'select[data-id=order]', function() {
-
+           
             let sizedId = '#size_id_' + $(this).attr('id');
             let rateId = '#rate' + $(this).attr('id');
             let quantityId = '#quantity' + $(this).attr('id');
@@ -41,12 +41,31 @@
             let totalValue = $(totalId).val();
             var currentGrandTotal = parseInt($('#grand_total').val());
             $('#grand_total').val(currentGrandTotal - totalValue);
-            var order = $(this).val();
+            var orderId = $(this).val();
+            let OrderName = $("select[data-id=order] option:selected").text();
+            if(OrderName === 'Other'){
+                $('#size_id_1').attr('disabled','true');
+                $('#rate1').attr('disabled','true');
+                $('#quantity1').attr('disabled','true');
+                $('#btnAdd').addClass('d-none');
+                $('.toggle-other-title').removeClass('d-none');
+                $('#grand_total').removeAttr('readonly');
+            }else{  
+                $('#size_id_1').removeAttr('disabled');
+                $('#rate1').removeAttr('disabled');
+                $('#quantity1').removeAttr('disabled');
+                $('#btnAdd').removeClass('d-none');
+                $('.toggle-other-title').addClass('d-none');
+                $('#grand_total').attr('readonly','true');
+
+
+            }
+
             var path = "{{ URL::route('order.getSize') }}";
             $.ajax({
                 url: path,
                 data: {
-                    'order_id': order,
+                    'order_id': orderId,
                     '_token': "{{ csrf_token() }}"
                 },
                 method: 'post',

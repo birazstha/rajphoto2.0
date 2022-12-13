@@ -81,12 +81,22 @@
                     <tbody>
                         <tr>
                             <td>1.</td>
-                            <td>{{ $bill->billOrders[0]->orders->name }}</td>
-                            <td>{{ $bill->billOrders[0]->sizes->name }}</td>
-                            <td>{{ $bill->billOrders[0]->quantity }}</td>
-                            <td>रु{{ $bill->billOrders[0]->rate }}/-</td>
 
-                            <td>रु{{ $bill->billOrders[0]->total }}/-</td>
+                            @if (isset($bill->other_income_title))
+                                <td>{{ $bill->billOrders[0]->sizes->name ?? $bill->other_income_title }}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>रु{{ $bill->billOrders[0]->total ?? $bill->grand_total }}/-</td>
+                            @else
+                                <td>{{ $bill->billOrders[0]->orders->name }}</td>
+                                <td>{{ $bill->billOrders[0]->sizes->name }}</td>
+                                <td>{{ $bill->billOrders[0]->quantity }}</td>
+                                <td>रु{{ $bill->billOrders[0]->rate }}/-</td>
+                                <td>रु{{ $bill->billOrders[0]->total }}/-</td>
+                            @endif
+
+
                         </tr>
                         <tr>
                             <td>2.</td>

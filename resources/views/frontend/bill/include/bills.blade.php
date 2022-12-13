@@ -47,8 +47,14 @@
                 <td class="change">
                     @foreach ($bill->billOrders as $key => $billOrder)
                         <div class="order-detail">
-                            {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }}
-                            - {{ $billOrder->quantity }} pc
+
+
+                            @if (isset($billOrder->sizes->name))
+                                {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }}
+                                - {{ $billOrder->quantity }} pc
+                            @else
+                                {{ $bill->other_income_title }}
+                            @endif
                         </div>
                     @endforeach
 

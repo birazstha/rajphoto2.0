@@ -57,13 +57,16 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
+
+
         //Check if this user already exist or not
         $customerId = $this->customerService->getCustomerId($request);
         try {
-            $bill =  $this->billService->store($request->merge(['oldCustomer' => $customerId]));
+            $this->billService->store($request->merge(['oldCustomer' => $customerId]));
             return redirect()->back()->with('success', 'Bill has been created successfully!!');
             // return Redirect::away()->route('bills.show', $bill->qr_code)->with('success', 'Bill has been created successfully!!');;
         } catch (\Exception $e) {
+            dd($e);
             throw new CustomGenericException($e->getMessage());
         }
     }

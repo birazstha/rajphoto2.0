@@ -120,6 +120,19 @@
                                 class="fas fa-plus"></i>&nbspAdd</button>
                     </div>
 
+                    <div class="toggle-other-title d-none">
+                        <!--Delivery Date-->
+                        <div class="form-group row">
+                            <label for="text" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="other_income_title" class="form-control">
+                            </div>
+                        </div>
+                        @error('delivery_date')
+                            <span class="text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <!--Grand Total-->
                     <div class="row">
                         <div class="col-4">
@@ -191,14 +204,6 @@
                             @endforeach
                         </div>
                     </div>
-
-
-
-
-
-
-
-
 
                     <input type="hidden" value="" name="ordered_date" class="form-control order-date"
                         id="order-date" readonly="readonly">
