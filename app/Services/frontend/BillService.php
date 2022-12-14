@@ -128,7 +128,6 @@ class BillService extends Service
             $transaction['amount'] =  $request->total;
             $transaction['bill_id'] = $request->bill_id;
             $transaction['bill_type'] = 1;
-
             $this->transactionService->store($transaction);
 
             $this->adjustmentService->updateAdjustment($request);
