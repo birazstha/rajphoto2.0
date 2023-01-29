@@ -72,7 +72,11 @@ class TransactionController extends Controller
             $data['date'] =  $request->date;
             $data['bill_paid_to'] =  $request->bill_paid_to;
             $this->transactionService->store($data);
-            $this->analyticService->store($request);
+
+            if (!isset($request->withdrawn_amount)) {
+                $this->analyticService->store($request);
+            }
+
             return redirect()->back()->with('success', 'Recorded successfully!!');
         } catch (\Exception $e) {
             dd($e);

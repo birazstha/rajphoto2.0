@@ -13,6 +13,7 @@ class Bill extends Model
   protected $table = 'bills';
   protected $fillable = [
     'customer_id',
+    'size_id',
     'quantity',
     'rate',
     'total',
@@ -44,5 +45,10 @@ class Bill extends Model
   public function customers()
   {
     return $this->belongsTo(Customer::class, 'customer_id');
+  }
+
+  public function sizes()
+  {
+    return $this->belongsTo(Size::class, 'size_id');
   }
 }

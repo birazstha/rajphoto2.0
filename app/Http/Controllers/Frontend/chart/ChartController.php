@@ -21,10 +21,9 @@ class ChartController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'transactions' => $this->analyticService->getTodaysTransactions($request),
+            'others' => $this->analyticService->getTodaysTransactions($request),
+            'transactions' => $this->analyticService->getTodaysTransactionsTest($request),
         ];
-
-
 
         return view('frontend.chart.index', $data);
     }

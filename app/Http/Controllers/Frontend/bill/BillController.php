@@ -57,8 +57,6 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
-
-
         //Check if this user already exist or not
         $customerId = $this->customerService->getCustomerId($request);
         try {

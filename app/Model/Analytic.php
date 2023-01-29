@@ -11,7 +11,7 @@ class Analytic extends Model
 
   protected $table = 'analytics';
   protected $fillable = [
-    'income_id', 'size_id', 'amount', 'date'
+    'income_id', 'size_id', 'amount', 'date', 'bill_id'
   ];
 
   public function incomes()
@@ -21,5 +21,10 @@ class Analytic extends Model
   public function sizes()
   {
     return $this->belongsTo(Size::class, 'size_id');
+  }
+
+  public function bills()
+  {
+    return $this->belongsTo(Bill::class, 'bill_id');
   }
 }

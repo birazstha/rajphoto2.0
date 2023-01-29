@@ -3,6 +3,8 @@
 namespace App\Services\frontend;
 
 use App\Model\Analytic;
+use App\Model\Bill;
+use App\Model\BillOrder;
 use Carbon\Carbon;
 use App\Services\Service;
 use App\Model\Transaction;
@@ -42,14 +44,28 @@ class AnalyticService extends Service
             ->get();
     }
 
+    public function getTodaysTransactionsTest()
+    {
+        $test =   BillOrder::select(
+            DB::raw("(sum(total)) as total_amount"),
+            'size_id',
+            DB::raw("count(size_id)")
+        )->groupBy('size_id')->get();
+
+        // dd($test);
+        return $test;
+    }
+
 
     public function store($request)
     {
+
         $date =  Carbon::now()->format('Y-m-d');
         try {
             if (isset($request->bill)) {
                 $billArray = [];
                 foreach ($request->bill as  $bill) {
+                    $innerData['bill_id'] = $request->bill_id;
                     $innerData['income_id'] = $bill['order_id'];
                     $innerData['amount'] = $request->paid_amount;
                     $innerData['size_id'] = $bill['size_id'];
