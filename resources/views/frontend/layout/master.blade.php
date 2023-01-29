@@ -56,35 +56,6 @@
 
 
 
-<script>
-    @if (Session::has('success'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-    @endif
-
-    @if (Session::has('error'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-    @endif
-
-    @if (Session::has('info'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-    @endif
-
-    @if (Session::has('warning'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true
-        }
-    @endif
-</script>
 
 
 <script>

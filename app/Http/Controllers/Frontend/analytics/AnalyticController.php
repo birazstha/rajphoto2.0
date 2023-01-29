@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\transaction;
+namespace App\Http\Controllers\Frontend\analytics;
 
 use App\Http\Controllers\Controller;
 use App\Model\Adjustment;
-use App\Model\Analytic;
 use App\Model\Bill;
 use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Model\PaymentMethod;
-use App\Model\Transaction;
 use App\Services\frontend\AdjustmentService;
-use App\Services\frontend\AnalyticService;
 use App\Services\frontend\BillService;
 use App\Services\frontend\TransactionService;
 use App\Services\frontend\ExpenseService;
@@ -23,9 +20,9 @@ use Exception;
 use Illuminate\Http\Request;
 
 
-class TransactionController extends Controller
+class AnalyticController extends Controller
 {
-    protected $orderService, $frontendUser, $expenseService, $transactionService, $paymentMethodService, $adjustmentService, $billService, $analyticService;
+    protected $orderService, $frontendUser, $expenseService, $transactionService, $paymentMethodService, $adjustmentService, $billService;
     public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
@@ -35,7 +32,6 @@ class TransactionController extends Controller
         $this->paymentMethodService = new PaymentMethodService(new PaymentMethod);
         $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->billService = new BillService(new Bill());
-        $this->analyticService = new AnalyticService(new Analytic());
     }
 
     public function index(Request $request)
@@ -53,30 +49,25 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            if ($request->transaction_type === 'income') {
-                $data['income_id'] = $request->transaction_title_id;
-                $data['payment_gateway'] = $request->payment_gateway ?? null;
-                $this->adjustmentService->updateAdjustment($request);
-            } elseif ($request->transaction_type === 'expense') {
-                $data['expense_id'] = $request->transaction_title_id;
-                $this->adjustmentService->deductClosingBalance($request);
-            }
-
-            if (isset($request->withdrawn_amount)) {
-                $data['is_withdrawn'] =  true;
-                $this->adjustmentService->deductClosingBalance($request);
-            }
-            $data['amount'] = $request->withdrawn_amount ?? $request->amount ?? $request->total;
-            $data['description'] = $request->description_income ?? $request->description_expense;
-            $data['date'] =  $request->date;
-            $data['bill_paid_to'] =  $request->bill_paid_to;
-            $this->transactionService->store($data);
-            $this->analyticService->store($request);
-            return redirect()->back()->with('success', 'Recorded successfully!!');
-        } catch (\Exception $e) {
-            dd($e);
+        if ($request->transaction_type === 'income') {
+            $data['income_id'] = $request->transaction_title_id;
+            $data['payment_gateway'] = $request->payment_gateway ?? null;
+            $this->adjustmentService->updateAdjustment($request);
+        } elseif ($request->transaction_type === 'expense') {
+            $data['expense_id'] = $request->transaction_title_id;
+            $this->adjustmentService->deductClosingBalance($request);
         }
+
+        if (isset($request->withdrawn_amount)) {
+            $data['is_withdrawn'] =  true;
+            $this->adjustmentService->deductClosingBalance($request);
+        }
+        $data['amount'] = $request->withdrawn_amount ?? $request->amount ?? $request->total;
+        $data['description'] = $request->description_income ?? $request->description_expense;
+        $data['date'] =  $request->date;
+        $data['bill_paid_to'] =  $request->bill_paid_to;
+        $this->transactionService->store($data);
+        return redirect()->back()->with('success', 'Recorded successfully!!');
     }
 
     public function update(Request $request, $id)

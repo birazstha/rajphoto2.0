@@ -24,7 +24,7 @@ class BankController extends Controller
         $data = [
             'pageTitle' => $this->moduleName,
             'savings' => $this->transactionService->getSavingsDetail($request),
-            'banks'=> $this->savingService->getAllData($request),
+            'banks' => $this->savingService->getAllData($request),
         ];
         return view('frontend.saving.index', $data);
     }

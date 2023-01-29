@@ -33,4 +33,6 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/adjustment', 'adjustment\AdjustmentController@store')->name('frontend.adjustment.store');
 
     Route::get('/transaction-filter/{type}', 'dashboard\DashboardController@filter')->name('filter.trasactions');
+
+    Route::get('/analytics', 'chart\ChartController@index')->name('analytics');
 });

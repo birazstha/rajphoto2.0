@@ -81,7 +81,7 @@
             });
         });
 
-        $(document).on('change', 'select[data-class=size]', ($.debounce(200,function() {
+        $(document).on('change', 'select[data-class=size]',function() {
             var size = $(this).val();
             let rateId = '#rate' + $(this).attr('data-id');
             let totalId = '#total' + $(this).attr('data-id');
@@ -120,7 +120,7 @@
                     calculateGrandTotal(response, oldTotalAmount);
                 },
             });
-        })));
+        });
 
 
            //Append new order 

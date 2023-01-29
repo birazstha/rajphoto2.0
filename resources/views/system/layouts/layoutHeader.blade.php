@@ -8,12 +8,12 @@
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.min.css"
         rel="stylesheet" type="text/css" />
 
-  <!-- Ionicons -->
+    <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
+    <!-- Theme style -->
 
     {{-- <link rel="stylesheet" href="{{ asset('adminLte/dist/css/adminlte.min.css') }}"> --}}
-    
+
     {{-- Localhost --}}
     <link rel="stylesheet" href="{{ asset('public/adminLte/dist/css/adminlte.min.css') }}">
 
@@ -32,7 +32,6 @@
     <link href="{{ asset('public/compiledCssAndJs/css/system.css') }}" rel="stylesheet" media="screen">
 
 
-    <link href="{{ asset('public/toast/jquery.toast.min.css') }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
         integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"
@@ -40,4 +39,4 @@
     <script src="{{ asset('public/tinymce/tinymce.min.js') }}"></script>
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
 
-  </head>
+</head>

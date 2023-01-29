@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chart.js": "^4.1.0",
         "epic-spinners": "^1.1.0",
         "husky": "^7.0.4",
         "jquery-typeahead": "^2.11.1",

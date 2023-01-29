@@ -16,14 +16,15 @@ use App\Services\frontend\IncomeService;
 use App\Services\System\CustomerService;
 use App\Services\System\BillOrderService;
 use App\Exceptions\CustomGenericException;
-
+use App\Model\Analytic;
 use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\TransactionService;
 
 class BillService extends Service
 {
 
-    public $orderService, $frontendUser, $customerService, $transactionService, $adjustmentService;
+    public $orderService, $billOrderService,
+        $frontendUser, $customerService, $transactionService, $adjustmentService, $analyticService;
     public function __construct(Bill $bill)
     {
         parent::__construct($bill);
@@ -32,6 +33,7 @@ class BillService extends Service
         $this->transactionService = new TransactionService(new Transaction);
         $this->billOrderService = new BillOrderService(new BillOrder);
         $this->adjustmentService = new AdjustmentService(new Adjustment);
+        $this->analyticService = new AnalyticService(new Analytic());
         $this->module = 'Prepare Bill';
     }
 
@@ -91,6 +93,11 @@ class BillService extends Service
 
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
+
+            $this->analyticService->store($request);
+
+
+
             DB::commit();
             return $bill;
         } catch (\Exception $e) {

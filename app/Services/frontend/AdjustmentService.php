@@ -16,6 +16,7 @@ class AdjustmentService extends Service
     public function updateAdjustment($request)
     {
 
+
         $data = $this->model->where('date', $request->ordered_date)
             ->orWhere('date', $request->cleared_date)
             ->orWhere('date', $request->date);

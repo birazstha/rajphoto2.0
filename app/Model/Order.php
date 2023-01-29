@@ -9,9 +9,10 @@ class Order extends Model
 {
 
     protected $table = 'orders';
-    protected $fillable = ['name','status','rank','details_required','rate'];
+    protected $fillable = ['name', 'status', 'rank', 'details_required', 'rate'];
 
-    public function sizes(){
+    public function sizes()
+    {
         return $this->hasMany(Size::class);
     }
 
@@ -19,5 +20,4 @@ class Order extends Model
     {
         return $query->where('status', true);
     }
-
 }
