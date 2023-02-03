@@ -73,7 +73,7 @@ class TransactionController extends Controller
             $data['bill_paid_to'] =  $request->bill_paid_to;
             $this->transactionService->store($data);
 
-            if (!isset($request->withdrawn_amount)) {
+            if (!isset($request->withdrawn_amount) && $request->transaction_type != 'expense') {
                 $this->analyticService->store($request);
             }
 

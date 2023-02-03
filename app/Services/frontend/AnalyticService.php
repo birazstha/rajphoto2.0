@@ -39,9 +39,8 @@ class AnalyticService extends Service
             'income_id',
             DB::raw("count(income_id)")
         )
-
             ->groupBy('income_id')
-            ->get();
+            ->where('date', Carbon::now())->get();
     }
 
     public function getTodaysTransactionsTest()
@@ -50,7 +49,7 @@ class AnalyticService extends Service
             DB::raw("(sum(total)) as total_amount"),
             'size_id',
             DB::raw("count(size_id)")
-        )->groupBy('size_id')->get();
+        )->groupBy('size_id')->where('date', '=', Carbon::now())->get();
 
         // dd($test);
         return $test;

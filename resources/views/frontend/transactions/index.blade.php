@@ -14,8 +14,7 @@
                 class="btn btn-danger open-AddBookDialog"><i class="fa fa-plus"></i>&nbspExpenses</button> --}}
         </div>
 
-        @include('frontend.transactions.income')
-        @include('frontend.transactions.expense')
+
         @include('frontend.transactions.form')
 
 

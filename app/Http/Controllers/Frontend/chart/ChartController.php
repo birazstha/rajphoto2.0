@@ -22,7 +22,7 @@ class ChartController extends Controller
     {
         $data = [
             'others' => $this->analyticService->getTodaysTransactions($request),
-            'transactions' => $this->analyticService->getTodaysTransactionsTest($request),
+            // 'transactions' => $this->analyticService->getTodaysTransactionsTest($request),
         ];
 
         return view('frontend.chart.index', $data);
