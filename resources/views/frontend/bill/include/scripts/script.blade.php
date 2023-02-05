@@ -101,7 +101,7 @@
                     'size_id': size,
                     '_token': "{{ csrf_token() }}"
                 },
-                method: 'post',
+                method: 'get',
                 dataType: 'text',
                 success: function(response) {
                     //setting the rate of the selected Size

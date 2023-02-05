@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #f1f1f1;
+}
+
 #form {
     margin: 1rem auto;
     border-radius: 5px;

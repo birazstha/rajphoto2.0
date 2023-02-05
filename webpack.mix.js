@@ -22,6 +22,10 @@ mix.js("resources/asset/system/js/system.js", "public/compiledCssAndJs/js/")
         "public/compiledCssAndJs/js/"
     )
     .js(
+        "resources/asset/system/js/transaction_og.js",
+        "public/compiledCssAndJs/js/"
+    )
+    .js(
         "resources/asset/system/js/currentDate.js",
         "public/compiledCssAndJs/js/"
     )

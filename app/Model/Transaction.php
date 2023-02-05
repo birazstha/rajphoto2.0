@@ -23,6 +23,7 @@ class Transaction extends Model
     'description',
     'payment_gateway',
     'bill_paid_to',
+    'size_id'
   ];
 
 

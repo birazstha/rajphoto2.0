@@ -218,6 +218,9 @@
                             </div>"
                                 data-html="true" style="cursor: pointer;">
                                 {{ $transaction->incomes->name }}
+
+
+                                {{ isset($transaction->description) ? '(' . $transaction->description . ')' : '' }}
                             </p>
                         @endif
                     </td>

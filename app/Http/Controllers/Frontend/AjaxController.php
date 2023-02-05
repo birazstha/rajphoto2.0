@@ -108,8 +108,11 @@ class AjaxController extends Controller
 
     public function getRate(Request $request)
     {
+        // return Size::where('id', $request->order_id)->pluck('rate')->first();
+
         return Order::where('id', $request->order_id)->pluck('rate')->first();
     }
+
 
     public function autoCompleteSearch(Request $request)
     {

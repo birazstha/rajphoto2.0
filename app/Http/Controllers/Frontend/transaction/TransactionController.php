@@ -10,7 +10,7 @@ use App\Model\Expense;
 use App\Model\FrontendUser;
 use App\Model\Order;
 use App\Model\PaymentMethod;
-use App\Model\Transaction;
+use App\Model\Size;
 use App\Services\frontend\AdjustmentService;
 use App\Services\frontend\AnalyticService;
 use App\Services\frontend\BillService;
@@ -19,13 +19,22 @@ use App\Services\frontend\ExpenseService;
 use App\Services\System\FrontendUserService;
 use App\Services\frontend\OrderService;
 use App\Services\System\PaymentMethodService;
+use App\Services\System\SizeService;
 use Exception;
 use Illuminate\Http\Request;
 
 
 class TransactionController extends Controller
 {
-    protected $orderService, $frontendUser, $expenseService, $transactionService, $paymentMethodService, $adjustmentService, $billService, $analyticService;
+    protected $orderService,
+        $frontendUser,
+        $expenseService,
+        $transactionService,
+        $paymentMethodService,
+        $adjustmentService,
+        $billService,
+        $analyticService,
+        $sizeService;
     public function __construct(TransactionService $transactionService)
     {
         $this->transactionService = $transactionService;
@@ -36,6 +45,7 @@ class TransactionController extends Controller
         $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->billService = new BillService(new Bill());
         $this->analyticService = new AnalyticService(new Analytic());
+        $this->sizeService = new SizeService(new Size());
     }
 
     public function index(Request $request)
@@ -53,6 +63,8 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+
+        $data = $request->all();
         try {
             if ($request->transaction_type === 'income') {
                 $data['income_id'] = $request->transaction_title_id;
@@ -69,15 +81,13 @@ class TransactionController extends Controller
             }
             $data['amount'] = $request->withdrawn_amount ?? $request->amount ?? $request->total;
             $data['description'] = $request->description_income ?? $request->description_expense;
-            $data['date'] =  $request->date;
-            $data['bill_paid_to'] =  $request->bill_paid_to;
             $this->transactionService->store($data);
 
-            if (!isset($request->withdrawn_amount) && $request->transaction_type != 'expense') {
-                $this->analyticService->store($request);
-            }
+            // if (!isset($request->withdrawn_amount) && $request->transaction_type != 'expense') {
+            //     $this->analyticService->store($request);
+            // }
 
-            return redirect()->back()->with('success', 'Recorded successfully!!');
+            return redirect()->route('home')->with('success', 'Expense recorded successfully!!');
         } catch (\Exception $e) {
             dd($e);
         }
@@ -126,5 +136,25 @@ class TransactionController extends Controller
     {
         $this->transactionService->delete($request, $id);
         return redirect()->back()->with('success', 'Deleted successfully!!');
+    }
+
+    public function income(Request $request)
+    {
+        $orderId = Order::where('name', 'Urgent')->first()->id;
+        $data = [
+            'payments' =>  $this->paymentMethodService->getAllData($request),
+            'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
+            'sizes' => $this->sizeService->getAllData($request->merge(['urgentId' => $orderId]))
+        ];
+        return view('frontend.transactions.income', $data);
+    }
+
+    public function expense(Request $request)
+    {
+        $data = [
+            'expenses' => $this->expenseService->getAllData($request),
+            'transactions' => $this->transactionService->getExpenses($request),
+        ];
+        return view('frontend.transactions.expense', $data);
     }
 }

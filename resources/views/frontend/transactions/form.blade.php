@@ -161,14 +161,7 @@
 
                     </div>
 
-
-
-
-
-
                     <input type="hidden" name="date" class="current_date" value="">
-
-
 
                     {{-- Payment Gateway --}}
                     <div class="form-group row toggle-payment-other d-none" id="toggle-payment-other">
@@ -188,38 +181,6 @@
                     </div>
 
 
-
-
-
-
-                    {{-- <div class="row" id="cash-transaction-other">
-                        <div class="col-6">
-                            <!--Cash Received-->
-                            <div class="form-group row">
-                                <label for="order_date" class="col-sm-4 col-form-label">Cash Received</label>
-                                <div class="col-sm-8">
-                                    <input type="number" name="cash_received"
-                                        value="{{ $item->cash_received ?? '' }}" id="other_cash_received"
-                                        class="form-control">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-6">
-                            <!--Cash Return-->
-                            <div class="form-group row">
-                                <label for="texr" class="col-sm-4 col-form-label">Cash Return</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="cash_return" value="{{ $item->cash_return ?? '' }}"
-                                        id="other_cash_return" class="form-control" readonly>
-                                </div>
-                            </div>
-                            @error('delivery_date')
-                                <span class="text text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                    </div> --}}
 
 
 

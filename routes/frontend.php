@@ -14,7 +14,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/search/{qr_code}', 'bill\BillController@searchBillFromIndex')->name('bill.searches');
 
     Route::post('/getOrderById', 'AjaxController@getOrderById')->name('order.getSize');
-    Route::post('/getRateBySize', 'AjaxController@getRateBySize')->name('size.getRate');
+    Route::get('/getRateBySize', 'AjaxController@getRateBySize')->name('size.getRate');
     Route::get('/getCustomerInfo', 'AjaxController@getCustomerInfo')->name('bill.getCustomerInfo');
     Route::get('/getRate', 'AjaxController@getRate')->name('bill.getRate');
     Route::get('/getIncome', 'AjaxController@getIncome')->name('bill.getIncome');
@@ -27,6 +27,11 @@ Route::group(['namespace' => 'Frontend'], function () {
 
 
     Route::resource('transactions', 'transaction\TransactionController');
+
+    Route::get('/income', 'transaction\TransactionController@income')->name('transactions.income');
+    Route::get('/expense', 'transaction\TransactionController@expense')->name('transactions.expense');
+
+
 
     Route::resource('customers', 'customer\customerController');
     Route::get('customer/{id}', 'customer\customerController@search')->name('customerResult');

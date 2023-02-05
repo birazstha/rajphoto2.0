@@ -71,7 +71,7 @@
     {{ $transactions }}
 @endsection
 @section('js')
-    <script src="{{ asset('public/compiledCssAndJs/js/transaction.js') }}"></script>
+    <script src="{{ asset('public/compiledCssAndJs/js/transaction_og.js') }}"></script>
     <script>
         $(function() {
             $('.html-tooltip').tooltip();

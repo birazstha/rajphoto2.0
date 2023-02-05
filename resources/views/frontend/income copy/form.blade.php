@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('main-content')
-    <div class="container">
+    {{-- <div class="container">
         <div class="row border border-info">
             <div class="col-6 border border-danger">
                 1 of 2
@@ -9,34 +9,69 @@
                 2 of 2
             </div>
         </div>
-    </div>
-    -
+    </div> --}}
+
+
     <div class="card card-success">
         <div class="card-header">
             <h3 class="card-title">Income</h3>
         </div>
-        <!-- /.card-header -->
-        <!-- form start -->
+
         <form class="form-horizontal">
             <div class="card-body">
+
+                {{-- Title --}}
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                        <select name="" id="" class="form-control">
-
+                        <select name="" id="transaction_title" class="form-control transaction_title">
                             <option value="">Select Title</option>
-
                             @foreach ($orders as $order)
-                                <option value="">{{ $order->name }}</option>
+                                <option value="{{ $order->id }}">{{ $order->name }}</option>
                             @endforeach
 
                         </select>
                     </div>
                 </div>
+
+                {{-- Size --}}
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Size</label>
+                    <div class="col-sm-10">
+                        <select name="" id="transaction_title" class="form-control transaction_title">
+                            <option value="">Select Size</option>
+                            @foreach ($sizes as $size)
+                                <option value="">{{ $size->name }}</option>
+                            @endforeach
+
+                            {{-- @foreach ($orders as $order)
+                                <option value="{{ $order->id }}">{{ $order->name }}</option>
+                            @endforeach --}}
+
+                        </select>
+                    </div>
+                </div>
+
+
+                {{-- Amount --}}
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
                     <div class="col-sm-10">
                         <input type="number" class="form-control" id="inputPassword3" placeholder="Amount">
+                    </div>
+                </div>
+
+
+                <!--Description-->
+                <div class="form-group row d-none" id="toggle-description-income">
+                    {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-sm-10">
+
+                        <textarea name="description_income" id="" cols="10" rows="3" class="form-control"></textarea>
+
+                        @error('description')
+                            <span class="text text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

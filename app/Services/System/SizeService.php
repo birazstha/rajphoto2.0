@@ -19,6 +19,7 @@ class SizeService extends Service
     {
 
 
+
         $query = $this->query();
 
         if (isset($data->keyword) && $data->keyword !== null) {
@@ -26,6 +27,12 @@ class SizeService extends Service
         }
         if (count($selectedColumns) > 0) {
             $query->select($selectedColumns);
+        }
+
+
+
+        if (isset($data->urgentId)) {
+            return $query->where('order_id', $data->urgentId)->get();
         }
 
         if (isset($data->order_id)) {

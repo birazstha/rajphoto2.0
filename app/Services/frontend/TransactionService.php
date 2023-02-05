@@ -114,4 +114,9 @@ class TransactionService extends Service
         $transaction =  $this->model->where('created_at', '>=', Carbon::today())->get();
         return  collect($transaction)->whereNOtNull('bill_id')->sum('amount');
     }
+
+    public function getExpenses()
+    {
+        return $this->model->whereNotNull('expense_id')->where('created_at', '>=', Carbon::today())->get();
+    }
 }
