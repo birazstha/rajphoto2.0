@@ -89,17 +89,11 @@ class BillService extends Service
 
             //Check if closing balance is already adjusted or not
             $this->adjustmentService->updateAdjustment($request);
-
-
             //Storing multiple orders
             $this->billOrderService->store($request->merge(['bill_id' => $bill->id]));
-
             $this->analyticService->store($request);
-
-
-
             DB::commit();
-            return $bill;
+            return  $data['qr_code'];
         } catch (\Exception $e) {
             dd($e);
             DB::rollback();

@@ -29,22 +29,7 @@
             </div>
             <div class="bill-id">
                 <div class="bill-id__background">
-                    <div class="contact">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>9844044750</p>
-                    </div>
-                    <div class="contact">
-                        <i class="fas fa-map-marker"></i>
-                        <p>Tikathali, Lalitpur</p>
-                    </div>
-                    <div class="contact">
-                        <i class="far fa-envelope"></i>
-                        <p>rajphotopasal@gmail.com</p>
-                    </div>
-                    {{-- <div class="contact">
-                        <i class="fas fa-globe"></i>
-                        <p>www.rajphotopasal.com</p>
-                    </div> --}}
+                    <span>Bill ID: {{ $bill->qr_code }}</span>
                 </div>
             </div>
         </section>
@@ -59,12 +44,16 @@
                         <p>Contact</p>
                         <p>Order Date</p>
                         <p>Delivery Date</p>
+                        <p>Payment Method</p>
+                        <p>Billed By</p>
                     </div>
                     <div class="details">
                         <p>: {{ $bill->customers->name }}</p>
                         <p>: {{ $bill->customers->phone_number }}</p>
                         <p>: {{ $bill->ordered_date }}</p>
                         <p>: {{ $bill->delivery_date }}</p>
+                        <p>: {{ $transaction->payment_gateway ? 'Online Payment' : 'Cash' }} </p>
+                        <p>: {{ $bill->users->name }}</p>
                     </div>
                 </div>
                 <div class="qr-code">
@@ -171,43 +160,59 @@
         <!-- Bill Detail Ends -->
 
         <!-- Net total starts -->
+        <div class="calculation">
+            <div class="grand-detail">
+                <p>Grand Total</p>
+                <p>Advance Amount</p>
+                <p>Due Amount</p>
+            </div>
+            <div>
+                <p>: रु{{ $bill->grand_total }}/-</p>
+                <p>: {{ $bill->paid_amount === 0 ? 'Unpaid' : 'रु' . $bill->paid_amount . '/-' }}</p>
+                <p>: {!! $bill->due_amount === 0 ? 'Paid' : 'रु' . $bill->due_amount . '/-' !!}</p>
+                </p>
+            </div>
+        </div>
+        <!-- Net total End -->
 
-        <div class="calculation-service">
-
-            <div class="service-container">
-                <h4>
-                    <ul>
-                        Our Services
-                    </ul>
-                </h4>
+        <div class="service-container">
+            <h4>
                 <ul>
-                    <ol>
-                        <li>Photography and Videography service in Wedding, Mehendi, Baby Shower etc.</li>
-                        <li>Urgent Photo and Frames can be printed in 5 mins.</li>
-                        <li>Color Print, Lamination, Photocopy.</li>
-                        <li>Wedding Malas, Cup Prints.</li>
-                    </ol>
+                    Our Services
                 </ul>
-            </div>
-            <div class="calculation">
-                <div class="grand-detail">
-                    <p>Grand Total</p>
-                    <p>Advance Amount</p>
-                    <p>Due Amount</p>
-                </div>
-                <div>
-                    <p>: रु{{ $bill->grand_total }}/-</p>
-                    <p>: {{ $bill->paid_amount === 0 ? 'Unpaid' : 'रु' . $bill->paid_amount . '/-' }}</p>
-                    <p>: {!! $bill->due_amount === 0 ? 'Paid' : 'रु' . $bill->due_amount . '/-' !!}</p>
-                    </p>
-                </div>
-            </div>
-            <!-- Net total End -->
-
-
+            </h4>
+            <ul>
+                <ol>
+                    <li>Photography and Videography service in Wedding, Mehendi, Baby Shower etc.</li>
+                    <li>Urgent Photo and Frames can be printed in 5 mins.</li>
+                    <li>Color Print, Lamination, Photocopy.</li>
+                    <li>Wedding Malas, Cup Prints.</li>
+                </ol>
+            </ul>
         </div>
 
+        <div class="remember-us">
+            <p>"Loosing your old photos is equal to destroying your history"</p>
+        </div>
 
+        <footer>
+            <div class="contact">
+                <i class="fas fa-phone-alt"></i>
+                <p>9844044750</p>
+            </div>
+            <div class="contact">
+                <i class="fas fa-map-marker"></i>
+                <p>Tikathali, Lalitpur</p>
+            </div>
+            <div class="contact">
+                <i class="far fa-envelope"></i>
+                <p>rajphotopasal@gmail.com</p>
+            </div>
+            <div class="contact">
+                <i class="fas fa-globe"></i>
+                <p>www.rajphotopasal.com</p>
+            </div>
+        </footer>
     </div>
 </body>
 

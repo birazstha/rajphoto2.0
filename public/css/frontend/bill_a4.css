@@ -6,12 +6,13 @@
 :root {
     --main-color: #d7d4d4;
     --main-font: "Inria Serif", serif;
-    --font-size: 15px;
+    --font-size: 20px;
 }
 
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -21,11 +22,14 @@ body {
 }
 .main-container {
     border: 2px solid rgb(157, 157, 157);
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0 auto;
 }
 
 .header {
     border-bottom: 1px solid #316a82;
-    height: 80px;
+    height: 135px;
     display: flex;
     justify-content: space-between;
 }
@@ -50,7 +54,7 @@ body {
 }
 
 .logo-img img {
-    width: 70px;
+    width: 100px;
     margin: 0;
     margin-right: 0.9rem;
 }
@@ -68,14 +72,14 @@ body {
 }
 
 .bill-id {
+    width: 12rem;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
-
-    /* border: 1px solid red; */
+    align-items: center;
 }
 
 .bill-id__background {
+    background-color: var(--main-color);
     height: 30%;
     width: 100%;
     border-radius: 30px 0 0 30px;
@@ -91,7 +95,7 @@ body {
 
 .customer-info {
     padding-left: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     /* border: 1px solid blue; */
     display: flex;
     justify-content: space-between;
@@ -105,7 +109,6 @@ body {
 .labels,
 .details {
     /* border: 1px solid red; */
-    line-height: 15px;
     font-size: var(--font-size);
 }
 
@@ -124,9 +127,15 @@ body {
     font-family: var(--main-font);
 }
 
+.bill-container {
+    margin-top: 1rem;
+    /* border: 1px solid red; */
+}
+
 .room-table {
     border-collapse: collapse;
-    font-size: var(--font-size);
+    margin: 10px 0;
+    font-size: 1rem;
     width: 100%;
     border-radius: 5px 5px 0 0;
 }
@@ -141,10 +150,9 @@ body {
 .room-table td,
 th {
     border-bottom: 1px solid grey;
-    padding: 10px;
+    padding: 15px;
     align-items: center;
-    font-size: var(--font-size);
-
+    font-size: 20px;
     text-align: center;
 }
 
@@ -175,6 +183,9 @@ th {
 .calculation {
     display: flex;
     justify-content: end;
+    margin-right: 89px;
+    position: relative;
+    left: 63px;
     font-size: var(--font-size);
 }
 
@@ -212,6 +223,7 @@ footer {
 }
 
 .service-container {
+    margin-left: 2rem;
     font-size: var(--font-size);
 }
 
@@ -222,9 +234,7 @@ footer {
 }
 
 .service-container ul ol li {
-    margin-bottom: 5px;
-    width: 547px;
-    /* border: 1px solid red; */
+    margin-bottom: 0.8rem;
 }
 
 .remember-us {
@@ -241,11 +251,4 @@ footer {
 
 .qr-code {
     margin-right: 1rem;
-}
-
-.calculation-service {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0.6rem;
-    padding-left: 1.5rem;
 }

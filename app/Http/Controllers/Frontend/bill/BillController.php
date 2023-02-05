@@ -44,6 +44,7 @@ class BillController extends Controller
 
     public function index(Request $request)
     {
+
         $data = [
             'pageTitle' => 'Bills',
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'required'])),
@@ -52,7 +53,7 @@ class BillController extends Controller
             'payments' =>  $this->paymentMethodService->getAllData($request),
         ];
 
-        return view('frontend.bill.index', $data);
+        return view('frontend.bill.form', $data);
     }
 
     public function store(Request $request)
@@ -61,8 +62,7 @@ class BillController extends Controller
         $customerId = $this->customerService->getCustomerId($request);
         try {
             $this->billService->store($request->merge(['oldCustomer' => $customerId]));
-            return redirect()->back()->with('success', 'Bill has been created successfully!!');
-            // return Redirect::away()->route('bills.show', $bill->qr_code)->with('success', 'Bill has been created successfully!!');;
+            return redirect()->route('home')->with('success', 'Bill has been created successfully!!');
         } catch (\Exception $e) {
             dd($e);
             throw new CustomGenericException($e->getMessage());
@@ -71,6 +71,7 @@ class BillController extends Controller
 
     public function show($id)
     {
+
         $data = [
             'bill' =>  $this->billService->getBillByQr($id),
             'payments' => PaymentMethod::all(),

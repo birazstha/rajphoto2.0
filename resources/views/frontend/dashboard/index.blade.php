@@ -202,7 +202,9 @@
                                     </div>"
                                 data-html="true" style="cursor: pointer;">
                                 {{ $transaction->bills->status ? 'Cleared' : 'Prepared' }}
-                                Bill ({{ $transaction->bills->qr_code }})
+                                Bill ({{ $transaction->bills->customers->name }})
+                                <a href="{{ route('bills.show', $transaction->bills->qr_code) }}" target="_blank"><i
+                                        class="fas fa-print"></i></a>
                             </p>
                         @elseif (isset($transaction->expense_id))
                             {{ $transaction->expenses->title }}

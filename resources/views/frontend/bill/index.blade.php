@@ -6,7 +6,7 @@
         <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
                 class="fa fa-plus"></i>&nbspCreate</button>
 
-        @include('frontend.bill.form')
+        {{-- @include('frontend.bill.form') --}}
     </div>
 
     <div class="mb-4">
