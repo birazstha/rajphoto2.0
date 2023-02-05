@@ -215,9 +215,9 @@
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <script>
-    // $(document).ready(function() {
-    //     window.print();
-    // })
+    $(document).ready(function() {
+        window.print();
+    })
 </script>
 
 </html>

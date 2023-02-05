@@ -37,10 +37,6 @@
             </tr>
         </table>
 
-
-
-
-
     </div>
 
     {{-- Bills --}}
@@ -58,6 +54,7 @@
                 <th class="text-center">Date</th>
                 <th class="text-center">Prepared By</th>
                 <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
 
@@ -130,6 +127,12 @@
                             <span class="badge badge-info btn-sm">Pending</span>
                         @endif
                     </td>
+                    <td>
+                        <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
+                            data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
+                                class="far fa-eye"></i></button>
+                        @include('frontend.bill.include.clearBill')
+                    </td>
 
                 </tr>
             @empty
@@ -148,5 +151,33 @@
     <script>
         var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
         $('.order-date').val(currentBsDate);
+    </script>
+
+    <script>
+        var clearedDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
+        $(document).on("click", ".open-AddBookDialog", function() {
+
+            var dueAmount = $(this).data('bill');
+            var totalAmount;
+            $(".total").val(dueAmount);
+            $('.cleared_date').val(clearedDate);
+
+            //Calculating Total amount by deducting discount
+            $(document).on('keyup', '#discount', function() {
+                var discountAmount = $(this).val();
+                totalAmount = dueAmount - parseInt(discountAmount);
+                console.log(totalAmount);
+                $(".total").val(totalAmount);
+            });
+
+            //Calculation Cash return
+            $(document).on('keyup', '#cash_received', function() {
+                var cashReceived = $(this).val();
+                var totalAmt = $('.total').val();
+                cashReturn = cashReceived - totalAmt;
+                console.log(cashReturn);
+                $(".cash_return").val(cashReturn);
+            });
+        });
     </script>
 @endsection

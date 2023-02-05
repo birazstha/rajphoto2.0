@@ -20,7 +20,7 @@ body {
     font-family: var(--main-font);
 }
 .main-container {
-    border: 2px solid rgb(157, 157, 157);
+    /* border: 2px solid rgb(157, 157, 157); */
 }
 
 .header {

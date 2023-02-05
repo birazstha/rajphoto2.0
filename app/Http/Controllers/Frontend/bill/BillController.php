@@ -71,7 +71,6 @@ class BillController extends Controller
 
     public function show($id)
     {
-
         $data = [
             'bill' =>  $this->billService->getBillByQr($id),
             'payments' => PaymentMethod::all(),
@@ -80,7 +79,6 @@ class BillController extends Controller
 
         return view('frontend.bill.photoBill', $data);
     }
-
 
     public function edit($id)
     {
@@ -92,15 +90,11 @@ class BillController extends Controller
     {
         try {
             $this->billService->update($request, $id);
-            return redirect()->route('bills.index')->with('success', 'Bill has been cleared successfully!!');
+            return redirect()->route('home')->with('success', 'Bill has been cleared successfully!!');
         } catch (\Exception $e) {
             DB::rollback();
             throw new CustomGenericException($e->getMessage());
         }
-    }
-
-    public function destroy($id)
-    {
     }
 
     public function scanQrCode()
@@ -110,8 +104,6 @@ class BillController extends Controller
 
     public function searchBill(Request $request)
     {
-
-
         $items = Bill::where('qr_code', $request->qrcode)->first();
         $data = [
             'item' => $items,
