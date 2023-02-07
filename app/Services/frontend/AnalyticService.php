@@ -33,7 +33,6 @@ class AnalyticService extends Service
 
     public function getTodaysTransactions()
     {
-
         return  $this->model->select(
             DB::raw("(sum(amount)) as total_amount"),
             'income_id',
@@ -45,20 +44,18 @@ class AnalyticService extends Service
 
     public function getTodaysTransactionsTest()
     {
-        $test =   BillOrder::select(
-            DB::raw("(sum(total)) as total_amount"),
-            'size_id',
-            DB::raw("count(size_id)")
-        )->groupBy('size_id')->where('date', '=', Carbon::now())->get();
-
-        // dd($test);
-        return $test;
+        return  $this->model->select(
+            DB::raw("(sum(amount)) as total_amount"),
+            'income_id',
+            DB::raw("count(income_id)")
+        )
+            ->groupBy('income_id')
+            ->where('date', Carbon::now())->get();
     }
 
 
     public function store($request)
     {
-
         $date =  Carbon::now()->format('Y-m-d');
         try {
             if (isset($request->bill)) {
@@ -67,6 +64,7 @@ class AnalyticService extends Service
                     $innerData['bill_id'] = $request->bill_id;
                     $innerData['income_id'] = $bill['order_id'];
                     $innerData['amount'] = $request->paid_amount;
+                    $innerData['transaction_id'] = $request->transaction;
                     $innerData['size_id'] = $bill['size_id'];
                     $innerData['date'] = $date;
                     array_push($billArray, $innerData);
@@ -74,8 +72,10 @@ class AnalyticService extends Service
                 return $this->model::insert($billArray);
             } else {
                 $data['date'] = $date;
-                $data['income_id'] = $request->transaction_title_id ?? ''; //Photo, Lamination, SIM
-                $data['amount'] = $request->total ?? null; //Photo, Lamination, SIM
+                $data['income_id'] = $request->income_id ?? ''; //Photo, Lamination, SIM
+                $data['amount'] = $request->amount ?? null; //Photo, Lamination, SIM
+                $data['amount'] = $request->amount ?? null; //Photo, Lamination, SIM
+                $data['transaction_id'] = $request->transaction;
                 Analytic::create($data);
             }
         } catch (\Exception $e) {

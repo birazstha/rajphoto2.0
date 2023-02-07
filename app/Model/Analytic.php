@@ -11,7 +11,7 @@ class Analytic extends Model
 
   protected $table = 'analytics';
   protected $fillable = [
-    'income_id', 'size_id', 'amount', 'date', 'bill_id'
+    'income_id', 'size_id', 'amount', 'date', 'bill_id', 'transaction_id'
   ];
 
   public function incomes()

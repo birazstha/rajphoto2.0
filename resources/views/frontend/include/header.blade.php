@@ -82,7 +82,7 @@
                     </li> --}}
 
                     <li>
-                        <a class="dropdown-toggle {{ request()->segment(1) === 'transactions' ? 'active-link' : '' }}"
+                        <a class="dropdown-toggle {{ request()->segment(1) === 'income' ? 'active-link' : '' }} {{ request()->segment(1) === 'expense' ? 'active-link' : '' }}"
                             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Transaction
                         </a>

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
-    protected $expenseService, $transactionService;
+    protected $expenseService, $transactionService, $moduleName, $savingService;
     public function __construct(SavingService $savingService)
     {
         $this->savingService = $savingService;
@@ -26,7 +26,7 @@ class BankController extends Controller
             'savings' => $this->transactionService->getSavingsDetail($request),
             'banks' => $this->savingService->getAllData($request),
         ];
-        return view('frontend.saving.index', $data);
+        return view('frontend.saving.form', $data);
     }
 
     public function store(Request $request)
@@ -35,6 +35,6 @@ class BankController extends Controller
         $transaction['amount'] =  $request->amount;
         $transaction['saving_id'] = $request->saving_id;
         $this->transactionService->store($transaction);
-        return redirect()->route('bank.index')->with('success', 'Recorded successfully!!');
+        return redirect()->route('home')->with('success', 'Recorded successfully!!');
     }
 }

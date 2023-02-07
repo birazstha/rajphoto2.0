@@ -100,8 +100,8 @@ class TransactionService extends Service
 
     public function store($request)
     {
-        $this->model->create($request);
-        return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully!!');
+        $transaction = $this->model->create($request);
+        return $transaction->id;
     }
 
     public function getTransactionByBill($id)

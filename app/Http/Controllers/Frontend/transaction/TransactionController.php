@@ -64,6 +64,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
+
         $data = $request->all();
         try {
             if ($request->transaction_type === 'income') {
@@ -81,11 +82,14 @@ class TransactionController extends Controller
             }
             $data['amount'] = $request->withdrawn_amount ?? $request->amount ?? $request->total;
             $data['description'] = $request->description_income ?? $request->description_expense;
-            $this->transactionService->store($data);
+            $transactionId = $this->transactionService->store($data);
 
-            // if (!isset($request->withdrawn_amount) && $request->transaction_type != 'expense') {
-            //     $this->analyticService->store($request);
-            // }
+
+
+            if (!isset($request->withdrawn_amount) || $request->transaction_type != 'expense') {
+
+                $this->analyticService->store($request->merge(['transaction' => $transactionId]));
+            }
 
             return redirect()->route('home')->with('success', 'Expense recorded successfully!!');
         } catch (\Exception $e) {
