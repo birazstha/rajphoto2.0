@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($bills as $key => $transaction)
+            @forelse ($bills as $key => $transaction)
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>
@@ -23,7 +23,11 @@
                     <td>Rs. {{ $transaction->total_amount }}/-</td>
 
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td class="text text-danger text-center" colspan="5">No data available</td>
+                </tr>
+            @endforelse
 
         </tbody>
     </table>
@@ -40,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($transactions as $key => $transaction)
+            @forelse ($transactions as $key => $transaction)
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>
@@ -50,7 +54,11 @@
                     <td>Rs. {{ $transaction->total_amount }}/-</td>
 
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td class="text text-danger text-center" colspan="5">No data available</td>
+                </tr>
+            @endforelse
 
 
 
