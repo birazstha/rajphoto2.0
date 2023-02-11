@@ -1,6 +1,9 @@
 @extends('frontend.layout.master')
 @section('main-content')
-    <div class="d-flex justify-content-end mt-2 mb-2">
+    <div class="d-flex justify-content-between mt-2 mb-2">
+        <div>
+            <input type="text" name="todays-date" class="form-control" id="todays-date">
+        </div>
         <div>
             <button class="btn btn-secondary" id="adjustmentt" data-toggle="modal" data-target="#adjustments"> <i
                     class="fa fa-plus"></i>
@@ -177,7 +180,11 @@
             <option value="{{ route('filter.trasactions', 'online-payment') }}"
                 {{ request()->segment(2) == 'online-payment' ? 'selected' : '' }}>Online Payment</option>
         </select>
+
+
     </div>
+
+
 
     <table class="table table-striped">
         <thead class="table-active">
@@ -240,6 +247,7 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/compiledCssAndJs/js/dashboard.js') }}"></script>
     <script>
         $(document).ready(function() {
             $(document).on("keyup", "#closing_balancee", function() {
@@ -263,6 +271,19 @@
                 $('.html-tooltip').tooltip();
             });
 
+
+        });
+    </script>
+
+
+    <script>
+        $(function() {
+
+            $("#datepicker").datepicker({
+                onSelect: function(date) {
+                    console.log('here');;
+                },
+            });
 
         });
     </script>

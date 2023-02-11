@@ -3,25 +3,21 @@
     $count = 1;
 @endphp
 
-
-
-
 <table class="room-table">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Customer's Detail</th>
             <th class="text-center">Order's Detail</th>
+            <th class="text-center">Photo Number</th>
             <th class="text-center">Amount Details</th>
             <th class="text-center">Date</th>
-            <th class="text-center">Prepared By</th>
             <th class="text-center">Action</th>
 
         </tr>
     </thead>
 
     <tbody>
-
         @forelse ($bills as $key => $bill)
             <tr>
                 <td class="text-center">{{ $key + 1 }}</td>
@@ -47,8 +43,6 @@
                 <td class="change">
                     @foreach ($bill->billOrders as $key => $billOrder)
                         <div class="order-detail">
-
-
                             @if (isset($billOrder->sizes->name))
                                 {{ $key + 1 }}. {{ $billOrder->orders->name }} - {{ $billOrder->sizes->name }}
                                 - {{ $billOrder->quantity }} pc
@@ -58,6 +52,10 @@
                         </div>
                     @endforeach
 
+                </td>
+
+                <td>
+                    {{ $bill->photo_number ?? 'N/A' }}
                 </td>
 
                 <td>
@@ -103,7 +101,7 @@
                         </div>
                     </div>
                 </td>
-                <td class="text-center">{{ $bill->users->name }}</td>
+
 
                 <td class="text-center">
 

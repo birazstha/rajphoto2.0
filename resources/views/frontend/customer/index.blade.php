@@ -52,7 +52,6 @@
                 <th class="text-center">Order's Detail</th>
                 <th class="text-center">Amount Details</th>
                 <th class="text-center">Date</th>
-                <th class="text-center">Prepared By</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
             </tr>
@@ -118,7 +117,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="text-center">{{ $bill->users->name }}</td>
+
 
                     <td class="text-center">
                         @if ($bill->status)

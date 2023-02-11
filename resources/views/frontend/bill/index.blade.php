@@ -3,10 +3,9 @@
     {{ Session::has('success') }}
     <div class="d-flex justify-content-between mb-2 align-items-center">
         <h2>Bills</h2>
-        <button data-toggle="modal" data-target="#createBill" target="_blank" class="btn btn-success open-AddBookDialog"><i
-                class="fa fa-plus"></i>&nbspCreate</button>
+        <a class="btn btn-success" href="{{ route('bills.create') }}"><i class="fa fa-plus"></i>&nbspCreate</a>
 
-        {{-- @include('frontend.bill.form') --}}
+
     </div>
 
     <div class="mb-4">

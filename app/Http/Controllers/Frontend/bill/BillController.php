@@ -27,7 +27,8 @@ use Illuminate\Support\Facades\Redirect;
 class BillController extends Controller
 {
     public $orderService, $billOrderService, $frontendUser, $customerService,
-        $incomeService, $billService, $paymentMethodService, $transactionService;
+        $incomeService, $billService, $paymentMethodService, $transactionService, $moduleName, $userService;
+
     public function __construct(BillService $billService)
     {
         $this->billService = $billService;
@@ -42,6 +43,20 @@ class BillController extends Controller
         $this->transactionService = new TransactionService(new Transaction());
     }
 
+
+    public function create(Request $request)
+    {
+        $data = [
+            'pageTitle' => 'Bills',
+            'orders' => $this->orderService->getAllData($request->merge(['details' => 'required'])),
+            'users' => $this->frontendUser->getAllData($request),
+            'bills' => $this->billService->getAllData($request->merge(['today' => true])),
+            'payments' =>  $this->paymentMethodService->getAllData($request),
+        ];
+
+        return view('frontend.bill.form', $data);
+    }
+
     public function index(Request $request)
     {
 
@@ -53,7 +68,7 @@ class BillController extends Controller
             'payments' =>  $this->paymentMethodService->getAllData($request),
         ];
 
-        return view('frontend.bill.form', $data);
+        return view('frontend.bill.index', $data);
     }
 
     public function store(Request $request)

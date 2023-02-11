@@ -23,12 +23,11 @@ class ChartController extends Controller
         $data = [
             'bills' => $this->analyticService->getTodaysTransactions($request),
             'transactions' => $this->analyticService->getTodaysTransactionsTest($request),
+            'elections' => ['NCP' => 1200, 'RSP' => 12000, 'JSP' => 1200, 'UML' => 1200]
         ];
 
 
-
-
-
+        // return view('frontend.chart.index_chart', $data);
         return view('frontend.chart.index', $data);
     }
 }

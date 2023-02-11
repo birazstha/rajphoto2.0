@@ -76,7 +76,7 @@
                             <a href="{{ route('home') }}" class="active-link">Home</a>
                         </li>
                     @endif
-                    <li><a href="{{ route('bills.index') }}"
+                    <li><a href="{{ route('bills.create') }}"
                             class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
                     {{-- <li><a href="{{ route('transactions.index') }}" class="">Transaction</a>
                     </li> --}}
@@ -94,7 +94,7 @@
                     </li>
 
                     <li><a href="{{ route('bank.index') }}"
-                            class="{{ request()->segment(1) === 'saving' ? 'active-link' : '' }}">Savings</a> </li>
+                            class="{{ request()->segment(1) === 'bank' ? 'active-link' : '' }}">Savings</a> </li>
                     <li><a href="{{ route('analytics') }}"
                             class="{{ request()->segment(1) === 'analytics' ? 'active-link' : '' }}">Analytics</a>
                     </li>

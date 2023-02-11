@@ -59,17 +59,11 @@ class BillService extends Service
 
     public function store($request)
     {
-        $orderType = $request->bill[0]['order_id'];
         DB::beginTransaction();
         try {
             //Urgent Order value is 4
             $data = $request->all();
             $data['qr_code'] = uniqid();
-            if ($orderType == 4) {
-                $data['cleared_date'] =  $request->ordered_date;
-                $data['cleared_by'] =  $request->user_id;
-                $data['status'] = true;
-            }
             $customerId = uniqid();
             if (empty($request->oldCustomer)) {
                 $name = $this->changeNameFormat($request->name);
@@ -78,6 +72,7 @@ class BillService extends Service
             } else {
                 $data['customer_id'] = $request->oldCustomer;
             }
+            $data['photo_number'] = 'RAJ_' . $request->photo_number;
             $bill = $this->model->create($data);
 
             //For recording transactions
@@ -103,17 +98,18 @@ class BillService extends Service
 
     public function changeNameFormat($name)
     {
+
         $nameArray = explode(' ', $name);
-        if (count($nameArray) == 2) {
+        if (count($nameArray) == 1) {
+            return  ucfirst($nameArray[0]);
+        } elseif (count($nameArray) == 2) {
             return ucfirst($nameArray[0]) . ' ' . ucfirst($nameArray[1]);
-        } else {
-            return ucfirst($nameArray[0]) . ' ' . ucfirst($nameArray[1]) . ' ' . ucfirst($nameArray[2]);
         }
+        return ucfirst($nameArray[0]) . ' ' . ucfirst($nameArray[1]) . ' ' . ucfirst($nameArray[2]);
     }
 
     public function update($request, $id)
     {
-
         DB::beginTransaction();
         try {
             $item = $this->itemByIdentifier($id);

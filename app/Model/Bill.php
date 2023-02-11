@@ -29,7 +29,8 @@ class Bill extends Model
     'status',
     'cleared_date',
     'cleared_by',
-    'other_income_title'
+    'other_income_title',
+    'photo_number'
   ];
 
   public function billOrders()

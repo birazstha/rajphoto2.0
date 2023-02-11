@@ -84,10 +84,7 @@ class TransactionController extends Controller
             $data['description'] = $request->description_income ?? $request->description_expense;
             $transactionId = $this->transactionService->store($data);
 
-
-
             if (!isset($request->withdrawn_amount) || $request->transaction_type != 'expense') {
-
                 $this->analyticService->store($request->merge(['transaction' => $transactionId]));
             }
 

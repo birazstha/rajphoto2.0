@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('main-content')
-    {{ $elections }}
+    @dump($elections)
 
     <div class="w-25" style="">
         <canvas id="myChart"></canvas>

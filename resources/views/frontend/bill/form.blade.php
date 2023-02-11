@@ -1,5 +1,9 @@
 @extends('frontend.layout.master')
 @section('main-content')
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3>Bill</h3>
+        <a class="btn btn-success" href="{{ route('bills.index') }}"><i class="fa fa-list"></i> List</a>
+    </div>
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Create Bill</h3>
@@ -8,36 +12,41 @@
         <form class="form-horizontal" action="{{ route('bills.store') }}" method="POST" autocomplete="off">
             @csrf
             <div class="card-body">
+
+
+                <!--Name-->
                 <div class="form-group row">
-                    <div class="col-6">
-                        <!--Name-->
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-4 col-form-label">Name</label>
-                            <div class="col-sm-8">
-                                <input type="text" value="" name="name"
-                                    class="typeahead form-control search-name" id="customer_name"
-                                    placeholder="Enter customer's name" required>
-                            </div>
-                        </div>
-
+                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="" name="name" class="typeahead form-control search-name"
+                            id="customer_name" placeholder="Enter Name" required>
                     </div>
+                </div>
 
-                    <div class="col-6">
-                        <!--Phone-->
-                        <div class="form-group row">
-                            <label for="phone_number" class="col-sm-4 col-form-label">Phone</label>
-                            <div class="col-sm-8">
-                                <input type="number" value="" name="phone_number" class="form-control search-phone"
-                                    id="phone_number" placeholder="Enter customer's phone number." required>
-                                <span class="text text-danger" id="error-phone"></span>
-                            </div>
 
-                        </div>
-
+                <!--Phone Number-->
+                <div class="form-group row">
+                    <label for="phone_number" class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-sm-10">
+                        <input type="number" value="" name="phone_number" class="form-control search-phone"
+                            id="phone_number" placeholder="Enter Phone Number." required>
+                        <span class="text text-danger" id="error-phone"></span>
                     </div>
-
 
                 </div>
+
+
+                <!--Photo Number-->
+                <div class="form-group row">
+                    <label for="photo_number" class="col-sm-2 col-form-label">Photo Number</label>
+                    <div class="col-sm-10">
+                        <input type="number" value="" name="photo_number" class="form-control" id="photo_number"
+                            placeholder="Enter Photo Number." required>
+                    </div>
+
+                </div>
+
+
 
                 {{-- For delivery --}}
                 <div class="dynamic-input">
@@ -218,7 +227,7 @@
                     </div>
 
 
-                    <!--Prepared by-->
+                    {{-- <!--Prepared by-->
                     <div class="form-group row">
                         {!! Form::label('user_id', 'Prepared By', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
@@ -243,7 +252,7 @@
                                 <span class="text text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <button class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save</button>

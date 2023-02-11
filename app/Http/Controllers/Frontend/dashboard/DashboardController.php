@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
-    protected $adjustmentService, $transactionService;
+    protected $adjustmentService, $transactionService, $moduleName;
     public function __construct()
     {
         $this->moduleName = 'Dashboard';

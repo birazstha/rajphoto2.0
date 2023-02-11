@@ -39,7 +39,7 @@ class AnalyticService extends Service
             DB::raw("count(size_id)")
         )
             ->groupBy('size_id')
-            ->whereNotNull('size_id')->where('date', Carbon::now())->get();
+            ->whereNotNull('size_id')->where('date', Carbon::now())->orderBy('total_amount', 'DESC')->get();
     }
 
     public function getTodaysTransactionsTest()
@@ -50,7 +50,7 @@ class AnalyticService extends Service
             DB::raw("count(income_id)")
         )
             ->groupBy('income_id')
-            ->whereNull('bill_id')->where('date', Carbon::now())->get();
+            ->whereNull('bill_id')->where('date', Carbon::now())->orderBy('total_amount', 'DESC')->get();
     }
 
 
