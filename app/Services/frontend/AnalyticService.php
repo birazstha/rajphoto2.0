@@ -2,12 +2,13 @@
 
 namespace App\Services\frontend;
 
-use App\Model\Analytic;
-use App\Model\Bill;
-use App\Model\BillOrder;
 use Carbon\Carbon;
+use App\Model\Bill;
+use App\Model\Analytic;
+use App\Model\BillOrder;
 use App\Services\Service;
 use App\Model\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AnalyticService extends Service
@@ -39,7 +40,7 @@ class AnalyticService extends Service
             DB::raw("count(size_id)")
         )
             ->groupBy('size_id')
-            ->whereNotNull('size_id')->where('date', Carbon::now())->orderBy('total_amount', 'DESC')->get();
+            ->whereNotNull('size_id')->where('date', Carbon::now())->get();
     }
 
     public function getTodaysTransactionsTest()
@@ -50,7 +51,7 @@ class AnalyticService extends Service
             DB::raw("count(income_id)")
         )
             ->groupBy('income_id')
-            ->whereNull('bill_id')->where('date', Carbon::now())->orderBy('total_amount', 'DESC')->get();
+            ->whereNull('bill_id')->where('date', Carbon::now())->get();
     }
 
 
@@ -81,5 +82,34 @@ class AnalyticService extends Service
         } catch (\Exception $e) {
             dd($e);
         }
+    }
+
+    public function chart(Request $request)
+    {
+        $data = [
+            'bills' => $this->getTodaysTransactions($request),
+            'transactions' => $this->getTodaysTransactionsTest($request),
+        ];
+        $array1 = collect($data['bills']);
+        $array2 = collect($data['transactions']);
+
+        $data['merged'] = $array1->merge($array2);
+
+        $data['test'] = $data['merged']->sortByDesc('total_amount');
+
+
+        $data['analytic'] =  $data['test']->mapWithKeys(function ($item, $key) {
+            if (isset($item->income_id)) {
+                return [$item->incomes->name => $item->total_amount];
+            } else {
+                return [$item->sizes->name . ' (' . $item->sizes->orders->name . ')' => $item->total_amount];
+            }
+        });
+
+        return $data;
+
+
+
+        // return view('frontend.chart.index', $data);
     }
 }

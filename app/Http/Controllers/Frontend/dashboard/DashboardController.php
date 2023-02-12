@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Model\Adjustment;
+use App\Model\Analytic;
 use App\Model\Order;
 use App\Model\Transaction;
 use App\Services\frontend\AdjustmentService;
+use App\Services\frontend\AnalyticService;
 use App\Services\frontend\TransactionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,12 +16,13 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
-    protected $adjustmentService, $transactionService, $moduleName;
+    protected $adjustmentService, $transactionService, $moduleName, $analyticService;
     public function __construct()
     {
         $this->moduleName = 'Dashboard';
         $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->transactionService = new TransactionService(new Transaction);
+        $this->analyticService = new AnalyticService(new Analytic());
     }
 
 
@@ -40,7 +43,10 @@ class DashboardController extends Controller
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance();
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
 
-        // dd($data);
+        $data['analytics'] = $this->analyticService->chart($request);
+
+
+
 
 
         return view('frontend.dashboard.index', $data);

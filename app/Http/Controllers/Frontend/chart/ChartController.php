@@ -24,20 +24,21 @@ class ChartController extends Controller
             'bills' => $this->analyticService->getTodaysTransactions($request),
             'transactions' => $this->analyticService->getTodaysTransactionsTest($request),
         ];
+        $array1 = collect($data['bills']);
+        $array2 = collect($data['transactions']);
+
+        $data['merged'] = $array1->merge($array2);
+
+        $data['test'] = $data['merged']->sortByDesc('total_amount');
 
 
-        $bill = $data['bills']->mapWithKeys(function ($item, $key) {
-            return [$item->sizes->name . '(' . $item->sizes->orders->name . ')' => $item->total_amount];
+        $data['incomes'] =  $data['test']->mapWithKeys(function ($item, $key) {
+            if (isset($item->income_id)) {
+                return [$item->incomes->name => $item->total_amount];
+            } else {
+                return [$item->sizes->name . ' (' . $item->sizes->orders->name . ')' => $item->total_amount];
+            }
         });
-
-        $transaction = $data['transactions']->mapWithKeys(function ($item, $key) {
-            return [$item->incomes->name => $item->total_amount];
-        });
-
-        $array1 = collect($bill);
-        $array2 = collect($transaction);
-
-        $data['incomes'] = $array1->merge($array2);
 
 
 
