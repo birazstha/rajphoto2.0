@@ -126,14 +126,6 @@
            //Append new order 
            $('#btnAdd').click(function() {
             billCount++;
-           
-            // Check if user has entered full order details or not
-            // currentTotal = $(`#total${count}`).val();
-            // setLastTotal(currentTotal);
-            // if(!lastTotal){
-            //     $('.error-msg').removeClass('d-none');
-            //     return false;
-            // }
             
             $('.removeOrder').removeClass('d-none');
             //Increase the count
@@ -271,21 +263,14 @@
         $('#paid_amount').on('keyup change', function() {
             balanceAmt = $('#grand_total').val() - $(this).val();
             grandTotal = $('#grand_total').val();
-            
             $('#due_amount').val(balanceAmt);
-           
-
             var paidAmt = $(this).val();
-
             $('#cash_received').val(paidAmt);
-
             if(parseInt(paidAmt) > parseInt(grandTotal)  ){
                 $('#error-paid-amount').text("Paid amount can't be greater than grand total");
             }else{
                 $('#error-paid-amount').text('');
             }
-
-
             if(paidAmt == 0){
                 $('#toggle-payment-method').addClass('d-none');
                 $('#cash_received').val(0);

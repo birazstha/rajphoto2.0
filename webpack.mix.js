@@ -25,8 +25,9 @@ mix.js("resources/asset/system/js/system.js", "public/compiledCssAndJs/js/")
         "resources/asset/system/js/transaction_og.js",
         "public/compiledCssAndJs/js/"
     )
+    .js("resources/asset/system/js/bill.js", "public/compiledCssAndJs/js/")
     .js(
-        "resources/asset/system/js/currentDate.js",
+        "resources/asset/system/js/nepali-date.js",
         "public/compiledCssAndJs/js/"
     )
     .sass(

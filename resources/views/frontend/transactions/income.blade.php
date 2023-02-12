@@ -8,7 +8,7 @@
         <form class="form-horizontal" action="{{ route('transactions.store') }}" method="POST" autocomplete="off">
             @csrf
 
-            <input type="hidden" name="date" class="current_date" value="">
+            <input type="hidden" name="date" id="todays_date" value="">
 
             <div class="card-body">
 

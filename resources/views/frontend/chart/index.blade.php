@@ -1,5 +1,11 @@
 @extends('frontend.layout.master')
 @section('main-content')
+    <h1>Todays Analytics</h1>
+
+    <div class="w-25" style="">
+        <canvas id="myChart"></canvas>
+    </div>
+
     <h1>Bills</h1>
 
 
@@ -73,7 +79,7 @@
 
     <script>
         const ctx = document.getElementById('myChart');
-        var bills = @json($bills);
+        var bills = @json($incomes);
         var labels = Object.keys(bills);
         var values = Object.values(bills);
         console.log(labels);
