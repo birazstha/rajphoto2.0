@@ -53,7 +53,11 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
 <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
+
 <script src="{{ asset('public/compiledCssAndJs/js/nepali-date.js') }}"></script>
+
+
+
 
 
 

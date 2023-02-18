@@ -32,7 +32,7 @@ class AnalyticService extends Service
         return $query->orderBy('created_at', 'DESC')->where('created_at', '>=', Carbon::today())->whereNull(['saving_id', 'bill_id'])->where('is_withdrawn', false)->paginate(10);
     }
 
-    public function getTodaysTransactions()
+    public function getTodaysTransactions($request)
     {
         return  $this->model->select(
             DB::raw("(sum(amount)) as total_amount"),
@@ -40,10 +40,10 @@ class AnalyticService extends Service
             DB::raw("count(size_id)")
         )
             ->groupBy('size_id')
-            ->whereNotNull('size_id')->where('date', Carbon::now())->get();
+            ->whereNotNull('size_id')->where('date', $request->date)->get();
     }
 
-    public function getTodaysTransactionsTest()
+    public function getTodaysTransactionsTest($request)
     {
         return  $this->model->select(
             DB::raw("(sum(amount)) as total_amount"),
@@ -51,13 +51,13 @@ class AnalyticService extends Service
             DB::raw("count(income_id)")
         )
             ->groupBy('income_id')
-            ->whereNull('bill_id')->where('date', Carbon::now())->get();
+            ->whereNull('bill_id')->where('date', $request->date)->get();
     }
 
 
     public function store($request)
     {
-        $date =  Carbon::now()->format('Y-m-d');
+
         try {
             if (isset($request->bill)) {
                 $billArray = [];
@@ -67,12 +67,12 @@ class AnalyticService extends Service
                     $innerData['amount'] = $request->paid_amount;
                     $innerData['transaction_id'] = $request->transaction;
                     $innerData['size_id'] = $bill['size_id'];
-                    $innerData['date'] = $date;
+                    $innerData['date'] = $request->ordered_date;
                     array_push($billArray, $innerData);
                 }
                 return $this->model::insert($billArray);
             } else {
-                $data['date'] = $date;
+                $data['date'] = $request->date;
                 $data['income_id'] = $request->income_id ?? ''; //Photo, Lamination, SIM
                 $data['amount'] = $request->amount ?? null; //Photo, Lamination, SIM
                 $data['amount'] = $request->amount ?? null; //Photo, Lamination, SIM

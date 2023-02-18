@@ -60,10 +60,16 @@ class TransactionService extends Service
         return $this->model->select(DB::raw('amount'))->where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get()->groupBy('date');
     }
 
-    public function getTodaysTransactions()
+    // public function getTodaysTransactions($request)
+    // {
+    //     return $this->model->where('date', '=', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
+    // }
+
+    public function getTodaysTransactions($request)
     {
-        return $this->model->where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
+        return $this->model->where('created_at', '>=', Carbon::now()->format('Y-m-d'))->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
     }
+
 
 
     public function getSavingsDetail()

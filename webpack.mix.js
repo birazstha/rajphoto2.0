@@ -30,6 +30,10 @@ mix.js("resources/asset/system/js/system.js", "public/compiledCssAndJs/js/")
         "resources/asset/system/js/nepali-date.js",
         "public/compiledCssAndJs/js/"
     )
+    .js(
+        "resources/asset/system/js/frontend/dashboard",
+        "public/compiledCssAndJs/js/frontend"
+    )
     .sass(
         "resources/asset/system/styles/system.scss",
         "public/compiledCssAndJs/css"

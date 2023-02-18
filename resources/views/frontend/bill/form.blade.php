@@ -41,7 +41,7 @@
                     <label for="photo_number" class="col-sm-2 col-form-label">Photo Number</label>
                     <div class="col-sm-10">
                         <input type="number" value="" name="photo_number" class="form-control" id="photo_number"
-                            placeholder="Enter Photo Number." required>
+                            placeholder="Enter Photo Number.">
                     </div>
 
                 </div>

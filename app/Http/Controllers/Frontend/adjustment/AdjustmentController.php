@@ -14,11 +14,9 @@ class AdjustmentController extends Controller
     {
         $this->adjustmentService = $adjustmentService;
     }
-    
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $this->adjustmentService->store($request);
-        return redirect()->back()->with(['success'=>'Closing balance recorded successfully']); 
     }
-
-
 }

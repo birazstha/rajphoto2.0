@@ -49,6 +49,9 @@
 
     <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('public/compiledCssAndJs/js/nepali-date.js') }}"></script>
+
+
     <style>
         .ui-autocomplete {
             z-index: 2147483647;

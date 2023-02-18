@@ -9,7 +9,5 @@ class Adjustment extends Model
 {
 
     protected $table = 'adjustments';
-    protected $fillable = ['closing_balance','adjusted_amount','amount','date'];
-
-    
+    protected $fillable = ['adjusted_amount', 'amount', 'date', 'type'];
 }

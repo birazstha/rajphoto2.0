@@ -18,6 +18,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/getCustomerInfo', 'AjaxController@getCustomerInfo')->name('bill.getCustomerInfo');
     Route::get('/getRate', 'AjaxController@getRate')->name('bill.getRate');
     Route::get('/getIncome', 'AjaxController@getIncome')->name('bill.getIncome');
+    Route::get('/getDashboardInfo', 'AjaxController@getDashboardInfo');
     Route::get('/getOpeningBalance', 'AjaxController@getOpeningBalance')->name('bill.getOpeningBalance');
     Route::post('/darkmode', 'AjaxController@darkmode')->name('frontend.darkmode');
     Route::get('autocompletePhone', 'AjaxController@autocompletePhone')->name('autoCompletePhone');

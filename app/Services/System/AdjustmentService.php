@@ -13,11 +13,17 @@ class AdjustmentService extends Service
         parent::__construct($adjustment);
     }
 
-    public function getClosingBalance($request){
-       
+    public function getClosingBalance($request)
+    {
+
         $query = $this->query();
-        return $query->where('date', $request->prevDate)->first()->closing_balance ?? 0;
+        return $query->where('date', $request->prevDate)->first()->amount ?? 0;
+    }
+
+    public function store($request)
+    {
+        dd($request->all());
+        $this->model->store($request);
+        return redirect()->back()->with(['success' => 'Closing balance recorded successfully']);
     }
 }
-
-

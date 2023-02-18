@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Model\Adjustment;
+use Carbon\Carbon;
 use App\Model\Bill;
-use App\Model\Customer;
-use App\Model\Expense;
-use App\Model\FrontendUser;
-use App\Model\Income;
-use App\Model\Order;
-use App\Model\PaymentMethod;
 use App\Model\Size;
+use App\Model\Order;
+use App\Model\Income;
+use App\Model\Expense;
+use App\Model\Customer;
+use App\Model\Adjustment;
 use App\Model\Transaction;
-use App\Services\frontend\ExpenseService;
+use App\Model\FrontendUser;
+use App\Model\PaymentMethod;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Model\Analytic;
+use App\Services\frontend\AnalyticService;
 use App\Services\frontend\OrderService;
+use App\Services\frontend\ExpenseService;
+use App\Services\frontend\TransactionService;
 use App\Services\System\AdjustmentService;
 use App\Services\System\PaymentMethodService;
-use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
 
-    protected $adjustmentService, $orderService, $expenseService;
+    protected $adjustmentService, $orderService, $expenseService, $paymentService, $transactionService, $analyticService;
     public function __construct()
     {
         $this->adjustmentService = new AdjustmentService(new Adjustment);
         $this->orderService = new OrderService(new Order);
         $this->expenseService = new ExpenseService(new Expense);
         $this->paymentService = new PaymentMethodService(new PaymentMethod());
+        $this->transactionService = new TransactionService(new Transaction());
+        $this->analyticService = new AnalyticService(new Analytic());
     }
 
 
@@ -103,6 +109,31 @@ class AjaxController extends Controller
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['online-payment-bill'] - $data['online-payment-other'];
         $data['todaysDate'] = $request->date;
         return view('system.home.transactions', $data);
+    }
+
+
+    public function getDashboardInfo(Request $request)
+    {
+
+        $data['transactions'] = $this->transactionService->getTodaysTransactions($request);
+        $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
+        $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');
+        $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
+        $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
+        $data['adjustment'] = Adjustment::where('date', '=', $request->date)->first()->adjusted_amount ?? 0;
+
+        // dd($data['adjustment']);
+        $data['onlinePaymentBill'] = collect($data['transactions'])->where('payment_gateway')->where('bill_id')->sum('amount');
+        $data['onlinePaymentOther'] = collect($data['transactions'])->where('payment_gateway')->where('income_id')->sum('amount');
+        $data['totalOnlinePayment'] = $data['onlinePaymentBill'] + $data['onlinePaymentOther'];
+        $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
+        $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
+        $data['analytics'] = $this->analyticService->chart($request);
+        $data['pie_chart'] = $data['analytics']['analytic'];
+
+
+
+        return view('frontend.dashboard.dashboard', $data);
     }
 
 
