@@ -42,6 +42,6 @@ class OrderService extends Service
 
     public function getBillClearanceId()
     {
-        return $this->model->where('name', 'Bill Clearance')->first()->id;
+        return $this->model->where('name', 'Bill Clearance')->first()->id ?? null;
     }
 }

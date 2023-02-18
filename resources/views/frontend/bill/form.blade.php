@@ -206,7 +206,7 @@
                     </div>
                 </div>
 
-                <input type="hidden" value="" id="todays_date" name="ordered_date"
+                <input type="hidden" value="" class="todays_date" name="ordered_date"
                     class="form-control order-date" readonly="readonly">
 
 
