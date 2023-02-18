@@ -17,7 +17,8 @@
                             <input type="number" class="form-control" name="withdrawn_amount" value=""
                                 id="withdrawn_amount">
                         </div>
-                        <input type="hidden" id="todays_date" name="date">
+                        <input type="text" name="date" class="form-control todays_date">
+
                     </form>
                 </div>
                 <div class="modal-footer">

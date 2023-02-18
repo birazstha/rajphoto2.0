@@ -44,7 +44,7 @@
                         @enderror
                     </div>
                 </div>
-                <input type="hidden" name="date" id="todays_date" value="">
+                <input type="hidden" name="date" class="todays_date" value="">
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

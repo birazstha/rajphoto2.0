@@ -39,4 +39,9 @@ class OrderService extends Service
     {
         return $this->model->where('details_required', false)->orderBy('rank', 'ASC')->get();
     }
+
+    public function getBillClearanceId()
+    {
+        return $this->model->where('name', 'Bill Clearance')->first()->id;
+    }
 }

@@ -36,11 +36,11 @@ class AdjustmentService extends Service
     {
 
         $data = $this->model->where('date', $request->date);
-        $closingAmount = $data->first()->closing_balance ?? 0;
+        $closingAmount = $data->first()->amount ?? 0;
         $updatedClosingAmnt = $closingAmount - $request->amount - $request->withdrawn_amount;
         if ($data) {
             $data->update([
-                'closing_balance' => $updatedClosingAmnt,
+                'amount' => $updatedClosingAmnt,
             ]);
         }
     }

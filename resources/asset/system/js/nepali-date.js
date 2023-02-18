@@ -11,5 +11,5 @@ var yesterdayDate = NepaliFunctions.ConvertDateFormat(
     "YYYY-MM-DD"
 );
 
-$("#todays_date").val(currentBsDate);
-$("#yesterdays_date").val(yesterdayDate);
+$(".todays_date").val(currentBsDate);
+$(".yesterdays_date").val(yesterdayDate);

@@ -63,13 +63,7 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-
-
         $data = $request->all();
-
-
-
-
         try {
             if ($request->transaction_type === 'income') {
                 $data['income_id'] = $request->transaction_title_id;
@@ -89,8 +83,8 @@ class TransactionController extends Controller
             $transactionId = $this->transactionService->store($data);
 
 
-            if (!isset($request->withdrawn_amount) && !isset($request->expense_id)) {
 
+            if (!isset($request->withdrawn_amount) && !isset($request->expense_id)) {
 
                 $this->analyticService->store($request->merge(['transaction' => $transactionId]));
             }

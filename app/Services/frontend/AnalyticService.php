@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Model\Bill;
 use App\Model\Analytic;
 use App\Model\BillOrder;
+use App\Model\Order;
 use App\Services\Service;
 use App\Model\Transaction;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class AnalyticService extends Service
     protected $orderService, $frontendUser;
     public function __construct(Analytic $analytic)
     {
+
         parent::__construct($analytic);
+        $this->orderService = new OrderService(new Order());
     }
 
     public function getAllData($data, $selectedColumns = [], $pagination = true)
@@ -45,13 +48,15 @@ class AnalyticService extends Service
 
     public function getTodaysTransactionsTest($request)
     {
+        $billClearanceId = $this->orderService->getBillClearanceId();
+
         return  $this->model->select(
             DB::raw("(sum(amount)) as total_amount"),
             'income_id',
             DB::raw("count(income_id)")
         )
             ->groupBy('income_id')
-            ->whereNull('bill_id')->where('date', $request->date)->get();
+            ->whereNull('bill_id')->where('date', $request->date)->where('income_id', '!=', $billClearanceId)->get();
     }
 
 
@@ -89,13 +94,17 @@ class AnalyticService extends Service
         $data = [
             'bills' => $this->getTodaysTransactions($request),
             'transactions' => $this->getTodaysTransactionsTest($request),
-        ];
+        ];;
+
         $array1 = collect($data['bills']);
         $array2 = collect($data['transactions']);
 
         $data['merged'] = $array1->merge($array2);
 
         $data['test'] = $data['merged']->sortByDesc('total_amount');
+
+
+
 
 
         $data['analytic'] =  $data['test']->mapWithKeys(function ($item, $key) {
@@ -105,6 +114,8 @@ class AnalyticService extends Service
                 return [$item->sizes->name . ' (' . $item->sizes->orders->name . ')' => $item->total_amount];
             }
         });
+
+
 
         return $data;
 

@@ -129,7 +129,11 @@ class AjaxController extends Controller
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
         $data['analytics'] = $this->analyticService->chart($request);
+
+
+
         $data['pie_chart'] = $data['analytics']['analytic'];
+
 
 
 

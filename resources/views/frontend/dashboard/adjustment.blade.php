@@ -12,7 +12,7 @@
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="form-label" for="">Adjustmen Type</label>
+                        <label class="form-label" for="">Adjustment Type</label>
                         <select name="type" id="adjustment_type" class="form-control">
                             <option value="">--Select Type--</option>
                             <option value="opening">Opening Balance</option>
@@ -29,7 +29,7 @@
                     {{-- Cash In drawer --}}
                     <div class="form-group">
                         <label class="form-label" for="">Cash In Drawer</label>
-                        <input type="number" class="form-control" name="amount" id="closing_balancee" value="">
+                        <input type=number" class="form-control" name="amount" id="closing_balancee" value="">
                     </div>
 
                     {{-- Adjustment --}}
@@ -39,8 +39,8 @@
                             readonly>
                     </div>
 
-                    <input type="hidden" name="todays_date" id="todays_date" value="">
-                    <input type="hidden" name="yesterdays_date" id="yesterdays_date" value="">
+                    <input type="hidden" name="todays_date" class="todays_date" value="">
+                    <input type="hidden" name="yesterdays_date" class="yesterdays_date" value="">
 
 
                 </div>
