@@ -67,7 +67,8 @@ class TransactionService extends Service
 
     public function getTodaysTransactions($request)
     {
-        return $this->model->where('date', '=', $request->date)->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
+
+        return $this->model->where('created_at', '>=', Carbon::today())->orderBy('created_at', 'DESC')->with(['bills', 'expenses', 'banks'])->get();
     }
 
     public function getSavingsDetail()

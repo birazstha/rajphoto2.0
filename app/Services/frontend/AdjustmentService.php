@@ -35,6 +35,8 @@ class AdjustmentService extends Service
     public function deductClosingBalance($request)
     {
 
+
+
         $data = $this->model->where('date', $request->date);
         $closingAmount = $data->first()->amount ?? 0;
         $updatedClosingAmnt = $closingAmount - $request->amount - $request->withdrawn_amount;
