@@ -53,9 +53,6 @@ class AdjustmentService extends Service
     public function store($request)
     {
         $data = $request->except('_token');
-
-
-
         if ($data['type'] === 'opening') {
             $this->model->create([
                 'amount' => $data['amount'],
@@ -72,7 +69,6 @@ class AdjustmentService extends Service
             ]);
         }
 
-
-        return redirect()->back()->with(['success' => 'Closing balance recorded successfully']);
+        return $data['type'];
     }
 }

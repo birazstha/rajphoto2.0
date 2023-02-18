@@ -22,7 +22,7 @@ class AdjustmentService extends Service
 
     public function store($request)
     {
-        dd($request->all());
+
         $this->model->store($request);
         return redirect()->back()->with(['success' => 'Closing balance recorded successfully']);
     }
