@@ -44,10 +44,12 @@ class DashboardController extends Controller
         $data['onlinePaymentOther'] = collect($data['transactions'])->where('payment_gateway')->where('income_id')->sum('amount');
         $data['totalOnlinePayment'] = $data['onlinePaymentBill'] + $data['onlinePaymentOther'];
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance();
+        $data['cash_in_drawer'] =  $this->adjustmentService->getCashInDrawer();
 
 
 
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
+
 
 
         $data['analytics'] = $this->analyticService->chart($request);

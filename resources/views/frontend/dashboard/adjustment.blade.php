@@ -29,7 +29,7 @@
                     {{-- Cash In drawer --}}
                     <div class="form-group">
                         <label class="form-label" for="">Cash In Drawer</label>
-                        <input type=number" class="form-control" name="amount" id="closing_balancee" value="">
+                        <input type="number" class="form-control" name="amount" id="closing_balancee" value="">
                     </div>
 
                     {{-- Adjustment --}}
