@@ -81,10 +81,15 @@
                     @endif
                     <li><a href="{{ route('bills.create') }}"
                             class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
+
+                    <li><a href="{{ route('transactions.income') }}"
+                            class="{{ request()->segment(1) === 'income' ? 'active-link' : '' }}">Income</a> </li>
+                    <li><a href="{{ route('transactions.expense') }}"
+                            class="{{ request()->segment(1) === 'expense' ? 'active-link' : '' }}">Expense</a> </li>
                     {{-- <li><a href="{{ route('transactions.index') }}" class="">Transaction</a>
                     </li> --}}
 
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-toggle {{ request()->segment(1) === 'income' ? 'active-link' : '' }} {{ request()->segment(1) === 'expense' ? 'active-link' : '' }}"
                             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Transaction
@@ -94,13 +99,13 @@
                             <li><a class="dropdown-item" href="{{ route('transactions.expense') }}">Expense</a></li>
 
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <li><a href="{{ route('bank.index') }}"
                             class="{{ request()->segment(1) === 'bank' ? 'active-link' : '' }}">Savings</a> </li>
-                    <li><a href="{{ route('analytics') }}"
+                    {{-- <li><a href="{{ route('analytics') }}"
                             class="{{ request()->segment(1) === 'analytics' ? 'active-link' : '' }}">Analytics</a>
-                    </li>
+                    </li> --}}
 
                 </ul>
             </nav>

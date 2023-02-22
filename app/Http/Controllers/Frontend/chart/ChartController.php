@@ -28,9 +28,7 @@ class ChartController extends Controller
         $array2 = collect($data['transactions']);
 
         $data['merged'] = $array1->merge($array2);
-
         $data['test'] = $data['merged']->sortByDesc('total_amount');
-
 
         $data['incomes'] =  $data['test']->mapWithKeys(function ($item, $key) {
             if (isset($item->income_id)) {

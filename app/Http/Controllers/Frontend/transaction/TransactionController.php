@@ -143,7 +143,9 @@ class TransactionController extends Controller
     public function income(Request $request)
     {
         $orderId = Order::where('name', 'Urgent')->first()->id;
+
         $data = [
+            'pageTitle' => 'Incomes',
             'payments' =>  $this->paymentMethodService->getAllData($request),
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
             'sizes' => $this->sizeService->getAllData($request->merge(['urgentId' => $orderId]))
@@ -154,6 +156,7 @@ class TransactionController extends Controller
     public function expense(Request $request)
     {
         $data = [
+            'pageTitle' => 'Expenses',
             'expenses' => $this->expenseService->getAllData($request),
             'transactions' => $this->transactionService->getExpenses($request),
         ];

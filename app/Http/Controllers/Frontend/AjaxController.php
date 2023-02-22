@@ -114,8 +114,6 @@ class AjaxController extends Controller
 
     public function getDashboardInfo(Request $request)
     {
-
-
         $data['transactions'] = $this->transactionService->getTodaysTransactionsAjax($request);
         $data['totalIncome'] = collect($data['transactions'])->where('bill_id')->sum('amount') + collect($data['transactions'])->where('income_id')->sum('amount');
         $data['totalExpense'] = collect($data['transactions'])->where('expense_id')->sum('amount');

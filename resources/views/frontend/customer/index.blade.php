@@ -114,6 +114,9 @@
                                 <div>
                                     <b>Delivery Date:</b> {{ $bill->delivery_date }}
                                 </div>
+                                <div>
+                                    <b>Cleared Date:</b> {{ $bill->cleared_date ?? 'N/A' }}
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -126,9 +129,10 @@
                             <span class="badge badge-info btn-sm">Pending</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                         <button data-toggle="modal" data-target="#billDetail{{ $bill->id }}" target="_blank"
-                            data-bill={{ $bill->due_amount }} class="btn btn-success btn-sm open-AddBookDialog"><i
+                            data-bill={{ $bill->due_amount }}
+                            class="btn btn-success btn-sm open-AddBookDialog {{ $bill->status ? 'disabled' : '' }}"><i
                                 class="far fa-eye"></i></button>
                         @include('frontend.bill.include.clearBill')
                     </td>

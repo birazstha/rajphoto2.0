@@ -60,7 +60,7 @@
                     </div> --}}
 
                     {{-- Cleared By --}}
-                    <div class="mb-3 row">
+                    {{-- <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Cleared By</label>
                         <div class="col-sm-8">
                             <select name="user_id" id="user_id" class="form-control">
@@ -71,7 +71,7 @@
 
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <input type="text" hidden name="cleared_date" class="cleared_date" value=""
                         id="cleared_date">
