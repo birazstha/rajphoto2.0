@@ -33,8 +33,9 @@ $(document).on("change", ".payment_method_other", function() {
 });
 
 $(document).ready(function() {
-    $("#income_title").focus();
-    $("#expense_title").focus();
+    $("#income_amount").focus();
+    $("#expense_amount").focus();
+    $("#saving_amount").focus();
 });
 
 $(document).ready(function() {

@@ -2,31 +2,20 @@
 @section('main-content')
     <div class="card card-info">
         <div class="card-header">
-            <h3 class="card-title">Saving</h3>
+            <h3 class="card-title">Saving - {{ $bank->bank_name }}</h3>
         </div>
 
         <form class="form-horizontal" action="{{ route('bank.store') }}" method="POST" autocomplete="off">
             @csrf
             <div class="card-body">
                 {{-- Title --}}
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
-                    <div class="col-sm-10">
-                        <select name="saving_id" id="expense_title" class="form-control transaction_title" required>
-                            <option value="">Select Bank Name</option>
-                            @foreach ($banks as $bank)
-                                <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
+                <input type="hidden" name="saving_id" value="{{ $bank->id }}">
 
                 {{-- Amount --}}
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
                     <div class="col-sm-10">
-                        <input type="number" name="amount" class="form-control" id="inputPassword3" placeholder="Amount"
+                        <input type="number" name="amount" class="form-control" id="saving_amount" placeholder="Amount"
                             required>
                     </div>
                 </div>

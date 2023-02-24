@@ -2,14 +2,14 @@
 @section('main-content')
     <div class="card card-danger">
         <div class="card-header">
-            <h3 class="card-title">Expense</h3>
+            <h3 class="card-title">Expense - {{ $expense->title }}</h3>
         </div>
 
         <form class="form-horizontal" action="{{ route('transactions.store') }}" method="POST" autocomplete="off">
             @csrf
             <div class="card-body">
                 {{-- Title --}}
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
                         <select name="expense_id" id="expense_title" class="form-control transaction_title" required>
@@ -19,31 +19,36 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
+
+                <input type="hidden" name="expense_id" value="{{ $expense->id }}">
 
 
                 {{-- Amount --}}
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
                     <div class="col-sm-10">
-                        <input type="number" name="amount" class="form-control" id="inputPassword3" placeholder="Amount"
+                        <input type="number" name="amount" class="form-control" id="expense_amount" placeholder="Amount"
                             required>
                     </div>
                 </div>
 
 
-                <!--Description-->
-                <div class="form-group row d-none" id="toggle-description-income">
-                    {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
-                    <div class="col-sm-10">
 
-                        <textarea name="description_income" id="" cols="10" rows="3" class="form-control"></textarea>
+                @if ($is_other)
+                    <!--Description-->
+                    <div class="form-group row" id="toggle-description-income">
+                        {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
+                        <div class="col-sm-10">
 
-                        @error('description')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
+                            <textarea name="description_income" id="" cols="10" rows="3" class="form-control"></textarea>
+
+                            @error('description')
+                                <span class="text text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
+                @endif
                 <input type="hidden" name="date" class="todays_date" value="">
             </div>
             <!-- /.card-body -->

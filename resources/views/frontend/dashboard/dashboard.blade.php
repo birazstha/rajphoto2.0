@@ -262,6 +262,7 @@
                                         </p>
                                     @elseif (isset($transaction->expense_id))
                                         {{ $transaction->expenses->title }}
+                                        {{ isset($transaction->description) ? '(' . $transaction->description . ')' : '' }}
                                     @elseif (isset($transaction->saving_id))
                                         {{ $transaction->banks->bank_name }}
                                     @elseif($transaction->is_withdrawn == true)

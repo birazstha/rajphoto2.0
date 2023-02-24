@@ -50,6 +50,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
+
         $data = [
             'pageTitle' => 'Transaction',
             'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
@@ -140,25 +141,50 @@ class TransactionController extends Controller
         return redirect()->back()->with('success', 'Deleted successfully!!');
     }
 
+    // public function income(Request $request)
+    // {
+
+    //     $orderId = Order::where('name', 'Urgent')->first()->id;
+
+    //     $data = [
+    //         'pageTitle' => 'Incomes',
+    //         'payments' =>  $this->paymentMethodService->getAllData($request),
+    //         'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
+    //         'sizes' => $this->sizeService->getAllData($request->merge(['urgentId' => $orderId]))
+    //     ];
+    //     return view('frontend.transactions.income', $data);
+    // }
+
     public function income(Request $request)
     {
+
         $orderId = Order::where('name', 'Urgent')->first()->id;
+
+
+        $income = Order::where('id', $request->incomeId)->first();
+
 
         $data = [
             'pageTitle' => 'Incomes',
             'payments' =>  $this->paymentMethodService->getAllData($request),
-            'orders' => $this->orderService->getAllData($request->merge(['details' => 'not-required'])),
-            'sizes' => $this->sizeService->getAllData($request->merge(['urgentId' => $orderId]))
+            'income' => $income,
+            'sizes' => $this->sizeService->getAllData($request->merge(['urgentId' => $orderId])),
+            'is_other' => $income->name === 'Others'  ? true : false,
         ];
         return view('frontend.transactions.income', $data);
     }
 
     public function expense(Request $request)
     {
+
+        $expense = Expense::where('id', $request->expenseId)->first();
+
         $data = [
             'pageTitle' => 'Expenses',
             'expenses' => $this->expenseService->getAllData($request),
             'transactions' => $this->transactionService->getExpenses($request),
+            'is_other' => $expense->title === 'Other'  ? true : false,
+            'expense' => $expense
         ];
         return view('frontend.transactions.expense', $data);
     }

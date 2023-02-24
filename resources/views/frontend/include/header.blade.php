@@ -82,27 +82,59 @@
                     <li><a href="{{ route('bills.create') }}"
                             class="{{ request()->segment(1) === 'bills' ? 'active-link' : '' }}">Bill</a> </li>
 
-                    <li><a href="{{ route('transactions.income') }}"
+                    {{-- <li><a href="{{ route('transactions.income') }}"
                             class="{{ request()->segment(1) === 'income' ? 'active-link' : '' }}">Income</a> </li>
                     <li><a href="{{ route('transactions.expense') }}"
-                            class="{{ request()->segment(1) === 'expense' ? 'active-link' : '' }}">Expense</a> </li>
-                    {{-- <li><a href="{{ route('transactions.index') }}" class="">Transaction</a>
-                    </li> --}}
+                            class="{{ request()->segment(1) === 'expense' ? 'active-link' : '' }}">Expense</a> </li> --}}
 
-                    {{-- <li>
-                        <a class="dropdown-toggle {{ request()->segment(1) === 'income' ? 'active-link' : '' }} {{ request()->segment(1) === 'expense' ? 'active-link' : '' }}"
+                    <li>
+                        <a class="dropdown-toggle {{ request()->segment(1) === 'income' ? 'active-link' : '' }} {{ request()->segment(1) === 'income' ? 'active-link' : '' }}"
                             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Transaction
+                            Income
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="{{ route('transactions.income') }}">Income</a></li>
-                            <li><a class="dropdown-item" href="{{ route('transactions.expense') }}">Expense</a></li>
+                            @foreach ($orders as $order)
+                                <li><a class="dropdown-item "
+                                        href="{{ route('transactions.income', ['incomeId' => $order->id]) }}">{{ $order->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="dropdown-toggle {{ request()->segment(1) === 'expense' ? 'active-link' : '' }} {{ request()->segment(1) === 'expense' ? 'active-link' : '' }}"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Expense
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach ($expenses as $expense)
+                                <li><a class="dropdown-item "
+                                        href="{{ route('transactions.expense', ['expenseId' => $expense->id]) }}">{{ $expense->title }}</a>
+                                </li>
+                            @endforeach
 
                         </ul>
-                    </li> --}}
 
-                    <li><a href="{{ route('bank.index') }}"
-                            class="{{ request()->segment(1) === 'bank' ? 'active-link' : '' }}">Savings</a> </li>
+                    </li>
+
+
+
+                    <li>
+                        <a class="dropdown-toggle {{ request()->segment(1) === 'bank' ? 'active-link' : '' }} {{ request()->segment(1) === 'bank' ? 'active-link' : '' }}"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Savings
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach ($savings as $saving)
+                                <li><a class="dropdown-item "
+                                        href="{{ route('bank.index', ['bankId' => $saving->id]) }}">{{ $saving->bank_name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
+
                     {{-- <li><a href="{{ route('analytics') }}"
                             class="{{ request()->segment(1) === 'analytics' ? 'active-link' : '' }}">Analytics</a>
                     </li> --}}

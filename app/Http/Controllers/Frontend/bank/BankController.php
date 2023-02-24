@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\bank;
 
 
 use App\Http\Controllers\Controller;
+use App\Model\Saving;
 use App\Model\Transaction;
 use App\Services\frontend\SavingService;
 use App\Services\frontend\TransactionService;
@@ -21,10 +22,12 @@ class BankController extends Controller
 
     public function index(Request $request)
     {
+
+
         $data = [
             'pageTitle' => $this->moduleName,
             'savings' => $this->transactionService->getSavingsDetail($request),
-            'banks' => $this->savingService->getAllData($request),
+            'bank' => Saving::where('id', $request->bankId)->first(),
         ];
         return view('frontend.saving.form', $data);
     }
