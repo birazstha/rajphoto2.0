@@ -183,4 +183,17 @@
             });
         });
     </script>
+
+    <script>
+        $('.payment_method').on('change', function() {
+
+            let method = $(this).val();
+            if (method === 'online') {
+                $('.toggle-gateway').removeClass('d-none');
+            } else {
+                $('.toggle-gateway').addClass('d-none');
+
+            }
+        });
+    </script>
 @endsection

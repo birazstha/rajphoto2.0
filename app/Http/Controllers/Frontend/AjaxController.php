@@ -121,7 +121,7 @@ class AjaxController extends Controller
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', '=', $request->date)->first()->adjusted_amount ?? 0;
 
-        // dd($data['adjustment']);
+
         $data['onlinePaymentBill'] = collect($data['transactions'])->where('payment_gateway')->where('bill_id')->sum('amount');
         $data['onlinePaymentOther'] = collect($data['transactions'])->where('payment_gateway')->where('income_id')->sum('amount');
         $data['totalOnlinePayment'] = $data['onlinePaymentBill'] + $data['onlinePaymentOther'];
@@ -131,14 +131,31 @@ class AjaxController extends Controller
 
         $data['analytics'] = $this->analyticService->chart($request);
 
-
-
         $data['pie_chart'] = $data['analytics']['analytic'];
 
 
-
-
         return view('frontend.dashboard.dashboard', $data);
+    }
+
+    public function getTransactions(Request $request)
+    {
+        if ($request->title === 'all') {
+            $data['transactions'] = $this->transactionService->getTodaysTransactions();
+        } else if ($request->title === 'incomes') {
+            $data['transactions'] = $this->transactionService->fetchIncomeData();
+        } else if ($request->title === 'incomes') {
+            $data['transactions'] = $this->transactionService->fetchIncomeData();
+        } else if ($request->title === 'bill') {
+            $data['transactions'] = $this->transactionService->fetchBillData();
+        } else if ($request->title === 'expense') {
+            $data['transactions'] = $this->transactionService->fetchExpenseData();
+        } else if ($request->title === 'savings') {
+            $data['transactions'] = $this->transactionService->fetchSavingData();
+        } else if ($request->title === 'online_payments') {
+            $data['transactions'] = $this->transactionService->fetchOnlinePaymentData();
+        }
+
+        return view('frontend.dashboard.transaction', $data);
     }
 
 

@@ -73,6 +73,39 @@
                         </div>
                     </div> --}}
 
+                    <!--Payment Method-->
+
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Payment Method</label>
+                        <div class="col-sm-8">
+                            <select name="" class="form-control payment_method" id="payment_method" required>
+                                <option value="cash" selected>Cash</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row toggle-gateway d-none">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Payment Gateway</label>
+                        <div class="col-sm-8">
+                            @foreach ($payments as $payment)
+                                <div class="form-check" style="display: flex; align-items:center;">
+                                    <input class="form-check-input" name="payment_gateway" type="radio"
+                                        id="flexRadioDefault1" value="{{ $payment->id }}">
+                                    <label class="form-check-label mr-2" for="flexRadioDefault1">
+                                        <img src="{{ asset('public/uploads/payment-method/' . $payment->image) }}"
+                                            height="50px" alt="">
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+
+
+
+
                     <input type="text" hidden name="cleared_date" class="cleared_date" value=""
                         id="cleared_date">
 

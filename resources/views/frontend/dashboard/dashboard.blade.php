@@ -207,28 +207,23 @@
             <div class="card-header">
                 <h3 class="card-title">Transactions</h3>
                 <div class="card-tools">
-                    {{-- <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group input-group-sm" style="width: 150px;">
                         <div class="input-group-append">
-                            <select class="form-select"
-                                onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                <option value="{{ route('home') }}" selected>All</option>
-                                <option value="{{ route('filter.trasactions', 'bill') }}"
-                                    {{ request()->segment(2) == 'bill' ? 'selected' : '' }}>Bill</option>
-
-                                <option value="{{ route('filter.trasactions', 'income') }}"
-                                    {{ request()->segment(2) == 'income' ? 'selected' : '' }}>Incomes</option>
-                                <option value="{{ route('filter.trasactions', 'expense') }}"
-                                    {{ request()->segment(2) == 'expense' ? 'selected' : '' }}>Expenses
+                            <select class="form-select" id="transactions">
+                                <option value="all" selected>All</option>
+                                <option value="bill">Bill
                                 </option>
-                                <option value="{{ route('filter.trasactions', 'savings') }}"
-                                    {{ request()->segment(2) == 'savings' ? 'selected' : '' }}>Savings</option>
-                                <option value="{{ route('filter.trasactions', 'online-payment') }}"
-                                    {{ request()->segment(2) == 'online-payment' ? 'selected' : '' }}>Online
+                                <option value="incomes">
+                                    Incomes</option>
+                                <option value="expense">Expenses
+                                </option>
+                                <option value="savings">Savings</option>
+                                <option value="online_payments">Online
                                     Payment
                                 </option>
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -241,7 +236,7 @@
                             <th scope="col">Amount</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="transaction_detail">
                         @forelse ($transactions as $key => $transaction)
                             <tr
                                 class="{{ $transaction->income_id ? 'table-success' : ($transaction->bill_id ? 'table-success' : ($transaction->saving_id ? 'table-primary' : 'table-danger')) }}">
@@ -250,10 +245,10 @@
                                     @if (isset($transaction->bill_id))
                                         <p class="html-tooltip" data-toggle="tooltip" data-placement="right"
                                             title="<div class='text-left'>
-                                                            <p>Name: {{ $transaction->bills->customers->name }}</p>
-                                                            <p>Transaction ID:  {{ $transaction->id }}</p>
-                                                            <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
-                                                            </div>"
+                                                    <p>Name: {{ $transaction->bills->customers->name }}</p>
+                                                    <p>Transaction ID:  {{ $transaction->id }}</p>
+                                                    <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
+                                                    </div>"
                                             data-html="true" style="cursor: pointer;">
                                             {{ $transaction->bills->status ? 'Cleared' : 'Prepared' }}
                                             Bill ({{ $transaction->bills->customers->name }})
@@ -271,9 +266,9 @@
                                     @else
                                         <p class="html-tooltip w-25" data-toggle="tooltip" data-placement="right"
                                             title=" <div class='text-left'>
-                                                    <p>Transaction ID: {{ $transaction->id }}</p>
-                                                    <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
-                                                    </div>"
+                                            <p>Transaction ID: {{ $transaction->id }}</p>
+                                            <p>Payment Gateway: {{ $transaction->payment_gateway ? 'Online' : 'Cash' }}</p>
+                                            </div>"
                                             data-html="true" style="cursor: pointer;">
                                             {{ $transaction->incomes->name }}
                                             {{ isset($transaction->description) ? '(' . $transaction->description . ')' : '' }}
@@ -289,6 +284,7 @@
                                 <td colspan="3" class="text-center text-danger"> No Transactions found</td>
                             </tr>
                         @endforelse
+
                     </tbody>
                 </table>
             </div>

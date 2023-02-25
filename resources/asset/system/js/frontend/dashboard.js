@@ -55,4 +55,19 @@ $(function() {
 
         $("#adjustment").val(netClosingBalance);
     });
+
+    $(document).on("change", "#transactions", function() {
+        let title = $(this).val();
+        $.ajax({
+            method: "get",
+            url: window.location.origin + "/rajphoto2.0/getTransactions",
+            data: {
+                title: title
+            },
+            dataType: "html",
+            success: function(response) {
+                $("#transaction_detail").html(response);
+            }
+        });
+    });
 });

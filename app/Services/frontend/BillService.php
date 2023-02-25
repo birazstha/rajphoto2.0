@@ -110,6 +110,7 @@ class BillService extends Service
 
     public function update($request, $id)
     {
+
         DB::beginTransaction();
         try {
             $item = $this->itemByIdentifier($id);
@@ -121,10 +122,13 @@ class BillService extends Service
             $item = $this->itemByIdentifier($id);
             $item->update($data);
 
+
+            $transaction = $request->all();
+
             $transaction['date'] =  $request->cleared_date;
             $transaction['amount'] =  $request->total;
-            $transaction['bill_id'] = $request->bill_id;
             $transaction['bill_type'] = 1;
+
             $this->transactionService->store($transaction);
 
             $this->adjustmentService->updateAdjustment($request);
