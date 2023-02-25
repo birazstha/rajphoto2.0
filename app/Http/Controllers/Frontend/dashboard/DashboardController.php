@@ -29,6 +29,8 @@ class DashboardController extends Controller
     public function dashboard(Request $request)
     {
 
+
+
         $data['pageTitle'] = $this->moduleName;
         $data['transactions'] = $this->transactionService->getTodaysTransactions($request);
 
@@ -48,13 +50,16 @@ class DashboardController extends Controller
 
 
 
+        // dd($data['openingBalance']);
+
+
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
 
 
 
         $data['analytics'] = $this->analyticService->chart($request);
 
-        // dd($data['closingBalance']);
+
 
         return view('frontend.dashboard.index', $data);
     }

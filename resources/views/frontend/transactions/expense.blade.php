@@ -9,20 +9,7 @@
             @csrf
             <div class="card-body">
                 {{-- Title --}}
-                {{-- <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
-                    <div class="col-sm-10">
-                        <select name="expense_id" id="expense_title" class="form-control transaction_title" required>
-                            <option value="">Select Title</option>
-                            @foreach ($expenses as $expenses)
-                                <option value="{{ $expenses->id }}">{{ $expenses->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div> --}}
-
                 <input type="hidden" name="expense_id" value="{{ $expense->id }}">
-
 
                 {{-- Amount --}}
                 <div class="form-group row">
@@ -33,10 +20,19 @@
                     </div>
                 </div>
 
+                {{-- Paid to --}}
+                @if ($is_bill_paid)
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Paid To</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="bill_paid_to" class="form-control"
+                                placeholder="Enter Receiver's Name" required>
+                        </div>
+                    </div>
+                @endif
 
-
+                <!--Description-->
                 @if ($is_other)
-                    <!--Description-->
                     <div class="form-group row" id="toggle-description-income">
                         {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
                         <div class="col-sm-10">
@@ -49,7 +45,10 @@
                         </div>
                     </div>
                 @endif
+
+                {{-- Date --}}
                 <input type="hidden" name="date" class="todays_date" value="">
+
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
@@ -59,48 +58,10 @@
             <!-- /.card-footer -->
         </form>
     </div>
-
-    {{-- <div class="row">
-        <div class="col-12">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Fixed Header Table</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0" style="height: 300px;">
-                    <table class="table table-head-fixed text-nowrap">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach ($transactions as $key => $transaction)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $transaction->expenses->title }}</td>
-                                    <td>{{ $transaction->amount }}</td>
-
-                                </tr>
-                            @endforeach
-
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-    </div> --}}
 @endsection
 
 @section('js')
     <script src="{{ asset('public/compiledCssAndJs/js/transaction.js') }}"></script>
-
     <script>
         $(document).ready(function() {
             $('#expense_title').focus();

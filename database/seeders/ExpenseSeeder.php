@@ -19,18 +19,16 @@ class ExpenseSeeder extends Seeder
 
         Expense::firstOrCreate([
             'title' => 'Breakfast',
-                'status' => 1,
+            'status' => 1,
         ]);
 
         Expense::firstOrCreate([
-            'title' => 'Bill Clearance',
+            'title' => 'Bill Paid',
             'status' => 1,
         ]);
         Expense::firstOrCreate([
             'title' => 'Other',
             'status' => 1,
         ]);
-
-        
     }
 }

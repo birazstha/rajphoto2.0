@@ -49,7 +49,7 @@ class AdjustmentService extends Service
 
     public function getClosingBalance()
     {
-        return $this->model->where('created_at', '>=', Carbon::yesterday())->where('type', 'closing')->first()->amount ?? 0;
+        return $this->model->where('created_at', Carbon::yesterday()->format('Y-m-d'))->where('type', 'opening')->first()->amount ?? 0;
     }
 
     public function getCashInDrawer()
@@ -59,12 +59,14 @@ class AdjustmentService extends Service
 
     public function store($request)
     {
+
         $data = $request->except('_token');
         if ($data['type'] === 'opening') {
             $this->model->create([
                 'amount' => $data['amount'],
                 'date' => $data['yesterdays_date'],
                 'adjusted_amount' => 0,
+                'created_at' => Carbon::yesterday()->format('Y-m-d H:i:s'),
                 'type' => $data['type']
             ]);
         } else {

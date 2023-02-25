@@ -10,17 +10,23 @@
                     </button>
                 </div>
 
+
+
+
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="form-label" for="">Adjustment Type</label>
                         <select name="type" id="adjustment_type" class="form-control">
                             <option value="">--Select Type--</option>
-                            <option value="opening">Opening Balance</option>
-                            <option value="closing" selected>Closing Balance</option>
+                            <option value="opening" {{ $openingBalance === 0 ? 'selected' : '' }}>Opening Balance
+                            </option>
+                            <option value="closing" {{ $openingBalance != 0 ? 'selected' : '' }}
+                                {{ $openingBalance === 0 ? 'disabled' : '' }}>Closing Balance
+                            </option>
                         </select>
                     </div>
 
-                    <div class="form-group toggle-amount">
+                    <div class="form-group toggle-amount {{ $openingBalance === 0 ? 'd-none' : '' }}">
                         <label class="form-label" for="">Amount</label>
                         <input type="text" readonly id="closing" class="form-control"
                             value="{{ $closingBalance }}">
@@ -33,7 +39,7 @@
                     </div>
 
                     {{-- Adjustment --}}
-                    <div class="form-group toggle-adjustment">
+                    <div class="form-group toggle-adjustment {{ $openingBalance === 0 ? 'd-none' : '' }}">
                         <label class="form-label" for="">Adjustment</label>
                         <input type="text" class="form-control" name="adjusted_amount" value="" id="adjustment"
                             readonly>

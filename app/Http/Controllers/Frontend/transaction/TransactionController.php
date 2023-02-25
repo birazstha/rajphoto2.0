@@ -178,12 +178,12 @@ class TransactionController extends Controller
     {
 
         $expense = Expense::where('id', $request->expenseId)->first();
-
         $data = [
             'pageTitle' => 'Expenses',
             'expenses' => $this->expenseService->getAllData($request),
             'transactions' => $this->transactionService->getExpenses($request),
             'is_other' => $expense->title === 'Other'  ? true : false,
+            'is_bill_paid' => $expense->title === 'Bill Paid'  ? true : false,
             'expense' => $expense
         ];
         return view('frontend.transactions.expense', $data);

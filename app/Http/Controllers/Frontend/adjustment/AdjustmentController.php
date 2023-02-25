@@ -17,6 +17,7 @@ class AdjustmentController extends Controller
 
     public function store(Request $request)
     {
+
         $type =  $this->adjustmentService->store($request);
 
         return redirect()->back()->with(['success' => $type === 'closing' ? 'Closing Balance recorded Successfully ' : 'Opening Balance recorded successfully']);

@@ -263,6 +263,7 @@
                                     @elseif (isset($transaction->expense_id))
                                         {{ $transaction->expenses->title }}
                                         {{ isset($transaction->description) ? '(' . $transaction->description . ')' : '' }}
+                                        {{ isset($transaction->bill_paid_to) ? '(' . ucwords($transaction->bill_paid_to) . ')' : '' }}
                                     @elseif (isset($transaction->saving_id))
                                         {{ $transaction->banks->bank_name }}
                                     @elseif($transaction->is_withdrawn == true)
