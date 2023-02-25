@@ -72,7 +72,7 @@ class BillService extends Service
             } else {
                 $data['customer_id'] = $request->oldCustomer;
             }
-            $data['photo_number'] = 'RAJ_' . $request->photo_number;
+            $data['photo_number'] = $request->photo_number ? 'RAJ_' . $request->photo_number : null;
             $bill = $this->model->create($data);
 
             //For recording transactions

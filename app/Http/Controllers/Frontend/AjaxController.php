@@ -59,17 +59,16 @@ class AjaxController extends Controller
     {
         $customerName =  $request->customer_name;
         $totalBill =  Bill::count();
-        $users = FrontendUser::all();
         $date =  $request->date;
         if (isset($customerName)) {
             $bills = Bill::where('status', false)->whereHas('customers', function ($query) use ($request) {
                 $query->where('name', 'ILIKE', '%' . $request->customer_name . '%')->orWhere('phone_number', 'ILIKE', '%' . $request->customer_name . '%');
             })->get();
 
-            return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
+            return view('frontend.bill.include.bills', compact('bills', 'totalBill'))->render();
         } elseif (isset($date)) {
             $bills = Bill::where('status', false)->where('ordered_date', 'ILIKE', '%' . $request->date . '%')->orderBy('created_at', 'DESC')->get();
-            return view('frontend.bill.include.bills', compact('bills', 'totalBill', 'users'))->render();
+            return view('frontend.bill.include.bills', compact('bills', 'totalBill'))->render();
         }
     }
 
@@ -120,20 +119,13 @@ class AjaxController extends Controller
         $data['totalSaving'] =  collect($data['transactions'])->where('saving_id')->sum('amount');
         $data['withdrawn'] = $data['transactions']->where('is_withdrawn', true)->sum('amount');
         $data['adjustment'] = Adjustment::where('date', '=', $request->date)->first()->adjusted_amount ?? 0;
-
-
         $data['onlinePaymentBill'] = collect($data['transactions'])->where('payment_gateway')->where('bill_id')->sum('amount');
         $data['onlinePaymentOther'] = collect($data['transactions'])->where('payment_gateway')->where('income_id')->sum('amount');
         $data['totalOnlinePayment'] = $data['onlinePaymentBill'] + $data['onlinePaymentOther'];
         $data['openingBalance'] =  $this->adjustmentService->getClosingBalance($request);
         $data['closingBalance'] =  $data['openingBalance'] + $data['totalIncome'] +  $data['adjustment'] - $data['totalExpense'] - $data['totalSaving'] - $data['withdrawn'] - $data['onlinePaymentBill'] - $data['onlinePaymentOther'];
-
-
         $data['analytics'] = $this->analyticService->chart($request);
-
         $data['pie_chart'] = $data['analytics']['analytic'];
-
-
         return view('frontend.dashboard.dashboard', $data);
     }
 
@@ -154,7 +146,6 @@ class AjaxController extends Controller
         } else if ($request->title === 'online_payments') {
             $data['transactions'] = $this->transactionService->fetchOnlinePaymentData();
         }
-
         return view('frontend.dashboard.transaction', $data);
     }
 

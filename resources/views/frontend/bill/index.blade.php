@@ -60,21 +60,6 @@
                 $(".cash_return").val(cashReturn);
             });
         });
-
-
-        $('#order-date').nepaliDatePicker({
-            language: "english",
-        });
-        var currentBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), 'YYYY-MM-DD');
-        $('.order-date').val(currentBsDate);
-
-        //Delivery date
-        $('#delivery-date').nepaliDatePicker({
-            language: "english",
-        });
-        var deliveryDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BsAddDays(NepaliFunctions
-            .GetCurrentBsDate(), 1), 'YYYY-MM-DD')
-        $('#delivery-date').val(deliveryDate);
     </script>
 
     <script>
